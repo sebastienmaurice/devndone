@@ -14,7 +14,10 @@ export const legal = {
 		registration: 'Immatriculé au Registre national des entreprises (RNE)',
 		ape: '6201Z — Programmation informatique',
 		vat: 'TVA non applicable, art. 293 B du CGI',
-		address: '1 rue Blaise Pascal, 59540 Caudry, France',
+		// Adresse du domicile volontairement non publiée. La LCEN (art. 6-III) demande une adresse
+		// pour un entrepreneur individuel : renseigner ici une domiciliation d'entreprise ou une boîte
+		// postale dès qu'elle existe. Tant que le champ est vide, check:build émet un avertissement.
+		address: '' as string,
 		email: 'overseb75@gmail.com',
 		phone: '+33 6 20 84 78 01',
 		publicationDirector: 'Sébastien Maurice'

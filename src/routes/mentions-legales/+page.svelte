@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Seo from '$lib/components/Seo.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
 	import { legal } from '$lib/content/legal';
 	import { site } from '$lib/config/site';
 
@@ -40,8 +40,10 @@
 					<dd>{p.ape}</dd>
 					<dt>TVA</dt>
 					<dd>{p.vat}</dd>
-					<dt>Adresse</dt>
-					<dd>{p.address}</dd>
+					{#if p.address}
+						<dt>Adresse</dt>
+						<dd>{p.address}</dd>
+					{/if}
 					<dt>Email</dt>
 					<dd><a class="link" href="mailto:{p.email}">{p.email}</a></dd>
 					{#if p.phone}<dt>Téléphone</dt>

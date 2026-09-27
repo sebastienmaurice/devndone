@@ -6,7 +6,7 @@
 	import { page } from '$app/state';
 	import { afterNavigate } from '$app/navigation';
 	import { navPages } from '$lib/content/pages';
-	import Logo from './Logo.svelte';
+	import Logo from '../brand/Logo.svelte';
 
 	let open = $state(false);
 	let toggle: HTMLButtonElement | undefined = $state();

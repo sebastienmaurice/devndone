@@ -99,7 +99,7 @@
 	padding: 0;
 }
 
-.btn:disabled,
+.btn:disabled:not([aria-busy='true']),
 .btn[aria-disabled='true'] {
 	--btn-bg: color-mix(in srgb, var(--text) 10%, transparent);
 	--btn-fg: var(--text-subtle);
@@ -304,7 +304,7 @@
 .section-head .t-h2 {
 	max-width: 14em;
 }
-.section-head p {
+.section-head > p:not([class]) {
 	max-width: 36em;
 	color: var(--text-muted);
 	font-size: var(--text-body-lg);
@@ -800,7 +800,8 @@
 	position: relative;
 }
 .step::before {
-	content: '0' counter(step) ' / 04';
+	/* --step-total est posé par le composant Steps (ex. "04") */
+	content: counter(step, decimal-leading-zero) ' / ' var(--step-total, '04');
 	font-family: var(--font-mono);
 	font-size: var(--text-caption);
 	color: var(--text-subtle);
@@ -1191,22 +1192,22 @@
 }
 
 /* ==========================================================================
-   10. MOUVEMENT — apparition au scroll (activée par JS uniquement)
+   10. MOUVEMENT — apparition au scroll
+   L'attribut est posé par JS (action reveal) uniquement sur les éléments hors
+   écran au chargement : sans JS, ou déjà visible, le contenu n'est jamais masqué.
    ========================================================================== */
 
-.js [data-reveal] {
-	opacity: 0;
-	transform: translateY(var(--shift-reveal));
+[data-reveal] {
 	transition:
 		opacity var(--duration-scene) var(--ease-out),
 		transform var(--duration-scene) var(--ease-out);
 }
-.js [data-reveal].is-in {
-	opacity: 1;
-	transform: none;
+[data-reveal='pending'] {
+	opacity: 0;
+	transform: translateY(var(--shift-reveal));
 }
 @media (prefers-reduced-motion: reduce) {
-	.js [data-reveal] {
+	[data-reveal='pending'] {
 		opacity: 1;
 		transform: none;
 	}

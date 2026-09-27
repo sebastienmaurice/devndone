@@ -80,6 +80,10 @@ const required = [
 ];
 for (const r of required) if (!existsSync(join(build, r))) errors.push(`build/${r} manquant`);
 
+// Routes internes (banc d'essai du design system) : interdites en production
+if (!staging && existsSync(join(build, 'design-system')))
+	errors.push('build/design-system : route interne présente dans un build de production');
+
 const buildFiles = walk(build);
 const secretPatterns = [
 	[/sk-[A-Za-z0-9_-]{20,}/, 'clé de type sk-…'],
@@ -121,6 +125,12 @@ for (const f of buildFiles) {
 		}
 	}
 }
+
+const legalHtml = join(build, 'mentions-legales/index.html');
+if (existsSync(legalHtml) && !readFileSync(legalHtml, 'utf8').includes('<dt>Adresse</dt>'))
+	warnings.push(
+		'mentions-legales : aucune adresse publiée (LCEN art. 6-III) — prévoir une domiciliation'
+	);
 
 const robots = existsSync(join(build, 'robots.txt'))
 	? readFileSync(join(build, 'robots.txt'), 'utf8')

@@ -3,7 +3,7 @@
 	(ErrorDocument dans static/.htaccess), avec un vrai code HTTP 404.
 -->
 <script lang="ts">
-	import NotFound from '$lib/components/NotFound.svelte';
+	import NotFound from '$lib/components/pages/NotFound.svelte';
 </script>
 
 <NotFound />

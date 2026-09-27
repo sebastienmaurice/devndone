@@ -5,7 +5,7 @@
  * Toujours un slash final (trailingSlash: 'always'), jamais d'accent dans l'URL.
  */
 export type PageEntry = {
-	path: string;
+	path: `/${string}`;
 	label: string;
 	/** Affichée dans la navigation principale */
 	nav?: boolean;

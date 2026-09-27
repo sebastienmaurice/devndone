@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { site } from '$lib/config/site';
 	import { legalPages } from '$lib/content/pages';
-	import Logo from './Logo.svelte';
+	import Logo from '../brand/Logo.svelte';
 
 	const year = new Date().getFullYear();
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import NotFound from '$lib/components/NotFound.svelte';
-	import Seo from '$lib/components/Seo.svelte';
+	import NotFound from '$lib/components/pages/NotFound.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
 </script>
 
 {#if page.status === 404}

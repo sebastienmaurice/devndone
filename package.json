@@ -18,7 +18,8 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"fonts": "node scripts/copy-fonts.mjs",
-		"icons": "node scripts/generate-icons.mjs"
+		"icons": "node scripts/generate-icons.mjs",
+		"ds:sync": "node scripts/sync-design-system.mjs"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",

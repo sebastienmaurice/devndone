@@ -32,13 +32,17 @@ npm run dev
 
 Le site est servi sur <http://localhost:5173>, avec rechargement à chaud.
 
-| Commande         | Rôle                                          |
-| ---------------- | --------------------------------------------- |
-| `npm run check`  | Vérification TypeScript et Svelte             |
-| `npm run lint`   | Prettier + ESLint                             |
-| `npm run format` | Formate tout le code                          |
-| `npm run fonts`  | Recopie les polices depuis `node_modules`     |
-| `npm run icons`  | Régénère les icônes PNG et l'image de partage |
+| Commande          | Rôle                                                   |
+| ----------------- | ------------------------------------------------------ |
+| `npm run check`   | Vérification TypeScript et Svelte                      |
+| `npm run lint`    | Prettier + ESLint                                      |
+| `npm run format`  | Formate tout le code                                   |
+| `npm run fonts`   | Recopie les polices depuis `node_modules`              |
+| `npm run icons`   | Régénère les icônes PNG et l'image de partage          |
+| `npm run ds:sync` | Recopie le CSS du design system dans `src/lib/styles/` |
+
+Le banc d'essai des composants est sur <http://localhost:5173/design-system/>.
+Il est généré en dev et en staging, **jamais en production**, et toujours en `noindex`.
 
 ## 3. Build et vérification
 
@@ -60,7 +64,8 @@ npm run preview            # sert build/ sur http://localhost:4173
 - **le code source** : aucun `+page.server`, aucune form action, aucun endpoint non prérendu, aucune variable d'environnement privée ;
 - **le build** : les fichiers indispensables sont présents (pages, 404, sitemap, robots, `.htaccess`, polices, icônes) ;
 - **la sécurité** : aucune source map, aucun `.env`, aucune chaîne qui ressemble à une clé secrète ;
-- **l'indexation** : en production, pas de `noindex` et plus aucun « À COMPLÉTER » (mentions légales) ; en staging, `noindex` partout et `robots.txt` bloquant.
+- **l'indexation** : en production, pas de `noindex` et plus aucun « À COMPLÉTER » (mentions légales) ; en staging, `noindex` partout et `robots.txt` bloquant ;
+- **les routes internes** : `/design-system/` ne doit jamais apparaître dans un build de production.
 
 ### Modes
 
@@ -69,8 +74,10 @@ npm run preview            # sert build/ sur http://localhost:4173
 | `npm run build`         | production | autorisée, sitemap déclaré dans `robots.txt`  |
 | `npm run build:staging` | staging    | `noindex` sur toutes les pages, `Disallow: /` |
 
-Il n'y a **aucune variable d'environnement** en V1. Le mode est lu via `import.meta.env.MODE`
-(voir `src/lib/config/site.ts`).
+Il n'y a **aucune variable d'environnement à configurer** en V1. Le mode est lu via
+`import.meta.env.MODE` (voir `src/lib/config/site.ts`). En interne, `vite.config.ts` le transmet
+au processus de prérendu par `DND_BUILD_MODE`, car ce processus recharge la configuration sans
+l'option `--mode`.
 
 > Règle absolue : aucune clé secrète dans ce dépôt ni dans le site. Tout ce qui est construit
 > finit dans du JavaScript public. Un service qui a besoin d'une clé (CRM, IA, email) passe par
@@ -138,25 +145,56 @@ On les nettoie de temps en temps.
 ├── scripts/
 │   ├── check-build.mjs        Contrôle source + build avant déploiement
 │   ├── copy-fonts.mjs         Polices → static/fonts (sous-ensemble latin)
-│   └── generate-icons.mjs     Icônes PNG + image Open Graph (sharp)
+│   ├── generate-icons.mjs     Icônes PNG + image Open Graph (sharp)
+│   └── sync-design-system.mjs Design system → src/lib/styles (npm run ds:sync)
 ├── src/
 │   ├── app.html               Gabarit HTML (lang, préchargement des polices, icônes)
 │   ├── lib/
 │   │   ├── assets/brand/      Images traitées au build (AVIF / WebP / srcset)
-│   │   ├── components/        Seo, Logo, Icon, SiteHeader, SiteFooter, NotFound
+│   │   ├── actions/reveal.ts  Apparition au défilement (use:reveal)
+│   │   ├── components/        Importés via `$lib/components` (index.ts)
+│   │   │   ├── layout/        Section, SectionHead, SiteHeader, SiteFooter
+│   │   │   ├── brand/         Logo, Icon, Eyebrow, Tagline, Stroke, Rule, SlashBand
+│   │   │   ├── ui/            Button, LinkArrow, Badge, Status, Notice, Card, Offer, PriceRow,
+│   │   │   │                  FeatureList, Steps, Metric, Terminal, SpecList, Accordion, Breadcrumb
+│   │   │   ├── form/          Field, Check, Honeypot
+│   │   │   ├── seo/           Seo
+│   │   │   └── pages/         NotFound
 │   │   ├── config/site.ts     Nom, URL canonique, description, mode staging
 │   │   ├── content/           Données : pages.ts (nav + sitemap), legal.ts
-│   │   └── styles/            Design system v1.0 (tokens, base, layout, components) + fonts.css
+│   │   └── styles/            Copie du design system (NE PAS éditer : npm run ds:sync) + fonts.css
 │   └── routes/
 │       ├── +layout.ts         prerender = true · trailingSlash = 'always'
 │       ├── +page.svelte       Accueil (version d'attente, phase 1)
 │       ├── 404/               Page 404 statique, servie par .htaccess
+│       ├── design-system/     Banc d'essai des composants (dev + staging uniquement)
 │       ├── mentions-legales/
 │       ├── sitemap.xml/       Généré au build depuis content/pages.ts
 │       └── robots.txt/        Généré au build selon le mode
 ├── static/                    Copié tel quel : .htaccess, polices, logos, icônes, manifest, og/
 └── vite.config.ts             Configuration SvelteKit (adapter-static, CSP, prérendu strict)
 ```
+
+### Composants
+
+```svelte
+<script lang="ts">
+	import { Section, SectionHead, FeatureList, Button } from '$lib/components';
+</script>
+
+<Section surface="ivory" labelledby="expertises">
+	<SectionHead id="expertises" lead="01" eyebrow="Expertises" title="Quatre univers." />
+	<FeatureList items={services} />
+	<Button href="/contact/" icon="arrow-right">Parlons de votre projet</Button>
+</Section>
+```
+
+- La **surface** se déclare sur `<Section>` : boutons, liens, badges, champs s'y accordent seuls.
+- Les composants appliquent les classes du design system. Leur CSS reste global
+  (`src/lib/styles/components.css`) pour ne jamais diverger de la documentation.
+- Une évolution visuelle se fait **d'abord dans le design system**
+  (`../brand/design-system/`), puis `npm run ds:sync`.
+- Tout nouveau composant s'ajoute au banc d'essai `/design-system/`, dans les 4 surfaces.
 
 ### Ajouter une page
 
@@ -180,7 +218,10 @@ On les nettoie de temps en temps.
 
 ## 6. À compléter avant la mise en production
 
-- [ ] `src/lib/content/legal.ts` : éditeur, statut, SIRET, adresse, email, directeur de la publication. Le contrôle bloque tant que « À COMPLÉTER » est présent.
+- [x] `src/lib/content/legal.ts` : éditeur, statut, SIRET, email, téléphone, directeur de la publication.
+- [ ] **Adresse** : l'adresse du domicile n'est volontairement pas publiée. La LCEN en demande une
+      pour un entrepreneur individuel : renseigner une domiciliation ou une boîte postale dans
+      `legal.ts` (le contrôle émet un avertissement tant qu'elle manque).
 - [ ] Vérifier les informations d'Hostinger (hébergeur) dans le même fichier.
 - [ ] Activer HSTS après validation du SSL.
 
@@ -189,7 +230,8 @@ On les nettoie de temps en temps.
 | Phase | Contenu                                                              | État               |
 | ----- | -------------------------------------------------------------------- | ------------------ |
 | 1     | Socle, design system intégré, SEO technique, 404, déploiement        | ✓                  |
-| 2–3   | Composants Svelte du design system, header et navigation complets    | à venir            |
+| 2     | Composants Svelte du design system, banc d'essai, action reveal      | ✓                  |
+| 3     | Header : navigation complète et CTA (dès que les pages existent)     | à venir            |
 | 4     | Pages : services, tarifs, réalisations, méthode, à propos            | à venir            |
 | 5     | Contact : abstraction de formulaire + transport (webhook)            | décision à prendre |
 | 6–7   | Réalisations, démos interactives                                     | à venir            |

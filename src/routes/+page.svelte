@@ -3,7 +3,7 @@
 	Elle sera remplacée par l'accueil complet en phase 4.
 -->
 <script lang="ts">
-	import Seo from '$lib/components/Seo.svelte';
+	import { Eyebrow, Section, Seo, SlashBand, Status, Stroke } from '$lib/components';
 	import { site, absoluteUrl } from '$lib/config/site';
 
 	const jsonLd = {
@@ -29,42 +29,31 @@
 
 <Seo path="/" {jsonLd} />
 
-<section class="section hero" aria-labelledby="hero-title">
-	<span class="slash-band" aria-hidden="true"></span>
-	<div class="container hero__content">
-		<p class="eyebrow">
-			<b>Studio digital</b><span class="slash" aria-hidden="true">/</span>Indépendant
-		</p>
+<Section labelledby="hero-title" class="hero">
+	<SlashBand right="7%" />
+	<div class="hero__content">
+		<Eyebrow lead="Studio digital" label="Indépendant" />
 		<h1 class="t-display" id="hero-title">
-			Des projets pensés pour être <span class="stroke"
-				>Done<span class="t-dot">.</span><svg
-					viewBox="0 0 300 14"
-					preserveAspectRatio="none"
-					aria-hidden="true"
-					><path d="M2 11 C 80 3, 200 1, 298 6 C 200 5, 90 8, 2 13 Z" fill="currentColor" /></svg
-				></span
-			>
+			Des projets pensés pour être <Stroke>Done<span class="t-dot">.</span></Stroke>
 		</h1>
 		<p class="t-body-lg t-muted t-measure">
 			On conçoit, développe, automatise et maintient les outils numériques dont votre activité a
 			réellement besoin.
 		</p>
-		<p class="status status--progress">Le site complet arrive bientôt</p>
+		<Status state="progress" as="p">Le site complet arrive bientôt</Status>
 	</div>
-</section>
+</Section>
 
-<section class="key-visual" aria-label="Visuel de marque">
+<Section flush bleed label="Visuel de marque" class="key-visual">
 	<enhanced:img
 		src="$lib/assets/brand/key-visual-mascotte-night.png"
 		alt="Dev, la mascotte DEV'n DONE, lève le pouce derrière le lettrage Dev'n Done, avec la signature Développer / Piloter / Livrer"
 		sizes="(min-width: 1536px) 1536px, 100vw"
 	/>
-</section>
+</Section>
 
 <style>
-	.hero {
-		overflow: clip;
-		--band-right: 7%;
+	:global(.hero.section) {
 		padding-block: clamp(var(--space-8), 12vw, var(--space-11));
 	}
 
@@ -76,17 +65,16 @@
 		justify-items: start;
 	}
 
-	.hero h1 {
+	h1 {
 		max-width: 11ch;
 	}
 
-	.key-visual {
+	:global(.key-visual) {
 		display: grid;
 		justify-items: center;
-		background: var(--dnd-night);
 	}
 
-	.key-visual :global(img) {
+	:global(.key-visual img) {
 		width: 100%;
 		max-width: 1536px;
 		height: auto;
