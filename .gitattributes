@@ -1,0 +1,7 @@
+# Fins de ligne normalisées (développement sous Windows, déploiement Linux)
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.woff2 binary
+*.avif binary
+*.webp binary

@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Polices de marque, auto-hébergées (static/fonts, copiées par `npm run fonts`).
+   Sous-ensemble latin uniquement : couvre le français (accents, œ, €, « »).
+   Licence : SIL Open Font License 1.1 pour les trois familles.
+   ========================================================================== */
+
+@font-face {
+	font-family: 'Lilita One';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/lilita-one-400.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Plus Jakarta Sans';
+	font-style: normal;
+	font-weight: 200 800;
+	font-display: swap;
+	src: url('/fonts/plus-jakarta-sans-var.woff2') format('woff2-variations');
+}
+
+@font-face {
+	font-family: 'IBM Plex Mono';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/ibm-plex-mono-400.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'IBM Plex Mono';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('/fonts/ibm-plex-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'IBM Plex Mono';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url('/fonts/ibm-plex-mono-600.woff2') format('woff2');
+}

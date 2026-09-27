@@ -1,0 +1,12 @@
+/* ==========================================================================
+   Point d'entrée des styles globaux — importé une seule fois dans +layout.svelte.
+   tokens / base / layout / components sont des copies du Design System v1.0
+   (D:\DEV'n DONE\brand\design-system\css). Toute évolution se fait d'abord
+   dans le design system, puis est recopiée ici.
+   ========================================================================== */
+
+@import './fonts.css';
+@import './tokens.css';
+@import './base.css';
+@import './layout.css';
+@import './components.css';
