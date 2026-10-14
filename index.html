@@ -11,167 +11,189 @@
 <meta property="og:title" content="Dev'n Done · Des projets pensés pour être Done.">
 <meta property="og:description" content="Un studio digital indépendant qui conçoit, développe et livre des solutions web.">
 <meta property="og:url" content="https://devndone.com/">
-<meta name="theme-color" content="#0A0E17">
+<meta property="og:image" content="https://devndone.com/og.jpg">
+<meta name="theme-color" content="#0A0D11">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preload" href="lilita-one-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="layout.css">
+<link rel="stylesheet" href="components.css">
 <style>
-:root{
-  --night:#0A0E17; --night-2:#111723; --line:#222C3B;
-  --text:#F2F4F8; --muted:#A8B1C0; --orange:#FF8A00;
-  --web:#2DD4BF; --design:#FF8A00; --auto:#34D399; --full:#8B7CFF;
-  --radius:16px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--night);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-.skip{position:absolute;left:-999px;top:0;background:var(--orange);color:var(--night);padding:.6rem 1rem;z-index:10}
-.skip:focus{left:8px;top:8px}
-:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:6px}
-.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-header{position:sticky;top:0;background:rgba(10,14,23,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
-.brand{text-decoration:none;line-height:1.1}
-.brand b{display:block;font-size:1.5rem;font-weight:900;font-style:italic;letter-spacing:-.01em}
-.brand b span{color:var(--orange)}
-.brand small{display:block;font-size:.6rem;letter-spacing:.28em;color:var(--muted);margin-top:3px}
-nav{display:flex;gap:24px;align-items:center}
-nav a{text-decoration:none;color:var(--muted);font-size:.95rem}
-nav a:hover{color:var(--text)}
-.btn{display:inline-block;text-decoration:none;font-weight:700;padding:.8rem 1.4rem;border-radius:999px;background:var(--orange);color:var(--night);border:2px solid var(--orange)}
-.btn:hover{filter:brightness(1.08)}
-.btn.ghost{background:transparent;color:var(--text);border-color:var(--line)}
-.btn.ghost:hover{border-color:var(--text)}
-.btn.small{padding:.55rem 1.1rem;font-size:.9rem}
-.hero{padding:88px 0 72px}
-.script{color:var(--muted);font-style:italic;margin:0 0 18px;max-width:34ch}
-h1{font-size:clamp(2.2rem,6vw,4rem);line-height:1.08;margin:0 0 20px;max-width:14ch}
-h1 em{color:var(--orange);font-weight:900;font-style:italic}
-.stack{color:var(--text);font-size:.98rem;margin:0 0 30px}
-.stack span{color:var(--orange);margin:0 .5rem}
-.cta{display:flex;flex-wrap:wrap;gap:12px}
-section{padding:68px 0;border-top:1px solid var(--line)}
-.eyebrow{color:var(--orange);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.78rem;margin:0 0 10px}
-h2{font-size:clamp(1.6rem,3.6vw,2.3rem);line-height:1.2;margin:0 0 10px}
-h2 em{color:var(--orange);font-style:italic}
-.sub{color:var(--muted);margin:0 0 34px;max-width:62ch}
-.grid{display:grid;gap:18px}
-.g4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-.card{background:var(--night-2);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column}
-.card.hl{border-color:var(--orange)}
-.uni{border-top:3px solid var(--c,var(--line))}
-.uni .n{color:var(--c);font-weight:800;font-size:.85rem;letter-spacing:.08em}
-.uni h3{margin:6px 0 8px;font-size:1.25rem}
-.uni p{margin:0;color:var(--muted);font-size:.95rem}
-.steps{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));counter-reset:s}
-.step{border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--night-2)}
-.step::before{counter-increment:s;content:"0" counter(s);display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;border:2px solid var(--orange);color:var(--orange);font-weight:800;margin-bottom:10px}
-.step h3{margin:0 0 4px;font-size:1.05rem}
-.step p{margin:0;color:var(--muted);font-size:.93rem}
-.badge{align-self:flex-start;background:var(--orange);color:var(--night);font-size:.72rem;font-weight:800;padding:.2rem .6rem;border-radius:999px;margin-bottom:10px;letter-spacing:.04em}
-.card h3{margin:0 0 6px;font-size:1.2rem}
-.price{font-size:2rem;font-weight:800;margin:4px 0 2px}
-.price small{font-size:.9rem;font-weight:500;color:var(--muted)}
-.tag{color:var(--muted);font-size:.9rem;margin:0 0 14px}
-.card ul{margin:0 0 18px;padding:0;list-style:none;font-size:.95rem}
-.card li{padding:6px 0;border-top:1px solid var(--line)}
-.card li b{color:var(--muted);font-weight:500;display:block;font-size:.8rem}
-.card .btn{margin-top:auto;text-align:center}
-.note{color:var(--muted);font-size:.88rem;margin-top:18px}
-.pack .meta{color:var(--orange);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.pack p{margin:6px 0 0;color:var(--muted);font-size:.95rem}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:400;font-style:normal;font-display:swap;src:url(plus-jakarta-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:500;font-style:normal;font-display:swap;src:url(plus-jakarta-sans-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:600;font-style:normal;font-display:swap;src:url(plus-jakarta-sans-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:700;font-style:normal;font-display:swap;src:url(plus-jakarta-sans-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:800;font-style:normal;font-display:swap;src:url(plus-jakarta-sans-latin-800-normal.woff2) format("woff2")}
+@font-face{font-family:"Lilita One";font-weight:400;font-style:normal;font-display:swap;src:url(lilita-one-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-weight:400;font-style:normal;font-display:swap;src:url(ibm-plex-mono-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-weight:500;font-style:normal;font-display:swap;src:url(ibm-plex-mono-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Caveat";font-weight:500;font-style:normal;font-display:swap;src:url(caveat-latin-500-normal.woff2) format("woff2")}
+/* Spécifique à la page : n'utilise que les variables du design system */
+:root{--u-web:#3B9BFF;--u-design:#FF8A00;--u-auto:#00E5B8;--u-full:#9B7CFF}
+.hand{font-family:"Caveat",cursive;font-weight:500;color:var(--text-muted);font-size:1.25rem;line-height:1.2}
+.skip{position:absolute;left:-999px;top:0}
+header.top{position:sticky;top:0;z-index:var(--z-sticky);background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .bar{display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);min-height:76px}
+header.top .logo img{height:44px}
+.menu{display:flex;align-items:center;gap:var(--space-6)}
+.menu a:not(.btn){text-decoration:none;color:var(--text-muted);font-size:var(--text-body-sm);font-weight:var(--weight-semibold);padding-block:var(--space-2);border-bottom:2px solid transparent}
+.menu a:not(.btn):hover,.menu a[aria-current]{color:var(--text);border-color:var(--accent-deco)}
+.hero{padding-block:clamp(2.5rem,6vw,5rem) var(--space-5);overflow:hidden}
+.hero__grid{display:grid;gap:var(--space-7);align-items:center}
+@media(min-width:900px){.hero__grid{grid-template-columns:1.05fr 1fr}}
+.hero h1{font-family:var(--font-display);font-weight:400;font-size:clamp(2.75rem,2rem + 3.6vw,5.25rem);line-height:.98;letter-spacing:-.005em;margin:var(--space-4) 0 var(--space-5)}
+.hero h1 .done{color:var(--accent-text);display:inline-block;transform:rotate(-2deg);position:relative}
+.hero h1 .done::after{content:"";position:absolute;left:2%;right:6%;bottom:-.08em;height:.09em;background:var(--accent-deco);border-radius:99px;transform:rotate(-1.2deg)}
+.hero__stack{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-4);margin:0 0 var(--space-6);font-size:var(--text-body-sm);font-weight:var(--weight-medium)}
+.hero__stack i{color:var(--accent-deco);font-style:normal}
+.hero__visual{position:relative}
+.hero__visual img{width:100%;height:auto;border-radius:var(--radius-lg)}
+.hero__visual .hand{position:absolute;right:2%;top:4%;transform:rotate(-6deg);max-width:9ch;text-align:center}
+.univers{display:grid;gap:var(--col-gap);grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr))}
+.uni{border-top:3px solid var(--c);gap:var(--space-3)}
+.uni__n{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;border:2px solid var(--c);color:var(--c);font-weight:var(--weight-extrabold);font-size:var(--text-body-sm)}
+.uni h3{font-family:var(--font-display);font-weight:400;font-size:var(--text-h3);margin:0}
+.uni p{margin:0;color:var(--text-muted);font-size:var(--text-body-sm)}
+.uni ul{display:flex;flex-wrap:wrap;gap:var(--space-2);list-style:none;margin:var(--space-2) 0 0;padding:0}
+.uni li{font-family:var(--font-mono);font-size:var(--text-caption);color:var(--text-muted);border:1px solid var(--line);border-radius:var(--radius-full);padding:2px 10px}
+.stepsrow{display:grid;gap:var(--col-gap);grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));margin-top:var(--space-6)}
+.stp{display:grid;gap:var(--space-2);align-content:start}
+.stp b.n{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;border:2px solid var(--c);color:var(--c);font-weight:var(--weight-extrabold)}
+.stp h3{margin:var(--space-2) 0 0;font-size:1.1rem}
+.stp p{margin:0;color:var(--text-muted);font-size:var(--text-body-sm)}
+.cards{display:grid;gap:var(--col-gap);grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.proj{padding:0;overflow:hidden}
+.proj a{display:grid;gap:var(--space-2);padding:clamp(var(--space-5),3vw,var(--space-6));text-decoration:none}
+.proj a:hover h3{color:var(--accent-text)}
+.proj .k{font-family:var(--font-mono);font-size:var(--text-caption);color:var(--accent-text)}
+.proj h3{margin:0;font-family:var(--font-display);font-weight:400;font-size:var(--text-h3)}
+.proj p{margin:0;color:var(--text-muted);font-size:var(--text-body-sm)}
+.sub{color:var(--text-muted);max-width:var(--measure);margin:0 0 var(--space-6);font-size:var(--text-body-lg)}
+.note{color:var(--text-subtle);font-size:var(--text-body-sm);margin-top:var(--space-5)}
+.note a{color:var(--accent-text)}
+.card h3{margin:0}
+.card.hl{border-color:var(--accent-deco)}
+.card .tag{color:var(--text-muted);font-size:var(--text-body-sm);margin:0}
+.card .price{font-family:var(--font-display);font-size:var(--text-h2);line-height:1;margin:0}
+.card .price small{font-family:var(--font-mono);font-size:var(--text-caption);color:var(--text-subtle)}
+.card ul{margin:0;padding:0;list-style:none;font-size:var(--text-body-sm)}
+.card li{padding:var(--space-2) 0;border-top:1px solid var(--line)}
+.card li b{display:block;color:var(--text-subtle);font-weight:var(--weight-medium);font-size:var(--text-caption)}
+.card .btn{margin-top:auto}
+.badge{justify-self:start}
+.pack .meta{font-family:var(--font-mono);font-size:var(--text-caption);color:var(--accent-text)}
+.pack p{margin:0;color:var(--text-muted);font-size:var(--text-body-sm)}
 .pack p.price{color:var(--text)}
-.proj a{text-decoration:none}
-.proj a:hover h3{color:var(--orange)}
-.proj p{margin:0;color:var(--muted);font-size:.93rem}
-blockquote{margin:0;background:var(--night-2);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-blockquote p{margin:0 0 12px}
-blockquote footer{all:unset;color:var(--muted);font-size:.88rem}
-.about{max-width:68ch;color:var(--muted)}
-.contact{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-footer.site{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.9rem}
-footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
-@media (max-width:700px){nav a:not(.btn){display:none}.hero{padding:56px 0 44px}}
+blockquote{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:var(--space-5)}
+blockquote p{margin:0 0 var(--space-3)}
+blockquote footer{color:var(--text-subtle);font-size:var(--text-body-sm)}
+.about{max-width:var(--measure);color:var(--text-muted)}
+.contact{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-top:var(--space-5)}
+.sec h2{font-family:var(--font-display);font-weight:400;font-size:var(--text-h2);line-height:1.05;margin:var(--space-3) 0 var(--space-3);max-width:20ch}
+.sec h2 em{font-style:normal;color:var(--accent-text)}
+.sec h2.wide{max-width:none}
+.sec+.sec{border-top:1px solid var(--line)}
+.cta-band{display:grid;gap:var(--space-5);align-items:center;grid-template-columns:auto 1fr auto;padding:var(--space-5) var(--space-6);border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface)}
+.cta-band img{height:72px;width:auto}
+.cta-band p{margin:0;font-family:var(--font-display);font-size:var(--text-h3)}
+.cta-band p em{font-style:normal;color:var(--accent-text)}
+@media(max-width:720px){.menu a:not(.btn){display:none}.cta-band{grid-template-columns:1fr;text-align:center;justify-items:center}}
+footer.site{border-top:1px solid var(--line);padding-block:var(--space-6);color:var(--text-subtle);font-size:var(--text-body-sm)}
+footer.site .container{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--space-3)}
+footer.site img{height:32px;width:auto}
+footer.site a{color:var(--text-muted)}
 </style>
 </head>
-<body>
-<a class="skip" href="#main">Aller au contenu</a>
-<header>
-  <div class="wrap bar">
-    <a class="brand" href="#top" aria-label="Dev'n Done, accueil"><b>Dev'n <span>Done</span></b><small>DÉVELOPPER / PILOTER / LIVRER</small></a>
-    <nav aria-label="Navigation principale">
-      <a href="#top">Accueil</a>
+<body class="surface-night">
+<a class="skip-link" href="#main">Aller au contenu</a>
+<header class="top">
+  <div class="container bar">
+    <a class="logo logo--header" href="#top" aria-label="Dev'n Done, accueil"><img src="logo.svg" alt="Dev'n Done, développer / piloter / livrer" width="211" height="44"></a>
+    <nav class="menu" aria-label="Navigation principale">
+      <a href="#top" aria-current="page">Accueil</a>
       <a href="#services">Services</a>
       <a href="#realisations">Réalisations</a>
       <a href="#tarifs">Tarifs</a>
       <a href="#apropos">À propos</a>
       <a href="#contact">Contact</a>
-      <a class="btn small" href="https://calendly.com/sebastienmaurice/prise-de-contact">Parlons de votre projet</a>
+      <a class="btn btn--primary btn--sm" href="https://calendly.com/sebastienmaurice/prise-de-contact">Parlons de votre projet</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
-<div id="top" class="hero">
-  <div class="wrap">
-    <p class="script">Un studio digital indépendant qui conçoit, développe et livre des solutions web.</p>
-    <h1>Des projets pensés pour être <em>Done.</em></h1>
-    <p class="stack">WordPress<span>·</span>WooCommerce<span>·</span>Automatisation<span>·</span>Identité<span>·</span>Full Stack</p>
-    <div class="cta">
-      <a class="btn" href="#services">Découvrir mes services</a>
-      <a class="btn ghost" href="https://calendly.com/sebastienmaurice/prise-de-contact">Réserver 15 min</a>
+<section id="top" class="hero">
+  <div class="container hero__grid">
+    <div>
+      <p class="hand">Un studio digital indépendant qui conçoit, développe et livre des solutions web.</p>
+      <h1>Des projets pensés pour être <span class="done">Done.</span></h1>
+      <p class="hero__stack">WordPress <i>·</i> WooCommerce <i>·</i> Automatisation <i>·</i> Identité <i>·</i> Full Stack</p>
+      <div class="cluster">
+        <a class="btn btn--primary btn--lg" href="#services">Découvrir mes services</a>
+        <a class="btn btn--secondary btn--lg" href="https://calendly.com/sebastienmaurice/prise-de-contact">Réserver 15 min</a>
+      </div>
     </div>
-  </div>
-</div>
-
-<section id="services">
-  <div class="wrap">
-    <p class="eyebrow">Services</p>
-    <h2>Quatre univers. Un même objectif : votre <em>projet.</em></h2>
-    <p class="sub">Une seule vision, du premier brief jusqu'à la mise en ligne.</p>
-    <div class="grid g4">
-      <article class="card uni" style="--c:var(--web)"><span class="n">01</span><h3>Web</h3><p>Sites vitrine, boutiques en ligne, refontes et SEO. Maintenance en abonnement pour garder votre site à jour et protégé.</p></article>
-      <article class="card uni" style="--c:var(--design)"><span class="n">02</span><h3>Design et identité</h3><p>Logos, chartes graphiques, images IA et supports visuels.</p></article>
-      <article class="card uni" style="--c:var(--auto)"><span class="n">03</span><h3>Automatisation</h3><p>Gagnez du temps avec des outils sur mesure et des workflows intelligents.</p></article>
-      <article class="card uni" style="--c:var(--full)"><span class="n">04</span><h3>Full Stack</h3><p>Quand WordPress ne suffit plus : du sur-mesure.</p></article>
+    <div class="hero__visual">
+      <img src="logo-mascotte.webp" alt="Dev, la mascotte de Dev'n Done, pouce levé au-dessus du logo" width="1140" height="600" fetchpriority="high">
     </div>
   </div>
 </section>
 
-<section id="process">
-  <div class="wrap">
-    <p class="eyebrow">Mon process</p>
-    <h2>De l'idée à la mise en ligne, en toute confiance.</h2>
-    <div class="steps" style="margin-top:28px">
-      <div class="step"><h3>Comprendre</h3><p>On échange sur vos besoins et vos objectifs.</p></div>
-      <div class="step"><h3>Concevoir</h3><p>Je vous propose une solution sur mesure.</p></div>
-      <div class="step"><h3>Développer</h3><p>Le design prend vie, le code fait le reste.</p></div>
-      <div class="step"><h3>Livrer</h3><p>On teste, on ajuste, et c'est en ligne !</p></div>
+<section id="services" class="section sec">
+  <div class="container">
+    <p class="t-label t-accent">Nos expertises</p>
+    <h2 class="wide">Quatre univers. Un même objectif : votre <em>projet.</em></h2>
+    <p class="sub">Web, design, automatisation et développement sur mesure. Une seule vision, du premier brief jusqu'à la mise en ligne.</p>
+    <div class="univers">
+      <article class="card uni" style="--c:var(--u-web)"><span class="uni__n">01</span><h3>Web</h3><p>Sites vitrine, boutiques en ligne, refontes et optimisation SEO, avec une maintenance en abonnement pour garder votre site à jour et protégé.</p><ul><li>Création</li><li>Refonte</li><li>WooCommerce</li><li>SEO</li><li>Maintenance</li></ul></article>
+      <article class="card uni" style="--c:var(--u-design)"><span class="uni__n">02</span><h3>Design</h3><p>Identité visuelle, direction artistique, images IA et mockups : une esthétique cohérente pour marquer les esprits.</p><ul><li>Identité visuelle</li><li>Direction artistique</li><li>Images IA</li><li>Mockups</li></ul></article>
+      <article class="card uni" style="--c:var(--u-auto)"><span class="uni__n">03</span><h3>Automatisation</h3><p>Et si cette tâche pouvait se faire toute seule ? Audit des processus, automatisation ciblée ou complète.</p><ul><li>Audit</li><li>Automatisation ciblée</li><li>Make · Zapier</li></ul></article>
+      <article class="card uni" style="--c:var(--u-full)"><span class="uni__n">04</span><h3>Full Stack</h3><p>Quand WordPress ne suffit plus : applications, API, espaces clients et outils métier sur mesure.</p><ul><li>Svelte</li><li>Node.js</li><li>PostgreSQL</li><li>API</li></ul></article>
     </div>
   </div>
 </section>
 
-<section id="realisations">
-  <div class="wrap">
-    <p class="eyebrow">Réalisations</p>
-    <h2>Des projets qui sont vraiment <em>Done.</em></h2>
-    <p class="sub">Des sites livrés, tels qu'ils existent aujourd'hui.</p>
-    <div class="grid g3">
-      <article class="card proj"><a href="https://www.palimpseste-urbain.com/" rel="noopener"><h3>Palimpseste Urbain</h3><p>Agence d'architecture et d'urbanisme. Refonte WordPress, Elementor Pro, SEO.</p></a></article>
-      <article class="card proj"><a href="https://gsti62.com/" rel="noopener"><h3>GSTI62</h3><p>Migration de Wix vers WordPress et WooCommerce. Catalogue B2B et devis en ligne.</p></a></article>
-      <article class="card proj"><a href="https://sebastienmaurice.github.io/cine-delices.html" rel="noopener"><h3>Ciné Délices</h3><p>Application full stack de recettes inspirées du cinéma. Node.js, PostgreSQL.</p></a></article>
-      <article class="card proj"><a href="https://maxilou.fr/" rel="noopener"><h3>Maxilou</h3><p>Location de matériel BTP et espaces verts. Catalogue par catégories et devis en ligne.</p></a></article>
-      <article class="card proj"><a href="https://www.petitchateauvercourt.com/" rel="noopener"><h3>Petit Château Vercourt</h3><p>Chambres d'hôtes en Picardie. Réservation en ligne, versions française et anglaise.</p></a></article>
-      <article class="card proj"><a href="https://www.pano-douai.fr/" rel="noopener"><h3>PANO Sign'Service</h3><p>Refonte WordPress Elementor. Vitrine et e-commerce de signalétique.</p></a></article>
+<section id="process" class="section sec">
+  <div class="container">
+    <p class="t-label t-accent">Mon process</p>
+    <h2 class="wide">De l'idée à la mise en ligne, en toute confiance.</h2>
+    <div class="stepsrow">
+      <div class="stp" style="--c:var(--u-web)"><b class="n">01</b><h3>Comprendre</h3><p>On échange sur vos besoins et vos objectifs.</p></div>
+      <div class="stp" style="--c:var(--u-design)"><b class="n">02</b><h3>Concevoir</h3><p>Je vous propose une solution sur mesure.</p></div>
+      <div class="stp" style="--c:var(--u-full)"><b class="n">03</b><h3>Développer</h3><p>Le design prend vie, le code fait le reste.</p></div>
+      <div class="stp" style="--c:var(--u-auto)"><b class="n">04</b><h3>Livrer</h3><p>On teste, on ajuste, et c'est en ligne !</p></div>
     </div>
   </div>
 </section>
 
-<section id="tarifs">
-  <div class="wrap">
-    <p class="eyebrow">Tarifs</p>
-    <h2>Maintenance WordPress en abonnement</h2>
+<section id="realisations" class="section sec">
+  <div class="container">
+    <p class="t-label t-accent">02 · Réalisations</p>
+    <h2 class="wide">Des projets qui sont vraiment <em>Done.</em></h2>
+    <p class="sub">Des projets concrets pour de vrais besoins, tels qu'ils existent aujourd'hui.</p>
+    <div class="cards">
+      <article class="card proj"><a href="https://www.palimpseste-urbain.com/" rel="noopener"><span class="k">WordPress · Elementor Pro · SEO</span><h3>Palimpseste Urbain</h3><p>Agence d'architecture et d'urbanisme. Refonte WordPress, direction artistique, SEO.</p></a></article>
+      <article class="card proj"><a href="https://gsti62.com/" rel="noopener"><span class="k">Wix → WordPress · WooCommerce</span><h3>GSTI</h3><p>Migration de Wix vers WordPress et WooCommerce. Catalogue B2B et devis en ligne.</p></a></article>
+      <article class="card proj"><a href="https://sebastienmaurice.github.io/cine-delices.html" rel="noopener"><span class="k">Svelte · Node.js · PostgreSQL</span><h3>Ciné Délices</h3><p>Application full stack de recettes inspirées du cinéma.</p></a></article>
+      <article class="card proj"><a href="https://maxilou.fr/" rel="noopener"><span class="k">WordPress · Catalogue · Devis</span><h3>Maxilou</h3><p>Location de matériel BTP et espaces verts. Catalogue par catégories et devis en ligne.</p></a></article>
+      <article class="card proj"><a href="https://www.petitchateauvercourt.com/" rel="noopener"><span class="k">WordPress · Réservation · FR/EN</span><h3>Petit Château Vercourt</h3><p>Chambres d'hôtes en Picardie. Réservation en ligne, versions française et anglaise.</p></a></article>
+      <article class="card proj"><a href="https://www.pano-douai.fr/" rel="noopener"><span class="k">WordPress · Elementor · E-commerce</span><h3>PANO Sign'Service</h3><p>Refonte WordPress Elementor. Vitrine et e-commerce de signalétique.</p></a></article>
+    </div>
+    <div class="cta-band" style="margin-top:var(--space-7)">
+      <img src="favicon.svg" alt="">
+      <p>Un autre projet en tête ? On le rend <em>Done.</em></p>
+      <a class="btn btn--primary" href="https://calendly.com/sebastienmaurice/prise-de-contact">Parlons de votre projet</a>
+    </div>
+  </div>
+</section>
+
+<section id="tarifs" class="section sec">
+  <div class="container">
+    <p class="t-label t-accent">Tarifs</p>
+    <h2 class="wide">Maintenance WordPress en abonnement</h2>
     <p class="sub">Mises à jour, sauvegardes et surveillance : votre site reste à jour et protégé, sans que vous ayez à y penser. Trois niveaux, sans engagement de durée.</p>
-    <div class="grid g3">
+    <div class="cards">
       <article class="card">
         <h3>Essentiel</h3>
         <p class="tag">Site vitrine à faible trafic</p>
@@ -182,10 +204,10 @@ footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:
           <li><b>Surveillance de disponibilité</b>Basique</li>
           <li><b>Délai de réponse</b>48 h</li>
         </ul>
-        <a class="btn ghost" href="https://calendly.com/sebastienmaurice/prise-de-contact">En parler</a>
+        <a class="btn btn--secondary" href="https://calendly.com/sebastienmaurice/prise-de-contact">En parler</a>
       </article>
       <article class="card hl">
-        <span class="badge">RECOMMANDÉ</span>
+        <span class="badge badge--accent">Recommandé</span>
         <h3>Confort</h3>
         <p class="tag">Site actif</p>
         <p class="price">129 € <small>HT / mois</small></p>
@@ -195,7 +217,7 @@ footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:
           <li><b>Surveillance de disponibilité</b>Basique</li>
           <li><b>Délai de réponse</b>24 h</li>
         </ul>
-        <a class="btn" href="https://calendly.com/sebastienmaurice/prise-de-contact">En parler</a>
+        <a class="btn btn--primary" href="https://calendly.com/sebastienmaurice/prise-de-contact">En parler</a>
       </article>
       <article class="card">
         <h3>Sérénité</h3>
@@ -207,14 +229,14 @@ footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:
           <li><b>Surveillance de disponibilité</b>Avancée avec alertes</li>
           <li><b>Délai de réponse</b>4 h ouvrées</li>
         </ul>
-        <a class="btn ghost" href="https://calendly.com/sebastienmaurice/prise-de-contact">En parler</a>
+        <a class="btn btn--secondary" href="https://calendly.com/sebastienmaurice/prise-de-contact">En parler</a>
       </article>
     </div>
     <p class="note">Le détail complet de chaque formule (analyses de sécurité, corrections incluses, rapports) est précisé lors de l'échange. Au-delà du temps de correction inclus, toute intervention est chiffrée à l'avance. Tarifs hors taxes.</p>
 
-    <h2 style="margin-top:56px">Audit, création et refonte</h2>
+    <h2 class="wide" style="margin-top:var(--space-9)">Audit, création et refonte</h2>
     <p class="sub">Des forfaits à prix fermé, avec un contenu et un délai annoncés à l'avance. 50 % à la signature, le solde à la livraison.</p>
-    <div class="grid g3">
+    <div class="cards">
       <article class="card pack"><span class="meta">Livré en 48 h</span><h3>Audit technique WordPress</h3><p class="price">490 € <small>HT</small></p><p>Rapport PDF de 10 à 15 pages : score PageSpeed et Core Web Vitals, analyse SEO technique, recommandations classées par priorité.</p></article>
       <article class="card pack"><span class="meta">Livré en 7 jours</span><h3>Lancement site WordPress</h3><p class="price">990 € <small>HT</small></p><p>Site responsive jusqu'à 5 pages, formulaire de contact, Google Maps, SEO on-page essentiel, hébergement et nom de domaine configurés.</p></article>
       <article class="card pack"><span class="meta">Livré en 5 jours</span><h3>Landing page WordPress</h3><p class="price">1 200 € <small>HT</small></p><p>Une page conçue sur mesure à partir d'une maquette Figma, optimisée Core Web Vitals, SEO on-page inclus.</p></article>
@@ -226,12 +248,12 @@ footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:
   </div>
 </section>
 
-<section id="avis">
-  <div class="wrap">
-    <p class="eyebrow">Avis clients</p>
-    <h2>Ce qu'en disent mes clients</h2>
+<section id="avis" class="section sec">
+  <div class="container">
+    <p class="t-label t-accent">Avis clients</p>
+    <h2 class="wide">Ce qu'en disent mes clients</h2>
     <p class="sub">Avis publiés sur mon profil Malt.</p>
-    <div class="grid g3">
+    <div class="cards">
       <blockquote><p>« Un travail extraordinaire. Il a parfaitement intégré les enjeux de notre communication, force de proposition sur les textes et les graphiques. »</p><footer>Ryad Asselah, Directeur, Palimpseste Urbain</footer></blockquote>
       <blockquote><p>« Efficace, professionnelle, respecte les délais demandés. Je le recommande à 100 %. »</p><footer>Virginie, SARL GSTI (pièces détachées industrielles)</footer></blockquote>
       <blockquote><p>« Rapide, précis, efficace... je te recontacte dès que j'ai un nouveau besoin. »</p><footer>Eric Havard, Gérant, Hache</footer></blockquote>
@@ -240,31 +262,32 @@ footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:
   </div>
 </section>
 
-<section id="apropos">
-  <div class="wrap">
-    <p class="eyebrow">À propos</p>
-    <h2>Un seul interlocuteur, du brief à la mise en ligne.</h2>
+<section id="apropos" class="section sec">
+  <div class="container">
+    <p class="t-label t-accent">À propos</p>
+    <h2 class="wide">Un seul interlocuteur, du brief à la mise en ligne.</h2>
     <p class="about">Je suis Sébastien Maurice, indépendant à Caudry. J'ai 15 ans d'expérience du design et de l'intégration web (WordPress, WooCommerce, PrestaShop), complétés par une formation au développement full stack (Titre Professionnel Développeur Web et Web Mobile, O'Clock, 2026). Je travaille avec des TPE, artisans et PME, avec un devis clair et un délai annoncé.</p>
   </div>
 </section>
 
-<section id="contact">
-  <div class="wrap">
-    <p class="eyebrow">Contact</p>
-    <h2>Un projet en tête ? On le rend <em>Done.</em></h2>
+<section id="contact" class="section sec">
+  <div class="container">
+    <p class="t-label t-accent">Contact</p>
+    <h2 class="wide">Un projet en tête ? On le rend <em>Done.</em></h2>
     <p class="sub">15 minutes pour faire le point sur votre projet et définir la bonne approche, sans engagement.</p>
     <div class="contact">
-      <a class="btn" href="https://calendly.com/sebastienmaurice/prise-de-contact">Parlons de votre projet</a>
-      <a class="btn ghost" href="mailto:overseb75@gmail.com">Écrire un email</a>
-      <a class="btn ghost" href="https://www.linkedin.com/in/sebastien-maurice/" rel="noopener">LinkedIn</a>
-      <a class="btn ghost" href="https://www.malt.fr/profile/semauri" rel="noopener">Malt</a>
+      <a class="btn btn--primary" href="https://calendly.com/sebastienmaurice/prise-de-contact">Parlons de votre projet</a>
+      <a class="btn btn--secondary" href="mailto:overseb75@gmail.com">Écrire un email</a>
+      <a class="btn btn--secondary" href="https://www.linkedin.com/in/sebastien-maurice/" rel="noopener">LinkedIn</a>
+      <a class="btn btn--secondary" href="https://www.malt.fr/profile/semauri" rel="noopener">Malt</a>
     </div>
   </div>
 </section>
+
 </main>
 
 <footer class="site">
-  <div class="wrap">
+  <div class="container">
     <span>© 2026 Dev'n Done · Sébastien Maurice, entrepreneur individuel · SIREN 517 849 733 · Caudry (59)</span>
     <a href="mentions-legales.html">Mentions légales</a>
   </div>
