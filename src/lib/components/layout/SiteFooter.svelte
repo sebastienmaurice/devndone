@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { site } from '$lib/config/site';
+	import { legal } from '$lib/content/legal';
 	import { legalPages } from '$lib/content/pages';
 	import Logo from '../brand/Logo.svelte';
 
@@ -13,7 +14,6 @@
 				<span class="logo logo--footer"
 					><Logo variant="horizontal" height={36} alt={site.wordmark} /></span
 				>
-				<p class="t-body-sm t-muted t-measure">{site.description}</p>
 				<p class="tagline">
 					{#each site.tagline as word, i (word)}{#if i > 0}<span class="slash" aria-hidden="true"
 								>/</span
@@ -22,7 +22,11 @@
 			</div>
 		</div>
 		<div class="site-footer__bottom">
-			<span>© {year} {site.name}</span>
+			<!-- Même mention que le pied de page du site en ligne -->
+			<span
+				>© {year} Dev'n Done · {legal.publisher.name}, entrepreneur individuel · SIREN {legal
+					.publisher.siren} · Caudry (59)</span
+			>
 			{#if legalPages.length}
 				<ul class="cluster" role="list">
 					{#each legalPages as item (item.path)}

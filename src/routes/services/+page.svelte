@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { Section, SectionHead, Seo, Steps } from '$lib/components';
+	import { Section, SectionHead, Seo } from '$lib/components';
 	import ContactCta from '$lib/components/sections/ContactCta.svelte';
+	import ProcessBand from '$lib/components/sections/ProcessBand.svelte';
 	import UniverseGrid from '$lib/components/sections/UniverseGrid.svelte';
-	import { processIntro, processSteps, servicesIntro } from '$lib/content/services';
+	import { servicesIntro } from '$lib/content/services';
 </script>
 
 <Seo
@@ -24,11 +25,8 @@
 	</div>
 </Section>
 
-<Section surface="ivory" labelledby="process-title">
-	<div class="stack stack--lg">
-		<SectionHead id="process-title" eyebrow={processIntro.eyebrow} title={processIntro.title} />
-		<Steps items={processSteps} />
-	</div>
+<Section labelledby="process-title" tight>
+	<ProcessBand />
 </Section>
 
 <ContactCta />

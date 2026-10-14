@@ -10,12 +10,16 @@ export const site = {
 	lang: 'fr',
 	locale: 'fr_FR',
 	tagline: ['Développer', 'Piloter', 'Livrer'],
+	// Titre, description et Open Graph de l'accueil : ceux du site en ligne (index.html, branche main)
+	homeTitle: "Dev'n Done · Studio digital indépendant · WordPress, design, automatisation",
 	description:
-		"Studio digital indépendant : conception, développement, automatisation et maintenance d'outils numériques sur mesure.",
+		'Studio digital indépendant : sites WordPress, maintenance en abonnement, identité visuelle, automatisation et développement sur mesure pour TPE, artisans et PME.',
+	ogTitle: "Dev'n Done · Des projets pensés pour être Done.",
+	ogDescription: 'Un studio digital indépendant qui conçoit, développe et livre des solutions web.',
 	themeColor: '#0A0D11',
 	ogImage: '/og/og-default.jpg',
 	ogImageAlt:
-		"Dev, la mascotte DEV'n DONE, derrière le lettrage Dev'n Done — Développer / Piloter / Livrer"
+		"Dev, la mascotte DEV'n DONE, derrière le lettrage Dev'n Done, avec la signature Développer / Piloter / Livrer"
 } as const;
 
 /** Transforme un chemin interne en URL absolue canonique. */

@@ -1,6 +1,7 @@
 <!--
-	Cartes de réalisations (content/realisations.ts). Chaque carte est un seul lien vers le
-	site du projet, ouvert dans un nouvel onglet. `limit` pour n'en montrer qu'une partie.
+	Cartes de réalisations (content/realisations.ts), d'après la maquette « réalisations » :
+	numéro cerclé, nom, technologies, texte. Chaque carte est un seul lien vers le site du projet,
+	ouvert dans un nouvel onglet. Pas de capture d'écran tant que les fichiers n'existent pas.
 -->
 <script lang="ts">
 	import { projects } from '$lib/content/realisations';
@@ -10,16 +11,22 @@
 
 	const shown = $derived(limit ? projects.slice(0, limit) : projects);
 	const host = (url: string) => new URL(url).hostname.replace(/^www\./, '');
+	const pad = (n: number) => String(n + 1).padStart(2, '0');
 </script>
 
 <ul class="auto-grid projects" role="list">
-	{#each shown as p (p.name)}
+	{#each shown as p, i (p.name)}
 		<li>
 			<a class="card card--link project" href={p.url} target="_blank" rel="noopener">
-				<p class="t-tech">{p.stack}</p>
-				<svelte:element this={`h${headingLevel}`} class="t-h3">{p.name}</svelte:element>
-				<p class="t-muted">{p.text}</p>
-				<span class="link-arrow project__host"
+				<div class="project__head">
+					<span class="num-circle" aria-hidden="true">{pad(i)}</span>
+					<div>
+						<svelte:element this={`h${headingLevel}`} class="t-h3">{p.name}</svelte:element>
+						<p class="t-tech t-muted">{p.stack}</p>
+					</div>
+				</div>
+				<p>{p.text}</p>
+				<span class="link-arrow"
 					>{host(p.url)}<Icon name="arrow-up-right" /><span class="sr-only">(nouvel onglet)</span
 					></span
 				>
@@ -30,10 +37,27 @@
 
 <style>
 	.projects {
-		--auto-min: 17rem;
+		--auto-min: 18rem;
 	}
 	.project {
 		height: 100%;
-		grid-template-rows: auto auto 1fr auto;
+		grid-template-rows: auto 1fr auto;
+	}
+	.project__head {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--space-4);
+	}
+	.num-circle {
+		display: inline-grid;
+		place-items: center;
+		flex: none;
+		width: 2.75rem;
+		height: 2.75rem;
+		border: var(--border-hair) solid var(--accent-deco);
+		border-radius: 50%;
+		font-family: var(--font-mono);
+		font-size: var(--text-body-sm);
+		color: var(--accent-text);
 	}
 </style>

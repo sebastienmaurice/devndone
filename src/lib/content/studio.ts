@@ -60,3 +60,9 @@ export const hero = {
 	ctaServices: 'Découvrir mes services',
 	ctaCall: 'Réserver 15 min'
 } as const;
+
+/** Bandeau sous les réalisations ; le mot « Done. » est mis en forme par le composant */
+export const ctaBand = {
+	text: 'Un autre projet en tête ? On le rend',
+	cta: 'Parlons de votre projet'
+} as const;

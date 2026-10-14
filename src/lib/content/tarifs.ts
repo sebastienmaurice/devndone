@@ -65,7 +65,7 @@ export const maintenancePlans: readonly MaintenancePlan[] = [
 
 export const packagesIntro = {
 	title: 'Audit, création et refonte',
-	lede: "Des forfaits à prix fermé, avec un contenu et un délai annoncés à l'avance. 50 % à la signature, le solde à la livraison.",
+	lede: "Des forfaits à prix fermé, avec un contenu et un délai annoncés à l'avance. 50 % à la signature, le solde à la livraison.",
 	note: 'Identité visuelle, SEO, automatisation, développement sur mesure : chiffrés après un premier échange.'
 } as const;
 

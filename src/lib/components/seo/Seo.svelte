@@ -8,6 +8,11 @@
 	type Props = {
 		/** Titre de la page, sans le nom du site (ajouté automatiquement) */
 		title?: string;
+		/** Titre complet, sans ajout du nom du site (accueil) */
+		fullTitle?: string;
+		/** Titre et description pour le partage, s'ils diffèrent de la page */
+		ogTitle?: string;
+		ogDescription?: string;
 		description?: string;
 		/** Chemin canonique de la page, avec slash final */
 		path: string;
@@ -21,6 +26,9 @@
 
 	let {
 		title,
+		fullTitle: fullTitleProp,
+		ogTitle,
+		ogDescription,
 		description = site.description,
 		path,
 		image = site.ogImage,
@@ -31,8 +39,10 @@
 	}: Props = $props();
 
 	const fullTitle = $derived(
-		title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline.join(' / ')}`
+		fullTitleProp ?? (title ? `${title} · ${site.wordmark}` : site.homeTitle)
 	);
+	const shareTitle = $derived(ogTitle ?? fullTitle);
+	const shareDescription = $derived(ogDescription ?? description);
 	const canonical = $derived(absoluteUrl(path));
 	const imageUrl = $derived(absoluteUrl(image));
 	const robots = $derived(noindex ? 'noindex, nofollow' : 'index, follow');
@@ -53,10 +63,10 @@
 	<link rel="canonical" href={canonical} />
 
 	<meta property="og:type" content={type} />
-	<meta property="og:site_name" content={site.name} />
+	<meta property="og:site_name" content={site.wordmark} />
 	<meta property="og:locale" content={site.locale} />
-	<meta property="og:title" content={fullTitle} />
-	<meta property="og:description" content={description} />
+	<meta property="og:title" content={shareTitle} />
+	<meta property="og:description" content={shareDescription} />
 	<meta property="og:url" content={canonical} />
 	<meta property="og:image" content={imageUrl} />
 	<meta property="og:image:alt" content={imageAlt} />
@@ -64,8 +74,8 @@
 	<meta property="og:image:height" content="630" />
 
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={fullTitle} />
-	<meta name="twitter:description" content={description} />
+	<meta name="twitter:title" content={shareTitle} />
+	<meta name="twitter:description" content={shareDescription} />
 	<meta name="twitter:image" content={imageUrl} />
 
 	<!-- eslint-disable-next-line svelte/no-at-html-tags -- JSON sérialisé et échappé ci-dessus -->

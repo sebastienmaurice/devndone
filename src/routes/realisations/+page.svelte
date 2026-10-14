@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Section, SectionHead, Seo, Stroke } from '$lib/components';
 	import ContactCta from '$lib/components/sections/ContactCta.svelte';
+	import CtaBand from '$lib/components/sections/CtaBand.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import { realisationsIntro } from '$lib/content/realisations';
 </script>
@@ -26,6 +27,7 @@
 			{/snippet}
 		</SectionHead>
 		<ProjectGrid headingLevel={2} />
+		<CtaBand />
 	</div>
 </Section>
 

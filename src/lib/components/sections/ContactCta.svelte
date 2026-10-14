@@ -14,12 +14,13 @@
 		surface?: 'night' | 'raised' | 'ivory' | 'orange';
 		/** Liens LinkedIn et Malt en plus de Calendly et de l'email */
 		full?: boolean;
+		id?: string;
 	};
 
-	let { level = 2, surface = 'raised', full = false }: Props = $props();
+	let { level = 2, surface = 'raised', full = false, id }: Props = $props();
 </script>
 
-<Section {surface} labelledby="contact-title">
+<Section {id} {surface} labelledby="contact-title">
 	<SectionHead
 		id="contact-title"
 		{level}

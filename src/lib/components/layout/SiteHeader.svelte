@@ -6,6 +6,8 @@
 	import { page } from '$app/state';
 	import { afterNavigate } from '$app/navigation';
 	import { navPages } from '$lib/content/pages';
+	import { contactIntro, links } from '$lib/content/studio';
+	import Button from '../ui/Button.svelte';
 	import Logo from '../brand/Logo.svelte';
 
 	let open = $state(false);
@@ -25,10 +27,10 @@
 
 <header class="site-header">
 	<div class="container site-header__inner">
-		<a class="logo logo--header" href="/" aria-label="Dev'n Done — accueil">
+		<a class="logo logo--header" href="/" aria-label="Dev'n Done, accueil">
 			<Logo variant="horizontal" alt="" />
 		</a>
-		<a class="logo logo--compact" href="/" aria-label="Dev'n Done — accueil">
+		<a class="logo logo--compact" href="/" aria-label="Dev'n Done, accueil">
 			<Logo variant="compact" alt="" />
 		</a>
 
@@ -46,6 +48,9 @@
 					{/each}
 				</ul>
 			</nav>
+
+			<!-- Affiché à partir de 1200 px (.nav__cta) ; en dessous, le menu mobile le reprend -->
+			<Button href={links.calendly} size="sm" class="nav__cta">{contactIntro.cta}</Button>
 
 			<button
 				bind:this={toggle}
@@ -73,5 +78,6 @@
 				</li>
 			{/each}
 		</ul>
+		<div><Button href={links.calendly}>{contactIntro.cta}</Button></div>
 	</nav>
 {/if}
