@@ -266,7 +266,7 @@ identique après la bascule : refaire le relevé.
 | ----- | --------------------------------------------------------------------------- | ------- |
 | 1     | Socle, design system intégré, SEO technique, 404, déploiement               | ✓       |
 | 2     | Composants Svelte du design system, banc d'essai, action reveal             | ✓       |
-| 3     | Header : navigation complète et CTA (dès que les pages existent)            | à venir |
+| 3     | Header : navigation complète et CTA, pied de page                           | ✓       |
 | 4     | Pages : services (avec le process), réalisations, tarifs, à propos, contact | ✓       |
 | 5     | Contact : lien Calendly et email, sans formulaire (lancement)               | décidé  |
 | 6–7   | Réalisations, démos interactives                                            | à venir |
