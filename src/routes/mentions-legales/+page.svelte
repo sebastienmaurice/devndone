@@ -56,8 +56,8 @@
 			<section class="stack stack--sm" aria-labelledby="l-hebergeur">
 				<h2 class="t-h3" id="l-hebergeur">Hébergement</h2>
 				<p>
-					Le site est hébergé par {h.name}, {h.address} —
-					<a class="link" href={h.website} rel="noopener">{h.website.replace('https://', '')}</a>.
+					Le site est hébergé sur GitHub Pages par {h.name}, {h.address}
+					(<a class="link" href={h.website} rel="noopener">{h.website.replace('https://', '')}</a>).
 				</p>
 			</section>
 

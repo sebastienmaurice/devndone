@@ -23,10 +23,11 @@ export const legal = {
 		publicationDirector: 'Sébastien Maurice'
 	},
 	host: {
-		// Informations publiques d'Hostinger — à vérifier sur hostinger.fr avant publication
-		name: 'Hostinger International Ltd',
-		address: '61 Lordou Vironos Street, 6023 Larnaca, Chypre',
-		website: 'https://www.hostinger.fr'
+		// Site publié sur GitHub Pages. Raison sociale et adresse : section « Contacting GitHub »
+		// de la GitHub General Privacy Statement (docs.github.com/en/site-policy), relevées le 14/10/2026.
+		name: 'GitHub, Inc.',
+		address: '88 Colin P. Kelly Jr. St., San Francisco, CA 94107, États-Unis',
+		website: 'https://github.com'
 	},
-	updatedAt: '2026-09-27'
+	updatedAt: '2026-10-14'
 } as const;

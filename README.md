@@ -253,8 +253,7 @@ identique après la bascule : refaire le relevé.
 - [ ] **Adresse** : l'adresse du domicile n'est volontairement pas publiée. La LCEN en demande une
       pour un entrepreneur individuel : renseigner une domiciliation ou une boîte postale dans
       `legal.ts` (le contrôle émet un avertissement tant qu'elle manque).
-- [ ] **Hébergeur** : `legal.ts` désigne encore Hostinger. Le remplacer par GitHub (GitHub Pages),
-      avec ses coordonnées vérifiées sur une source officielle.
+- [x] **Hébergeur** : GitHub, Inc. dans `legal.ts` (coordonnées de la GitHub General Privacy Statement).
 - [ ] Relever en ligne les en-têtes envoyés par GitHub Pages (HSTS compris) et le code HTTP de la 404.
 
 ## 7. Feuille de route
