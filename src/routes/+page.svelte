@@ -40,7 +40,7 @@
 		<div class="hero__content">
 			<p class="t-body-lg t-muted hero__kicker">{hero.eyebrow}</p>
 			<h1 class="t-h1" id="hero-title">
-				Des projets pensés pour être <Stroke>Done<span class="t-dot">.</span></Stroke>
+				Des projets pensés pour être <span class="t-accent hero__done"><Stroke>Done.</Stroke></span>
 			</h1>
 			<p class="t-tech">{hero.keywords}</p>
 			<div class="cluster">
@@ -171,6 +171,12 @@
 
 	h1 {
 		max-width: 13ch;
+	}
+
+	/* « Done. » orange et légèrement incliné, comme sur la page en ligne */
+	.hero__done {
+		display: inline-block;
+		transform: rotate(-2deg);
 	}
 
 	.hero__visual :global(img) {
