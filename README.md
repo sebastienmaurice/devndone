@@ -152,6 +152,12 @@ La documentation recommande aussi d'ajouter une règle de protection à l'enviro
 `8a21ded`). Remettre ses fichiers à la racine de `main`, puis repasser la source sur
 « Deploy from a branch », branche `main`, dossier `/`.
 
+Relevé du 14 octobre 2026 sur la **page provisoire** (publiée depuis une branche, avec `curl -I`) :
+`http://devndone.com/` et `https://www.devndone.com/` répondent 301 vers `https://devndone.com/`,
+une URL inconnue répond 404, et aucun en-tête `Strict-Transport-Security`, `X-Frame-Options`,
+`X-Content-Type-Options` ni `Content-Security-Policy` n'est envoyé. Rien ne garantit que ce soit
+identique après la bascule : refaire le relevé.
+
 ### Après la mise en ligne
 
 - Ouvrir une URL inconnue (ex. `https://devndone.com/test-404/`) : la page 404 doit s'afficher.
