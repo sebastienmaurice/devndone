@@ -17,7 +17,7 @@ export type PageEntry = {
 };
 
 export const pages: PageEntry[] = [
-	{ path: '/', label: 'Accueil', nav: true, sitemap: true, priority: 1 },
+	{ path: '/', label: 'Accueil', sitemap: true, priority: 1 }, // le logo ramène à l'accueil
 	{ path: '/services/', label: 'Services', nav: true, sitemap: true, priority: 0.9 },
 	{ path: '/realisations/', label: 'Réalisations', nav: true, sitemap: true, priority: 0.8 },
 	{ path: '/tarifs/', label: 'Tarifs', nav: true, sitemap: true, priority: 0.8 },
