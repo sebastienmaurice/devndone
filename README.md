@@ -1,13 +1,15 @@
-# DEV'n DONE — site officiel
+# DEV'n DONE : site officiel
 
 Site de [devndone.com](https://devndone.com) : SvelteKit + TypeScript, **100 % statique**,
-hébergé sur un mutualisé Hostinger (offre Single). Aucun serveur Node, aucune base de
-données, aucun Docker en production : `npm run build` produit des fichiers HTML / CSS / JS
-que l'on envoie tels quels.
+hébergé gratuitement sur **GitHub Pages** (dépôt public `sebastienmaurice/devndone`).
+Aucun serveur Node, aucune base de données : `npm run build` produit des fichiers
+HTML / CSS / JS, qu'un workflow GitHub Actions publie tels quels.
 
 ```text
-Code source → npm run build → build/ (HTML, CSS, JS, images) → upload → public_html/ → devndone.com
+push sur main → GitHub Actions (npm ci, npm run release) → archive build/ → GitHub Pages → devndone.com
 ```
+
+Hostinger ne fournit que le nom de domaine et sa zone DNS : il n'y a pas d'hébergement chez lui.
 
 Références de marque, dans le dossier parent :
 
@@ -42,108 +44,131 @@ Le site est servi sur <http://localhost:5173>, avec rechargement à chaud.
 | `npm run ds:sync` | Recopie le CSS du design system dans `src/lib/styles/` |
 
 Le banc d'essai des composants est sur <http://localhost:5173/design-system/>.
-Il est généré en dev et en staging, **jamais en production**, et toujours en `noindex`.
+Il n'existe qu'en dev : il n'est **jamais généré au build**, et il est toujours en `noindex`.
 
 ## 3. Build et vérification
 
 ```bash
-npm run release            # check + lint + build production + contrôle du build
-npm run release:staging    # idem, en mode staging
+npm run release            # check + lint + build + contrôle du build
 ```
 
 Ou étape par étape :
 
 ```bash
-npm run build              # production → build/
+npm run build              # build/ (vite build, puis copie de la page 404 en build/404.html)
 npm run check:build        # contrôle du dossier build/
 npm run preview            # sert build/ sur http://localhost:4173
 ```
 
-**`npm run check:build` doit afficher ✓ avant tout déploiement.** Il vérifie :
+**`npm run check:build` doit afficher ✓ avant tout déploiement.** Le workflow GitHub Actions
+lance `npm run release` : un contrôle en échec bloque la publication. Il vérifie :
 
 - **le code source** : aucun `+page.server`, aucune form action, aucun endpoint non prérendu, aucune variable d'environnement privée ;
-- **le build** : les fichiers indispensables sont présents (pages, 404, sitemap, robots, `.htaccess`, polices, icônes) ;
+- **le build** : les fichiers indispensables sont présents (pages, `404.html`, sitemap, robots, `CNAME`, `.nojekyll`, polices, icônes), et `CNAME` contient exactement `devndone.com` ;
 - **la sécurité** : aucune source map, aucun `.env`, aucune chaîne qui ressemble à une clé secrète ;
-- **l'indexation** : en production, pas de `noindex` et plus aucun « À COMPLÉTER » (mentions légales) ; en staging, `noindex` partout et `robots.txt` bloquant ;
-- **les routes internes** : `/design-system/` ne doit jamais apparaître dans un build de production.
+- **l'indexation** : pas de `noindex` sur les pages publiques (seule la 404 en a un), plus aucun « À COMPLÉTER » (mentions légales), `robots.txt` ouvert ;
+- **les routes internes** : `/design-system/` ne doit jamais apparaître dans le build.
 
-### Modes
+Il n'y a **aucune variable d'environnement à configurer**, ni en local ni dans GitHub Actions.
 
-| Commande                | Mode       | Indexation                                    |
-| ----------------------- | ---------- | --------------------------------------------- |
-| `npm run build`         | production | autorisée, sitemap déclaré dans `robots.txt`  |
-| `npm run build:staging` | staging    | `noindex` sur toutes les pages, `Disallow: /` |
-
-Il n'y a **aucune variable d'environnement à configurer** en V1. Le mode est lu via
-`import.meta.env.MODE` (voir `src/lib/config/site.ts`). En interne, `vite.config.ts` le transmet
-au processus de prérendu par `DND_BUILD_MODE`, car ce processus recharge la configuration sans
-l'option `--mode`.
-
-> Règle absolue : aucune clé secrète dans ce dépôt ni dans le site. Tout ce qui est construit
-> finit dans du JavaScript public. Un service qui a besoin d'une clé (CRM, IA, email) passe par
-> un service externe qui la conserve côté serveur.
+> Règle absolue : aucune clé secrète dans ce dépôt ni dans le site. Le dépôt est public, et
+> tout ce qui est construit finit dans du JavaScript public. Un service qui a besoin d'une clé
+> (CRM, IA, email) passe par un service externe qui la conserve côté serveur.
 
 ---
 
-## 4. Déploiement sur Hostinger
+## 4. Déploiement sur GitHub Pages
 
-### Ce qu'il faut envoyer
+### Le workflow
 
-Le **contenu** du dossier `build/`, et non le dossier lui-même, va dans `public_html/`.
+`.github/workflows/deploy.yml`, déclenché à chaque push sur `main` ou `refonte`, et à la demande
+(onglet Actions, « Run workflow ») :
 
-```text
-build/                         →  public_html/
-├── .htaccess                  →  .htaccess        (fichier caché : à ne pas oublier)
-├── index.html                 →  index.html
-├── 404/ mentions-legales/     →  …
-├── _app/                      →  _app/            (JS / CSS / images hashés)
-├── fonts/ brand/ og/          →  …
-└── sitemap.xml robots.txt …   →  …
-```
+1. **build** (toutes les branches) : `npm ci`, `npm run release`, puis envoi de `build/` comme
+   archive Pages (`actions/upload-pages-artifact`, avec les fichiers cachés pour garder `.nojekyll`).
+2. **deploy** (uniquement sur `main`) : publication de l'archive (`actions/deploy-pages`).
 
-### Procédure
+Un push sur `refonte` ne publie donc rien : il sert à vérifier que le build passe sur GitHub.
+Les actions utilisées et les permissions `pages: write` / `id-token: write` suivent la
+[documentation des workflows Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
-1. `npm run release`, et le contrôle doit afficher ✓.
-2. Se connecter en **SFTP/FTP**. Les identifiants sont dans hPanel → Sites → devndone.com → Fichiers → Comptes FTP. Un client comme FileZilla ou l'extension SFTP de VS Code convient.
-3. Au premier déploiement, supprimer le fichier d'accueil par défaut d'Hostinger (`default.php` ou `index.php`) dans `public_html/`.
-4. Envoyer `_app/` **en premier**, puis tout le reste. Un visiteur ne peut ainsi jamais recevoir une page qui pointe vers des fichiers pas encore arrivés.
-5. Vérifier que `.htaccess` est bien présent. Dans FileZilla, afficher les fichiers cachés (Serveur → Forcer l'affichage des fichiers cachés).
-6. Si le cache LiteSpeed ou le CDN Hostinger est activé, le purger dans hPanel.
+### Ce que GitHub Pages fait, et ne fait pas
 
-Variante sans client FTP : zipper le contenu de `build/`, l'envoyer avec le gestionnaire de fichiers
-de hPanel, puis l'extraire dans `public_html/`.
+| Sujet               | Comportement                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Gratuité            | Le plan GitHub Free inclut « GitHub Pages in public repositories » ([plans GitHub](https://docs.github.com/en/get-started/learning-about-github/githubs-plans)). Le dépôt doit donc rester public.                                                                                                                                                                                                                 |
+| Limites             | Site publié de 1 Go au plus, bande passante « soft » de 100 Go par mois, déploiement interrompu au-delà de 10 minutes ([limites](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)).                                                                                                                                                                                         |
+| Page 404            | GitHub Pages affiche le fichier `404.html` du site pour les pages inexistantes ([page 404 personnalisée](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site)). La documentation ne précise pas le code HTTP renvoyé : **je ne peux pas le confirmer**, à contrôler en ligne (voir « Après la mise en ligne »).                               |
+| `CNAME`             | « If you are publishing from a custom GitHub Actions workflow, no `CNAME` file is created, and any existing `CNAME` file is ignored and is not required. » Le domaine se règle dans Settings > Pages ([domaine personnalisé](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)). `static/CNAME` est gardé par sécurité. |
+| `.nojekyll`         | Désactive Jekyll, qui ignore les dossiers commençant par `_` comme `_app/` ([blog GitHub](https://github.blog/news-insights/the-library/bypassing-jekyll-on-github-pages/)). La documentation de `adapter-static` le recommande. Avec un workflow personnalisé, la documentation GitHub ne dit pas si Jekyll intervient : le fichier est gardé par précaution.                                                     |
+| HTTPS               | « Enforce HTTPS » redirige toutes les requêtes HTTP vers HTTPS ([HTTPS](https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https)).                                                                                                                                                                                                                           |
+| `www`               | Avec `devndone.com` comme domaine personnalisé et les bons DNS, `www.devndone.com` redirige vers `devndone.com` ([domaine personnalisé](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)).                                                                                                                             |
+| En-têtes HTTP, HSTS | La documentation ne décrit aucun moyen de poser ses propres en-têtes (pas de `.htaccess`). Quels en-têtes GitHub Pages ajoute de lui-même, HSTS compris : **je ne peux pas le confirmer**, à relever en ligne dans les outils de développement. La CSP reste injectée en `<meta>` par SvelteKit ; `frame-ancestors` n'est pas déclaré, car il est ignoré en `<meta>`.                                              |
+| Chemins             | Le site est servi à la racine du domaine personnalisé : `paths.base` reste vide.                                                                                                                                                                                                                                                                                                                                   |
 
-Les anciens fichiers de `_app/immutable/` peuvent rester sur le serveur : ils sont inoffensifs.
-On les nettoie de temps en temps.
+### Bascule de la page provisoire vers ce site (une seule fois)
 
-### Domaine, HTTPS et www
+Aujourd'hui, `devndone.com` sert la page provisoire publiée **depuis la branche `main`**
+(source « Deploy from a branch »). Le nouveau site vit sur la branche `refonte`.
+**Ne rien faire de ce qui suit sans décision explicite de Sébastien** : ces étapes changent le site en ligne.
 
-- Le domaine est chez Hostinger, les DNS pointent vers l'hébergement.
-- **SSL** : hPanel → Sécurité → SSL, installer le certificat pour `devndone.com` **et** `www.devndone.com`.
-- **URL canonique : `https://devndone.com`**, sans www. `.htaccess` redirige en 301 :
-  - `http://` vers `https://` ;
-  - `www.devndone.com` vers `devndone.com`.
-- **HSTS** : une fois HTTPS vérifié sur les deux hôtes, décommenter la ligne `Strict-Transport-Security` dans `static/.htaccess`, puis redéployer.
+1. Vérifier sur `refonte` que le dernier run du workflow est vert (onglet Actions).
+2. **Changer la source d'abord** : Settings > Pages > Build and deployment > Source :
+   « GitHub Actions » ([procédure officielle](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)).
+3. **Puis fusionner** `refonte` dans `main` et pousser. Le push sur `main` lance le workflow,
+   dont le job `deploy` publie le nouveau site.
 
-### Staging (recommandé avant chaque mise en production)
+   Les deux branches n'ont aucun historique commun, et `main` contient les fichiers de la page
+   provisoire à la racine (`index.html`, `*.css`, polices, `CLAUDE.md`...). Une fusion simple
+   les garderait et créerait des conflits. Méthode proposée : sur `refonte`, enregistrer
+   l'historique de `main` sans reprendre ses fichiers, puis avancer `main` sur `refonte` :
 
-1. hPanel → Domaines → Sous-domaines : créer `staging.devndone.com`. Hostinger crée un dossier dédié.
-2. `npm run release:staging`, puis envoyer le contenu de `build/` dans ce dossier.
-3. Vérifier le site sur `https://staging.devndone.com`. Il n'est pas indexé : `noindex` et `robots.txt` bloquant.
-4. Reconstruire en **production** (`npm run release`) avant d'envoyer sur `public_html/`. Un build de staging ne doit jamais partir en production, et le contrôle l'empêche.
+   ```bash
+   git fetch origin
+   git switch refonte
+   git merge -s ours --allow-unrelated-histories origin/main -m "Remplace la page provisoire par le site SvelteKit"
+   git push origin refonte
+   git push origin refonte:main
+   ```
+
+   Le dernier `push` est une avance rapide (aucun historique de `main` n'est perdu) : c'est lui
+   qui déclenche la publication.
+
+4. **Vérifier** :
+   - le run du workflow est vert et le job `deploy` affiche l'URL du site ;
+   - https://devndone.com/ affiche le nouveau site, ainsi que `/mentions-legales/` ;
+   - Settings > Pages : le domaine personnalisé est toujours `devndone.com` et « Enforce HTTPS » toujours coché ;
+   - les contrôles de « Après la mise en ligne », ci-dessous.
+
+**Entre les étapes 2 et 3** (source déjà sur « GitHub Actions », aucun déploiement par Actions
+encore fait), la documentation officielle ne dit pas si la page provisoire reste en ligne, ni si le
+domaine personnalisé et « Enforce HTTPS » sont conservés : **je ne peux pas le confirmer**. Par
+prudence, enchaîner les étapes 2 et 3 sans attendre, puis contrôler le site aussitôt.
+
+La documentation recommande aussi d'ajouter une règle de protection à l'environnement
+`github-pages` pour que seule la branche par défaut puisse y déployer.
+
+**Retour arrière** : la page provisoire reste dans l'historique de `main` (commit
+`8a21ded`). Remettre ses fichiers à la racine de `main`, puis repasser la source sur
+« Deploy from a branch », branche `main`, dossier `/`.
 
 ### Après la mise en ligne
 
+- Ouvrir une URL inconnue (ex. `https://devndone.com/test-404/`) : la page 404 doit s'afficher.
+  Relever le code HTTP dans les outils de développement (onglet Réseau) : il doit être 404.
+- Relever les en-têtes de réponse de `https://devndone.com/` (HSTS, etc.) et noter ici ce que GitHub Pages envoie.
 - Google Search Console : déclarer `https://devndone.com` et soumettre `https://devndone.com/sitemap.xml`.
-- Vérifier une URL inconnue (ex. `/test-404/`). Elle doit afficher la page 404 avec un code HTTP 404.
 
 ---
 
 ## 5. Structure du projet
 
 ```text
+├── .github/workflows/
+│   └── deploy.yml             Build + contrôle sur chaque push, publication Pages depuis main
 ├── scripts/
 │   ├── check-build.mjs        Contrôle source + build avant déploiement
+│   ├── copy-404.mjs           build/404/index.html → build/404.html (page 404 de GitHub Pages)
 │   ├── copy-fonts.mjs         Polices → static/fonts (sous-ensemble latin)
 │   ├── generate-icons.mjs     Icônes PNG + image Open Graph (sharp)
 │   └── sync-design-system.mjs Design system → src/lib/styles (npm run ds:sync)
@@ -160,18 +185,18 @@ On les nettoie de temps en temps.
 │   │   │   ├── form/          Field, Check, Honeypot
 │   │   │   ├── seo/           Seo
 │   │   │   └── pages/         NotFound
-│   │   ├── config/site.ts     Nom, URL canonique, description, mode staging
+│   │   ├── config/site.ts     Nom, URL canonique, description
 │   │   ├── content/           Données : pages.ts (nav + sitemap), legal.ts
 │   │   └── styles/            Copie du design system (NE PAS éditer : npm run ds:sync) + fonts.css
 │   └── routes/
 │       ├── +layout.ts         prerender = true · trailingSlash = 'always'
 │       ├── +page.svelte       Accueil (version d'attente, phase 1)
-│       ├── 404/               Page 404 statique, servie par .htaccess
-│       ├── design-system/     Banc d'essai des composants (dev + staging uniquement)
+│       ├── 404/               Page 404 statique, recopiée en 404.html
+│       ├── design-system/     Banc d'essai des composants (dev uniquement)
 │       ├── mentions-legales/
 │       ├── sitemap.xml/       Généré au build depuis content/pages.ts
-│       └── robots.txt/        Généré au build selon le mode
-├── static/                    Copié tel quel : .htaccess, polices, logos, icônes, manifest, og/
+│       └── robots.txt/        Généré au build (indexation autorisée)
+├── static/                    Copié tel quel : CNAME, .nojekyll, polices, logos, icônes, manifest, og/
 └── vite.config.ts             Configuration SvelteKit (adapter-static, CSP, prérendu strict)
 ```
 
@@ -207,7 +232,7 @@ On les nettoie de temps en temps.
 | Choix                       | Raison                                                                                         |
 | --------------------------- | ---------------------------------------------------------------------------------------------- |
 | `adapter-static` + `strict` | Aucune page ne peut dépendre d'un serveur ; le build échoue sinon                              |
-| `trailingSlash: 'always'`   | `/page/` devient `page/index.html`, servi nativement par Apache / LiteSpeed sans réécriture    |
+| `trailingSlash: 'always'`   | `/page/` devient `page/index.html`, servi tel quel par GitHub Pages                            |
 | `paths.relative: false`     | La 404 fonctionne sur n'importe quelle URL profonde                                            |
 | CSP `mode: 'hash'`          | Politique de sécurité stricte en `<meta>`, sans `unsafe-inline` pour les scripts               |
 | `@sveltejs/enhanced-img`    | AVIF / WebP / srcset au build : visuel mascotte de 335 Ko → 7 à 21 Ko                          |
@@ -222,17 +247,18 @@ On les nettoie de temps en temps.
 - [ ] **Adresse** : l'adresse du domicile n'est volontairement pas publiée. La LCEN en demande une
       pour un entrepreneur individuel : renseigner une domiciliation ou une boîte postale dans
       `legal.ts` (le contrôle émet un avertissement tant qu'elle manque).
-- [ ] Vérifier les informations d'Hostinger (hébergeur) dans le même fichier.
-- [ ] Activer HSTS après validation du SSL.
+- [ ] **Hébergeur** : `legal.ts` désigne encore Hostinger. Le remplacer par GitHub (GitHub Pages),
+      avec ses coordonnées vérifiées sur une source officielle.
+- [ ] Relever en ligne les en-têtes envoyés par GitHub Pages (HSTS compris) et le code HTTP de la 404.
 
 ## 7. Feuille de route
 
-| Phase | Contenu                                                              | État               |
-| ----- | -------------------------------------------------------------------- | ------------------ |
-| 1     | Socle, design system intégré, SEO technique, 404, déploiement        | ✓                  |
-| 2     | Composants Svelte du design system, banc d'essai, action reveal      | ✓                  |
-| 3     | Header : navigation complète et CTA (dès que les pages existent)     | à venir            |
-| 4     | Pages : services, tarifs, réalisations, méthode, à propos            | à venir            |
-| 5     | Contact : abstraction de formulaire + transport (webhook)            | décision à prendre |
-| 6–7   | Réalisations, démos interactives                                     | à venir            |
-| 8     | Recette : Lighthouse, accessibilité, navigateurs, mise en production | à venir            |
+| Phase | Contenu                                                              | État    |
+| ----- | -------------------------------------------------------------------- | ------- |
+| 1     | Socle, design system intégré, SEO technique, 404, déploiement        | ✓       |
+| 2     | Composants Svelte du design system, banc d'essai, action reveal      | ✓       |
+| 3     | Header : navigation complète et CTA (dès que les pages existent)     | à venir |
+| 4     | Pages : services, tarifs, réalisations, méthode, à propos            | à venir |
+| 5     | Contact : lien Calendly et email, sans formulaire (lancement)        | décidé  |
+| 6–7   | Réalisations, démos interactives                                     | à venir |
+| 8     | Recette : Lighthouse, accessibilité, navigateurs, mise en production | à venir |
