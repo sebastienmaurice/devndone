@@ -1,0 +1,58 @@
+# Build du site et publication sur GitHub Pages.
+#
+# - Sur la branche refonte (et sur demande) : build + contrôle uniquement, rien n'est publié.
+# - Sur main : build + contrôle, puis publication sur GitHub Pages.
+#   La publication ne fonctionne qu'une fois Settings > Pages > Source réglé sur « GitHub Actions ».
+#
+# Actions officielles : https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+
+name: Build et déploiement
+
+on:
+  push:
+    branches: [main, refonte]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Un seul déploiement à la fois ; un déploiement en cours n'est jamais annulé.
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # check + lint + build + contrôle du build (scripts/check-build.mjs)
+      - run: npm run release
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: build/
+          # Sans cette option, .nojekyll (fichier caché) serait exclu de l'archive.
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
