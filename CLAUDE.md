@@ -64,7 +64,7 @@ Sur le poste de Sébastien :
 ## Contraintes impératives
 
 - **Pas de Google Fonts ni de ressource tierce chargée** : les polices sont auto-hébergées. Les mentions légales affirment que le site ne dépose aucun cookie et ne collecte aucune donnée personnelle : toute ressource externe qui transmet l'IP du visiteur contredirait cette phrase. Seul Calendly (lien de prise de rendez-vous) est cité.
-- **Aucune donnée personnelle de l'éditeur** sur le site : pas d'adresse postale, pas de téléphone, pas de numéro de sécurité sociale, pas de date de naissance. Contact public : adresse email déjà présente, lien Calendly, Malt, LinkedIn.
+- **Données personnelles de l'éditeur** : ne jamais publier de numéro de sécurité sociale, de date ou lieu de naissance, ni de pièce d'identité. Pour les mentions légales, l'article 6-III-1 de la LCEN (loi 2004-575) liste nom, adresse, téléphone et email : le téléphone et l'adresse à publier (professionnels si possible) sont une **décision de Sébastien**, à vérifier sur Légifrance et la fiche Service-Public « Mentions obligatoires sur le site internet d'un entrepreneur individuel ». Ne pas retirer un numéro déjà présent sans son accord.
 - **Accessibilité** : lien d'évitement, focus visible, contrastes de la charte, `prefers-reduced-motion` respecté (déjà dans `base.css`).
 - **Performance** : images avec `width` et `height`, visuel du hero en WebP, polices en `woff2` avec `font-display: swap`.
 - Les avis clients affichés sont de vrais avis Malt : ne jamais en ajouter ni en reformuler sans source.
