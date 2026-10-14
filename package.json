@@ -6,12 +6,9 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && node scripts/copy-404.mjs",
-		"build:staging": "vite build --mode staging && node scripts/copy-404.mjs",
 		"preview": "vite preview",
 		"check:build": "node scripts/check-build.mjs",
-		"check:build:staging": "node scripts/check-build.mjs --staging",
 		"release": "npm run check && npm run lint && npm run build && npm run check:build",
-		"release:staging": "npm run check && npm run lint && npm run build:staging && npm run check:build:staging",
 		"prepare": "svelte-kit sync || echo ",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",

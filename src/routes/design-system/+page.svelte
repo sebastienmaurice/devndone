@@ -1,7 +1,7 @@
 <!--
 	Banc d'essai des composants Svelte du design system.
-	Généré en dev et en staging uniquement (voir INTERNAL_ROUTES dans vite.config.ts),
-	jamais publié en production. Toujours en noindex.
+	Servi en dev uniquement (voir INTERNAL_ROUTES dans vite.config.ts),
+	jamais généré au build. Toujours en noindex.
 -->
 <script lang="ts">
 	import {
@@ -70,7 +70,7 @@
 		lead="Interne"
 		eyebrow="Banc d'essai"
 		title="Composants"
-		lede="Chaque composant Svelte du design system, avec de vraies props. Page générée en dev et en staging uniquement."
+		lede="Chaque composant Svelte du design system, avec de vraies props. Page servie en dev uniquement."
 	>
 		<Status state="progress" as="p">Hors production · noindex</Status>
 	</SectionHead>

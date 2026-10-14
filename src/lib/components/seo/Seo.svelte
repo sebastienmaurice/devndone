@@ -1,9 +1,9 @@
 <!--
 	Métadonnées d'une page : titre, description, canonical, Open Graph, Twitter, JSON-LD.
-	À placer une fois par page. En build staging, toute page passe en noindex.
+	À placer une fois par page.
 -->
 <script lang="ts">
-	import { site, isStaging, absoluteUrl } from '$lib/config/site';
+	import { site, absoluteUrl } from '$lib/config/site';
 
 	type Props = {
 		/** Titre de la page, sans le nom du site (ajouté automatiquement) */
@@ -35,7 +35,7 @@
 	);
 	const canonical = $derived(absoluteUrl(path));
 	const imageUrl = $derived(absoluteUrl(image));
-	const robots = $derived(isStaging || noindex ? 'noindex, nofollow' : 'index, follow');
+	const robots = $derived(noindex ? 'noindex, nofollow' : 'index, follow');
 
 	// « < » échappé pour qu'aucune chaîne ne puisse fermer la balise <script>
 	const jsonLdHtml = $derived(

@@ -4,15 +4,10 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { pages } from './src/lib/content/pages.ts';
 
-/** Routes internes (banc d'essai) : générées en dev / staging, jamais en production. */
+/** Routes internes (banc d'essai) : servies en dev, jamais générées au build. */
 const INTERNAL_ROUTES: `/${string}`[] = ['/design-system'];
 
-export default defineConfig(({ mode }) => {
-	// Le prérendu tourne dans un processus enfant qui recharge cette config sans --mode :
-	// on transmet le mode par l'environnement, que l'enfant hérite.
-	if (mode !== 'production' && !process.env.DND_BUILD_MODE) process.env.DND_BUILD_MODE = mode;
-	const buildMode = process.env.DND_BUILD_MODE ?? mode;
-
+export default defineConfig(() => {
 	return {
 		plugins: [
 			// Doit précéder sveltekit() : génère AVIF / WebP / srcset au build
@@ -44,15 +39,9 @@ export default defineConfig(({ mode }) => {
 					handleHttpError: 'fail', // un lien interne cassé fait échouer le build
 					handleMissingId: 'fail',
 					// Points d'entrée du crawl : toutes les pages publiques (content/pages.ts) + fichiers
-					// techniques ; les routes internes seulement hors production.
-					entries: [
-						...pages.map((p) => p.path),
-						'/404/',
-						'/sitemap.xml',
-						'/robots.txt',
-						...(buildMode === 'production' ? [] : INTERNAL_ROUTES.map((r) => `${r}/` as const))
-					],
-					// Une route jamais atteinte fait échouer le build, sauf les routes internes en production.
+					// techniques. Les routes internes n'en font jamais partie.
+					entries: [...pages.map((p) => p.path), '/404/', '/sitemap.xml', '/robots.txt'],
+					// Une route jamais atteinte fait échouer le build, sauf les routes internes.
 					handleUnseenRoutes: ({ routes, message }) => {
 						const unexpected = routes.filter((r) => !(INTERNAL_ROUTES as string[]).includes(r));
 						if (unexpected.length) throw new Error(message);

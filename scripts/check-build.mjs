@@ -1,6 +1,5 @@
 // Contrôle avant déploiement sur GitHub Pages.
-//   npm run check:build            → contrôle d'un build de production
-//   npm run check:build:staging    → contrôle d'un build de staging
+//   npm run check:build    → contrôle du dossier build/
 //
 // 1. Le code source reste compatible avec un hébergement 100 % statique.
 // 2. Le dossier build/ contient tout ce qu'il faut, et rien de ce qu'il ne faut pas.
@@ -13,7 +12,6 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const src = join(root, 'src');
 const build = join(root, 'build');
-const staging = process.argv.includes('--staging');
 
 const errors = [];
 const warnings = [];
@@ -59,7 +57,7 @@ for (const f of srcFiles) {
 // 2. Build
 // ---------------------------------------------------------------------------
 if (!existsSync(build)) {
-	console.error('✕ build/ introuvable : lancer npm run build (ou build:staging) avant.');
+	console.error('✕ build/ introuvable : lancer npm run build avant.');
 	process.exit(1);
 }
 
@@ -89,8 +87,8 @@ if (existsSync(cname) && readFileSync(cname, 'utf8').trim() !== 'devndone.com')
 	errors.push('build/CNAME : doit contenir exactement devndone.com');
 
 // Routes internes (banc d'essai du design system) : interdites en production
-if (!staging && existsSync(join(build, 'design-system')))
-	errors.push('build/design-system : route interne présente dans un build de production');
+if (existsSync(join(build, 'design-system')))
+	errors.push('build/design-system : route interne présente dans le build');
 
 const buildFiles = walk(build);
 const secretPatterns = [
@@ -124,10 +122,8 @@ for (const f of buildFiles) {
 		if (name.endsWith('.html')) {
 			const noindex = /<meta name="robots" content="noindex/.test(text);
 			const is404 = name === '404/index.html' || name === '404.html';
-			if (staging && !noindex) errors.push(`${name} : pas de noindex dans un build de staging`);
-			if (!staging && noindex && !is404)
-				errors.push(`${name} : noindex dans un build de production`);
-			if (!staging && text.includes('À COMPLÉTER'))
+			if (noindex && !is404) errors.push(`${name} : noindex sur une page publique`);
+			if (text.includes('À COMPLÉTER'))
 				errors.push(`${name} : contenu « À COMPLÉTER » (mentions légales ?)`);
 			if (!/<link rel="canonical"/.test(text)) warnings.push(`${name} : pas de lien canonical`);
 		}
@@ -143,16 +139,12 @@ if (existsSync(legalHtml) && !readFileSync(legalHtml, 'utf8').includes('<dt>Adre
 const robots = existsSync(join(build, 'robots.txt'))
 	? readFileSync(join(build, 'robots.txt'), 'utf8')
 	: '';
-if (staging && !/Disallow: \/\s*$/m.test(robots))
-	errors.push('robots.txt : le staging doit bloquer l’indexation');
-if (!staging && /Disallow: \/\s*$/m.test(robots))
-	errors.push('robots.txt : la production bloque l’indexation');
+if (/Disallow: \/\s*$/m.test(robots)) errors.push('robots.txt : le site bloque l’indexation');
 
 // ---------------------------------------------------------------------------
 // Rapport
 // ---------------------------------------------------------------------------
-const mode = staging ? 'STAGING' : 'PRODUCTION';
-console.log(`\nDEV'n DONE — contrôle du build (${mode})`);
+console.log(`\nDEV'n DONE : contrôle du build`);
 console.log(`  ${buildFiles.length} fichiers · ${(totalBytes / 1024).toFixed(0)} Ko au total`);
 console.log(`  pages HTML : ${buildFiles.filter((f) => f.endsWith('.html')).length}\n`);
 
@@ -163,4 +155,4 @@ if (errors.length) {
 	console.log(`\n✕ ${errors.length} problème(s) : ne pas déployer.\n`);
 	process.exit(1);
 }
-console.log(`✓ Build ${mode.toLowerCase()} prêt : publiable sur GitHub Pages.\n`);
+console.log(`✓ Build prêt : publiable sur GitHub Pages.\n`);

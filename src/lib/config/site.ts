@@ -18,12 +18,6 @@ export const site = {
 		"Dev, la mascotte DEV'n DONE, derrière le lettrage Dev'n Done — Développer / Piloter / Livrer"
 } as const;
 
-/**
- * Mode de build : `npm run build` → production, `npm run build:staging` → staging.
- * En staging, toutes les pages sont en noindex et robots.txt bloque l'indexation.
- */
-export const isStaging = import.meta.env.MODE === 'staging';
-
 /** Transforme un chemin interne en URL absolue canonique. */
 export function absoluteUrl(path: string): string {
 	return new URL(path, site.url).href;
