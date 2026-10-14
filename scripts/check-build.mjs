@@ -67,6 +67,8 @@ const required = [
 	'index.html',
 	'404/index.html',
 	'404.html',
+	'CNAME',
+	'.nojekyll',
 	'mentions-legales/index.html',
 	'sitemap.xml',
 	'robots.txt',
@@ -79,6 +81,12 @@ const required = [
 	'brand/logo-horizontal-ivory.svg'
 ];
 for (const r of required) if (!existsSync(join(build, r))) errors.push(`build/${r} manquant`);
+
+// Domaine personnalisé : avec un déploiement par GitHub Actions, GitHub ignore ce fichier
+// (le domaine se règle dans Settings > Pages), mais on le garde juste, par sécurité.
+const cname = join(build, 'CNAME');
+if (existsSync(cname) && readFileSync(cname, 'utf8').trim() !== 'devndone.com')
+	errors.push('build/CNAME : doit contenir exactement devndone.com');
 
 // Routes internes (banc d'essai du design system) : interdites en production
 if (!staging && existsSync(join(build, 'design-system')))
