@@ -1,5 +1,5 @@
 <!--
-	Contenu de la page 404, partagé entre la page statique /404/ (servie par Apache)
+	Contenu de la page 404, partagé entre la page statique /404/ (servie par GitHub Pages)
 	et +error.svelte (erreurs pendant la navigation côté client).
 -->
 <script lang="ts">

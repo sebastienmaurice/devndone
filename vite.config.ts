@@ -24,19 +24,19 @@ export default defineConfig(({ mode }) => {
 						filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 				},
 
-				// Site 100 % statique pour l'hébergement mutualisé Hostinger :
+				// Site 100 % statique pour GitHub Pages :
 				// chaque URL devient un vrai fichier HTML dans build/.
 				adapter: adapter({
 					pages: 'build',
 					assets: 'build',
 					fallback: undefined, // pas de SPA : aucune page rendue côté client uniquement
-					precompress: false, // LiteSpeed compresse à la volée
+					precompress: false, // pas de .gz / .br : rien n'indique que GitHub Pages les sert
 					strict: true // le build échoue si une page ne peut pas être prérendue
 				}),
 
 				paths: {
 					// Chemins absolus (/_app/…) : indispensable pour la page 404 servie
-					// par Apache sur n'importe quelle URL profonde.
+					// par GitHub Pages sur n'importe quelle URL profonde.
 					relative: false
 				},
 
@@ -60,8 +60,9 @@ export default defineConfig(({ mode }) => {
 				},
 
 				// En-tête CSP injecté en <meta> avec les empreintes des scripts de SvelteKit.
-				// Pas de 'unsafe-inline' pour les scripts ; frame-ancestors est posé dans .htaccess
-				// (non supporté en <meta>).
+				// Pas de 'unsafe-inline' pour les scripts ; frame-ancestors n'est pas déclaré :
+				// il est ignoré en <meta>, et la documentation de GitHub Pages ne prévoit aucun
+				// moyen de poser un en-tête HTTP.
 				csp: {
 					mode: 'hash',
 					directives: {

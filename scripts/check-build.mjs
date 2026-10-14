@@ -1,4 +1,4 @@
-// Contrôle avant déploiement Hostinger.
+// Contrôle avant déploiement sur GitHub Pages.
 //   npm run check:build            → contrôle d'un build de production
 //   npm run check:build:staging    → contrôle d'un build de staging
 //
@@ -69,7 +69,6 @@ const required = [
 	'mentions-legales/index.html',
 	'sitemap.xml',
 	'robots.txt',
-	'.htaccess',
 	'favicon.svg',
 	'apple-touch-icon.png',
 	'site.webmanifest',
@@ -155,6 +154,4 @@ if (errors.length) {
 	console.log(`\n✕ ${errors.length} problème(s) : ne pas déployer.\n`);
 	process.exit(1);
 }
-console.log(
-	`✓ Build ${mode.toLowerCase()} prêt : envoyer le CONTENU de build/ dans public_html/.\n`
-);
+console.log(`✓ Build ${mode.toLowerCase()} prêt : publiable sur GitHub Pages.\n`);
