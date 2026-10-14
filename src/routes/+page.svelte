@@ -1,20 +1,20 @@
 <!--
 	Accueil : même contenu et même ordre que la page en ligne (index.html, branche main),
-	mis en page avec le design system d'après les maquettes (../Graphique/Site web/).
+	mis en page avec le design system (liste éditoriale, étapes, cartes pour regrouper uniquement).
+	Un seul accent orange par écran : le trait sous « Done. » du hero, puis les boutons.
 	Textes : $lib/content. Ancres identiques à la page en ligne (#services, #process…).
 -->
 <script lang="ts">
-	import { Button, LinkArrow, Section, SectionHead, Seo, Stroke } from '$lib/components';
+	import { Button, LinkArrow, Section, SectionHead, Seo, Steps, Stroke } from '$lib/components';
 	import ContactCta from '$lib/components/sections/ContactCta.svelte';
 	import CtaBand from '$lib/components/sections/CtaBand.svelte';
 	import MaintenancePlans from '$lib/components/sections/MaintenancePlans.svelte';
 	import PackageGrid from '$lib/components/sections/PackageGrid.svelte';
-	import ProcessBand from '$lib/components/sections/ProcessBand.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
-	import UniverseGrid from '$lib/components/sections/UniverseGrid.svelte';
+	import UniverseList from '$lib/components/sections/UniverseList.svelte';
 	import { realisationsIntro } from '$lib/content/realisations';
-	import { servicesIntro } from '$lib/content/services';
+	import { processIntro, processSteps, servicesIntro } from '$lib/content/services';
 	import { aboutIntro, hero, links, reviewsIntro } from '$lib/content/studio';
 	import { maintenanceIntro, packagesIntro } from '$lib/content/tarifs';
 	import { site, absoluteUrl } from '$lib/config/site';
@@ -71,16 +71,17 @@
 			lede={servicesIntro.lede}
 		>
 			{#snippet titleContent()}
-				Quatre univers. Un même objectif : votre <span class="t-accent">projet.</span>
+				Quatre univers. Un même objectif&nbsp;: votre projet<span class="t-dot">.</span>
 			{/snippet}
 		</SectionHead>
-		<UniverseGrid />
+		<UniverseList />
 	</div>
 </Section>
 
 <!-- Process -->
-<Section id="process" labelledby="process-title" tight>
-	<ProcessBand />
+<Section id="process" surface="ivory" labelledby="process-title">
+	<SectionHead id="process-title" eyebrow={processIntro.eyebrow} title={processIntro.title} />
+	<Steps items={processSteps} />
 </Section>
 
 <!-- Réalisations -->
@@ -94,7 +95,7 @@
 			lede={realisationsIntro.lede}
 		>
 			{#snippet titleContent()}
-				Des projets qui sont vraiment <span class="t-accent">Done.</span>
+				Des projets qui sont vraiment Done<span class="t-dot">.</span>
 			{/snippet}
 		</SectionHead>
 		<ProjectGrid />
@@ -141,7 +142,8 @@
 </Section>
 
 <!-- Contact -->
-<ContactCta id="contact" full />
+<!-- La bande slash de la page est ici : dans le hero, le visuel mascotte (fond opaque) la couperait -->
+<ContactCta id="contact" full band />
 
 <style>
 	:global(.hero.section) {
@@ -149,6 +151,8 @@
 	}
 
 	.hero__grid {
+		position: relative;
+		z-index: 1;
 		display: grid;
 		gap: var(--space-7);
 		align-items: center;

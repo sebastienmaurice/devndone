@@ -190,7 +190,8 @@ identique après la bascule : refaire le relevé.
 │   │   │   │                  FeatureList, Steps, Metric, Terminal, SpecList, Accordion, Breadcrumb
 │   │   │   ├── form/          Field, Check, Honeypot
 │   │   │   ├── seo/           Seo
-│   │   │   ├── sections/      Blocs de page : UniverseGrid, ProjectGrid, ReviewList, ContactCta
+│   │   │   ├── sections/      Blocs de page : UniverseList, ProjectGrid, CtaBand, MaintenancePlans,
+│   │   │   │                  PackageGrid, ReviewList, ContactCta
 │   │   │   └── pages/         NotFound
 │   │   ├── config/site.ts     Nom, URL canonique, description
 │   │   ├── content/           Données : pages.ts (nav + sitemap), legal.ts, services.ts,

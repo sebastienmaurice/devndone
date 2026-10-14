@@ -11,7 +11,7 @@
 <ul class="auto-grid packages" role="list">
 	{#each packages as pack (pack.name)}
 		<Card as="li">
-			<p class="t-tech t-accent">{pack.delay}</p>
+			<p class="t-tech t-muted">{pack.delay}</p>
 			<svelte:element this={`h${headingLevel}`} class="t-h3">{pack.name}</svelte:element>
 			<p class="offer__price">
 				<span class="offer__amount">{pack.price}</span>

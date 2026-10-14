@@ -9,7 +9,7 @@
 
 <div class="card cta-band">
 	<img src="/favicon.svg" alt="" width="56" height="56" />
-	<p class="t-h2">{ctaBand.text} <span class="t-accent">Done<span class="t-dot">.</span></span></p>
+	<p class="t-h2">{ctaBand.text} Done<span class="t-dot">.</span></p>
 	<Button href={links.calendly} icon="arrow-up-right">{ctaBand.cta}</Button>
 </div>
 

@@ -6,6 +6,7 @@
 	import { contactIntro, links } from '$lib/content/studio';
 	import Section from '../layout/Section.svelte';
 	import SectionHead from '../layout/SectionHead.svelte';
+	import SlashBand from '../brand/SlashBand.svelte';
 	import Stroke from '../brand/Stroke.svelte';
 	import Button from '../ui/Button.svelte';
 
@@ -15,12 +16,16 @@
 		/** Liens LinkedIn et Malt en plus de Calendly et de l'email */
 		full?: boolean;
 		id?: string;
+		/** Bande slash derrière le contenu (une par page au maximum) */
+		band?: boolean;
 	};
 
-	let { level = 2, surface = 'raised', full = false, id }: Props = $props();
+	let { level = 2, surface = 'raised', full = false, id, band = false }: Props = $props();
 </script>
 
 <Section {id} {surface} labelledby="contact-title">
+	<!-- Bande affichée dès 1024 px seulement : en dessous, elle passerait derrière le texte -->
+	{#if band}<div class="contact-band"><SlashBand right="8%" /></div>{/if}
 	<SectionHead
 		id="contact-title"
 		{level}
@@ -42,3 +47,11 @@
 		</div>
 	</SectionHead>
 </Section>
+
+<style>
+	@media (max-width: 1023px) {
+		.contact-band {
+			display: none;
+		}
+	}
+</style>

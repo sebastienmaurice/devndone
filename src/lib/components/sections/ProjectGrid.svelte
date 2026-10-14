@@ -1,6 +1,6 @@
 <!--
-	Cartes de réalisations (content/realisations.ts), d'après la maquette « réalisations » :
-	numéro cerclé, nom, technologies, texte. Chaque carte est un seul lien vers le site du projet,
+	Cartes de réalisations (content/realisations.ts) : la carte regroupe un projet (design system,
+	« Cartes offres »). Numéro en mono neutre, nom, technologies, texte. Chaque carte est un seul lien vers le site du projet,
 	ouvert dans un nouvel onglet. Pas de capture d'écran tant que les fichiers n'existent pas.
 -->
 <script lang="ts">
@@ -18,12 +18,10 @@
 	{#each shown as p, i (p.name)}
 		<li>
 			<a class="card card--link project" href={p.url} target="_blank" rel="noopener">
-				<div class="project__head">
-					<span class="num-circle" aria-hidden="true">{pad(i)}</span>
-					<div>
-						<svelte:element this={`h${headingLevel}`} class="t-h3">{p.name}</svelte:element>
-						<p class="t-tech t-muted">{p.stack}</p>
-					</div>
+				<div class="stack stack--sm">
+					<p class="t-caption t-subtle" aria-hidden="true">{pad(i)} /</p>
+					<svelte:element this={`h${headingLevel}`} class="t-h3">{p.name}</svelte:element>
+					<p class="t-tech t-muted">{p.stack}</p>
 				</div>
 				<p>{p.text}</p>
 				<span class="link-arrow"
@@ -42,22 +40,5 @@
 	.project {
 		height: 100%;
 		grid-template-rows: auto 1fr auto;
-	}
-	.project__head {
-		display: flex;
-		align-items: flex-start;
-		gap: var(--space-4);
-	}
-	.num-circle {
-		display: inline-grid;
-		place-items: center;
-		flex: none;
-		width: 2.75rem;
-		height: 2.75rem;
-		border: var(--border-hair) solid var(--accent-deco);
-		border-radius: 50%;
-		font-family: var(--font-mono);
-		font-size: var(--text-body-sm);
-		color: var(--accent-text);
 	}
 </style>

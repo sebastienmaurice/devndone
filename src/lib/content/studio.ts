@@ -48,7 +48,7 @@ export const reviews: readonly Review[] = [
 export const contactIntro = {
 	eyebrow: 'Contact',
 	/** Le mot « Done. » est mis en forme par la page */
-	title: 'Un projet en tête ? On le rend',
+	title: 'Un projet en tête ? On le rend',
 	lede: '15 minutes pour faire le point sur votre projet et définir la bonne approche, sans engagement.',
 	cta: 'Parlons de votre projet',
 	email: 'Écrire un email'
@@ -63,6 +63,6 @@ export const hero = {
 
 /** Bandeau sous les réalisations ; le mot « Done. » est mis en forme par le composant */
 export const ctaBand = {
-	text: 'Un autre projet en tête ? On le rend',
+	text: 'Un autre projet en tête ? On le rend',
 	cta: 'Parlons de votre projet'
 } as const;

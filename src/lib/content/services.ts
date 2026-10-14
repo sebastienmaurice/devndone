@@ -12,7 +12,7 @@ export type Universe = {
 
 export const servicesIntro = {
 	eyebrow: 'Nos expertises',
-	title: 'Quatre univers. Un même objectif : votre projet.',
+	title: 'Quatre univers. Un même objectif : votre projet.',
 	lede: "Web, design, automatisation et développement sur mesure. Une seule vision, du premier brief jusqu'à la mise en ligne."
 } as const;
 
