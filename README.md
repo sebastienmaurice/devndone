@@ -190,13 +190,16 @@ identique après la bascule : refaire le relevé.
 │   │   │   │                  FeatureList, Steps, Metric, Terminal, SpecList, Accordion, Breadcrumb
 │   │   │   ├── form/          Field, Check, Honeypot
 │   │   │   ├── seo/           Seo
+│   │   │   ├── sections/      Blocs de page : UniverseGrid, ProjectGrid, ReviewList, ContactCta
 │   │   │   └── pages/         NotFound
 │   │   ├── config/site.ts     Nom, URL canonique, description
-│   │   ├── content/           Données : pages.ts (nav + sitemap), legal.ts
+│   │   ├── content/           Données : pages.ts (nav + sitemap), legal.ts, services.ts,
+│   │   │                      realisations.ts, tarifs.ts, studio.ts (textes de la page provisoire)
 │   │   └── styles/            Copie du design system (NE PAS éditer : npm run ds:sync) + fonts.css
 │   └── routes/
 │       ├── +layout.ts         prerender = true · trailingSlash = 'always'
-│       ├── +page.svelte       Accueil (version d'attente, phase 1)
+│       ├── +page.svelte       Accueil
+│       ├── services/ realisations/ tarifs/ a-propos/ contact/
 │       ├── 404/               Page 404 statique, recopiée en 404.html
 │       ├── design-system/     Banc d'essai des composants (dev uniquement)
 │       ├── mentions-legales/
@@ -258,12 +261,12 @@ identique après la bascule : refaire le relevé.
 
 ## 7. Feuille de route
 
-| Phase | Contenu                                                              | État    |
-| ----- | -------------------------------------------------------------------- | ------- |
-| 1     | Socle, design system intégré, SEO technique, 404, déploiement        | ✓       |
-| 2     | Composants Svelte du design system, banc d'essai, action reveal      | ✓       |
-| 3     | Header : navigation complète et CTA (dès que les pages existent)     | à venir |
-| 4     | Pages : services, tarifs, réalisations, méthode, à propos            | à venir |
-| 5     | Contact : lien Calendly et email, sans formulaire (lancement)        | décidé  |
-| 6–7   | Réalisations, démos interactives                                     | à venir |
-| 8     | Recette : Lighthouse, accessibilité, navigateurs, mise en production | à venir |
+| Phase | Contenu                                                                     | État    |
+| ----- | --------------------------------------------------------------------------- | ------- |
+| 1     | Socle, design system intégré, SEO technique, 404, déploiement               | ✓       |
+| 2     | Composants Svelte du design system, banc d'essai, action reveal             | ✓       |
+| 3     | Header : navigation complète et CTA (dès que les pages existent)            | à venir |
+| 4     | Pages : services (avec le process), réalisations, tarifs, à propos, contact | ✓       |
+| 5     | Contact : lien Calendly et email, sans formulaire (lancement)               | décidé  |
+| 6–7   | Réalisations, démos interactives                                            | à venir |
+| 8     | Recette : Lighthouse, accessibilité, navigateurs, mise en production        | à venir |
