@@ -17,7 +17,12 @@ export type PageEntry = {
 };
 
 export const pages: PageEntry[] = [
-	{ path: '/', label: 'Accueil', sitemap: true, priority: 1 },
+	{ path: '/', label: 'Accueil', nav: true, sitemap: true, priority: 1 },
+	{ path: '/services/', label: 'Services', nav: true, sitemap: true, priority: 0.9 },
+	{ path: '/realisations/', label: 'Réalisations', nav: true, sitemap: true, priority: 0.8 },
+	{ path: '/tarifs/', label: 'Tarifs', nav: true, sitemap: true, priority: 0.8 },
+	{ path: '/a-propos/', label: 'À propos', nav: true, sitemap: true, priority: 0.6 },
+	{ path: '/contact/', label: 'Contact', nav: true, sitemap: true, priority: 0.7 },
 	{
 		path: '/mentions-legales/',
 		label: 'Mentions légales',
@@ -25,7 +30,6 @@ export const pages: PageEntry[] = [
 		sitemap: true,
 		priority: 0.2
 	}
-	// Phase 4 : services, tarifs, réalisations, démos, méthode, à propos, contact
 ];
 
 export const navPages = pages.filter((p) => p.nav);
