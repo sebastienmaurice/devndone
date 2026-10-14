@@ -1,6 +1,6 @@
 <!--
 	Mentions légales : mêmes textes que mentions-legales.html du site en ligne (content/legal.ts).
-	Seul ajout validé : l'adresse de l'hébergeur GitHub, Inc.
+	Ajouts validés : adresse de l'hébergeur GitHub, Inc. et données INPI (SIRET, registre, APE, TVA).
 -->
 <script lang="ts">
 	import Seo from '$lib/components/seo/Seo.svelte';
@@ -32,6 +32,14 @@
 				<dl class="spec-list">
 					<dt>SIREN</dt>
 					<dd>{p.siren}</dd>
+					<dt>SIRET</dt>
+					<dd>{p.siret}</dd>
+					<dt>Registre</dt>
+					<dd>{p.registration}</dd>
+					<dt>Code APE</dt>
+					<dd>{p.ape}</dd>
+					<dt>TVA</dt>
+					<dd>{p.vat}</dd>
 					<dt>Adresse</dt>
 					<dd>{p.address}</dd>
 					<dt>Téléphone</dt>

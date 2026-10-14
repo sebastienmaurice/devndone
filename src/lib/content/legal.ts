@@ -14,7 +14,7 @@ export const legal = {
 		status: 'Entrepreneur individuel (micro-entreprise)',
 		siret: '517 849 733 00020',
 		registration: 'Immatriculé au Registre national des entreprises (RNE)',
-		ape: '6201Z — Programmation informatique',
+		ape: '6201Z, programmation informatique',
 		vat: 'TVA non applicable, art. 293 B du CGI',
 		siren: '517 849 733',
 		/** Phrase d'identification affichée en tête des mentions (texte du site en ligne) */
