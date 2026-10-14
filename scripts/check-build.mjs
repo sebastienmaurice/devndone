@@ -66,6 +66,7 @@ if (!existsSync(build)) {
 const required = [
 	'index.html',
 	'404/index.html',
+	'404.html',
 	'mentions-legales/index.html',
 	'sitemap.xml',
 	'robots.txt',
@@ -114,7 +115,7 @@ for (const f of buildFiles) {
 
 		if (name.endsWith('.html')) {
 			const noindex = /<meta name="robots" content="noindex/.test(text);
-			const is404 = name === '404/index.html';
+			const is404 = name === '404/index.html' || name === '404.html';
 			if (staging && !noindex) errors.push(`${name} : pas de noindex dans un build de staging`);
 			if (!staging && noindex && !is404)
 				errors.push(`${name} : noindex dans un build de production`);

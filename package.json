@@ -5,8 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
-		"build:staging": "vite build --mode staging",
+		"build": "vite build && node scripts/copy-404.mjs",
+		"build:staging": "vite build --mode staging && node scripts/copy-404.mjs",
 		"preview": "vite preview",
 		"check:build": "node scripts/check-build.mjs",
 		"check:build:staging": "node scripts/check-build.mjs --staging",
