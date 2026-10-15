@@ -4,6 +4,7 @@
 
 	<Button href="/contact/" icon="arrow-right">Parlons de votre projet</Button>
 	<Button variant="secondary" size="sm" onclick={…}>Filtrer</Button>
+	<Button variant="alt" href="/realisations/">Voir les réalisations</Button>  (action secondaire Mint)
 -->
 <script lang="ts">
 	import type { Snippet } from 'svelte';
@@ -11,7 +12,7 @@
 	import Icon, { type IconName } from '../brand/Icon.svelte';
 
 	type Props = {
-		variant?: 'primary' | 'secondary' | 'ghost';
+		variant?: 'primary' | 'secondary' | 'alt' | 'ghost';
 		size?: 'sm' | 'md' | 'lg';
 		href?: string;
 		/** Icône placée après le libellé */

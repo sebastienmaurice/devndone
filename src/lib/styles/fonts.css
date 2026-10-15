@@ -1,7 +1,7 @@
 /* ==========================================================================
    Polices de marque, auto-hébergées (static/fonts, copiées par `npm run fonts`).
    Sous-ensemble latin uniquement : couvre le français (accents, œ, €, « »).
-   Licence : SIL Open Font License 1.1 pour les trois familles.
+   Licence : SIL Open Font License 1.1 pour les quatre familles.
    ========================================================================== */
 
 @font-face {
@@ -42,4 +42,13 @@
 	font-weight: 600;
 	font-display: swap;
 	src: url('/fonts/ibm-plex-mono-600.woff2') format('woff2');
+}
+
+/* Charte v1.2 (11.C) : voix manuscrite, réservée aux annotations. Pas de préchargement. */
+@font-face {
+	font-family: 'Caveat';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('/fonts/caveat-500.woff2') format('woff2');
 }

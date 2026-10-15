@@ -1,6 +1,7 @@
 /* ==========================================================================
-   DEV'n DONE Design System v1.0 — Tokens
-   Source de vérité : charte graphique v1.1 (brand/brand-guidelines.html).
+   DEV'n DONE Design System v1.1 — Tokens
+   Source de vérité : charte graphique v1.2 (brand/brand-guidelines.html).
+   v1.1 (15.10.2026) : voix manuscrite, Mint en action secondaire sur Night.
    Aucune valeur de couleur, de taille ou de durée ne doit être écrite en dur
    ailleurs que dans ce fichier.
    ========================================================================== */
@@ -29,6 +30,8 @@
 	--dnd-orange-active: #e67c00; /* Night dessus : 6.72 : 1 */
 	--dnd-orange-ink: #a85600; /* orange en texte sur Ivoire : 5.03 : 1 */
 	--dnd-mint-ink: #007a62; /* mint en texte sur Ivoire : 5.07 : 1 */
+	--dnd-mint-hover: #5cefd0; /* v1.1 · Night dessus : 13.64 : 1 */
+	--dnd-mint-ink-hover: #00614e; /* v1.1 · Ivoire dessus : 7.13 : 1 */
 
 	/* Feedback — proposé en v1.0, à valider */
 	--dnd-error: #ff6b6b; /* 7.02 : 1 sur Night */
@@ -40,6 +43,8 @@
 	--font-display: 'Lilita One', 'Arial Rounded MT Bold', 'Arial Black', sans-serif;
 	--font-ui: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 	--font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+	/* v1.1 · 4e voix, manuscrite : annotations courtes uniquement (charte 11.C) */
+	--font-hand: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
 
 	--weight-regular: 400;
 	--weight-medium: 500;
@@ -59,6 +64,8 @@
 	--text-button: 0.9375rem; /* 15 */
 	--text-tech: 0.875rem; /* 14 */
 	--text-caption: 0.75rem; /* 12 */
+	--text-hand: clamp(1.25rem, 1.083rem + 0.741vw, 1.75rem); /* 20 → 28 */
+	--text-stat: clamp(2.75rem, 2rem + 3.333vw, 5rem); /* 44 → 80, chiffre clé */
 
 	--leading-display: 0.88;
 	--leading-h1: 0.95;
@@ -67,6 +74,7 @@
 	--leading-body: 1.65;
 	--leading-body-lg: 1.6;
 	--leading-tight: 1.2;
+	--leading-hand: 1.15;
 
 	--tracking-display: -0.01em;
 	--tracking-h1: -0.005em;
@@ -111,6 +119,7 @@
 	--border-accent: 3px;
 
 	--slash-angle: -20deg;
+	--hand-tilt: -4deg; /* inclinaison des annotations manuscrites */
 
 	/* Élévation : par la surface, pas par l'ombre.
      Une seule ombre, réservée aux calques flottants (menu, dialogue). */
@@ -182,6 +191,12 @@
 	--accent-deco: var(--dnd-orange); /* trait, slash, filet */
 
 	--signal-text: var(--dnd-mint);
+	/* v1.1 · action secondaire : Mint, uniquement sur Night / Night élevé */
+	--action-alt: var(--dnd-mint);
+	--action-alt-hover: var(--dnd-mint-hover);
+	--on-action-alt: var(--dnd-night);
+	--action-alt-text: var(--dnd-mint);
+	--hand-text: var(--dnd-ivory-72);
 	--error: var(--dnd-error);
 	--focus: var(--dnd-orange);
 }
@@ -212,6 +227,12 @@
 	--accent-deco: var(--dnd-orange);
 
 	--signal-text: var(--dnd-mint-ink);
+	/* Sur Ivoire, le Mint est illisible (1.56 : 1) : il passe en encre */
+	--action-alt: var(--dnd-mint-ink);
+	--action-alt-hover: var(--dnd-mint-ink-hover);
+	--on-action-alt: var(--dnd-ivory);
+	--action-alt-text: var(--dnd-mint-ink);
+	--hand-text: var(--dnd-night-72);
 	--error: var(--dnd-error-ink);
 	--focus: var(--dnd-orange-ink);
 }
@@ -236,6 +257,12 @@
 	--accent-deco: var(--dnd-night);
 
 	--signal-text: var(--dnd-night);
+	/* Pas de Mint sur Orange : l'action secondaire reste Night */
+	--action-alt: var(--dnd-night);
+	--action-alt-hover: var(--dnd-night-raised);
+	--on-action-alt: var(--dnd-ivory);
+	--action-alt-text: var(--dnd-night);
+	--hand-text: var(--dnd-night);
 	--error: var(--dnd-night);
 	--focus: var(--dnd-night);
 }

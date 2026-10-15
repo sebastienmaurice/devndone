@@ -3,7 +3,7 @@
 // des paquets : `npm run fonts`.
 //
 // Pourquoi une copie plutôt qu'un import CSS des paquets : on ne publie que les
-// 5 fichiers utiles (pas les sous-ensembles cyrillique, vietnamien…), avec des
+// 6 fichiers utiles (pas les sous-ensembles cyrillique, vietnamien…), avec des
 // URL stables qui permettent le <link rel="preload">.
 
 import { copyFileSync, mkdirSync } from 'node:fs';
@@ -31,7 +31,9 @@ const files = [
 	[
 		'@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-600-normal.woff2',
 		'ibm-plex-mono-600.woff2'
-	]
+	],
+	// Charte v1.2 : voix manuscrite, annotations uniquement
+	['@fontsource/caveat/files/caveat-latin-500-normal.woff2', 'caveat-500.woff2']
 ];
 
 mkdirSync(out, { recursive: true });

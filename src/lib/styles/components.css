@@ -1,5 +1,5 @@
 /* ==========================================================================
-   DEV'n DONE Design System v1.0 — Composants
+   DEV'n DONE Design System v1.1 — Composants
    Chaque composant lit uniquement les variables sémantiques de tokens.css :
    il s'adapte seul au contexte (.surface-night / -raised / -ivory / -orange).
    Dépend de : tokens.css, base.css
@@ -71,6 +71,25 @@
 }
 .btn--secondary:hover {
 	--btn-ring: var(--text);
+}
+
+/* v1.1 · Action secondaire : Mint sur Night, Mint encre sur Ivoire, Night sur Orange.
+   Jamais deux boutons pleins de même couleur côte à côte ; l'orange reste l'action principale. */
+.btn--alt {
+	--btn-bg: var(--action-alt);
+	--btn-fg: var(--on-action-alt);
+}
+.btn--alt:hover {
+	--btn-bg: var(--action-alt-hover);
+}
+/* Sur Orange, le primaire est déjà Night plein : le secondaire passe en contour Night */
+.surface-orange .btn--alt {
+	--btn-bg: transparent;
+	--btn-fg: var(--text);
+	--btn-ring: var(--line-strong);
+}
+.surface-orange .btn--alt:hover {
+	--btn-bg: color-mix(in srgb, var(--text) 8%, transparent);
 }
 
 /* Tertiaire : texte seul, pour les actions mineures */
@@ -156,12 +175,12 @@
 		linear-gradient(currentColor, currentColor);
 }
 
-/* Lien autonome : « Explorer → » */
+/* Lien autonome : « Explorer → » · v1.1 : action secondaire, donc Mint sur Night */
 .link-arrow {
 	display: inline-flex;
 	align-items: center;
 	gap: var(--space-2);
-	color: var(--accent-text);
+	color: var(--action-alt-text);
 	font-weight: var(--weight-bold);
 	font-size: var(--text-body-sm);
 	text-decoration: none;
@@ -967,6 +986,18 @@
 	border: 1px solid var(--line);
 	color: var(--text);
 }
+/* v1.1 · tuile d'univers : icône en couleur d'action secondaire, taille 64 px */
+.icon-tile--alt {
+	color: var(--action-alt-text);
+	border-color: color-mix(in srgb, var(--action-alt-text) 40%, transparent);
+}
+.icon-tile--lg {
+	width: 64px;
+}
+.icon-tile--lg .icon {
+	width: 28px;
+	height: 28px;
+}
 
 /* ==========================================================================
    9. NAVIGATION
@@ -1186,6 +1217,110 @@
 	margin-top: var(--space-9);
 	padding-top: var(--space-5);
 	border-top: 1px solid var(--line);
+	font-family: var(--font-mono);
+	font-size: var(--text-caption);
+	color: var(--text-subtle);
+}
+
+/* ==========================================================================
+   11. v1.1 · ANNOTATION, CADRES D'APPAREIL, CHIFFRES CLÉS
+   ========================================================================== */
+
+/* Annotation manuscrite (Caveat) : une par écran, jamais une information essentielle.
+   La flèche est un SVG inline (.annotation__arrow), décoratif. */
+.annotation {
+	display: inline-flex;
+	align-items: flex-end;
+	gap: var(--space-2);
+	max-width: 18ch;
+	font-family: var(--font-hand);
+	font-weight: var(--weight-medium);
+	font-size: var(--text-hand);
+	line-height: var(--leading-hand);
+	color: var(--hand-text);
+	transform: rotate(var(--hand-tilt));
+}
+.annotation--flip {
+	--hand-tilt: 4deg;
+	flex-direction: row-reverse;
+}
+.annotation__arrow {
+	width: 44px;
+	height: 32px;
+	flex: none;
+	stroke: currentColor;
+	fill: none;
+	stroke-width: 1.5;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+/* Cadre d'appareil pour les captures de projets. Plat : aucune ombre, profondeur par la surface. */
+.device {
+	position: relative;
+	margin: 0;
+}
+.device__screen {
+	display: block;
+	overflow: hidden;
+	background: var(--surface);
+}
+.device__screen img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top center;
+}
+.device--laptop .device__screen {
+	aspect-ratio: 16 / 10;
+	border: 6px solid var(--surface);
+	border-bottom-width: 10px;
+	border-radius: var(--radius-md) var(--radius-md) 0 0;
+	box-shadow: 0 0 0 var(--border-hair) var(--line-strong);
+}
+.device--laptop::after {
+	content: '';
+	display: block;
+	height: 10px;
+	margin-inline: -6%;
+	background: var(--line-strong);
+	border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+.device--phone .device__screen {
+	aspect-ratio: 9 / 19;
+	border: 5px solid var(--surface);
+	border-radius: 20px;
+	box-shadow: 0 0 0 var(--border-hair) var(--line-strong);
+}
+/* Ordinateur + mobile superposé en bas à droite */
+.device-pair {
+	position: relative;
+	padding-right: 10%;
+}
+.device-pair .device--phone {
+	position: absolute;
+	right: 0;
+	bottom: -6%;
+	width: 24%;
+}
+
+/* Bandeau de chiffres clés : uniquement des chiffres sourcés (source affichée ou documentée) */
+.stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+	gap: var(--col-gap);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.metric__value {
+	font-size: var(--text-stat);
+}
+.metric__unit {
+	color: var(--action-alt-text);
+}
+.metric__source {
 	font-family: var(--font-mono);
 	font-size: var(--text-caption);
 	color: var(--text-subtle);

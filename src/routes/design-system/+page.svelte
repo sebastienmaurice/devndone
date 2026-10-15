@@ -6,16 +6,19 @@
 <script lang="ts">
 	import {
 		Accordion,
+		Annotation,
 		Badge,
 		Breadcrumb,
 		Button,
 		Card,
 		Check,
+		Device,
 		Eyebrow,
 		FeatureList,
 		Field,
 		Honeypot,
 		Icon,
+		IconTile,
 		LinkArrow,
 		Logo,
 		Metric,
@@ -28,6 +31,7 @@
 		Seo,
 		SlashBand,
 		SpecList,
+		Stats,
 		Status,
 		Steps,
 		Stroke,
@@ -114,6 +118,7 @@
 			<div class="cluster">
 				<Button href="/design-system/" icon="arrow-right">Primaire</Button>
 				<Button variant="secondary">Secondaire</Button>
+				<Button variant="alt" icon="arrow-right">Secondaire Mint (v1.1)</Button>
 				<Button variant="ghost">Tertiaire</Button>
 				<Button size="sm">Petit</Button>
 				<Button size="lg">Grand</Button>
@@ -143,6 +148,33 @@
 					<Status state="error">Échec</Status>
 				</div>
 			{/if}
+
+			<!-- v1.1 : charte v1.2, chapitre 11 -->
+			<Annotation arrow={surface === 'ivory' ? 'left' : 'right'}
+				>Ton co-pilote de projets</Annotation
+			>
+			<div class="cluster">
+				<IconTile name="site" alt large />
+				<IconTile name="palette" alt large />
+				<IconTile name="workflow" alt large />
+				<IconTile name="code" alt large />
+			</div>
+			<div class="grid">
+				<div class="col-6 md-col-6">
+					<div class="device-pair">
+						<Device kind="laptop" />
+						<Device kind="phone" />
+					</div>
+				</div>
+				<div class="col-6 md-col-6">
+					<Stats
+						showSource
+						items={[
+							{ value: '15', unit: '+', label: "ans d'expérience", source: 'texte À propos' }
+						]}
+					/>
+				</div>
+			</div>
 		</div>
 	</Section>
 {/each}

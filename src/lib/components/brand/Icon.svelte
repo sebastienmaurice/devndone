@@ -1,27 +1,63 @@
 <!--
-	Icônes du design system (grille 24 px, trait 2 px, currentColor).
-	Inline : aucune requête réseau, aucune bibliothèque. Décorative par défaut.
+	Icônes du site : bibliothèque Lucide (https://lucide.dev, licence ISC), charte v1.2 (11.D).
+	Même grammaire que la charte : grille 24 px, trait 2 px, extrémités arrondies, sans remplissage,
+	currentColor. Compilées dans le build : aucune requête réseau. Décoratives par défaut.
+	Pour ajouter une icône : l'importer depuis '@lucide/svelte/icons/<nom>' et l'inscrire ci-dessous.
 -->
 <script lang="ts" module>
+	import type { Component } from 'svelte';
+	import ArrowRight from '@lucide/svelte/icons/arrow-right';
+	import ArrowUpRight from '@lucide/svelte/icons/arrow-up-right';
+	import Bug from '@lucide/svelte/icons/bug';
+	import CalendarDays from '@lucide/svelte/icons/calendar-days';
+	import Check from '@lucide/svelte/icons/check';
+	import Clock from '@lucide/svelte/icons/clock';
+	import CodeXml from '@lucide/svelte/icons/code-xml';
+	import Info from '@lucide/svelte/icons/info';
+	import Layers from '@lucide/svelte/icons/layers';
+	import Mail from '@lucide/svelte/icons/mail';
+	import MapPin from '@lucide/svelte/icons/map-pin';
+	import Menu from '@lucide/svelte/icons/menu';
+	import Monitor from '@lucide/svelte/icons/monitor';
+	import Palette from '@lucide/svelte/icons/palette';
+	import PenTool from '@lucide/svelte/icons/pen-tool';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Rocket from '@lucide/svelte/icons/rocket';
+	import Search from '@lucide/svelte/icons/search';
+	import ShoppingCart from '@lucide/svelte/icons/shopping-cart';
+	import Sparkles from '@lucide/svelte/icons/sparkles';
+	import Terminal from '@lucide/svelte/icons/terminal';
+	import TriangleAlert from '@lucide/svelte/icons/triangle-alert';
+	import Workflow from '@lucide/svelte/icons/workflow';
+	import X from '@lucide/svelte/icons/x';
+
+	/** Noms du design system → composants Lucide */
 	export const icons = {
-		'arrow-right': '<path d="M5 12h14M13 6l6 6-6 6"/>',
-		'arrow-up-right': '<path d="M7 17L17 7M8 7h9v9"/>',
-		check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
-		close: '<path d="M6 6l12 12M18 6L6 18"/>',
-		plus: '<path d="M12 5v14M5 12h14"/>',
-		menu: '<path d="M4 8h16M4 16h11"/>',
-		info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
-		alert: '<path d="M12 3l9.5 17h-19z"/><path d="M12 10v4M12 17h.01"/>',
-		code: '<path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/>',
-		terminal: '<path d="M4 17l6-5-6-5M12 19h8"/>',
-		workflow:
-			'<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="12" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M8.5 6H12a3 3 0 013 3v.5M8.5 18H12a3 3 0 003-3v-.5"/>',
-		site: '<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M3 8h18"/>',
-		pen: '<path d="M4 20l4.5-1 10-10a2.1 2.1 0 00-3-3l-10 10z"/><path d="M13.5 7.5l3 3"/>',
-		layers: '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
-		mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/>',
-		calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'
-	} as const;
+		'arrow-right': ArrowRight,
+		'arrow-up-right': ArrowUpRight,
+		check: Check,
+		close: X,
+		plus: Plus,
+		menu: Menu,
+		info: Info,
+		alert: TriangleAlert,
+		code: CodeXml,
+		terminal: Terminal,
+		workflow: Workflow,
+		site: Monitor,
+		pen: PenTool,
+		palette: Palette,
+		layers: Layers,
+		mail: Mail,
+		calendar: CalendarDays,
+		clock: Clock,
+		'map-pin': MapPin,
+		rocket: Rocket,
+		bug: Bug,
+		search: Search,
+		sparkles: Sparkles,
+		cart: ShoppingCart
+	} satisfies Record<string, Component<Record<string, unknown>>>;
 
 	export type IconName = keyof typeof icons;
 </script>
@@ -36,16 +72,14 @@
 	};
 
 	let { name, size = 'lg', label, class: className = '' }: Props = $props();
+
+	const Glyph = $derived(icons[name]);
 </script>
 
-<svg
+<Glyph
 	class="icon {size === 'sm' ? 'icon--sm' : ''} {className}"
-	viewBox="0 0 24 24"
 	role={label ? 'img' : undefined}
 	aria-label={label}
 	aria-hidden={label ? undefined : 'true'}
 	focusable="false"
->
-	<!-- eslint-disable-next-line svelte/no-at-html-tags -- tracés statiques définis ci-dessus -->
-	{@html icons[name]}
-</svg>
+/>

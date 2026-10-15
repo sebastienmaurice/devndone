@@ -17,6 +17,7 @@ export { default as Tagline } from './brand/Tagline.svelte';
 export { default as Stroke } from './brand/Stroke.svelte';
 export { default as Rule } from './brand/Rule.svelte';
 export { default as SlashBand } from './brand/SlashBand.svelte';
+export { default as Annotation } from './brand/Annotation.svelte';
 
 // Interface
 export { default as Button } from './ui/Button.svelte';
@@ -34,6 +35,9 @@ export { default as Terminal, type TerminalLine } from './ui/Terminal.svelte';
 export { default as SpecList } from './ui/SpecList.svelte';
 export { default as Accordion, type AccordionItem } from './ui/Accordion.svelte';
 export { default as Breadcrumb } from './ui/Breadcrumb.svelte';
+export { default as IconTile } from './ui/IconTile.svelte';
+export { default as Device } from './ui/Device.svelte';
+export { default as Stats, type StatItem } from './ui/Stats.svelte';
 
 // Formulaires
 export { default as Field } from './form/Field.svelte';

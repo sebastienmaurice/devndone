@@ -12,6 +12,12 @@
 			"runtimeExecutable": "npm",
 			"runtimeArgs": ["run", "preview", "--", "--port", "4173", "--strictPort"],
 			"port": 4173
+		},
+		{
+			"name": "brand",
+			"runtimeExecutable": "npx",
+			"runtimeArgs": ["vite", "..", "--port", "4300", "--strictPort"],
+			"port": 4300
 		}
 	]
 }
