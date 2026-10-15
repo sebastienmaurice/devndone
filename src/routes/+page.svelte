@@ -1,7 +1,7 @@
 <!--
 	Accueil : même contenu et même ordre que la page en ligne (index.html, branche main),
-	mis en page avec le design system (liste éditoriale, étapes, cartes pour regrouper uniquement).
-	Un seul accent orange par écran : le trait sous « Done. » du hero, puis les boutons.
+	mis en page avec le design system v1.1 (charte v1.2) : fonds alternés Night / Ivoire, un seul
+	bandeau Orange, titres bicolores (mot accent), cartes à image.
 	Textes : $lib/content. Ancres identiques à la page en ligne (#services, #process…).
 -->
 <script lang="ts">
@@ -12,7 +12,7 @@
 	import PackageGrid from '$lib/components/sections/PackageGrid.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
-	import UniverseList from '$lib/components/sections/UniverseList.svelte';
+	import UniverseCards from '$lib/components/sections/UniverseCards.svelte';
 	import { realisationsIntro } from '$lib/content/realisations';
 	import { processIntro, processSteps, servicesIntro } from '$lib/content/services';
 	import { aboutIntro, hero, links, reviewsIntro } from '$lib/content/studio';
@@ -62,7 +62,7 @@
 </Section>
 
 <!-- Quatre univers -->
-<Section id="services" labelledby="univers-title">
+<Section id="services" surface="ivory" labelledby="univers-title">
 	<div class="stack stack--lg">
 		<SectionHead
 			id="univers-title"
@@ -71,21 +71,21 @@
 			lede={servicesIntro.lede}
 		>
 			{#snippet titleContent()}
-				Quatre univers. Un même objectif&nbsp;: votre projet<span class="t-dot">.</span>
+				Quatre univers. Un même objectif&nbsp;: votre <span class="accent-word">projet.</span>
 			{/snippet}
 		</SectionHead>
-		<UniverseList />
+		<UniverseCards href="/services/" />
 	</div>
 </Section>
 
 <!-- Process -->
-<Section id="process" surface="ivory" labelledby="process-title">
+<Section id="process" labelledby="process-title">
 	<SectionHead id="process-title" eyebrow={processIntro.eyebrow} title={processIntro.title} />
 	<Steps items={processSteps} />
 </Section>
 
 <!-- Réalisations -->
-<Section id="realisations" surface="raised" labelledby="projets-title">
+<Section id="realisations" surface="ivory" labelledby="projets-title">
 	<div class="stack stack--lg">
 		<SectionHead
 			id="projets-title"
@@ -95,13 +95,14 @@
 			lede={realisationsIntro.lede}
 		>
 			{#snippet titleContent()}
-				Des projets qui sont vraiment Done<span class="t-dot">.</span>
+				Des projets qui sont vraiment <span class="accent-word">Done.</span>
 			{/snippet}
 		</SectionHead>
 		<ProjectGrid />
-		<CtaBand />
 	</div>
 </Section>
+
+<CtaBand />
 
 <!-- Tarifs -->
 <Section id="tarifs" labelledby="maintenance-title">
@@ -135,15 +136,14 @@
 </Section>
 
 <!-- À propos -->
-<Section id="apropos" labelledby="apropos-title">
+<Section id="apropos" surface="raised" labelledby="apropos-title">
 	<SectionHead id="apropos-title" eyebrow={aboutIntro.eyebrow} title={aboutIntro.title}>
 		<p class="t-body-lg t-measure">{aboutIntro.text}</p>
 	</SectionHead>
 </Section>
 
 <!-- Contact -->
-<!-- La bande slash de la page est ici : dans le hero, le visuel mascotte (fond opaque) la couperait -->
-<ContactCta id="contact" full band />
+<ContactCta id="contact" surface="night" full />
 
 <style>
 	:global(.hero.section) {

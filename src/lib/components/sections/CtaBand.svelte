@@ -1,20 +1,25 @@
 <!--
-	Bandeau « Un autre projet en tête ? On le rend Done. » sous les réalisations
-	(texte et bouton du site en ligne, mise en page d'après la maquette « réalisations »).
+	Bandeau « Un autre projet en tête ? On le rend Done. » (texte et bouton du site en ligne).
+	Section Orange pleine largeur : le seul bandeau orange de la page (charte v1.2, 11.A).
+	Titre bicolore : « Done. » surligné en Night (charte v1.2, mot accent).
 -->
 <script lang="ts">
 	import { ctaBand, links } from '$lib/content/studio';
+	import Section from '../layout/Section.svelte';
 	import Button from '../ui/Button.svelte';
 </script>
 
-<div class="card cta-band">
-	<img src="/favicon.svg" alt="" width="56" height="56" />
-	<p class="t-h2">{ctaBand.text} Done<span class="t-dot">.</span></p>
-	<Button href={links.calendly} icon="arrow-up-right">{ctaBand.cta}</Button>
-</div>
+<Section surface="orange" tight label="Prise de rendez-vous">
+	<div class="cta-band">
+		<img src="/favicon.svg" alt="" width="64" height="64" />
+		<p class="t-h2">{ctaBand.text} <span class="accent-word">Done.</span></p>
+		<Button href={links.calendly} icon="arrow-up-right" size="lg">{ctaBand.cta}</Button>
+	</div>
+</Section>
 
 <style>
 	.cta-band {
+		display: grid;
 		grid-template-columns: auto 1fr;
 		align-items: center;
 		gap: var(--space-5);

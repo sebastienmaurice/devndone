@@ -182,6 +182,7 @@ identique après la bascule : refaire le relevé.
 │   ├── app.html               Gabarit HTML (lang, préchargement des polices, icônes)
 │   ├── lib/
 │   │   ├── assets/brand/      Images traitées au build (AVIF / WebP / srcset)
+│   │   ├── assets/projets/    Visuels des réalisations, recadrés sur les écrans
 │   │   ├── actions/reveal.ts  Apparition au défilement (use:reveal)
 │   │   ├── components/        Importés via `$lib/components` (index.ts)
 │   │   │   ├── layout/        Section, SectionHead, SiteHeader, SiteFooter
@@ -190,7 +191,7 @@ identique après la bascule : refaire le relevé.
 │   │   │   │                  FeatureList, Steps, Metric, Terminal, SpecList, Accordion, Breadcrumb
 │   │   │   ├── form/          Field, Check, Honeypot
 │   │   │   ├── seo/           Seo
-│   │   │   ├── sections/      Blocs de page : UniverseList, ProjectGrid, CtaBand, MaintenancePlans,
+│   │   │   ├── sections/      Blocs de page : UniverseCards, ProjectGrid, CtaBand, MaintenancePlans,
 │   │   │   │                  PackageGrid, ReviewList, ContactCta
 │   │   │   └── pages/         NotFound
 │   │   ├── config/site.ts     Nom, URL canonique, description

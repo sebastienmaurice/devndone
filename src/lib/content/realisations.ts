@@ -2,6 +2,8 @@
  * Réalisations.
  * Sources : page provisoire (dépôt devndone, index.html, section #realisations) et, pour
  * Harmony Valse, la fiche transmise par Sébastien le 14/10/2026 (portfolio Malt).
+ * Visuels : D:/GRAPHIQUE/MALT - GRAPISTE.COM/Web/CMS retenus, recadrés sur la zone des écrans
+ * (sans les textes ni les encarts « avis client » des compositions).
  * Textes et liens repris tels quels : ne rien ajouter sans validation.
  */
 export type ProjectDetails = {
@@ -23,6 +25,8 @@ export type Project = {
 	stack: string;
 	text: string;
 	url: string;
+	/** Visuel de présentation : src/lib/assets/projets/<image>.jpg (recadré sur les écrans) */
+	image: string;
 	/** Fiche complète, pour une future page projet (non affichée dans les cartes) */
 	details?: ProjectDetails;
 };
@@ -39,6 +43,7 @@ export const projects: readonly Project[] = [
 		stack: 'WordPress · Elementor · WooCommerce',
 		text: 'Cours de valse à Paris. Refonte WordPress Elementor & WooCommerce : réservation et boutique en ligne.',
 		url: 'https://harmonyvalse.com/',
+		image: 'harmony-valse',
 		details: {
 			subtitle: 'Refonte WordPress Elementor & WooCommerce - réservation et boutique en ligne',
 			sector: 'Divertissements & loisirs',
@@ -76,36 +81,42 @@ export const projects: readonly Project[] = [
 		name: 'Palimpseste Urbain',
 		stack: 'WordPress · Elementor Pro · SEO',
 		text: "Agence d'architecture et d'urbanisme. Refonte WordPress, direction artistique, SEO.",
-		url: 'https://www.palimpseste-urbain.com/'
+		url: 'https://www.palimpseste-urbain.com/',
+		image: 'palimpseste-urbain'
 	},
 	{
 		name: 'GSTI',
 		stack: 'Wix → WordPress · WooCommerce',
 		text: 'Migration de Wix vers WordPress et WooCommerce. Catalogue B2B et devis en ligne.',
-		url: 'https://gsti62.com/'
+		url: 'https://gsti62.com/',
+		image: 'gsti'
 	},
 	{
 		name: 'Ciné Délices',
 		stack: 'Svelte · Node.js · PostgreSQL',
 		text: 'Application full stack de recettes inspirées du cinéma.',
-		url: 'https://sebastienmaurice.github.io/cine-delices.html'
+		url: 'https://sebastienmaurice.github.io/cine-delices.html',
+		image: 'cine-delices'
 	},
 	{
 		name: 'Maxilou',
 		stack: 'WordPress · Catalogue · Devis',
 		text: 'Location de matériel BTP et espaces verts. Catalogue par catégories et devis en ligne.',
-		url: 'https://maxilou.fr/'
+		url: 'https://maxilou.fr/',
+		image: 'maxilou'
 	},
 	{
 		name: 'Petit Château Vercourt',
 		stack: 'WordPress · Réservation · FR/EN',
 		text: "Chambres d'hôtes en Picardie. Réservation en ligne, versions française et anglaise.",
-		url: 'https://www.petitchateauvercourt.com/'
+		url: 'https://www.petitchateauvercourt.com/',
+		image: 'petit-chateau-vercourt'
 	},
 	{
 		name: "PANO Sign'Service",
 		stack: 'WordPress · Elementor · E-commerce',
 		text: 'Refonte WordPress Elementor. Vitrine et e-commerce de signalétique.',
-		url: 'https://www.pano-douai.fr/'
+		url: 'https://www.pano-douai.fr/',
+		image: 'pano-douai'
 	}
 ];

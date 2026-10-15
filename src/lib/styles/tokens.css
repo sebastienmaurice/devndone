@@ -1,7 +1,8 @@
 /* ==========================================================================
    DEV'n DONE Design System v1.1 — Tokens
    Source de vérité : charte graphique v1.2 (brand/brand-guidelines.html).
-   v1.1 (15.10.2026) : voix manuscrite, Mint en action secondaire sur Night.
+   v1.1 (15.10.2026) : voix manuscrite, action secondaire (Mint sur Night, Orange sur Ivoire),
+   mot accent bicolore, cartes à image.
    Aucune valeur de couleur, de taille ou de durée ne doit être écrite en dur
    ailleurs que dans ce fichier.
    ========================================================================== */
@@ -196,6 +197,10 @@
 	--action-alt-hover: var(--dnd-mint-hover);
 	--on-action-alt: var(--dnd-night);
 	--action-alt-text: var(--dnd-mint);
+	--action-alt-ring: transparent;
+	/* Mot accent d'un titre bicolore : orange sur Night */
+	--accent-word-fg: var(--dnd-orange);
+	--accent-word-bg: transparent;
 	--hand-text: var(--dnd-ivory-72);
 	--error: var(--dnd-error);
 	--focus: var(--dnd-orange);
@@ -227,11 +232,17 @@
 	--accent-deco: var(--dnd-orange);
 
 	--signal-text: var(--dnd-mint-ink);
-	/* Sur Ivoire, le Mint est illisible (1.56 : 1) : il passe en encre */
-	--action-alt: var(--dnd-mint-ink);
-	--action-alt-hover: var(--dnd-mint-ink-hover);
-	--on-action-alt: var(--dnd-ivory);
-	--action-alt-text: var(--dnd-mint-ink);
+	/* Sur Ivoire, l'action secondaire est Orange (choix v1.2) : libellé Night (8.24 : 1)
+     et contour Night pour que la forme se détache du fond (l'orange seul : 2.26 : 1).
+     En texte, l'orange passe en encre (5.03 : 1). */
+	--action-alt: var(--dnd-orange);
+	--action-alt-hover: var(--dnd-orange-hover);
+	--on-action-alt: var(--dnd-night);
+	--action-alt-text: var(--dnd-orange-ink);
+	--action-alt-ring: var(--dnd-night);
+	/* Mot accent : surlignage orange, texte Night (8.24 : 1) */
+	--accent-word-fg: var(--dnd-night);
+	--accent-word-bg: var(--dnd-orange);
 	--hand-text: var(--dnd-night-72);
 	--error: var(--dnd-error-ink);
 	--focus: var(--dnd-orange-ink);
@@ -262,6 +273,10 @@
 	--action-alt-hover: var(--dnd-night-raised);
 	--on-action-alt: var(--dnd-ivory);
 	--action-alt-text: var(--dnd-night);
+	--action-alt-ring: var(--dnd-night);
+	/* Mot accent : surlignage Night, texte orange (8.24 : 1) */
+	--accent-word-fg: var(--dnd-orange);
+	--accent-word-bg: var(--dnd-night);
 	--hand-text: var(--dnd-night);
 	--error: var(--dnd-night);
 	--focus: var(--dnd-night);

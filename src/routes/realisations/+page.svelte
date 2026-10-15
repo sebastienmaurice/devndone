@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Section, SectionHead, Seo, Stroke } from '$lib/components';
+	import { Section, SectionHead, Seo } from '$lib/components';
 	import ContactCta from '$lib/components/sections/ContactCta.svelte';
 	import CtaBand from '$lib/components/sections/CtaBand.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
@@ -23,12 +23,13 @@
 			lede={realisationsIntro.lede}
 		>
 			{#snippet titleContent()}
-				Des projets qui sont vraiment <Stroke>Done<span class="t-dot">.</span></Stroke>
+				Des projets qui sont vraiment <span class="accent-word">Done.</span>
 			{/snippet}
 		</SectionHead>
 		<ProjectGrid headingLevel={2} />
-		<CtaBand />
 	</div>
 </Section>
+
+<CtaBand />
 
 <ContactCta />

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Section, SectionHead, Seo, Steps } from '$lib/components';
 	import ContactCta from '$lib/components/sections/ContactCta.svelte';
-	import UniverseList from '$lib/components/sections/UniverseList.svelte';
+	import UniverseCards from '$lib/components/sections/UniverseCards.svelte';
 	import { processIntro, processSteps, servicesIntro } from '$lib/content/services';
 </script>
 
@@ -20,11 +20,11 @@
 			title={servicesIntro.title}
 			lede={servicesIntro.lede}
 		/>
-		<UniverseList headingLevel={2} />
+		<UniverseCards headingLevel={2} />
 	</div>
 </Section>
 
-<Section surface="ivory" labelledby="process-title">
+<Section surface="raised" labelledby="process-title">
 	<SectionHead id="process-title" eyebrow={processIntro.eyebrow} title={processIntro.title} />
 	<Steps items={processSteps} />
 </Section>

@@ -78,6 +78,7 @@
 .btn--alt {
 	--btn-bg: var(--action-alt);
 	--btn-fg: var(--on-action-alt);
+	--btn-ring: var(--action-alt-ring);
 }
 .btn--alt:hover {
 	--btn-bg: var(--action-alt-hover);
@@ -296,6 +297,8 @@
 /* Bande slash : diagonale structurelle, une par écran maximum.
    Position réglable par le parent : --band-right, --band-top, --band-bottom.
    Masquée sous 640 px : sur un écran étroit, la diagonale traverse forcément le texte. */
+/* Bande slash : retirée des usages en v1.2 (remplacée par le mot accent). Conservée pour les
+   supports existants uniquement. */
 .slash-band {
 	position: absolute;
 	pointer-events: none;
@@ -1223,8 +1226,150 @@
 }
 
 /* ==========================================================================
-   11. v1.1 · ANNOTATION, CADRES D'APPAREIL, CHIFFRES CLÉS
+   11. v1.1 · MOT ACCENT, ANNOTATION, CARTES À IMAGE, CADRES, CHIFFRES CLÉS
    ========================================================================== */
+
+/* Titre bicolore : un ou deux mots clés par titre. Remplace la bande slash (retirée en v1.2).
+   Night : mot orange · Ivoire : surlignage orange, texte Night · Orange : surlignage Night. */
+.accent-word {
+	color: var(--accent-word-fg);
+	background: var(--accent-word-bg);
+	padding-inline: 0.12em;
+	border-radius: var(--radius-sm);
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
+
+/* Carte à image (projets, univers, offres) : visuel en haut, texte, liste, bouton rond
+   logé dans le coin bas-droit échancré. La carte entière est un seul lien ; le bouton rond
+   est décoratif (aria-hidden). Variantes de fond par contexte : .surface-night / -orange / -ivory
+   sur la carte elle-même (une seule carte orange par groupe). */
+.media-card {
+	position: relative;
+	display: grid;
+	height: 100%;
+}
+.media-card__body {
+	--notch: 64px;
+	display: grid;
+	gap: var(--space-4);
+	align-content: start;
+	grid-template-rows: auto auto 1fr;
+	height: 100%;
+	padding: var(--space-4) var(--space-4) var(--space-7);
+	background: var(--surface);
+	color: var(--text);
+	border-radius: var(--radius-lg);
+	box-shadow: inset 0 0 0 var(--border-hair) var(--line);
+	text-decoration: none;
+	-webkit-mask: radial-gradient(
+		circle at 100% 100%,
+		transparent calc(var(--notch) / 2 + 10px),
+		#000 calc(var(--notch) / 2 + 11px)
+	);
+	mask: radial-gradient(
+		circle at 100% 100%,
+		transparent calc(var(--notch) / 2 + 10px),
+		#000 calc(var(--notch) / 2 + 11px)
+	);
+}
+.media-card.surface-night .media-card__body,
+.media-card.surface-orange .media-card__body {
+	background: var(--bg);
+}
+.media-card__media {
+	overflow: hidden;
+	aspect-ratio: 16 / 10;
+	border-radius: calc(var(--radius-lg) - 4px);
+	background: var(--bg);
+}
+.media-card__media img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform var(--duration-scene) var(--ease-out);
+}
+/* Forme organique (univers, offres) : rayons irréguliers, aucun bord peint */
+.media-card__media--organic {
+	border-radius: 46% 54% 42% 58% / 52% 44% 56% 48%;
+	aspect-ratio: 4 / 3;
+}
+.media-card__text {
+	display: grid;
+	gap: var(--space-3);
+	padding-inline: var(--space-2);
+}
+.media-card__text p {
+	color: var(--text-muted);
+}
+.media-card__go {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	display: grid;
+	place-items: center;
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	background: var(--action-alt);
+	color: var(--on-action-alt);
+	box-shadow: inset 0 0 0 var(--border-ui) var(--action-alt-ring);
+	transition:
+		transform var(--duration-base) var(--ease-out),
+		background-color var(--duration-base) var(--ease-out);
+	pointer-events: none;
+}
+.media-card:hover .media-card__go {
+	transform: rotate(45deg);
+	background: var(--action-alt-hover);
+}
+.media-card:hover .media-card__media img {
+	transform: scale(1.03);
+}
+/* Le masque du coin rognerait l'anneau de focus : il est porté par le conteneur */
+.media-card {
+	border-radius: var(--radius-lg);
+}
+.media-card__body:focus-visible {
+	outline: none;
+}
+.media-card:has(.media-card__body:focus-visible) {
+	outline: var(--focus-ring);
+	outline-offset: var(--focus-offset);
+}
+
+/* Carte sans lien : pas d'échancrure ni de bouton rond */
+.media-card--static .media-card__body {
+	-webkit-mask: none;
+	mask: none;
+	padding-bottom: var(--space-5);
+}
+
+/* Liste à coches (offres, univers) */
+.check-list {
+	display: grid;
+	gap: var(--space-2);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.check-list li {
+	display: flex;
+	gap: var(--space-3);
+	align-items: flex-start;
+	font-size: var(--text-body-sm);
+	font-weight: var(--weight-medium);
+}
+.check-list .icon {
+	width: 20px;
+	height: 20px;
+	color: var(--action-alt-text);
+	margin-top: 1px;
+}
+.surface-orange .check-list .icon {
+	color: var(--text);
+}
 
 /* Annotation manuscrite (Caveat) : une par écran, jamais une information essentielle.
    La flèche est un SVG inline (.annotation__arrow), décoratif. */
