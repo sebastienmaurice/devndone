@@ -4,6 +4,7 @@
  * Harmony Valse, la fiche transmise par Sébastien le 14/10/2026 (portfolio Malt).
  * Fiches (`details`) de GSTI, Palimpseste Urbain, Maxilou, Petit Château Vercourt et
  * Alternativ' Uniforme : expériences publiques du profil Malt (relevées le 19/10/2026).
+ * PANO Sign'Service : expérience et fiche portfolio Malt transmises par Sébastien (19/10/2026).
  * Ciné Délices : étude de cas https://sebastienmaurice.github.io/cine-delices.html (19/10/2026).
  * Lieu du Petit Château Vercourt : adresse donnée par Sébastien (1 rue de l'Église, 80120 Vercourt).
  * Visuels : présentations complètes 1774 × 887 px (D:/GRAPHIQUE/MALT - GRAPISTE.COM/Web/CMS retenus
@@ -206,7 +207,36 @@ export const projects: readonly Project[] = [
 		stack: 'WordPress · Elementor · E-commerce',
 		text: 'Refonte WordPress Elementor. Vitrine et e-commerce de signalétique.',
 		url: 'https://www.pano-douai.fr/',
-		image: 'pano-douai'
+		image: 'pano-douai',
+		details: {
+			subtitle:
+				'Refonte du site WordPress avec Elementor, boutique WooCommerce et demande de devis',
+			sector: 'Presse & médias',
+			period: 'février 2020 - novembre 2022',
+			location: 'Dechy, France',
+			skills: [
+				'Refonte WordPress',
+				'WooCommerce Elementor',
+				'Intégration front-end',
+				'Site vitrine',
+				'Création de site WordPress Elementor'
+			],
+			summary:
+				"PANO Group Sign'Service est une agence de communication visuelle spécialisée dans la signalétique, le marquage de véhicules et la fabrication d'enseignes.",
+			context:
+				"Le projet consistait à moderniser le site WordPress et à mieux présenter les différentes prestations de l'agence, tout en intégrant des fonctionnalités permettant de développer les ventes et les demandes de devis en ligne.",
+			interventions: [
+				'Refonte du site sous WordPress avec Elementor',
+				"Intégration d'une boutique WooCommerce",
+				"Mise en place d'un formulaire de demande de devis",
+				'Restructuration des pages et des contenus',
+				'Optimisation technique et du référencement',
+				'Travail sur les Core Web Vitals et les performances',
+				'Adaptation responsive des interfaces'
+			],
+			result:
+				"Un site WordPress modernisé, structuré autour des prestations de l'agence et complété par une boutique WooCommerce et un parcours de demande de devis."
+		}
 	},
 	{
 		slug: 'alternativ-uniforme',
