@@ -4,6 +4,7 @@
  * Harmony Valse, la fiche transmise par Sébastien le 14/10/2026 (portfolio Malt).
  * Fiches (`details`) de GSTI, Palimpseste Urbain, Maxilou, Petit Château Vercourt et
  * Alternativ' Uniforme : expériences publiques du profil Malt (relevées le 19/10/2026).
+ * Ciné Délices : étude de cas https://sebastienmaurice.github.io/cine-delices.html (19/10/2026).
  * Lieu du Petit Château Vercourt : adresse donnée par Sébastien (1 rue de l'Église, 80120 Vercourt).
  * Visuels : présentations complètes 1774 × 887 px (D:/GRAPHIQUE/MALT - GRAPISTE.COM/Web/CMS retenus
  * et visuels transmis par Sébastien le 19/10/2026).
@@ -11,10 +12,10 @@
  */
 export type ProjectDetails = {
 	subtitle: string;
-	sector: string;
-	period: string;
-	location: string;
-	skills: readonly string[];
+	sector?: string;
+	period?: string;
+	location?: string;
+	skills?: readonly string[];
 	summary: string;
 	context?: string;
 	interventions: readonly string[];
@@ -112,10 +113,28 @@ export const projects: readonly Project[] = [
 	{
 		slug: 'cine-delices',
 		name: 'Ciné Délices',
-		stack: 'Svelte · Node.js · PostgreSQL',
+		stack: 'JavaScript · Node.js · Express · PostgreSQL',
 		text: 'Application full stack de recettes inspirées du cinéma.',
-		url: 'https://sebastienmaurice.github.io/cine-delices.html',
-		image: 'cine-delices'
+		url: 'https://cinedelices.com/',
+		image: 'cine-delices',
+		details: {
+			subtitle: 'Application web full stack, projet de formation (Titre professionnel DWWM)',
+			period: '12 semaines de développement',
+			summary:
+				"Chaque plat est rattaché au film qui l'a inspiré : affiche, contexte, puis la recette. Développé from scratch par une équipe de 5, sans framework UI côté front.",
+			context:
+				"Trois tensions à résoudre : un cahier des charges DWWM, une équipe de 5, et l'envie de produire un site qui ne ressemble pas à un exercice.",
+			interventions: [
+				"Recettes de films : chaque plat rattaché au film qui l'a inspiré",
+				'Système de niveaux et de badges qui récompense chaque contribution',
+				'Avis et notation avec aperçu avant validation et moyenne recalculée en temps réel',
+				'Recherche live de films avec debounce dynamique et annulation des requêtes obsolètes',
+				'Direction artistique maison : parallaxe et carrousel codés à la main',
+				'Sécurité OWASP Top-10 : Argon2id, Helmet et CSP, rate limiting, JWT en cookie httpOnly, validation Joi'
+			],
+			result:
+				'Site en ligne sur cinedelices.com, hébergé sur Render (Node.js, PostgreSQL managée, déploiement continu depuis GitHub).'
+		}
 	},
 	{
 		slug: 'maxilou',
