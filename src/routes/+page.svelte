@@ -7,13 +7,14 @@
 <script lang="ts">
 	import { Button, Seo } from '$lib/components';
 	import HandNote from '$lib/components/brand/HandNote.svelte';
+	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
+	import DoneWord from '$lib/components/brand/DoneWord.svelte';
 	import Icon from '$lib/components/brand/Icon.svelte';
 	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
 	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
 	import ExpertiseCards from '$lib/components/sections/ExpertiseCards.svelte';
 	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
-	import doneImage from '$lib/assets/brand/done-3d.png?enhanced&w=640;320';
 	import heroImage from '$lib/assets/mascotte/hero-renard-outils.png?enhanced&w=1120;720;480';
 	import { realisationsIntro } from '$lib/content/realisations';
 	import { heroSlogan, servicesIntro } from '$lib/content/services';
@@ -45,14 +46,7 @@
 			<h1 class="hero__title" id="hero-title">
 				<span class="hero__line">Des projets</span>
 				<span class="hero__line">pensés pour</span>
-				<span class="hero__line"
-					>être <enhanced:img
-						class="hero__done"
-						src={doneImage}
-						alt="Done."
-						sizes="(min-width: 1100px) 340px, 220px"
-					/></span
-				>
+				<span class="hero__line">être <DoneWord sizes="(min-width: 1100px) 340px, 220px" /></span>
 			</h1>
 			<p class="hero__keywords">
 				{#each keywords as word, i (word)}{#if i > 0}<span class="hero__slash" aria-hidden="true"
@@ -82,7 +76,9 @@
 	<div class="container">
 		<header class="center-head">
 			<SectionLabel label={servicesIntro.eyebrow} align="center" />
-			<h2 class="t-h2" id="univers-title">{servicesIntro.title}</h2>
+			<h2 class="t-h2" id="univers-title">
+				<AccentTitle text={servicesIntro.title} accent={servicesIntro.accent} />
+			</h2>
 			<p>{servicesIntro.lede}</p>
 		</header>
 		<ExpertiseCards />
@@ -102,7 +98,7 @@
 		<header class="split-head">
 			<div class="split-head__text">
 				<SectionLabel label={realisationsIntro.eyebrow} />
-				<h2 class="t-h2" id="projets-title">{realisationsIntro.title}</h2>
+				<h2 class="t-h2" id="projets-title">{realisationsIntro.titleStart} <DoneWord /></h2>
 				<p>{realisationsIntro.lede}</p>
 			</div>
 			<Button href="/contact/" variant="secondary" icon="arrow-right"
@@ -158,18 +154,6 @@
 	.hero__line {
 		display: block;
 		white-space: nowrap;
-	}
-	/* <picture> est en bloc dans la feuille de base : ici il suit le texte */
-	.hero__line :global(picture) {
-		display: inline;
-	}
-	/* Mot « DONE » en relief (image), calé sur la ligne de base du titre */
-	.hero__title :global(.hero__done) {
-		display: inline-block;
-		width: auto;
-		height: 1.5em;
-		margin-left: 0.04em;
-		vertical-align: -0.42em;
 	}
 	.hero__keywords {
 		display: flex;

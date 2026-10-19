@@ -36,6 +36,8 @@ export type Project = {
 export const realisationsIntro = {
 	eyebrow: 'Réalisations',
 	title: 'Des projets qui sont vraiment Done.',
+	/** Début du titre, affiché suivi du mot DONE en image */
+	titleStart: 'Des projets qui sont vraiment',
 	lede: "Des projets concrets pour de vrais besoins, tels qu'ils existent aujourd'hui."
 } as const;
 

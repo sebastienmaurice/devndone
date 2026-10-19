@@ -4,6 +4,7 @@
 	Données : content/services.ts (processIntro, processSteps).
 -->
 <script lang="ts">
+	import AccentTitle from '../brand/AccentTitle.svelte';
 	import { processIntro, processSteps } from '$lib/content/services';
 	import Icon from '../brand/Icon.svelte';
 	import SectionLabel from '../brand/SectionLabel.svelte';
@@ -17,7 +18,7 @@
 	<div class="process__intro">
 		<SectionLabel label={processIntro.eyebrow} />
 		<svelte:element this={`h${level}`} class="t-h2" id="process-title"
-			>{processIntro.title}</svelte:element
+			><AccentTitle text={processIntro.title} accent={processIntro.accent} /></svelte:element
 		>
 	</div>
 	<ol class="process__steps">

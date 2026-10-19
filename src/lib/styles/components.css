@@ -1247,7 +1247,8 @@
 .accent-word {
 	color: var(--accent-word-fg);
 	background: var(--accent-word-bg);
-	padding-inline: 0.12em;
+	/* Marge seulement quand le mot est surligné (bandeau Orange) */
+	padding-inline: var(--accent-word-pad, 0.12em);
 	border-radius: var(--radius-sm);
 	-webkit-box-decoration-break: clone;
 	box-decoration-break: clone;

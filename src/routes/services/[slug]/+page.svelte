@@ -16,6 +16,7 @@
 	import { projects } from '$lib/content/realisations';
 	import { universes } from '$lib/content/services';
 	import { hero, links } from '$lib/content/studio';
+	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
 	import { maintenanceIntro, packagesIntro } from '$lib/content/tarifs';
 
 	let { data } = $props();
@@ -68,7 +69,9 @@
 		<div class="container stack stack--lg">
 			<header class="stack stack--sm">
 				<SectionLabel label="Forfaits" />
-				<h2 class="t-h2" id="forfaits-title">{packagesIntro.title}</h2>
+				<h2 class="t-h2" id="forfaits-title">
+					<AccentTitle text={packagesIntro.title} accent={packagesIntro.accent} />
+				</h2>
 				<p class="muted">{packagesIntro.lede}</p>
 			</header>
 			<PackageGrid only={u.packages} />
@@ -91,7 +94,9 @@
 		<div class="container stack stack--lg">
 			<header class="stack stack--sm">
 				<SectionLabel label="Maintenance" />
-				<h2 class="t-h2" id="maintenance-title">{maintenanceIntro.title}</h2>
+				<h2 class="t-h2" id="maintenance-title">
+					<AccentTitle text={maintenanceIntro.title} accent={maintenanceIntro.accent} />
+				</h2>
 				<p class="muted">{maintenanceIntro.lede}</p>
 			</header>
 			<MaintenancePlans />
@@ -110,7 +115,9 @@
 		<div class="container stack stack--lg">
 			<header class="stack stack--sm">
 				<SectionLabel label="Réalisations" />
-				<h2 class="t-h2" id="related-title">Projets {u.title.toLowerCase()} déjà livrés</h2>
+				<h2 class="t-h2" id="related-title">
+					Projets <span class="accent-word">{u.title.toLowerCase()}</span> déjà livrés
+				</h2>
 			</header>
 			<ProjectGrid only={related} />
 		</div>

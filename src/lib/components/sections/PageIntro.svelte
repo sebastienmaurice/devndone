@@ -4,6 +4,7 @@
 -->
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import AccentTitle from '../brand/AccentTitle.svelte';
 	import SectionLabel from '../brand/SectionLabel.svelte';
 	import Breadcrumb from '../ui/Breadcrumb.svelte';
 
@@ -11,6 +12,8 @@
 		label: string;
 		/** Titre texte (sinon `title` en snippet) */
 		heading?: string;
+		/** Passage du titre en orange (titre bicolore) */
+		accent?: string;
 		lede?: string;
 		crumbs?: readonly { label: string; href?: string }[];
 		title?: Snippet;
@@ -18,7 +21,7 @@
 		aside?: Snippet;
 	};
 
-	let { label, heading, lede, crumbs, title, actions, aside }: Props = $props();
+	let { label, heading, accent, lede, crumbs, title, actions, aside }: Props = $props();
 </script>
 
 <section class="page-intro" aria-labelledby="page-title">
@@ -27,7 +30,7 @@
 			{#if crumbs}<Breadcrumb items={crumbs} />{/if}
 			<SectionLabel {label} />
 			<h1 class="t-h1" id="page-title">
-				{#if title}{@render title()}{:else}{heading}{/if}
+				{#if title}{@render title()}{:else if heading}<AccentTitle text={heading} {accent} />{/if}
 			</h1>
 			{#if lede}<p class="page-intro__lede">{lede}</p>{/if}
 			{#if actions}<div class="page-intro__actions">{@render actions()}</div>{/if}

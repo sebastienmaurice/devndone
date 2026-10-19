@@ -9,6 +9,7 @@
 	import MaintenancePlans from '$lib/components/sections/MaintenancePlans.svelte';
 	import PackageGrid from '$lib/components/sections/PackageGrid.svelte';
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
+	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
 	import { maintenanceIntro, packagesIntro } from '$lib/content/tarifs';
 </script>
 
@@ -21,6 +22,7 @@
 <PageIntro
 	label="Tarifs"
 	heading={packagesIntro.title}
+	accent={packagesIntro.accent}
 	lede={packagesIntro.lede}
 	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Tarifs' }]}
 />
@@ -36,7 +38,9 @@
 	<div class="container stack stack--lg">
 		<header class="stack stack--sm">
 			<SectionLabel label="Maintenance" />
-			<h2 class="t-h2" id="maintenance-title">{maintenanceIntro.title}</h2>
+			<h2 class="t-h2" id="maintenance-title">
+				<AccentTitle text={maintenanceIntro.title} accent={maintenanceIntro.accent} />
+			</h2>
 			<p class="note">{maintenanceIntro.lede}</p>
 		</header>
 		<MaintenancePlans />

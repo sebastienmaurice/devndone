@@ -9,6 +9,7 @@
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
+	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
 	import { aboutIntro, links, reviewsIntro } from '$lib/content/studio';
 </script>
 
@@ -21,6 +22,7 @@
 <PageIntro
 	label={aboutIntro.eyebrow}
 	heading={aboutIntro.title}
+	accent={aboutIntro.accent}
 	lede={aboutIntro.text}
 	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'À propos' }]}
 />
@@ -35,7 +37,9 @@
 	<div class="container stack stack--lg">
 		<header class="stack stack--sm">
 			<SectionLabel label={reviewsIntro.eyebrow} />
-			<h2 class="t-h2" id="avis-title">{reviewsIntro.title}</h2>
+			<h2 class="t-h2" id="avis-title">
+				<AccentTitle text={reviewsIntro.title} accent={reviewsIntro.accent} />
+			</h2>
 			<p class="note">{reviewsIntro.lede}</p>
 		</header>
 		<ReviewList />

@@ -1,13 +1,32 @@
 <!--
-	Les quatre expertises (maquette du 19/10/2026) : cartes blanches homogènes, icône, numéro orange,
-	titre, description, flèche. Chaque carte mène à la page du service (toute la carte est le lien).
-	4 colonnes en grand écran, 2 en tablette, 1 sur petit mobile. Données : content/services.ts.
+	Les quatre expertises (maquette du 19/10/2026) : cartes blanches homogènes, mascotte de
+	l'expertise, numéro orange, titre, description, flèche. Chaque carte mène à la page du service
+	(toute la carte est le lien). 4 colonnes en grand écran, 2 en tablette, 1 sur petit mobile.
+	Données : content/services.ts. Mascottes : $lib/assets/mascotte/expertise-*.jpg (fond blanc,
+	posé sur la carte blanche).
 -->
 <script lang="ts">
 	import { universes } from '$lib/content/services';
+	import web from '$lib/assets/mascotte/expertise-web.jpg?enhanced';
+	import design from '$lib/assets/mascotte/expertise-design.jpg?enhanced';
+	import automatisation from '$lib/assets/mascotte/expertise-automatisation.jpg?enhanced';
+	import fullStack from '$lib/assets/mascotte/expertise-fullstack.jpg?enhanced';
 	import Icon from '../brand/Icon.svelte';
 
 	let { headingLevel = 3 }: { headingLevel?: 2 | 3 | 4 } = $props();
+
+	const mascots: Record<string, { src: typeof web; alt: string }> = {
+		web: { src: web, alt: 'Dev, la mascotte, pouce levé devant son ordinateur portable' },
+		design: { src: design, alt: 'Dev, la mascotte, pensif, dessinant sur un carnet' },
+		automatisation: {
+			src: automatisation,
+			alt: 'Dev, la mascotte, réglant une machine à engrenages'
+		},
+		'full-stack': {
+			src: fullStack,
+			alt: "Dev, la mascotte, au bureau devant un écran, entouré de schémas d'application"
+		}
+	};
 
 	const pad = (n: number) => String(n + 1).padStart(2, '0');
 </script>
@@ -16,7 +35,16 @@
 	{#each universes as u, i (u.id)}
 		<li>
 			<a class="expertise" href={u.path}>
-				<span class="expertise__icon"><Icon name={u.icon} /></span>
+				{#if mascots[u.id]}
+					<span class="expertise__mascot">
+						<enhanced:img
+							src={mascots[u.id].src}
+							alt={mascots[u.id].alt}
+							sizes="(min-width: 1100px) 220px, 200px"
+							loading="lazy"
+						/>
+					</span>
+				{/if}
 				<span class="expertise__num" aria-hidden="true">{pad(i)}</span>
 				<svelte:element this={`h${headingLevel}`} class="t-h3 expertise__title"
 					>{u.title}</svelte:element
@@ -51,7 +79,7 @@
 		grid-template-rows: auto auto auto 1fr auto;
 		gap: var(--space-2);
 		height: 100%;
-		padding: var(--space-6) var(--space-5) var(--space-5);
+		padding: var(--space-5);
 		background: var(--surface);
 		border: 1px solid var(--line);
 		border-radius: var(--radius-card);
@@ -68,20 +96,17 @@
 		box-shadow: var(--shadow-card-hover);
 		border-color: var(--line-strong);
 	}
-	.expertise__icon {
-		display: grid;
-		place-items: center;
-		width: 64px;
-		height: 64px;
-		margin-bottom: var(--space-4);
-		border-radius: 18px;
-		background: var(--surface-sunk);
-		color: var(--text);
+	/* Fond blanc de l'image fondu dans la carte (multiply : le blanc disparaît) */
+	.expertise__mascot {
+		justify-self: center;
+		width: min(100%, 200px);
+		margin-bottom: var(--space-2);
 	}
-	.expertise__icon :global(.icon) {
-		width: 34px;
-		height: 34px;
-		stroke-width: 1.75;
+	.expertise__mascot :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		mix-blend-mode: multiply;
 	}
 	.expertise__num {
 		font-size: var(--text-h3);

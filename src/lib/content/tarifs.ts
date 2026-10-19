@@ -22,6 +22,7 @@ export type Package = {
 
 export const maintenanceIntro = {
 	title: 'Maintenance WordPress en abonnement',
+	accent: 'en abonnement',
 	lede: 'Mises à jour, sauvegardes et surveillance : votre site reste à jour et protégé, sans que vous ayez à y penser. Trois niveaux, sans engagement de durée.',
 	note: "Le détail complet de chaque formule (analyses de sécurité, corrections incluses, rapports) est précisé lors de l'échange. Au-delà du temps de correction inclus, toute intervention est chiffrée à l'avance. Tarifs hors taxes."
 } as const;
@@ -65,6 +66,7 @@ export const maintenancePlans: readonly MaintenancePlan[] = [
 
 export const packagesIntro = {
 	title: 'Audit, création et refonte',
+	accent: 'création et refonte',
 	lede: "Des forfaits à prix fermé, avec un contenu et un délai annoncés à l'avance. 50 % à la signature, le solde à la livraison.",
 	note: 'Identité visuelle, SEO, automatisation, développement sur mesure : chiffrés après un premier échange.'
 } as const;

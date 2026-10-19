@@ -23,6 +23,7 @@ export type Universe = {
 export const servicesIntro = {
 	eyebrow: 'Notre expertise',
 	title: 'Quatre univers. Un même objectif : votre projet.',
+	accent: 'votre projet',
 	lede: "Web, design, automatisation et développement sur mesure. Une seule vision, du premier brief jusqu'à la mise en ligne."
 } as const;
 
@@ -78,7 +79,8 @@ export const universes: readonly Universe[] = [
 
 export const processIntro = {
 	eyebrow: 'Mon process',
-	title: "De l'idée à la mise en ligne, en toute confiance."
+	title: "De l'idée à la mise en ligne, en toute confiance.",
+	accent: 'en toute confiance'
 } as const;
 
 export const processSteps = [

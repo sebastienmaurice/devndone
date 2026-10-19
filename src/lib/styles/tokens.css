@@ -214,6 +214,7 @@
 	/* Mot accent d'un titre bicolore : orange sur Night */
 	--accent-word-fg: var(--dnd-orange);
 	--accent-word-bg: transparent;
+	--accent-word-pad: 0;
 	--hand-text: var(--dnd-ivory-72);
 	--error: var(--dnd-error);
 	--focus: var(--dnd-orange);
@@ -256,9 +257,11 @@
 	--on-action-alt: var(--dnd-night);
 	--action-alt-text: var(--dnd-orange-ink);
 	--action-alt-ring: var(--dnd-night);
-	/* Mot accent : surlignage orange, texte Night (8.24 : 1) */
-	--accent-word-fg: var(--dnd-night);
-	--accent-word-bg: var(--dnd-orange);
+	/* v2.2 : titres bicolores Night + orange. Le mot accent est en orange encre (5.03 : 1) :
+     l'orange pur ne fait que 2.26 : 1 sur Ivoire, illisible en texte. */
+	--accent-word-fg: var(--dnd-orange-ink);
+	--accent-word-bg: transparent;
+	--accent-word-pad: 0;
 	--hand-text: var(--dnd-night-72);
 	--error: var(--dnd-error-ink);
 	--focus: var(--dnd-orange-ink);
