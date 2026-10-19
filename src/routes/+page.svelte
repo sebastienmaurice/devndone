@@ -45,12 +45,14 @@
 			<h1 class="hero__title" id="hero-title">
 				<span class="hero__line">Des projets</span>
 				<span class="hero__line">pensés pour</span>
-				<span class="hero__line">être <enhanced:img
-					class="hero__done"
-					src={doneImage}
-					alt="Done."
-					sizes="(min-width: 1100px) 340px, 220px"
-				/></span>
+				<span class="hero__line"
+					>être <enhanced:img
+						class="hero__done"
+						src={doneImage}
+						alt="Done."
+						sizes="(min-width: 1100px) 340px, 220px"
+					/></span
+				>
 			</h1>
 			<p class="hero__keywords">
 				{#each keywords as word, i (word)}{#if i > 0}<span class="hero__slash" aria-hidden="true"
