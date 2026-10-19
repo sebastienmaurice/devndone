@@ -14,7 +14,7 @@
 	import ExpertiseCards from '$lib/components/sections/ExpertiseCards.svelte';
 	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
-	import heroImage from '$lib/assets/mascotte/hero-renard-developpeur.png?enhanced&w=1120;720;480';
+	import heroImage from '$lib/assets/mascotte/hero-renard-outils.png?enhanced&w=1120;720;480';
 	import { realisationsIntro } from '$lib/content/realisations';
 	import { heroSlogan, servicesIntro } from '$lib/content/services';
 	import { hero, links } from '$lib/content/studio';
@@ -60,7 +60,7 @@
 		<div class="hero__visual">
 			<enhanced:img
 				src={heroImage}
-				alt="Dev, la mascotte renard de Dev'n Done, en sweat à capuche, assis avec son ordinateur portable, entre un écran de code JavaScript et une interface de site WordPress avec Elementor"
+				alt="Dev, la mascotte renard de Dev'n Done, assis avec son ordinateur portable entre un écran de code JavaScript et une interface WordPress avec Elementor, entouré des icônes WordPress, Elementor, WooCommerce, Automatisation, Identité et Full Stack"
 				sizes="(min-width: 1100px) 640px, 92vw"
 				fetchpriority="high"
 			/>
