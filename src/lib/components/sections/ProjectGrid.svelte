@@ -102,7 +102,8 @@
 		display: block;
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
+		/* Image entière, jamais rognée : un visuel hors 2:1 laisse des marges */
+		object-fit: contain;
 		transition: transform var(--duration-scene) var(--ease-out);
 	}
 	.project:hover .project__media :global(img) {

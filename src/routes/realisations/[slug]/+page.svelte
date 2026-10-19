@@ -160,7 +160,8 @@
 		display: block;
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
+		/* Image entière, jamais rognée : un visuel hors 2:1 laisse des marges */
+		object-fit: contain;
 	}
 	.case {
 		display: grid;
