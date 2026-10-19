@@ -2,6 +2,8 @@
 	Page d'une expertise. Contenu réel uniquement : description et domaines (content/services.ts),
 	forfaits liés et maintenance (content/tarifs.ts), process, réalisations liées.
 	Rien n'est inventé : sans forfait, la page renvoie au premier échange (texte du site en ligne).
+	En-tête : la mascotte de l'expertise à droite (même illustration que sa carte sur l'accueil),
+	prestations en pastilles cochées sous le texte, au-dessus des boutons.
 -->
 <script lang="ts">
 	import { Button, Seo } from '$lib/components';
@@ -13,6 +15,7 @@
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
+	import { expertiseMascots } from '$lib/assets/mascotte/expertises';
 	import { projects } from '$lib/content/realisations';
 	import { universes } from '$lib/content/services';
 	import { hero, links } from '$lib/content/studio';
@@ -32,6 +35,7 @@
 				? projects.filter((p) => p.stack.includes('Svelte')).map((p) => p.slug)
 				: []
 	);
+	const mascot = $derived(expertiseMascots[u.id]);
 	const others = $derived(universes.filter((x) => x.id !== u.id));
 </script>
 
@@ -48,19 +52,30 @@
 	]}
 >
 	{#snippet actions()}
-		<Button href="/contact/" icon="arrow-right">Parlons de votre projet</Button>
-		<Button href={links.calendly} variant="secondary"><Icon name="calendar" />{hero.ctaCall}</Button
-		>
-	{/snippet}
-	{#snippet aside()}
+		<!-- Prestations en pastilles cochées : la colonne de droite reste à la mascotte -->
 		<div class="domains">
-			<p class="domains__title">Prestations</p>
+			<p class="sr-only">Prestations</p>
 			<ul class="domains__list" role="list">
 				{#each u.tags as tag (tag)}
 					<li><span class="domains__check"><Icon name="check" size="sm" /></span>{tag}</li>
 				{/each}
 			</ul>
 		</div>
+		<Button href="/contact/" icon="arrow-right">Parlons de votre projet</Button>
+		<Button href={links.calendly} variant="secondary"><Icon name="calendar" />{hero.ctaCall}</Button
+		>
+	{/snippet}
+	{#snippet aside()}
+		{#if mascot}
+			<div class="mascot">
+				<enhanced:img
+					src={mascot.src}
+					alt={mascot.alt}
+					sizes="(min-width: 1100px) 560px, 92vw"
+					fetchpriority="high"
+				/>
+			</div>
+		{/if}
 	{/snippet}
 </PageIntro>
 
@@ -151,31 +166,39 @@
 		background: var(--surface);
 		border-block: 1px solid var(--line);
 	}
-	.domains {
-		padding: var(--space-6);
-		background: var(--surface);
-		border: 1px solid var(--line);
-		border-radius: var(--radius-card);
-		box-shadow: var(--shadow-card);
+	/* Illustration 3:2 sur fond blanc : multiply la fond dans l'Ivoire de la page */
+	.mascot {
+		aspect-ratio: 3 / 2;
 	}
-	.domains__title {
-		margin: 0 0 var(--space-4);
-		font-size: var(--text-label);
-		font-weight: var(--weight-extrabold);
-		letter-spacing: var(--tracking-label);
-		text-transform: uppercase;
+	.mascot :global(img) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		mix-blend-mode: multiply;
+	}
+	/* Prestations : pleine ligne au-dessus des boutons, pastilles blanches cochées */
+	.domains {
+		flex-basis: 100%;
+		margin-bottom: var(--space-2);
 	}
 	.domains__list {
-		display: grid;
-		gap: var(--space-3);
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
 		margin: 0;
 		padding: 0;
 		list-style: none;
 	}
 	.domains__list li {
-		display: flex;
+		display: inline-flex;
 		align-items: center;
-		gap: var(--space-3);
+		gap: var(--space-2);
+		padding: var(--space-1) var(--space-4) var(--space-1) var(--space-1);
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		font-size: var(--text-body-sm);
 		font-weight: var(--weight-semibold);
 	}
 	.domains__check {

@@ -9,7 +9,7 @@ declare module '*?enhanced&w=1120;720;480&quality=40' {
 	const picture: import('vite-imagetools').Picture;
 	export default picture;
 }
-declare module '*?enhanced&w=720;360' {
+declare module '*?enhanced&w=1200;720;360' {
 	const picture: import('vite-imagetools').Picture;
 	export default picture;
 }

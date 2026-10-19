@@ -2,37 +2,15 @@
 	Les quatre expertises (maquette du 19/10/2026) : cartes blanches homogènes, mascotte de
 	l'expertise, numéro orange, titre, description, flèche. Chaque carte mène à la page du service
 	(toute la carte est le lien). 4 colonnes en grand écran, 2 en tablette, 1 sur petit mobile.
-	Données : content/services.ts. Mascottes : $lib/assets/mascotte/expertise-*.jpg (illustrations 3:2, fond blanc,
-	posé sur la carte blanche).
+	Données : content/services.ts. Mascottes : $lib/assets/mascotte/expertises.ts (illustrations 3:2,
+	fond blanc posé sur la carte blanche), reprises dans l'en-tête de chaque page de service.
 -->
 <script lang="ts">
+	import { expertiseMascots as mascots } from '$lib/assets/mascotte/expertises';
 	import { universes } from '$lib/content/services';
-	import web from '$lib/assets/mascotte/expertise-web.jpg?enhanced&w=720;360';
-	import design from '$lib/assets/mascotte/expertise-design.jpg?enhanced&w=720;360';
-	import automatisation from '$lib/assets/mascotte/expertise-automatisation.jpg?enhanced&w=720;360';
-	import fullStack from '$lib/assets/mascotte/expertise-fullstack.jpg?enhanced&w=720;360';
 	import Icon from '../brand/Icon.svelte';
 
 	let { headingLevel = 3 }: { headingLevel?: 2 | 3 | 4 } = $props();
-
-	const mascots: Record<string, { src: typeof web; alt: string }> = {
-		web: {
-			src: web,
-			alt: 'Dev, la mascotte, à son bureau, montre un site en cours de création sur grand écran'
-		},
-		design: {
-			src: design,
-			alt: "Dev, la mascotte, dessine sur une tablette graphique entouré de planches d'identité visuelle"
-		},
-		automatisation: {
-			src: automatisation,
-			alt: 'Dev, la mascotte, relie des applications entre elles dans un flux automatisé'
-		},
-		'full-stack': {
-			src: fullStack,
-			alt: 'Dev, la mascotte, code sur son portable entre interface, API et base de données'
-		}
-	};
 
 	const pad = (n: number) => String(n + 1).padStart(2, '0');
 </script>
