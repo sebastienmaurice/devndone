@@ -119,7 +119,7 @@
 	}
 	.expertise:hover .expertise__mascot :global(img),
 	.expertise:focus-visible .expertise__mascot :global(img) {
-		transform: scale(1.04);
+		transform: scale(1.1);
 	}
 	.expertise__num {
 		font-size: var(--text-h3);
