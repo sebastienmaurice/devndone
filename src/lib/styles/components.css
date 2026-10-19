@@ -709,6 +709,8 @@
 }
 .offer__amount {
 	font-family: var(--font-display);
+	font-weight: var(--weight-display);
+	letter-spacing: var(--tracking-h2);
 	font-size: var(--text-h2);
 	line-height: 1;
 }
@@ -855,6 +857,8 @@
 }
 .metric__value {
 	font-family: var(--font-display);
+	font-weight: var(--weight-display);
+	letter-spacing: var(--tracking-h1);
 	font-size: var(--text-h1);
 	line-height: 1;
 }
@@ -1167,6 +1171,7 @@
 	padding-block: var(--space-4);
 	border-bottom: 1px solid var(--line);
 	font-family: var(--font-display);
+	font-weight: var(--weight-display);
 	font-size: var(--text-h2);
 	line-height: 1;
 	text-decoration: none;

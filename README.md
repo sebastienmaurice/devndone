@@ -183,25 +183,28 @@ identique après la bascule : refaire le relevé.
 │   ├── lib/
 │   │   ├── assets/brand/      Images traitées au build (AVIF / WebP / srcset)
 │   │   ├── assets/projets/    Visuels des réalisations, recadrés sur les écrans
+│   │   ├── assets/mascotte/   Hero (renard et écrans) et médaillon du bloc contact
 │   │   ├── actions/reveal.ts  Apparition au défilement (use:reveal)
 │   │   ├── components/        Importés via `$lib/components` (index.ts)
 │   │   │   ├── layout/        Section, SectionHead, SiteHeader, SiteFooter
-│   │   │   ├── brand/         Logo, Icon, Eyebrow, Tagline, Stroke, Rule, SlashBand
+│   │   │   ├── brand/         Logo, Icon (Lucide), DoneWord, HandNote, SectionLabel, Annotation…
 │   │   │   ├── ui/            Button, LinkArrow, Badge, Status, Notice, Card, Offer, PriceRow,
 │   │   │   │                  FeatureList, Steps, Metric, Terminal, SpecList, Accordion, Breadcrumb
 │   │   │   ├── form/          Field, Check, Honeypot
 │   │   │   ├── seo/           Seo
-│   │   │   ├── sections/      Blocs de page : UniverseCards, ProjectGrid, CtaBand, MaintenancePlans,
-│   │   │   │                  PackageGrid, ReviewList, ContactCta
+│   │   │   ├── sections/      PageIntro, ExpertiseCards, ProcessRow, ProjectGrid, PackageGrid,
+│   │   │   │                  MaintenancePlans, ReviewList, ContactBlock
 │   │   │   └── pages/         NotFound
 │   │   ├── config/site.ts     Nom, URL canonique, description
-│   │   ├── content/           Données : pages.ts (nav + sitemap), legal.ts, services.ts,
-│   │   │                      realisations.ts, tarifs.ts, studio.ts (textes de la page provisoire)
+│   │   ├── content/           Données : pages.ts (routes, header, pied de page, sitemap), legal.ts,
+│   │   │                      services.ts, realisations.ts, tarifs.ts, studio.ts
 │   │   └── styles/            Copie du design system (NE PAS éditer : npm run ds:sync) + fonts.css
 │   └── routes/
 │       ├── +layout.ts         prerender = true · trailingSlash = 'always'
 │       ├── +page.svelte       Accueil
-│       ├── services/ realisations/ tarifs/ a-propos/ contact/
+│       ├── services/          Vue d'ensemble + [slug]/ (web, design, automatisation, full-stack)
+│       ├── realisations/      Portfolio + [slug]/ (une étude de cas par projet)
+│       ├── tarifs/ apropos/ contact/ confidentialite/
 │       ├── 404/               Page 404 statique, recopiée en 404.html
 │       ├── design-system/     Banc d'essai des composants (dev uniquement)
 │       ├── mentions-legales/
@@ -263,12 +266,13 @@ identique après la bascule : refaire le relevé.
 
 ## 7. Feuille de route
 
-| Phase | Contenu                                                                     | État    |
-| ----- | --------------------------------------------------------------------------- | ------- |
-| 1     | Socle, design system intégré, SEO technique, 404, déploiement               | ✓       |
-| 2     | Composants Svelte du design system, banc d'essai, action reveal             | ✓       |
-| 3     | Header : navigation complète et CTA, pied de page                           | ✓       |
-| 4     | Pages : services (avec le process), réalisations, tarifs, à propos, contact | ✓       |
-| 5     | Contact : lien Calendly et email, sans formulaire (lancement)               | décidé  |
-| 6–7   | Réalisations, démos interactives                                            | à venir |
-| 8     | Recette : Lighthouse, accessibilité, navigateurs, mise en production        | à venir |
+| Phase | Contenu                                                                                                    | État     |
+| ----- | ---------------------------------------------------------------------------------------------------------- | -------- |
+| 1     | Socle, design system intégré, SEO technique, 404, déploiement                                              | ✓        |
+| 2     | Composants Svelte du design system, banc d'essai, action reveal                                            | ✓        |
+| 3     | Header : navigation complète et CTA, pied de page                                                          | ✓        |
+| 4     | Pages : services (avec le process), réalisations, tarifs, à propos, contact                                | ✓        |
+| 4 bis | Refonte v2.0 (maquette du 19/10/2026) : fond ivoire, multipage, études de cas                              | ✓        |
+| 5     | Contact : formulaire qui prépare un email (aucun envoi par le site) ; service d'envoi à brancher plus tard | en cours |
+| 6–7   | Réalisations, démos interactives                                                                           | à venir  |
+| 8     | Recette : Lighthouse, accessibilité, navigateurs, mise en production                                       | à venir  |
