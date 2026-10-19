@@ -2,7 +2,7 @@
 	Les quatre expertises (maquette du 19/10/2026) : cartes blanches homogènes, mascotte de
 	l'expertise, numéro orange, titre, description, flèche. Chaque carte mène à la page du service
 	(toute la carte est le lien). 4 colonnes en grand écran, 2 en tablette, 1 sur petit mobile.
-	Données : content/services.ts. Mascottes : $lib/assets/mascotte/expertise-*.jpg (fond blanc,
+	Données : content/services.ts. Mascottes : $lib/assets/mascotte/expertise-*.jpg (illustrations 3:2, fond blanc,
 	posé sur la carte blanche).
 -->
 <script lang="ts">
@@ -16,15 +16,21 @@
 	let { headingLevel = 3 }: { headingLevel?: 2 | 3 | 4 } = $props();
 
 	const mascots: Record<string, { src: typeof web; alt: string }> = {
-		web: { src: web, alt: 'Dev, la mascotte, pouce levé devant son ordinateur portable' },
-		design: { src: design, alt: 'Dev, la mascotte, pensif, dessinant sur un carnet' },
+		web: {
+			src: web,
+			alt: 'Dev, la mascotte, à son bureau, montre un site en cours de création sur grand écran'
+		},
+		design: {
+			src: design,
+			alt: "Dev, la mascotte, dessine sur une tablette graphique entouré de planches d'identité visuelle"
+		},
 		automatisation: {
 			src: automatisation,
-			alt: 'Dev, la mascotte, réglant une machine à engrenages'
+			alt: 'Dev, la mascotte, relie des applications entre elles dans un flux automatisé'
 		},
 		'full-stack': {
 			src: fullStack,
-			alt: "Dev, la mascotte, au bureau devant un écran, entouré de schémas d'application"
+			alt: 'Dev, la mascotte, code sur son portable entre interface, API et base de données'
 		}
 	};
 
@@ -40,7 +46,7 @@
 						<enhanced:img
 							src={mascots[u.id].src}
 							alt={mascots[u.id].alt}
-							sizes="(min-width: 1100px) 220px, 200px"
+							sizes="(min-width: 1100px) 300px, (min-width: 640px) 45vw, 90vw"
 							loading="lazy"
 						/>
 					</span>
@@ -103,9 +109,11 @@
 		outline-offset: var(--focus-offset);
 	}
 	/* Fond blanc de l'image fondu dans la carte (multiply : le blanc disparaît) */
+	/* Illustrations au format 3:2, sur toute la largeur de la carte */
 	.expertise__mascot {
-		justify-self: center;
-		width: min(100%, 200px);
+		display: block;
+		width: 100%;
+		aspect-ratio: 3 / 2;
 		margin-bottom: var(--space-2);
 		/* Le zoom reste dans le cadre de l'image */
 		overflow: hidden;
@@ -113,7 +121,8 @@
 	.expertise__mascot :global(img) {
 		display: block;
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: contain;
 		mix-blend-mode: multiply;
 		transition: transform var(--duration-reveal) var(--ease-out);
 	}
