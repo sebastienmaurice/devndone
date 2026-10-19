@@ -4,6 +4,7 @@
  * Harmony Valse, la fiche transmise par Sébastien le 14/10/2026 (portfolio Malt).
  * Fiches (`details`) de GSTI, Palimpseste Urbain, Maxilou, Petit Château Vercourt et
  * Alternativ' Uniforme : expériences publiques du profil Malt (relevées le 19/10/2026).
+ * Lieu du Petit Château Vercourt : adresse donnée par Sébastien (1 rue de l'Église, 80120 Vercourt).
  * Visuels : présentations complètes 1774 × 887 px (D:/GRAPHIQUE/MALT - GRAPISTE.COM/Web/CMS retenus
  * et visuels transmis par Sébastien le 19/10/2026).
  * Textes et liens repris tels quels : ne rien ajouter sans validation.
@@ -160,7 +161,7 @@ export const projects: readonly Project[] = [
 			subtitle: 'Création site WordPress hôtelier - Réservations & SEO local',
 			sector: 'Hôtellerie',
 			period: 'juin 2024 - juillet 2024',
-			location: 'Bernay, France',
+			location: 'Vercourt (Somme), France',
 			skills: [
 				'WordPress',
 				'Refonte site internet',
