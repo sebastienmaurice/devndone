@@ -87,26 +87,39 @@
 		color: var(--text);
 		text-decoration: none;
 		transition:
-			transform var(--duration-base) var(--ease-out),
-			box-shadow var(--duration-base) var(--ease-out),
-			border-color var(--duration-base) var(--ease-out);
+			transform var(--duration-reveal) var(--ease-out),
+			box-shadow var(--duration-reveal) var(--ease-out),
+			border-color var(--duration-reveal) var(--ease-out);
 	}
-	.expertise:hover {
-		transform: translateY(-3px);
+	/* Survol et focus clavier : la carte se soulève, le contour passe à l'orange */
+	.expertise:hover,
+	.expertise:focus-visible {
+		transform: translateY(-6px);
 		box-shadow: var(--shadow-card-hover);
-		border-color: var(--line-strong);
+		border-color: var(--accent-deco);
+	}
+	.expertise:focus-visible {
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-offset);
 	}
 	/* Fond blanc de l'image fondu dans la carte (multiply : le blanc disparaît) */
 	.expertise__mascot {
 		justify-self: center;
 		width: min(100%, 200px);
 		margin-bottom: var(--space-2);
+		/* Le zoom reste dans le cadre de l'image */
+		overflow: hidden;
 	}
 	.expertise__mascot :global(img) {
 		display: block;
 		width: 100%;
 		height: auto;
 		mix-blend-mode: multiply;
+		transition: transform var(--duration-reveal) var(--ease-out);
+	}
+	.expertise:hover .expertise__mascot :global(img),
+	.expertise:focus-visible .expertise__mascot :global(img) {
+		transform: scale(1.04);
 	}
 	.expertise__num {
 		font-size: var(--text-h3);
@@ -125,9 +138,26 @@
 		justify-self: end;
 		margin-top: var(--space-4);
 		color: var(--accent-deco);
-		transition: transform var(--duration-base) var(--ease-out);
+		transition: transform var(--duration-reveal) var(--ease-out);
 	}
-	.expertise:hover .expertise__go {
-		transform: translateX(4px);
+	.expertise:hover .expertise__go,
+	.expertise:focus-visible .expertise__go {
+		transform: translateX(5px);
+	}
+	/* Mouvement réduit : seuls le contour et l'ombre changent */
+	@media (prefers-reduced-motion: reduce) {
+		.expertise,
+		.expertise__mascot :global(img),
+		.expertise__go {
+			transition-property: border-color, box-shadow;
+		}
+		.expertise:hover,
+		.expertise:focus-visible,
+		.expertise:hover .expertise__mascot :global(img),
+		.expertise:focus-visible .expertise__mascot :global(img),
+		.expertise:hover .expertise__go,
+		.expertise:focus-visible .expertise__go {
+			transform: none;
+		}
 	}
 </style>
