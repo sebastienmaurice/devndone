@@ -1,11 +1,11 @@
 <!--
-	Bloc contact (maquette du 19/10/2026) : panneau Night arrondi, mascotte (clin d'œil, pouce levé)
+	Bloc contact (maquette du 19/10/2026) : panneau Night arrondi, mascotte (sourire malicieux, pouce levé)
 	à gauche, titre « Un projet en tête ? On le rend DONE. », texte, bouton orange vers /contact/,
 	petits traits d'énergie orange et menthe. Textes : content/studio.ts.
 -->
 <script lang="ts">
 	import { contactIntro } from '$lib/content/studio';
-	import mascotte from '$lib/assets/mascotte/contact-clin-oeil.png?enhanced';
+	import mascotte from '$lib/assets/mascotte/contact-pouce-leve.png?enhanced';
 	import DoneWord from '../brand/DoneWord.svelte';
 	import Icon from '../brand/Icon.svelte';
 	import Button from '../ui/Button.svelte';
@@ -21,7 +21,7 @@
 			<div class="contact__mascot">
 				<enhanced:img
 					src={mascotte}
-					alt="Dev, la mascotte Dev'n Done, fait un clin d'œil et lève le pouce"
+					alt="Dev, la mascotte Dev'n Done, en sweat à capuche, sourire malicieux et pouce levé"
 					sizes="240px"
 					loading="lazy"
 				/>
