@@ -6,7 +6,6 @@
 -->
 <script lang="ts">
 	import { Button, Seo } from '$lib/components';
-	import DoneWord from '$lib/components/brand/DoneWord.svelte';
 	import HandNote from '$lib/components/brand/HandNote.svelte';
 	import Icon from '$lib/components/brand/Icon.svelte';
 	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
@@ -14,6 +13,7 @@
 	import ExpertiseCards from '$lib/components/sections/ExpertiseCards.svelte';
 	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
+	import doneImage from '$lib/assets/brand/done-3d.png?enhanced&w=640;320';
 	import heroImage from '$lib/assets/mascotte/hero-renard-outils.png?enhanced&w=1120;720;480';
 	import { realisationsIntro } from '$lib/content/realisations';
 	import { heroSlogan, servicesIntro } from '$lib/content/services';
@@ -43,7 +43,12 @@
 		<div class="hero__text">
 			<HandNote>{heroSlogan}</HandNote>
 			<h1 class="hero__title" id="hero-title">
-				Des projets pensés pour être <DoneWord />
+				Des projets pensés pour être <enhanced:img
+					class="hero__done"
+					src={doneImage}
+					alt="Done."
+					sizes="(min-width: 1100px) 340px, 220px"
+				/>
 			</h1>
 			<p class="hero__keywords">
 				{#each keywords as word, i (word)}{#if i > 0}<span class="hero__slash" aria-hidden="true"
@@ -144,6 +149,14 @@
 		letter-spacing: -0.005em;
 		color: var(--text);
 		text-wrap: balance;
+	}
+	/* Mot « DONE » en relief (image), calé sur la ligne de base du titre */
+	.hero__title :global(.hero__done) {
+		display: inline-block;
+		width: auto;
+		height: 1.5em;
+		margin-left: 0.04em;
+		vertical-align: -0.42em;
 	}
 	.hero__keywords {
 		display: flex;
