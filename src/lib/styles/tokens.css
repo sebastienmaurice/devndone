@@ -257,9 +257,10 @@
 	--on-action-alt: var(--dnd-night);
 	--action-alt-text: var(--dnd-orange-ink);
 	--action-alt-ring: var(--dnd-night);
-	/* v2.2 : titres bicolores Night + orange. Le mot accent est en orange encre (5.03 : 1) :
-     l'orange pur ne fait que 2.26 : 1 sur Ivoire, illisible en texte. */
-	--accent-word-fg: var(--dnd-orange-ink);
+	/* v2.2 : titres bicolores Night + orange vif, choix de Sébastien (19/10/2026).
+     Contraste 2.26 : 1 sur Ivoire, sous le seuil WCAG (3 : 1 pour un grand titre) :
+     réservé aux titres H1 et H2, jamais au texte courant. */
+	--accent-word-fg: var(--dnd-orange);
 	--accent-word-bg: transparent;
 	--accent-word-pad: 0;
 	--hand-text: var(--dnd-night-72);

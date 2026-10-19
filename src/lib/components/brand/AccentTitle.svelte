@@ -1,6 +1,6 @@
 <!--
-	Titre bicolore (charte v2.2) : le texte en Night, le passage `accent` en orange (orange encre
-	sur Ivoire, orange sur Night) via la classe .accent-word du design system.
+	Titre bicolore (charte v2.2) : le texte en Night, le passage `accent` en orange vif #FF8A00
+	(sur tous les fonds sauf le bandeau Orange) via la classe .accent-word du design system.
 	Si `accent` est absent ou introuvable, le titre s'affiche d'une seule couleur.
 
 	<h2><AccentTitle text="Quatre univers. Un même objectif : votre projet." accent="votre projet" /></h2>
