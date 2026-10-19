@@ -7,10 +7,10 @@
 -->
 <script lang="ts">
 	import { universes } from '$lib/content/services';
-	import web from '$lib/assets/mascotte/expertise-web.jpg?enhanced';
-	import design from '$lib/assets/mascotte/expertise-design.jpg?enhanced';
-	import automatisation from '$lib/assets/mascotte/expertise-automatisation.jpg?enhanced';
-	import fullStack from '$lib/assets/mascotte/expertise-fullstack.jpg?enhanced';
+	import web from '$lib/assets/mascotte/expertise-web.jpg?enhanced&w=720;360';
+	import design from '$lib/assets/mascotte/expertise-design.jpg?enhanced&w=720;360';
+	import automatisation from '$lib/assets/mascotte/expertise-automatisation.jpg?enhanced&w=720;360';
+	import fullStack from '$lib/assets/mascotte/expertise-fullstack.jpg?enhanced&w=720;360';
 	import Icon from '../brand/Icon.svelte';
 
 	let { headingLevel = 3 }: { headingLevel?: 2 | 3 | 4 } = $props();
