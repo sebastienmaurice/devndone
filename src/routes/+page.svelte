@@ -43,12 +43,14 @@
 		<div class="hero__text">
 			<HandNote>{heroSlogan}</HandNote>
 			<h1 class="hero__title" id="hero-title">
-				Des projets pensés pour être <enhanced:img
+				<span class="hero__line">Des projets</span>
+				<span class="hero__line">pensés pour</span>
+				<span class="hero__line">être <enhanced:img
 					class="hero__done"
 					src={doneImage}
 					alt="Done."
 					sizes="(min-width: 1100px) 340px, 220px"
-				/>
+				/></span>
 			</h1>
 			<p class="hero__keywords">
 				{#each keywords as word, i (word)}{#if i > 0}<span class="hero__slash" aria-hidden="true"
@@ -141,7 +143,7 @@
 		justify-items: start;
 	}
 	.hero__title {
-		margin: var(--space-4) 0 var(--space-5);
+		margin: var(--space-4) 0 var(--space-2);
 		font-family: var(--font-display);
 		font-weight: 400;
 		font-size: clamp(2.75rem, 2rem + 3.6vw, 5.25rem);
@@ -149,6 +151,15 @@
 		letter-spacing: -0.005em;
 		color: var(--text);
 		text-wrap: balance;
+	}
+	/* Trois lignes fixes : « être » et DONE restent ensemble sur la dernière */
+	.hero__line {
+		display: block;
+		white-space: nowrap;
+	}
+	/* <picture> est en bloc dans la feuille de base : ici il suit le texte */
+	.hero__line :global(picture) {
+		display: inline;
 	}
 	/* Mot « DONE » en relief (image), calé sur la ligne de base du titre */
 	.hero__title :global(.hero__done) {
