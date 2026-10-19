@@ -1,8 +1,15 @@
+<!--
+	Vue d'ensemble des expertises : les quatre univers, le process, l'appel au contact.
+-->
 <script lang="ts">
-	import { Section, SectionHead, Seo, Steps } from '$lib/components';
-	import ContactCta from '$lib/components/sections/ContactCta.svelte';
-	import UniverseCards from '$lib/components/sections/UniverseCards.svelte';
-	import { processIntro, processSteps, servicesIntro } from '$lib/content/services';
+	import { Button, Seo } from '$lib/components';
+	import Icon from '$lib/components/brand/Icon.svelte';
+	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
+	import ExpertiseCards from '$lib/components/sections/ExpertiseCards.svelte';
+	import PageIntro from '$lib/components/sections/PageIntro.svelte';
+	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
+	import { servicesIntro } from '$lib/content/services';
+	import { hero, links } from '$lib/content/studio';
 </script>
 
 <Seo
@@ -11,22 +18,36 @@
 	description="Web, design, automatisation et développement full stack : quatre univers, une seule vision, du premier brief jusqu'à la mise en ligne."
 />
 
-<Section labelledby="services-title">
-	<div class="stack stack--lg">
-		<SectionHead
-			id="services-title"
-			level={1}
-			eyebrow={servicesIntro.eyebrow}
-			title={servicesIntro.title}
-			lede={servicesIntro.lede}
-		/>
-		<UniverseCards headingLevel={2} />
+<PageIntro
+	label={servicesIntro.eyebrow}
+	heading={servicesIntro.title}
+	lede={servicesIntro.lede}
+	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Services' }]}
+>
+	{#snippet actions()}
+		<Button href="/contact/" icon="arrow-right">Parlons de votre projet</Button>
+		<Button href={links.calendly} variant="secondary"><Icon name="calendar" />{hero.ctaCall}</Button
+		>
+	{/snippet}
+</PageIntro>
+
+<section class="section section--tight" aria-label="Les quatre expertises">
+	<div class="container">
+		<ExpertiseCards headingLevel={2} />
 	</div>
-</Section>
+</section>
 
-<Section surface="raised" labelledby="process-title">
-	<SectionHead id="process-title" eyebrow={processIntro.eyebrow} title={processIntro.title} />
-	<Steps items={processSteps} />
-</Section>
+<section class="section section--tight band" aria-labelledby="process-title">
+	<div class="container">
+		<ProcessRow />
+	</div>
+</section>
 
-<ContactCta />
+<ContactBlock />
+
+<style>
+	.band {
+		background: var(--surface);
+		border-block: 1px solid var(--line);
+	}
+</style>

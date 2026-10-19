@@ -49,6 +49,8 @@ export const contactIntro = {
 	eyebrow: 'Contact',
 	/** Le mot « Done. » est mis en forme par la page */
 	title: 'Un projet en tête ? On le rend',
+	/** Première ligne du titre du bloc contact (la seconde est « On le rend DONE. ») */
+	question: 'Un projet en tête ?',
 	lede: '15 minutes pour faire le point sur votre projet et définir la bonne approche, sans engagement.',
 	cta: 'Parlons de votre projet',
 	email: 'Écrire un email'

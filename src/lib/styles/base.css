@@ -25,7 +25,7 @@ body {
 	font-family: var(--font-ui);
 	font-size: var(--text-body);
 	line-height: var(--leading-body);
-	font-synthesis: none; /* Lilita One n'a qu'une graisse */
+	font-synthesis: none;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
@@ -118,7 +118,7 @@ p {
 .t-h2,
 .t-h3 {
 	font-family: var(--font-display);
-	font-weight: var(--weight-regular);
+	font-weight: var(--weight-display);
 }
 .t-display {
 	font-size: var(--text-display);
@@ -133,11 +133,12 @@ p {
 .t-h2 {
 	font-size: var(--text-h2);
 	line-height: var(--leading-h2);
+	letter-spacing: var(--tracking-h2);
 }
 .t-h3 {
 	font-size: var(--text-h3);
 	line-height: var(--leading-h3);
-	letter-spacing: 0.005em;
+	letter-spacing: var(--tracking-h3);
 }
 
 .t-body-lg {

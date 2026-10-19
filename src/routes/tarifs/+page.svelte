@@ -1,35 +1,58 @@
+<!--
+	Tarifs (tous HT), textes et montants du site en ligne. La grille de maintenance est une grille
+	de test (voir content/tarifs.ts) : elle n'est pas présentée comme définitive.
+-->
 <script lang="ts">
-	import { Section, SectionHead, Seo } from '$lib/components';
-	import ContactCta from '$lib/components/sections/ContactCta.svelte';
+	import { Seo } from '$lib/components';
+	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
+	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
 	import MaintenancePlans from '$lib/components/sections/MaintenancePlans.svelte';
 	import PackageGrid from '$lib/components/sections/PackageGrid.svelte';
+	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import { maintenanceIntro, packagesIntro } from '$lib/content/tarifs';
 </script>
 
 <Seo
 	title="Tarifs"
 	path="/tarifs/"
-	description="Maintenance WordPress en abonnement et forfaits à prix fermé : audit, lancement de site, landing page, refonte, boutique WooCommerce, audit automatisation."
+	description="Forfaits à prix fermé (audit, lancement de site, landing page, refonte, boutique WooCommerce, audit automatisation) et maintenance WordPress en abonnement."
 />
 
-<Section labelledby="maintenance-title">
-	<div class="stack stack--lg">
-		<SectionHead
-			id="maintenance-title"
-			level={1}
-			eyebrow="Tarifs"
-			title={maintenanceIntro.title}
-			lede={maintenanceIntro.lede}
-		/>
-		<MaintenancePlans headingLevel={2} />
-	</div>
-</Section>
+<PageIntro
+	label="Tarifs"
+	heading={packagesIntro.title}
+	lede={packagesIntro.lede}
+	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Tarifs' }]}
+/>
 
-<Section surface="raised" labelledby="forfaits-title">
-	<div class="stack stack--lg">
-		<SectionHead id="forfaits-title" title={packagesIntro.title} lede={packagesIntro.lede} />
-		<PackageGrid />
+<section class="section section--tight" aria-label="Forfaits">
+	<div class="container stack stack--lg">
+		<PackageGrid headingLevel={2} />
+		<p class="note">{packagesIntro.note}</p>
 	</div>
-</Section>
+</section>
 
-<ContactCta />
+<section class="section section--tight band" aria-labelledby="maintenance-title">
+	<div class="container stack stack--lg">
+		<header class="stack stack--sm">
+			<SectionLabel label="Maintenance" />
+			<h2 class="t-h2" id="maintenance-title">{maintenanceIntro.title}</h2>
+			<p class="note">{maintenanceIntro.lede}</p>
+		</header>
+		<MaintenancePlans />
+	</div>
+</section>
+
+<ContactBlock />
+
+<style>
+	.note {
+		margin: 0;
+		max-width: 44rem;
+		color: var(--text-muted);
+	}
+	.band {
+		background: var(--surface);
+		border-block: 1px solid var(--line);
+	}
+</style>

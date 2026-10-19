@@ -11,7 +11,7 @@
 
 <Seo title="Page introuvable" path="/404/" noindex />
 
-<Section labelledby="nf-title" class="not-found">
+<Section surface="ivory" labelledby="nf-title" class="not-found">
 	<SectionHead
 		id="nf-title"
 		level={1}

@@ -1,7 +1,11 @@
+<!--
+	Portfolio : toutes les réalisations (content/realisations.ts), chacune menant à son étude de cas.
+-->
 <script lang="ts">
-	import { Section, SectionHead, Seo } from '$lib/components';
-	import ContactCta from '$lib/components/sections/ContactCta.svelte';
-	import CtaBand from '$lib/components/sections/CtaBand.svelte';
+	import { Seo } from '$lib/components';
+	import DoneWord from '$lib/components/brand/DoneWord.svelte';
+	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
+	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import { realisationsIntro } from '$lib/content/realisations';
 </script>
@@ -12,24 +16,18 @@
 	description="Sites WordPress, boutiques WooCommerce et application full stack : des projets concrets pour de vrais besoins, tels qu'ils existent aujourd'hui."
 />
 
-<Section labelledby="realisations-title">
-	<div class="stack stack--lg">
-		<SectionHead
-			id="realisations-title"
-			level={1}
-			size="display"
-			eyebrow={realisationsIntro.eyebrow}
-			title={realisationsIntro.title}
-			lede={realisationsIntro.lede}
-		>
-			{#snippet titleContent()}
-				Des projets qui sont vraiment <span class="accent-word">Done.</span>
-			{/snippet}
-		</SectionHead>
+<PageIntro
+	label={realisationsIntro.eyebrow}
+	lede={realisationsIntro.lede}
+	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Réalisations' }]}
+>
+	{#snippet title()}Des projets qui sont vraiment <DoneWord />{/snippet}
+</PageIntro>
+
+<section class="section section--tight" aria-label="Projets">
+	<div class="container">
 		<ProjectGrid headingLevel={2} />
 	</div>
-</Section>
+</section>
 
-<CtaBand />
-
-<ContactCta />
+<ContactBlock />

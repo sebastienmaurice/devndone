@@ -1,22 +1,21 @@
 <!--
-	En-tête du site, d'après le design system (17 / Navigation) :
-	- logo horizontal dès 640 px, compact en dessous ; le logo ramène à l'accueil ;
-	- menu complet dès 1024 px, bouton d'action dès 1200 px (.nav__cta) ;
-	- en dessous de 1024 px, bouton Menu et panneau plein écran à grands titres numérotés.
-	La navigation vient de content/pages.ts (6 entrées maximum).
+	En-tête du site (maquette du 19/10/2026) : logo officiel à gauche, les cinq expertises au centre
+	séparées par des slashs orange, bouton « Parlons de votre projet » à droite. Fond Ivoire, collant.
+	Sous 1100 px : logo, bouton Menu et panneau plein écran (expertises + pages du studio).
+	Navigation : content/pages.ts (headerNav, mobileNav).
 -->
 <script lang="ts">
 	import { page } from '$app/state';
 	import { afterNavigate } from '$app/navigation';
-	import { navPages } from '$lib/content/pages';
-	import { contactIntro, links } from '$lib/content/studio';
+	import { headerNav, mobileNav } from '$lib/content/pages';
+	import { contactIntro } from '$lib/content/studio';
 	import Button from '../ui/Button.svelte';
 	import Logo from '../brand/Logo.svelte';
 
 	let open = $state(false);
 	let toggle: HTMLButtonElement | undefined = $state();
 
-	const isCurrent = (path: string) => page.url.pathname === path;
+	const isCurrent = (match: string) => page.url.pathname === match;
 
 	function close(returnFocus = false) {
 		open = false;
@@ -33,72 +32,212 @@
 		};
 	});
 
-	// Le panneau n'existe que sous 1024 px : on le ferme si la fenêtre s'élargit
+	// Le panneau n'existe que sous 1100 px : on le ferme si la fenêtre s'élargit
 	$effect(() => {
-		const desktop = window.matchMedia('(min-width: 1024px)');
-		const onChange = () => desktop.matches && close();
-		desktop.addEventListener('change', onChange);
-		return () => desktop.removeEventListener('change', onChange);
+		const wide = window.matchMedia('(min-width: 1100px)');
+		const onChange = () => wide.matches && close();
+		wide.addEventListener('change', onChange);
+		return () => wide.removeEventListener('change', onChange);
 	});
 </script>
 
 <svelte:window onkeydown={(e) => e.key === 'Escape' && open && close(true)} />
 
-<header class="site-header">
-	<div class="container site-header__inner">
-		<a class="logo logo--header" href="/" aria-label="Dev'n Done, accueil">
-			<Logo variant="horizontal" alt="" />
-		</a>
-		<a class="logo logo--compact" href="/" aria-label="Dev'n Done, accueil">
-			<Logo variant="compact" alt="" />
+<header class="site-header header">
+	<div class="container header__inner">
+		<a class="header__logo" href="/" aria-label="Dev'n Done, accueil">
+			<Logo variant="compact" tone="night" alt="" height={52} />
 		</a>
 
-		{#if navPages.length}
-			<nav class="nav" aria-label="Navigation principale">
-				<ul class="nav__list">
-					{#each navPages as item (item.path)}
-						<li>
-							<a
-								class="nav__link"
-								href={item.path}
-								aria-current={isCurrent(item.path) ? 'page' : undefined}>{item.label}</a
-							>
-						</li>
-					{/each}
-				</ul>
-			</nav>
+		<nav class="header__nav" aria-label="Expertises">
+			<ul>
+				{#each headerNav as item, i (item.href)}
+					<li>
+						{#if i > 0}<span class="header__slash" aria-hidden="true">/</span>{/if}
+						<a
+							href={item.href}
+							aria-current={isCurrent(item.match) && !item.href.includes('#') ? 'page' : undefined}
+							>{item.label}</a
+						>
+					</li>
+				{/each}
+			</ul>
+		</nav>
 
-			<div class="cluster">
-				<Button href={links.calendly} size="sm" class="nav__cta">{contactIntro.cta}</Button>
-				<button
-					bind:this={toggle}
-					class="nav-toggle"
-					type="button"
-					aria-expanded={open}
-					aria-controls="mobile-nav"
-					onclick={() => (open = !open)}
-				>
-					<span class="nav-toggle__bars" aria-hidden="true"><i></i><i></i></span>
-					Menu
-				</button>
-			</div>
-		{/if}
+		<div class="header__actions">
+			<Button href="/contact/" icon="arrow-right" class="header__cta">{contactIntro.cta}</Button>
+			<button
+				bind:this={toggle}
+				class="header__toggle"
+				type="button"
+				aria-expanded={open}
+				aria-controls="mobile-nav"
+				onclick={() => (open = !open)}
+			>
+				<span class="header__bars" aria-hidden="true"><i></i><i></i></span>
+				Menu
+			</button>
+		</div>
 	</div>
 </header>
 
-{#if navPages.length}
-	<nav class="mobile-nav" id="mobile-nav" aria-label="Navigation principale" hidden={!open}>
-		<ul class="mobile-nav__list">
-			{#each navPages as item (item.path)}
-				<li>
-					<a
-						href={item.path}
-						onclick={() => close()}
-						aria-current={isCurrent(item.path) ? 'page' : undefined}>{item.label}</a
-					>
-				</li>
-			{/each}
-		</ul>
-		<Button href={links.calendly} block>{contactIntro.cta}</Button>
-	</nav>
-{/if}
+<nav
+	class="mobile-nav surface-night"
+	id="mobile-nav"
+	aria-label="Navigation principale"
+	hidden={!open}
+>
+	<ul class="mobile-nav__list">
+		{#each mobileNav as item (item.href)}
+			<li>
+				<a
+					href={item.href}
+					onclick={() => close()}
+					aria-current={isCurrent(item.match) ? 'page' : undefined}>{item.label}</a
+				>
+			</li>
+		{/each}
+	</ul>
+	<Button href="/contact/" icon="arrow-right" block>{contactIntro.cta}</Button>
+</nav>
+
+<style>
+	.header {
+		background: color-mix(in srgb, var(--bg) 92%, transparent);
+		border-bottom: 1px solid transparent;
+	}
+	.header__inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-5);
+		min-height: 88px;
+	}
+	.header__logo {
+		display: inline-flex;
+		flex: none;
+	}
+
+	.header__nav {
+		display: none;
+	}
+	.header__nav ul {
+		display: flex;
+		align-items: center;
+		gap: 0;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.header__nav li {
+		display: flex;
+		align-items: center;
+	}
+	.header__nav a {
+		position: relative;
+		padding: var(--space-2) 0;
+		font-size: var(--text-body-sm);
+		font-weight: var(--weight-semibold);
+		color: var(--text);
+		text-decoration: none;
+	}
+	.header__nav a::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 2px;
+		border-radius: 2px;
+		background: var(--accent-deco);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform var(--duration-reveal) var(--ease-out);
+	}
+	.header__nav a:hover::after,
+	.header__nav a[aria-current='page']::after {
+		transform: scaleX(1);
+	}
+	.header__slash {
+		padding-inline: clamp(var(--space-3), 1.4vw, var(--space-5));
+		color: var(--accent-deco);
+		font-weight: var(--weight-bold);
+	}
+
+	.header__actions {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+	}
+	.header__actions :global(.header__cta) {
+		display: none;
+	}
+
+	.header__toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-3);
+		min-height: 44px;
+		padding: 0 var(--space-4);
+		background: none;
+		border: 1px solid var(--line-strong);
+		border-radius: var(--radius-btn);
+		font-family: var(--font-ui);
+		font-size: var(--text-body-sm);
+		font-weight: var(--weight-bold);
+		color: var(--text);
+		cursor: pointer;
+	}
+	.header__bars {
+		display: grid;
+		gap: 4px;
+		width: 16px;
+	}
+	.header__bars i {
+		height: 2px;
+		background: var(--text);
+		transition: transform var(--duration-base) var(--ease-out);
+	}
+	.header__bars i:first-child {
+		background: var(--accent-deco);
+		width: 70%;
+	}
+	.header__toggle[aria-expanded='true'] .header__bars i:first-child {
+		width: 100%;
+		transform: translateY(3px) rotate(45deg);
+	}
+	.header__toggle[aria-expanded='true'] .header__bars i:last-child {
+		transform: translateY(-3px) rotate(-45deg);
+	}
+
+	@media (min-width: 640px) {
+		.header__actions :global(.header__cta) {
+			display: inline-flex;
+		}
+	}
+	@media (min-width: 1100px) {
+		.header__nav {
+			display: block;
+		}
+		.header__toggle {
+			display: none;
+		}
+	}
+	@media (max-width: 639px) {
+		.header__inner {
+			min-height: 72px;
+		}
+	}
+
+	/* Panneau mobile : sous le header, plein écran, sur fond Night */
+	.mobile-nav {
+		inset: 88px 0 0 0;
+		background: var(--bg);
+		color: var(--text);
+	}
+	@media (max-width: 639px) {
+		.mobile-nav {
+			inset: 72px 0 0 0;
+		}
+	}
+</style>

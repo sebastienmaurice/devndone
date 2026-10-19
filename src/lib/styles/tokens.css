@@ -1,5 +1,7 @@
 /* ==========================================================================
-   DEV'n DONE Design System v1.1 — Tokens
+   DEV'n DONE Design System v2.0 — Tokens
+   v2.0 (19.10.2026, maquette « Landing page Dev'n Done et renard orange ») : fond Ivoire par défaut,
+   titres en Plus Jakarta Sans ExtraBold, boutons en pilule, cartes blanches à ombre légère.
    Source de vérité : charte graphique v1.2 (brand/brand-guidelines.html).
    v1.1 (15.10.2026) : voix manuscrite, action secondaire (Mint sur Night, Orange sur Ivoire),
    mot accent bicolore, cartes à image.
@@ -27,6 +29,7 @@
 	--dnd-night-45: #8e8f90; /* 3.10 : 1 — bordure de champ sur Ivoire */
 	--dnd-night-14: #d8d9d8; /* filet sur Ivoire (décoratif) */
 	--dnd-ivory-sunk: #f0f0ee; /* surface enfoncée sur Ivoire */
+	--dnd-paper: #ffffff; /* v2.0 · carte posée sur Ivoire (neutre) */
 	--dnd-orange-hover: #ff9a24; /* Night dessus : 9.18 : 1 */
 	--dnd-orange-active: #e67c00; /* Night dessus : 6.72 : 1 */
 	--dnd-orange-ink: #a85600; /* orange en texte sur Ivoire : 5.03 : 1 */
@@ -41,7 +44,9 @@
 	/* ------------------------------------------------------------------ *
    * 3. Typographie
    * ------------------------------------------------------------------ */
-	--font-display: 'Lilita One', 'Arial Rounded MT Bold', 'Arial Black', sans-serif;
+	/* v2.0 : titres en Plus Jakarta Sans ExtraBold (Lilita One n'est plus utilisée sur le site) */
+	--font-display: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+	--weight-display: 800;
 	--font-ui: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 	--font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
 	/* v1.1 · 4e voix, manuscrite : annotations courtes uniquement (charte 11.C) */
@@ -54,10 +59,10 @@
 	--weight-extrabold: 800;
 
 	/* Échelle fluide : min (360 px) → max (1440 px) */
-	--text-display: clamp(4rem, 2.333rem + 7.407vw, 9rem); /* 64 → 144 */
-	--text-h1: clamp(2.75rem, 2rem + 3.333vw, 5rem); /* 44 → 80 */
-	--text-h2: clamp(2rem, 1.667rem + 1.481vw, 3rem); /* 32 → 48 */
-	--text-h3: clamp(1.375rem, 1.25rem + 0.556vw, 1.75rem); /* 22 → 28 */
+	--text-display: clamp(2.75rem, 1.917rem + 3.704vw, 5.25rem); /* 44 → 84 */
+	--text-h1: clamp(2.375rem, 1.792rem + 2.593vw, 4.125rem); /* 38 → 66 */
+	--text-h2: clamp(1.75rem, 1.417rem + 1.481vw, 2.75rem); /* 28 → 44 */
+	--text-h3: clamp(1.125rem, 1.083rem + 0.185vw, 1.25rem); /* 18 → 20 */
 	--text-body-lg: clamp(1.125rem, 1.083rem + 0.185vw, 1.25rem); /* 18 → 20 */
 	--text-body: clamp(1rem, 0.979rem + 0.093vw, 1.0625rem); /* 16 → 17 */
 	--text-body-sm: 0.875rem; /* 14 */
@@ -68,17 +73,19 @@
 	--text-hand: clamp(1.25rem, 1.083rem + 0.741vw, 1.75rem); /* 20 → 28 */
 	--text-stat: clamp(2.75rem, 2rem + 3.333vw, 5rem); /* 44 → 80, chiffre clé */
 
-	--leading-display: 0.88;
-	--leading-h1: 0.95;
-	--leading-h2: 1;
-	--leading-h3: 1.1;
+	--leading-display: 1;
+	--leading-h1: 1.04;
+	--leading-h2: 1.1;
+	--leading-h3: 1.25;
 	--leading-body: 1.65;
 	--leading-body-lg: 1.6;
 	--leading-tight: 1.2;
 	--leading-hand: 1.15;
 
-	--tracking-display: -0.01em;
-	--tracking-h1: -0.005em;
+	--tracking-display: -0.04em;
+	--tracking-h1: -0.035em;
+	--tracking-h2: -0.025em;
+	--tracking-h3: -0.01em;
 	--tracking-label: 0.16em;
 	--tracking-button: 0.02em;
 	--tracking-caption: 0.02em;
@@ -113,7 +120,9 @@
 	--radius-md: 10px; /* boutons, champs */
 	--radius-lg: 16px; /* panneaux, cartes fonctionnelles */
 	--radius-tile: 22%; /* tuile d'icône — repris du monogramme */
-	--radius-full: 999px; /* pastilles uniquement */
+	--radius-full: 999px; /* pastilles et boutons (v2.0) */
+	--radius-btn: 999px; /* v2.0 : boutons en pilule */
+	--radius-card: 14px; /* v2.0 : cartes */
 
 	--border-hair: 1px;
 	--border-ui: 1.5px;
@@ -125,6 +134,10 @@
 	/* Élévation : par la surface, pas par l'ombre.
      Une seule ombre, réservée aux calques flottants (menu, dialogue). */
 	--shadow-overlay: 0 18px 48px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--dnd-ivory-14);
+	/* v2.0 : ombres légères des cartes et boutons sur Ivoire */
+	--shadow-card: 0 1px 2px rgba(10, 13, 17, 0.04), 0 6px 20px rgba(10, 13, 17, 0.05);
+	--shadow-card-hover: 0 2px 4px rgba(10, 13, 17, 0.05), 0 14px 32px rgba(10, 13, 17, 0.09);
+	--shadow-btn: 0 6px 16px rgba(255, 138, 0, 0.28);
 
 	/* ------------------------------------------------------------------ *
    * 6. Focus
@@ -171,7 +184,6 @@
  * le jeu COMPLET : un contexte imbriqué (Night dans Ivoire) n'hérite de rien.
  * --------------------------------------------------------------------- */
 
-:root,
 .surface-night,
 .surface-raised {
 	--bg: var(--dnd-night);
@@ -211,9 +223,12 @@
 	--surface: var(--dnd-night);
 }
 
+/* v2.0 : Ivoire devient le contexte par défaut du site */
+:root,
 .surface-ivory {
 	--bg: var(--dnd-ivory);
-	--surface: var(--dnd-ivory-sunk);
+	--surface: var(--dnd-paper);
+	--surface-sunk: var(--dnd-ivory-sunk);
 	--text: var(--dnd-night);
 	--text-muted: var(--dnd-night-72);
 	--text-subtle: var(--dnd-night-60);
@@ -222,12 +237,12 @@
 	--field-bg: var(--dnd-ivory);
 	--field-border: var(--dnd-night-45);
 
-	/* Sur Ivoire, l'orange ne tient ni en texte ni en silhouette (2.26 : 1).
-     Le bouton primaire devient Night, l'orange reste décoratif. */
-	--action: var(--dnd-night);
-	--action-hover: var(--dnd-night-raised);
-	--action-active: #000000;
-	--on-action: var(--dnd-ivory);
+	/* v2.0 : sur Ivoire, le bouton primaire est Orange, libellé Night (8.24 : 1), comme la maquette.
+     Sa silhouette ne se détache qu'à 2.26 : 1 du fond : le libellé porte l'identification. */
+	--action: var(--dnd-orange);
+	--action-hover: var(--dnd-orange-hover);
+	--action-active: var(--dnd-orange-active);
+	--on-action: var(--dnd-night);
 	--accent-text: var(--dnd-orange-ink);
 	--accent-deco: var(--dnd-orange);
 

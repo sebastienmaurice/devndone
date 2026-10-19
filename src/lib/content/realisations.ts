@@ -21,6 +21,8 @@ export type ProjectDetails = {
 };
 
 export type Project = {
+	/** Étude de cas : /realisations/<slug>/ */
+	slug: string;
 	name: string;
 	stack: string;
 	text: string;
@@ -39,6 +41,55 @@ export const realisationsIntro = {
 
 export const projects: readonly Project[] = [
 	{
+		slug: 'palimpseste-urbain',
+		name: 'Palimpseste Urbain',
+		stack: 'WordPress · Elementor Pro · SEO',
+		text: "Agence d'architecture et d'urbanisme. Refonte WordPress, direction artistique, SEO.",
+		url: 'https://www.palimpseste-urbain.com/',
+		image: 'palimpseste-urbain'
+	},
+	{
+		slug: 'gsti',
+		name: 'GSTI',
+		stack: 'Wix → WordPress · WooCommerce',
+		text: 'Migration de Wix vers WordPress et WooCommerce. Catalogue B2B et devis en ligne.',
+		url: 'https://gsti62.com/',
+		image: 'gsti'
+	},
+	{
+		slug: 'cine-delices',
+		name: 'Ciné Délices',
+		stack: 'Svelte · Node.js · PostgreSQL',
+		text: 'Application full stack de recettes inspirées du cinéma.',
+		url: 'https://sebastienmaurice.github.io/cine-delices.html',
+		image: 'cine-delices'
+	},
+	{
+		slug: 'maxilou',
+		name: 'Maxilou',
+		stack: 'WordPress · Catalogue · Devis',
+		text: 'Location de matériel BTP et espaces verts. Catalogue par catégories et devis en ligne.',
+		url: 'https://maxilou.fr/',
+		image: 'maxilou'
+	},
+	{
+		slug: 'petit-chateau-vercourt',
+		name: 'Petit Château Vercourt',
+		stack: 'WordPress · Réservation · FR/EN',
+		text: "Chambres d'hôtes en Picardie. Réservation en ligne, versions française et anglaise.",
+		url: 'https://www.petitchateauvercourt.com/',
+		image: 'petit-chateau-vercourt'
+	},
+	{
+		slug: 'pano-signservice',
+		name: "PANO Sign'Service",
+		stack: 'WordPress · Elementor · E-commerce',
+		text: 'Refonte WordPress Elementor. Vitrine et e-commerce de signalétique.',
+		url: 'https://www.pano-douai.fr/',
+		image: 'pano-douai'
+	},
+	{
+		slug: 'harmony-valse',
 		name: 'Harmony Valse',
 		stack: 'WordPress · Elementor · WooCommerce',
 		text: 'Cours de valse à Paris. Refonte WordPress Elementor & WooCommerce : réservation et boutique en ligne.',
@@ -76,47 +127,5 @@ export const projects: readonly Project[] = [
 				'Site WordPress stabilisé et modernisé, avec une expérience mobile améliorée et un parcours plus fluide pour les réservations et les achats en ligne.',
 			malt: 'https://www.malt.fr/profile/semauri#portfolio-item-6aa6e41f57d26cc7c4d117ed'
 		}
-	},
-	{
-		name: 'Palimpseste Urbain',
-		stack: 'WordPress · Elementor Pro · SEO',
-		text: "Agence d'architecture et d'urbanisme. Refonte WordPress, direction artistique, SEO.",
-		url: 'https://www.palimpseste-urbain.com/',
-		image: 'palimpseste-urbain'
-	},
-	{
-		name: 'GSTI',
-		stack: 'Wix → WordPress · WooCommerce',
-		text: 'Migration de Wix vers WordPress et WooCommerce. Catalogue B2B et devis en ligne.',
-		url: 'https://gsti62.com/',
-		image: 'gsti'
-	},
-	{
-		name: 'Ciné Délices',
-		stack: 'Svelte · Node.js · PostgreSQL',
-		text: 'Application full stack de recettes inspirées du cinéma.',
-		url: 'https://sebastienmaurice.github.io/cine-delices.html',
-		image: 'cine-delices'
-	},
-	{
-		name: 'Maxilou',
-		stack: 'WordPress · Catalogue · Devis',
-		text: 'Location de matériel BTP et espaces verts. Catalogue par catégories et devis en ligne.',
-		url: 'https://maxilou.fr/',
-		image: 'maxilou'
-	},
-	{
-		name: 'Petit Château Vercourt',
-		stack: 'WordPress · Réservation · FR/EN',
-		text: "Chambres d'hôtes en Picardie. Réservation en ligne, versions française et anglaise.",
-		url: 'https://www.petitchateauvercourt.com/',
-		image: 'petit-chateau-vercourt'
-	},
-	{
-		name: "PANO Sign'Service",
-		stack: 'WordPress · Elementor · E-commerce',
-		text: 'Refonte WordPress Elementor. Vitrine et e-commerce de signalétique.',
-		url: 'https://www.pano-douai.fr/',
-		image: 'pano-douai'
 	}
 ];

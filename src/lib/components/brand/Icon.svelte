@@ -13,17 +13,21 @@
 	import Check from '@lucide/svelte/icons/check';
 	import Clock from '@lucide/svelte/icons/clock';
 	import CodeXml from '@lucide/svelte/icons/code-xml';
+	import Globe from '@lucide/svelte/icons/globe';
 	import Info from '@lucide/svelte/icons/info';
 	import Layers from '@lucide/svelte/icons/layers';
+	import Lightbulb from '@lucide/svelte/icons/lightbulb';
 	import Mail from '@lucide/svelte/icons/mail';
 	import MapPin from '@lucide/svelte/icons/map-pin';
 	import Menu from '@lucide/svelte/icons/menu';
+	import MessageCircleMore from '@lucide/svelte/icons/message-circle-more';
 	import Monitor from '@lucide/svelte/icons/monitor';
 	import Palette from '@lucide/svelte/icons/palette';
 	import PenTool from '@lucide/svelte/icons/pen-tool';
 	import Plus from '@lucide/svelte/icons/plus';
 	import Rocket from '@lucide/svelte/icons/rocket';
 	import Search from '@lucide/svelte/icons/search';
+	import Settings from '@lucide/svelte/icons/settings';
 	import ShoppingCart from '@lucide/svelte/icons/shopping-cart';
 	import Sparkles from '@lucide/svelte/icons/sparkles';
 	import Terminal from '@lucide/svelte/icons/terminal';
@@ -56,7 +60,11 @@
 		bug: Bug,
 		search: Search,
 		sparkles: Sparkles,
-		cart: ShoppingCart
+		cart: ShoppingCart,
+		globe: Globe,
+		settings: Settings,
+		message: MessageCircleMore,
+		lightbulb: Lightbulb
 	} satisfies Record<string, Component<Record<string, unknown>>>;
 
 	export type IconName = keyof typeof icons;
