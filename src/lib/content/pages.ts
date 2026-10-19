@@ -25,17 +25,14 @@ export type NavItem = {
 	/** Chemin qui rend l'entrée active */ match: string;
 };
 
-/** Header (maquette du 19/10/2026) : les cinq expertises, puis le bouton d'action */
+/** Menu principal : les pages du site (le logo ramène à l'accueil). Une entrée est active sur sa
+ *  page et sur ses sous-pages (ex. /services/web/ active « Services »). */
 export const headerNav: NavItem[] = [
-	{ label: 'WordPress', href: '/services/web/', match: '/services/web/' },
-	{ label: 'WooCommerce', href: '/services/web/#woocommerce', match: '/services/web/' },
-	{
-		label: 'Automatisation',
-		href: '/services/automatisation/',
-		match: '/services/automatisation/'
-	},
-	{ label: 'Identité', href: '/services/design/', match: '/services/design/' },
-	{ label: 'Full Stack', href: '/services/full-stack/', match: '/services/full-stack/' }
+	{ label: 'Services', href: '/services/', match: '/services/' },
+	{ label: 'Réalisations', href: '/realisations/', match: '/realisations/' },
+	{ label: 'Tarifs', href: '/tarifs/', match: '/tarifs/' },
+	{ label: 'À propos', href: '/apropos/', match: '/apropos/' },
+	{ label: 'Contact', href: '/contact/', match: '/contact/' }
 ];
 
 export const pages: PageEntry[] = [
@@ -74,13 +71,8 @@ export const pages: PageEntry[] = [
 	}
 ];
 
-/** Menu mobile : les expertises puis les pages du studio */
-export const mobileNav: NavItem[] = [
-	...universes.map((u) => ({ label: u.title, href: u.path, match: u.path })),
-	...pages
-		.filter((p) => p.footer === 'studio' && p.path !== '/services/')
-		.map((p) => ({ label: p.label, href: p.path, match: p.path }))
-];
+/** Menu mobile : l'accueil puis les mêmes pages que le menu principal */
+export const mobileNav: NavItem[] = [{ label: 'Accueil', href: '/', match: '/' }, ...headerNav];
 
 export const footerPages = (column: NonNullable<PageEntry['footer']>) =>
 	pages.filter((p) => p.footer === column);

@@ -65,8 +65,6 @@
 	.package__name {
 		margin: var(--space-2) 0 0;
 		font-size: var(--text-h3);
-		font-weight: var(--weight-extrabold);
-		letter-spacing: -0.01em;
 	}
 	.package__price {
 		margin: 0;

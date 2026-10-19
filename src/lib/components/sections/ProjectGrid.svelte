@@ -122,9 +122,8 @@
 	}
 	.project__name {
 		margin: 0;
-		font-size: var(--text-body);
-		font-weight: var(--weight-extrabold);
-		letter-spacing: -0.01em;
+		font-size: 1.25rem;
+		letter-spacing: 0.005em;
 	}
 	.projects:not(.projects--compact) .project__name {
 		font-size: var(--text-h3);

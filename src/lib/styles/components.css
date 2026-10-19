@@ -1,5 +1,5 @@
 /* ==========================================================================
-   DEV'n DONE Design System v2.0 — Composants
+   DEV'n DONE Design System v2.1 — Composants
    Chaque composant lit uniquement les variables sémantiques de tokens.css :
    il s'adapte seul au contexte (.surface-night / -raised / -ivory / -orange).
    Dépend de : tokens.css, base.css
@@ -707,10 +707,11 @@
 	align-items: baseline;
 	gap: var(--space-2);
 }
+/* Prix et chiffres : texte courant (Plus Jakarta Sans), pas des titres */
 .offer__amount {
-	font-family: var(--font-display);
-	font-weight: var(--weight-display);
-	letter-spacing: var(--tracking-h2);
+	font-family: var(--font-ui);
+	font-weight: var(--weight-extrabold);
+	letter-spacing: -0.03em;
 	font-size: var(--text-h2);
 	line-height: 1;
 }
@@ -856,9 +857,9 @@
 	border-top: 1px solid var(--line);
 }
 .metric__value {
-	font-family: var(--font-display);
-	font-weight: var(--weight-display);
-	letter-spacing: var(--tracking-h1);
+	font-family: var(--font-ui);
+	font-weight: var(--weight-extrabold);
+	letter-spacing: -0.03em;
 	font-size: var(--text-h1);
 	line-height: 1;
 }

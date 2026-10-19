@@ -90,7 +90,7 @@
 		color: var(--accent-deco);
 	}
 	.expertise__title {
-		font-size: clamp(1.375rem, 1.25rem + 0.556vw, 1.75rem);
+		font-size: clamp(1.5rem, 1.35rem + 0.65vw, 2rem);
 	}
 	.expertise__text {
 		font-size: var(--text-body-sm);

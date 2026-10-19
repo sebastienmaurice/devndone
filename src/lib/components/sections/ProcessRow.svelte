@@ -103,8 +103,8 @@
 	}
 	.step-item__title {
 		margin: 0 0 var(--space-1);
-		font-size: var(--text-body);
-		font-weight: var(--weight-extrabold);
+		font-size: 1.25rem;
+		letter-spacing: 0.005em;
 	}
 	.step-item__body p {
 		margin: 0;

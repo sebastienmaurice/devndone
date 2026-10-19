@@ -136,17 +136,14 @@
 		justify-items: start;
 	}
 	.hero__title {
-		margin: var(--space-2) 0 0;
+		margin: var(--space-4) 0 var(--space-5);
 		font-family: var(--font-display);
-		font-weight: var(--weight-display);
-		font-size: clamp(2.5rem, 1.6rem + 3.9vw, 4.6rem);
-		line-height: 1.02;
-		letter-spacing: -0.04em;
+		font-weight: 400;
+		font-size: clamp(2.75rem, 2rem + 3.6vw, 5.25rem);
+		line-height: 0.98;
+		letter-spacing: -0.005em;
 		color: var(--text);
 		text-wrap: balance;
-	}
-	.hero__title :global(.done) {
-		font-size: 1.12em;
 	}
 	.hero__keywords {
 		display: flex;
@@ -182,13 +179,11 @@
 			margin-right: calc(-1 * var(--space-6));
 		}
 	}
-	/* L'image a un fond blanc cassé uni : on fond ses bords dans l'Ivoire de la page */
+	/* Image entière, sans fondu ni contour */
 	.hero__visual :global(img) {
 		display: block;
 		width: 100%;
 		height: auto;
-		-webkit-mask-image: radial-gradient(closest-side, #000 82%, transparent 100%);
-		mask-image: radial-gradient(closest-side, #000 82%, transparent 100%);
 	}
 
 	/* ------------------------------------------------------- En-têtes de section */

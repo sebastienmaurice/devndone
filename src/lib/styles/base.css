@@ -94,6 +94,16 @@ h3,
 h4 {
 	text-wrap: balance;
 }
+/* v2.1 : tous les titres en Lilita One, quelle que soit leur classe */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-display);
+	font-weight: var(--weight-display);
+}
 p {
 	text-wrap: pretty;
 }

@@ -1,7 +1,7 @@
 <!--
-	En-tête du site (maquette du 19/10/2026) : logo officiel à gauche, les cinq expertises au centre
+	En-tête du site (maquette du 19/10/2026) : logo officiel à gauche, les pages du site au centre
 	séparées par des slashs orange, bouton « Parlons de votre projet » à droite. Fond Ivoire, collant.
-	Sous 1100 px : logo, bouton Menu et panneau plein écran (expertises + pages du studio).
+	Sous 1100 px : logo, bouton Menu et panneau plein écran.
 	Navigation : content/pages.ts (headerNav, mobileNav).
 -->
 <script lang="ts">
@@ -15,7 +15,9 @@
 	let open = $state(false);
 	let toggle: HTMLButtonElement | undefined = $state();
 
-	const isCurrent = (match: string) => page.url.pathname === match;
+	// Actif sur la page et ses sous-pages ; l'accueil seulement sur « / »
+	const isCurrent = (match: string) =>
+		match === '/' ? page.url.pathname === '/' : page.url.pathname.startsWith(match);
 
 	function close(returnFocus = false) {
 		open = false;
@@ -49,14 +51,12 @@
 			<Logo variant="compact" tone="night" alt="" height={52} />
 		</a>
 
-		<nav class="header__nav" aria-label="Expertises">
+		<nav class="header__nav" aria-label="Navigation principale">
 			<ul>
 				{#each headerNav as item, i (item.href)}
 					<li>
 						{#if i > 0}<span class="header__slash" aria-hidden="true">/</span>{/if}
-						<a
-							href={item.href}
-							aria-current={isCurrent(item.match) && !item.href.includes('#') ? 'page' : undefined}
+						<a href={item.href} aria-current={isCurrent(item.match) ? 'page' : undefined}
 							>{item.label}</a
 						>
 					</li>
@@ -81,12 +81,7 @@
 	</div>
 </header>
 
-<nav
-	class="mobile-nav surface-night"
-	id="mobile-nav"
-	aria-label="Navigation principale"
-	hidden={!open}
->
+<nav class="mobile-nav surface-night" id="mobile-nav" aria-label="Menu" hidden={!open}>
 	<ul class="mobile-nav__list">
 		{#each mobileNav as item (item.href)}
 			<li>

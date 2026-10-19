@@ -1,7 +1,8 @@
 /* ==========================================================================
    DEV'n DONE Design System v2.0 — Tokens
    v2.0 (19.10.2026, maquette « Landing page Dev'n Done et renard orange ») : fond Ivoire par défaut,
-   titres en Plus Jakarta Sans ExtraBold, boutons en pilule, cartes blanches à ombre légère.
+   boutons en pilule, cartes blanches à ombre légère.
+   v2.1 (20.10.2026) : titres H1 à H6 en Lilita One (400), tout le reste en Plus Jakarta Sans.
    Source de vérité : charte graphique v1.2 (brand/brand-guidelines.html).
    v1.1 (15.10.2026) : voix manuscrite, action secondaire (Mint sur Night, Orange sur Ivoire),
    mot accent bicolore, cartes à image.
@@ -44,9 +45,9 @@
 	/* ------------------------------------------------------------------ *
    * 3. Typographie
    * ------------------------------------------------------------------ */
-	/* v2.0 : titres en Plus Jakarta Sans ExtraBold (Lilita One n'est plus utilisée sur le site) */
-	--font-display: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
-	--weight-display: 800;
+	/* v2.1 : titres H1 à H6 en Lilita One (une seule graisse, 400) */
+	--font-display: 'Lilita One', 'Arial Rounded MT Bold', sans-serif;
+	--weight-display: 400;
 	--font-ui: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 	--font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
 	/* v1.1 · 4e voix, manuscrite : annotations courtes uniquement (charte 11.C) */
@@ -59,10 +60,10 @@
 	--weight-extrabold: 800;
 
 	/* Échelle fluide : min (360 px) → max (1440 px) */
-	--text-display: clamp(2.75rem, 1.917rem + 3.704vw, 5.25rem); /* 44 → 84 */
-	--text-h1: clamp(2.375rem, 1.792rem + 2.593vw, 4.125rem); /* 38 → 66 */
-	--text-h2: clamp(1.75rem, 1.417rem + 1.481vw, 2.75rem); /* 28 → 44 */
-	--text-h3: clamp(1.125rem, 1.083rem + 0.185vw, 1.25rem); /* 18 → 20 */
+	--text-display: clamp(2.75rem, 2rem + 3.6vw, 5.25rem); /* 44 → 84, H1 du hero */
+	--text-h1: clamp(2.5rem, 1.9rem + 2.7vw, 4.5rem); /* 40 → 72 */
+	--text-h2: clamp(2rem, 1.667rem + 1.481vw, 3rem); /* 32 → 48 */
+	--text-h3: clamp(1.25rem, 1.15rem + 0.45vw, 1.625rem); /* 20 → 26 */
 	--text-body-lg: clamp(1.125rem, 1.083rem + 0.185vw, 1.25rem); /* 18 → 20 */
 	--text-body: clamp(1rem, 0.979rem + 0.093vw, 1.0625rem); /* 16 → 17 */
 	--text-body-sm: 0.875rem; /* 14 */
@@ -73,19 +74,19 @@
 	--text-hand: clamp(1.25rem, 1.083rem + 0.741vw, 1.75rem); /* 20 → 28 */
 	--text-stat: clamp(2.75rem, 2rem + 3.333vw, 5rem); /* 44 → 80, chiffre clé */
 
-	--leading-display: 1;
-	--leading-h1: 1.04;
-	--leading-h2: 1.1;
-	--leading-h3: 1.25;
+	--leading-display: 0.98;
+	--leading-h1: 0.98;
+	--leading-h2: 1.02;
+	--leading-h3: 1.1;
 	--leading-body: 1.65;
 	--leading-body-lg: 1.6;
 	--leading-tight: 1.2;
 	--leading-hand: 1.15;
 
-	--tracking-display: -0.04em;
-	--tracking-h1: -0.035em;
-	--tracking-h2: -0.025em;
-	--tracking-h3: -0.01em;
+	--tracking-display: -0.005em;
+	--tracking-h1: -0.005em;
+	--tracking-h2: 0;
+	--tracking-h3: 0.005em;
 	--tracking-label: 0.16em;
 	--tracking-button: 0.02em;
 	--tracking-caption: 0.02em;
