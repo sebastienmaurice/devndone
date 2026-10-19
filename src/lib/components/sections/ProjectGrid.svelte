@@ -91,14 +91,12 @@
 		transform: translateY(-3px);
 		box-shadow: var(--shadow-card-hover);
 	}
+	/* Ratio des visuels de projets : 2:1 (format source 1774 × 887 px) */
 	.project__media {
 		display: block;
-		aspect-ratio: 4 / 3;
+		aspect-ratio: 1774 / 887;
 		overflow: hidden;
 		background: var(--surface-sunk);
-	}
-	.projects:not(.projects--compact) .project__media {
-		aspect-ratio: 16 / 10;
 	}
 	.project__media :global(img) {
 		display: block;

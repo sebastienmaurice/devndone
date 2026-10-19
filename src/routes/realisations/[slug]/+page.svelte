@@ -151,10 +151,16 @@
 		box-shadow: var(--shadow-card);
 		background: var(--surface-sunk);
 	}
+	/* Ratio des visuels de projets : 2:1 (format source 1774 × 887 px) */
+	.visual :global(picture) {
+		display: block;
+		aspect-ratio: 1774 / 887;
+	}
 	.visual :global(img) {
 		display: block;
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: cover;
 	}
 	.case {
 		display: grid;
