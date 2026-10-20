@@ -1,11 +1,12 @@
 <!--
-	Bloc contact (maquette du 19/10/2026) : panneau Night arrondi, mascotte (sourire malicieux, pouce levé)
-	à gauche, titre « Un projet en tête ? On le rend DONE. », texte, bouton orange vers /contact/,
-	petits traits d'énergie orange et menthe. Textes : content/studio.ts.
+	Bloc contact (maquette du 19/10/2026) : panneau Night arrondi, mascotte détourée (PNG transparent,
+	tablette en main, pouce levé) à gauche, qui dépasse du haut du panneau et repose sur son bord bas,
+	titre « Un projet en tête ? On le rend DONE. », texte, bouton orange vers /contact/, petits traits
+	d'énergie orange et menthe. Textes : content/studio.ts.
 -->
 <script lang="ts">
 	import { contactIntro } from '$lib/content/studio';
-	import mascotte from '$lib/assets/mascotte/mascotte-renard-dev-n-done-pouce-leve.png?enhanced';
+	import mascotte from '$lib/assets/mascotte/mascotte-renard-dev-n-done-tablette-pouce-leve.png?enhanced';
 	import DoneWord from '../brand/DoneWord.svelte';
 	import Icon from '../brand/Icon.svelte';
 	import Button from '../ui/Button.svelte';
@@ -21,8 +22,8 @@
 			<div class="contact__mascot">
 				<enhanced:img
 					src={mascotte}
-					alt="Dev, la mascotte Dev'n Done, en sweat à capuche, sourire malicieux et pouce levé"
-					sizes="240px"
+					alt="Dev, la mascotte Dev'n Done, en sweat à capuche, tablette sous le bras, pointe du doigt avec un grand sourire"
+					sizes="(min-width: 900px) 280px, 180px"
 					loading="lazy"
 				/>
 			</div>
@@ -52,7 +53,8 @@
 
 <style>
 	.contact-wrap {
-		padding-block: var(--space-8) var(--section-y);
+		/* Place au-dessus du panneau pour la tête de la mascotte */
+		padding-block: calc(var(--space-9) + var(--space-5)) var(--section-y);
 	}
 	.contact {
 		position: relative;
@@ -66,14 +68,16 @@
 	}
 	@media (min-width: 900px) {
 		.contact {
-			grid-template-columns: 220px minmax(0, 1fr) auto;
+			grid-template-columns: 280px minmax(0, 1fr) auto;
 			padding: var(--space-6) var(--space-8) var(--space-6) var(--space-6);
 		}
 	}
+	/* Mascotte détourée : dépasse du haut du panneau, coupée net sur son bord bas (bas de l'image) */
 	.contact__mascot {
-		width: min(220px, 60%);
-		overflow: hidden;
-		border-radius: calc(var(--radius-card) * 1.2);
+		width: 180px;
+		margin-top: calc(-1 * var(--space-9));
+		margin-bottom: calc(-1 * var(--space-7));
+		align-self: end;
 	}
 	.contact__mascot :global(img) {
 		display: block;
@@ -83,7 +87,14 @@
 	@media (min-width: 900px) {
 		.contact__mascot {
 			width: 100%;
-			margin-block: calc(-1 * var(--space-8)) 0;
+			margin-block: calc(-1 * var(--space-9) - var(--space-5)) calc(-1 * var(--space-6));
+		}
+	}
+	/* Mobile : la mascotte reste au-dessus du texte, sans toucher le bas du panneau */
+	@media (max-width: 899px) {
+		.contact__mascot {
+			margin-bottom: 0;
+			align-self: start;
 		}
 	}
 	.contact__text {
