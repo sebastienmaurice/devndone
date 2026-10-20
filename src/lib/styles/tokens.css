@@ -255,7 +255,9 @@
 	--action-alt: var(--dnd-orange);
 	--action-alt-hover: var(--dnd-orange-hover);
 	--on-action-alt: var(--dnd-night);
-	--action-alt-text: var(--dnd-orange-ink);
+	/* v2.3 (20/10/2026) : liens et actions secondaires en texte = menthe encre (5.07 : 1 sur Ivoire).
+     Le menthe pur ne fait que 1.56 : 1 sur Ivoire : réservé aux fonds Night. */
+	--action-alt-text: var(--dnd-mint-ink);
 	--action-alt-ring: var(--dnd-night);
 	/* v2.2 : titres bicolores Night + orange vif, choix de Sébastien (19/10/2026).
      Contraste 2.26 : 1 sur Ivoire, sous le seuil WCAG (3 : 1 pour un grand titre) :
