@@ -14,7 +14,7 @@
 </script>
 
 <Seo
-	title="À propos"
+	title="À propos : Sébastien Maurice, développeur WordPress à Caudry"
 	path="/apropos/"
 	description="Sébastien Maurice, indépendant à Caudry : un seul interlocuteur, du brief à la mise en ligne, pour les TPE, artisans et PME."
 />

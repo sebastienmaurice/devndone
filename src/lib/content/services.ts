@@ -19,6 +19,8 @@ export type Universe = {
 	packages: readonly string[];
 	/** La maintenance WordPress en abonnement s'applique à cet univers */
 	maintenance?: boolean;
+	/** Titre de la page pour les moteurs de recherche (sans « · Dev'n Done ») */
+	seoTitle: string;
 	/** Description pour les moteurs de recherche (sinon `text`) */
 	description?: string;
 	/** Expertise complémentaire : bandeau orange sous les cartes, pas une carte */
@@ -38,6 +40,7 @@ export const universes: readonly Universe[] = [
 		title: 'Web',
 		text: 'Sites vitrine, boutiques en ligne, refontes et optimisation SEO, avec une maintenance en abonnement pour garder votre site à jour et protégé.',
 		tags: ['Création', 'Refonte', 'WooCommerce', 'SEO', 'Maintenance'],
+		seoTitle: 'Création et refonte de sites WordPress, maintenance',
 		path: '/services/web/',
 		navLabel: 'Web',
 		icon: 'globe',
@@ -57,6 +60,7 @@ export const universes: readonly Universe[] = [
 		tags: ['Identité visuelle', 'Direction artistique', 'Images IA', 'Mockups'],
 		description:
 			'Identité visuelle, direction artistique, images IA et mockups : une esthétique cohérente pour marquer les esprits. Studio digital indépendant à Caudry.',
+		seoTitle: 'Identité visuelle et direction artistique',
 		path: '/services/design/',
 		navLabel: 'Identité',
 		icon: 'pen',
@@ -69,6 +73,7 @@ export const universes: readonly Universe[] = [
 		tags: ['Audit', 'Automatisation ciblée', 'Make · Zapier'],
 		description:
 			'Et si cette tâche pouvait se faire toute seule ? Audit des processus, automatisation ciblée ou complète avec Make ou Zapier. Studio indépendant à Caudry.',
+		seoTitle: 'Automatisation des processus avec Make et Zapier',
 		path: '/services/automatisation/',
 		navLabel: 'Automatisation',
 		icon: 'settings',
@@ -86,6 +91,7 @@ export const universes: readonly Universe[] = [
 		],
 		description:
 			"Applications métier, espaces clients, outils sur mesure et interfaces applicatives. Exemple en développement : un logiciel de gestion d'affaires pour enseignistes.",
+		seoTitle: 'Applications métier et logiciels sur mesure',
 		path: '/services/applications/',
 		navLabel: 'Apps & logiciels',
 		icon: 'layers',
@@ -98,6 +104,7 @@ export const universes: readonly Universe[] = [
 		tags: ['Interfaces', 'API', 'Back-end'],
 		description:
 			'Du front-end au back-end, une solution complète pour votre projet : interfaces, API et back-end en JavaScript, Node.js, Express et PostgreSQL.',
+		seoTitle: 'Développement full stack : interfaces, API, back-end',
 		path: '/services/full-stack/',
 		navLabel: 'Full Stack',
 		icon: 'code',

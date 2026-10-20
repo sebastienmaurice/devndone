@@ -13,7 +13,7 @@
 </script>
 
 <Seo
-	title="Services"
+	title="Services web : WordPress, design, automatisation, applications"
 	path="/services/"
 	description="Web, design, automatisation, applications et logiciels, développement full stack : cinq expertises, une seule vision, du premier brief jusqu'à la mise en ligne."
 />

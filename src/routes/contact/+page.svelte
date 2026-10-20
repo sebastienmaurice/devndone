@@ -63,7 +63,7 @@
 </script>
 
 <Seo
-	title="Contact"
+	title="Contact : parlons de votre projet web"
 	path="/contact/"
 	description="15 minutes pour faire le point sur votre projet et définir la bonne approche, sans engagement. Prise de rendez-vous en ligne, formulaire ou email."
 />

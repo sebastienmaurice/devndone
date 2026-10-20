@@ -32,6 +32,8 @@ export type Project = {
 	stack: string;
 	text: string;
 	url: string;
+	/** Titre de la page pour les moteurs de recherche (sans « · Dev'n Done ») */
+	seoTitle: string;
 	/** Description pour les moteurs de recherche (sinon `text`) */
 	description?: string;
 	/** Visuel de présentation : src/lib/assets/projets/<image>.jpg (1774 × 887 px) */
@@ -51,6 +53,7 @@ export const realisationsIntro = {
 export const projects: readonly Project[] = [
 	{
 		slug: 'palimpseste-urbain',
+		seoTitle: "Palimpseste Urbain : refonte WordPress d'une agence d'architecture",
 		name: 'Palimpseste Urbain',
 		stack: 'WordPress · Elementor Pro · SEO',
 		text: "Agence d'architecture et d'urbanisme. Refonte WordPress, direction artistique, SEO.",
@@ -86,6 +89,7 @@ export const projects: readonly Project[] = [
 	},
 	{
 		slug: 'gsti',
+		seoTitle: 'GSTI : migration Wix vers WordPress WooCommerce B2B',
 		name: 'GSTI',
 		stack: 'Wix → WordPress · WooCommerce',
 		text: 'Migration de Wix vers WordPress et WooCommerce. Catalogue B2B et devis en ligne.',
@@ -119,6 +123,7 @@ export const projects: readonly Project[] = [
 	},
 	{
 		slug: 'cine-delices',
+		seoTitle: 'Ciné Délices : application full stack de recettes de cinéma',
 		name: 'Ciné Délices',
 		stack: 'JavaScript · Node.js · Express · PostgreSQL',
 		text: 'Application full stack de recettes inspirées du cinéma.',
@@ -147,6 +152,7 @@ export const projects: readonly Project[] = [
 	},
 	{
 		slug: 'maxilou',
+		seoTitle: 'Maxilou : site WordPress de location de matériel',
 		name: 'Maxilou',
 		stack: 'WordPress · Catalogue · Devis',
 		text: 'Location de matériel BTP et espaces verts. Catalogue par catégories et devis en ligne.',
@@ -182,6 +188,7 @@ export const projects: readonly Project[] = [
 	},
 	{
 		slug: 'petit-chateau-vercourt',
+		seoTitle: "Petit Château Vercourt : site WordPress de chambres d'hôtes",
 		name: 'Petit Château Vercourt',
 		stack: 'WordPress · Réservation · FR/EN',
 		text: "Chambres d'hôtes en Picardie. Réservation en ligne, versions française et anglaise.",
@@ -215,6 +222,7 @@ export const projects: readonly Project[] = [
 	},
 	{
 		slug: 'pano-signservice',
+		seoTitle: "PANO Sign'Service : refonte WordPress d'une agence de signalétique",
 		name: "PANO Sign'Service",
 		stack: 'WordPress · Elementor · E-commerce',
 		text: 'Refonte WordPress Elementor. Vitrine et e-commerce de signalétique.',
@@ -254,6 +262,7 @@ export const projects: readonly Project[] = [
 	},
 	{
 		slug: 'alternativ-uniforme',
+		seoTitle: "Alternativ' Uniforme : e-commerce B2B WordPress et PrestaShop",
 		name: "Alternativ' Uniforme",
 		stack: 'WordPress · PrestaShop · E-commerce B2B',
 		text: 'PME industrielle de Caudry, personnalisation textile. Sites WordPress et PrestaShop, e-commerce B2B et devis en ligne, sur 4 ans.',
@@ -286,6 +295,7 @@ export const projects: readonly Project[] = [
 	},
 	{
 		slug: 'harmony-valse',
+		seoTitle: "Harmony Valse : refonte WordPress d'une école de valse à Paris",
 		name: 'Harmony Valse',
 		stack: 'WordPress · Elementor · WooCommerce',
 		text: 'Cours de valse à Paris. Refonte WordPress Elementor & WooCommerce : réservation et boutique en ligne.',

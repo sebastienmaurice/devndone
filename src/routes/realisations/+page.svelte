@@ -11,7 +11,7 @@
 </script>
 
 <Seo
-	title="Réalisations"
+	title="Réalisations : sites WordPress, WooCommerce et applications"
 	path="/realisations/"
 	description="Sites WordPress, boutiques WooCommerce et application full stack : des projets concrets pour de vrais besoins, tels qu'ils existent aujourd'hui."
 />
