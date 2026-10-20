@@ -8,6 +8,7 @@
  */
 import { projects } from './realisations';
 import { universes } from './services';
+import { logicielPage } from './logiciel';
 
 export type PageEntry = {
 	path: `/${string}`;
@@ -45,6 +46,7 @@ export const pages: PageEntry[] = [
 		sitemap: true,
 		priority: 0.8
 	})),
+	{ path: logicielPage.path, label: 'Logiciel pour enseignistes', sitemap: true, priority: 0.6 },
 	{ path: '/realisations/', label: 'Réalisations', footer: 'studio', sitemap: true, priority: 0.8 },
 	...projects.map((p): PageEntry => ({
 		path: `/realisations/${p.slug}/`,

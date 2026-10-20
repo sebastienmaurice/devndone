@@ -2,14 +2,15 @@
 	Projets de la page « Applications & logiciels », sur le modèle de la section « Mon process » :
 	surtitre et titre (passage orange souligné), mascotte à gauche, cartes à droite. Première carte :
 	le logiciel de gestion d'affaires pour enseignistes (en développement), qui mène à sa présentation
-	plus bas dans la page ; les suivantes annoncent les projets à venir.
+	sur sa page dédiée ; les suivantes annoncent les projets à venir.
 	Textes : content/logiciel.ts. Mascotte : pose « ordinateur portable à la main ».
 -->
 <script lang="ts">
 	import {
 		applicationsProjectsIntro as intro,
 		applicationsUpcoming as upcoming,
-		logicielIntro
+		logicielIntro,
+		logicielPage
 	} from '$lib/content/logiciel';
 	import mascotte from '$lib/assets/mascotte/mascotte-renard-applications-ordinateur-portable.jpg?enhanced&w=720;360';
 	import visuel from '$lib/assets/logiciel/logiciel-enseigniste-releve-realite-augmentee.jpg?enhanced&w=720;360';
@@ -40,7 +41,7 @@
 
 	<ul class="apps__cards" role="list">
 		<li>
-			<a class="app-card" href="#logiciel-title">
+			<a class="app-card" href={logicielPage.path}>
 				<span class="app-card__media">
 					<enhanced:img
 						src={visuel}

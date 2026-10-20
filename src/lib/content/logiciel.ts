@@ -5,6 +5,14 @@
  * Source : dossier « Logiciel Enseigne » de Sébastien (principe, étapes, exemple conceptuel).
  * « Zen & Beauté » est un commerce fictif ; images illustratives, dimensions indicatives.
  */
+/** Page dédiée au logiciel */
+export const logicielPage = {
+	path: '/services/applications/logiciel-gestion-affaires-enseignistes/',
+	seoTitle: "Logiciel de gestion d'affaires pour enseignistes (en développement)",
+	description:
+		'Un logiciel pour enseignistes qui relie relevé de site, chiffrage, proposition visuelle, devis, décision du client et fiche atelier dans un seul dossier par affaire.'
+} as const;
+
 export const logicielIntro = {
 	eyebrow: 'Exemple en cours de développement',
 	title: "Un logiciel de gestion d'affaires pour enseignistes",

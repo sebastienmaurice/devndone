@@ -29,20 +29,27 @@
 	import Icon from '../brand/Icon.svelte';
 	import SectionLabel from '../brand/SectionLabel.svelte';
 
+	/** false : pas de surtitre ni de titre (la page dédiée les affiche dans son en-tête) */
+	let { showHeader = true }: { showHeader?: boolean } = $props();
+
 	const images = [commerce, cotes, proposition, fiche];
 	const gallery = [realite, interfacePlan, mesures, planTechnique];
 	const pad = (n: number) => String(n + 1).padStart(2, '0');
 </script>
 
-<section class="section" aria-labelledby="logiciel-title">
+<section
+	class="section"
+	aria-labelledby={showHeader ? 'logiciel-title' : undefined}
+	aria-label={showHeader ? undefined : 'Présentation du logiciel'}
+>
 	<div class="container stack stack--lg">
-		<header class="stack stack--sm">
-			<SectionLabel label={logicielIntro.eyebrow} />
-			<h2 class="t-h2 logiciel-title" id="logiciel-title">
-				<AccentTitle text={logicielIntro.title} accent={logicielIntro.accent} />
-			</h2>
-			<p class="lede">{logicielIntro.lede}</p>
-		</header>
+		{#if showHeader}<header class="stack stack--sm">
+				<SectionLabel label={logicielIntro.eyebrow} />
+				<h2 class="t-h2 logiciel-title" id="logiciel-title">
+					<AccentTitle text={logicielIntro.title} accent={logicielIntro.accent} />
+				</h2>
+				<p class="lede">{logicielIntro.lede}</p>
+			</header>{/if}
 
 		<ol class="chain" aria-label="Les étapes d'une affaire">
 			{#each logicielChain as step, i (step)}
