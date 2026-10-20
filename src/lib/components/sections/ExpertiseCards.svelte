@@ -181,6 +181,7 @@
 	}
 	/* Bandeau orange de l'expertise complémentaire (un seul bandeau Orange par page) */
 	.extra {
+		position: relative;
 		display: grid;
 		gap: var(--space-5);
 		margin-top: calc(var(--col-gap) + var(--space-6));
@@ -190,17 +191,9 @@
 		border-radius: var(--radius-card);
 		box-shadow: var(--shadow-card);
 	}
-	@media (min-width: 900px) {
-		.extra {
-			grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-			align-items: center;
-			gap: var(--space-6);
-			padding: var(--space-6) var(--space-7);
-		}
-	}
 	.extra__text {
 		display: grid;
-		gap: var(--space-3);
+		gap: var(--space-2);
 		justify-items: start;
 	}
 	.extra__label {
@@ -234,18 +227,46 @@
 		font-size: var(--text-body-sm);
 		font-weight: var(--weight-semibold);
 	}
-	/* Mascotte détourée : déborde du haut du bandeau et s'appuie sur son bord bas */
+	/* Petits écrans : l'illustration détourée sous le texte, posée sur le bord bas */
 	.extra__visual {
-		align-self: end;
+		margin-inline: calc(-1 * var(--space-5));
 	}
 	.extra__visual :global(img) {
 		display: block;
 		width: 100%;
 		height: auto;
 	}
-	@media (min-width: 900px) {
+	/* Tablette et petit écran de bureau : illustration limitée en largeur, alignée à droite */
+	@media (min-width: 768px) {
 		.extra__visual {
-			margin: calc(-1 * var(--space-9)) 0 calc(-1 * var(--space-6));
+			justify-self: end;
+			width: min(100% + var(--space-5), 46rem);
+			margin-right: calc(-1 * var(--space-5));
+		}
+	}
+	/* 1400 px et plus : le texte fixe la hauteur du bandeau ; l'illustration, calée en bas à droite,
+	   est un peu plus haute que lui et dépasse donc du bord haut (maquette du 20/10/2026).
+	   En dessous, l'image très large passerait sous le texte : elle reste sous le texte. */
+	@media (min-width: 1400px) {
+		.extra {
+			grid-template-columns: minmax(0, 22rem);
+			padding: var(--space-5) var(--space-7);
+		}
+		.extra__tags {
+			margin: 0;
+		}
+		.extra__visual {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			width: auto;
+			height: calc(100% + 1.75rem);
+			margin: 0;
+		}
+		.extra__visual :global(picture),
+		.extra__visual :global(img) {
+			width: auto;
+			height: 100%;
 		}
 	}
 </style>
