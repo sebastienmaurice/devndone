@@ -45,11 +45,11 @@ export const universes: readonly Universe[] = [
 		navLabel: 'Web',
 		icon: 'globe',
 		packages: [
-			'Audit technique WordPress',
-			'Lancement site WordPress',
-			'Landing page WordPress',
-			'Refonte WordPress PME',
-			'Boutique WooCommerce'
+			'Landing page',
+			'Site vitrine',
+			'Site pro et refonte PME',
+			'Boutique WooCommerce',
+			'Audit technique WordPress'
 		],
 		maintenance: true
 	},

@@ -14,9 +14,9 @@
 </script>
 
 <Seo
-	title="Tarifs : forfaits WordPress à prix fermé et maintenance"
+	title="Tarifs : sites WordPress en abonnement mensuel, audits et maintenance"
 	path="/tarifs/"
-	description="Forfaits à prix fermé (audit, lancement de site, landing page, refonte, boutique WooCommerce, audit automatisation) et maintenance WordPress en abonnement."
+	description="Sites WordPress en abonnement mensuel, création, hébergement et maintenance inclus : landing page, vitrine, refonte PME, boutique WooCommerce. Audits en paiement unique."
 />
 
 <PageIntro

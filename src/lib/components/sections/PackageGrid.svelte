@@ -22,7 +22,7 @@
 		<li class="package" id={anchor(pack.name)}>
 			<p class="package__delay"><Icon name="clock" size="sm" />{pack.delay}</p>
 			<svelte:element this={`h${headingLevel}`} class="package__name">{pack.name}</svelte:element>
-			<p class="package__price">{pack.price} <span>HT</span></p>
+			<p class="package__price">{pack.price} <span>{pack.period}</span></p>
 			<p class="package__text">{pack.text}</p>
 			<a class="link-arrow package__cta" href={links.calendly} target="_blank" rel="noopener"
 				>En parler<Icon name="arrow-up-right" /><span class="sr-only"
@@ -52,6 +52,40 @@
 		border-radius: var(--radius-card);
 		box-shadow: var(--shadow-card);
 		scroll-margin-top: 110px;
+		transition:
+			background-color var(--duration-reveal) var(--ease-out),
+			border-color var(--duration-reveal) var(--ease-out),
+			box-shadow var(--duration-reveal) var(--ease-out),
+			transform var(--duration-reveal) var(--ease-out);
+	}
+	/* Survol : la carte passe à l'orange, tout le contenu en Bleu nuit (8.24 : 1), prix en blanc */
+	.package:hover,
+	.package:focus-within {
+		transform: translateY(-6px);
+		background: var(--action);
+		border-color: var(--action);
+		box-shadow: var(--shadow-card-hover);
+	}
+	.package:hover :is(.package__delay, .package__name, .package__text, .package__price span),
+	.package:focus-within :is(.package__delay, .package__name, .package__text, .package__price span) {
+		color: var(--on-action);
+	}
+	.package:hover .package__price,
+	.package:focus-within .package__price {
+		color: var(--surface);
+	}
+	.package:hover :global(.package__cta),
+	.package:focus-within :global(.package__cta) {
+		color: var(--on-action);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.package {
+			transition-property: background-color, border-color, box-shadow;
+		}
+		.package:hover,
+		.package:focus-within {
+			transform: none;
+		}
 	}
 	.package__delay {
 		display: inline-flex;
@@ -66,14 +100,19 @@
 		margin: var(--space-2) 0 0;
 		font-size: var(--text-h3);
 	}
+	/* Prix en Lilita One, orange ; la périodicité reste en texte courant */
 	.package__price {
 		margin: 0;
+		font-family: var(--font-display);
+		font-weight: var(--weight-display);
 		font-size: var(--text-h2);
-		font-weight: var(--weight-extrabold);
-		letter-spacing: -0.03em;
+		letter-spacing: 0.005em;
 		line-height: 1.1;
+		color: var(--accent-deco);
+		transition: color var(--duration-reveal) var(--ease-out);
 	}
 	.package__price span {
+		font-family: var(--font-ui);
 		font-size: var(--text-body-sm);
 		font-weight: var(--weight-semibold);
 		letter-spacing: 0;
