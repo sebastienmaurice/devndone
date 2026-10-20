@@ -12,7 +12,7 @@
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
 	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
 	import { aboutIntro, links, reviewsIntro } from '$lib/content/studio';
-	import portrait from '$lib/assets/photos/sebastien-maurice-developpeur-web-caudry-mascotte.jpg?enhanced&w=1200;720;360';
+	import portrait from '$lib/assets/photos/sebastien-maurice-fondateur-dev-n-done-avec-mascotte.jpg?enhanced&w=1200;720;360';
 </script>
 
 <Seo
@@ -32,8 +32,8 @@
 		<div class="portrait">
 			<enhanced:img
 				src={portrait}
-				alt="Sébastien Maurice, fondateur de Dev'n Done, avec Dev, la mascotte, en arrière-plan"
-				sizes="(min-width: 1100px) 480px, 80vw"
+				alt="Sébastien Maurice, fondateur de Dev'n Done, avec Dev, la mascotte, bras croisés en arrière-plan"
+				sizes="(min-width: 1100px) 560px, 92vw"
 				fetchpriority="high"
 			/>
 		</div>
@@ -65,9 +65,9 @@
 <style>
 	/* Photo sur fond blanc : multiply la fond dans l'Ivoire de la page */
 	.portrait {
-		max-width: 30rem;
+		max-width: 36rem;
 		margin-inline: auto;
-		aspect-ratio: 1122 / 1292;
+		aspect-ratio: 1246 / 957;
 	}
 	.portrait :global(img) {
 		display: block;
@@ -78,7 +78,7 @@
 	}
 	@media (max-width: 1099px) {
 		.portrait {
-			max-width: 22rem;
+			max-width: 28rem;
 		}
 	}
 	.note {
