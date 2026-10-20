@@ -6,8 +6,10 @@
 -->
 <script lang="ts" module>
 	import type { Component } from 'svelte';
+	import ArrowLeft from '@lucide/svelte/icons/arrow-left';
 	import ArrowRight from '@lucide/svelte/icons/arrow-right';
 	import ArrowUpRight from '@lucide/svelte/icons/arrow-up-right';
+	import Briefcase from '@lucide/svelte/icons/briefcase';
 	import Bug from '@lucide/svelte/icons/bug';
 	import CalendarDays from '@lucide/svelte/icons/calendar-days';
 	import Check from '@lucide/svelte/icons/check';
@@ -30,13 +32,16 @@
 	import Settings from '@lucide/svelte/icons/settings';
 	import ShoppingCart from '@lucide/svelte/icons/shopping-cart';
 	import Sparkles from '@lucide/svelte/icons/sparkles';
+	import Target from '@lucide/svelte/icons/target';
 	import Terminal from '@lucide/svelte/icons/terminal';
 	import TriangleAlert from '@lucide/svelte/icons/triangle-alert';
+	import Trophy from '@lucide/svelte/icons/trophy';
 	import Workflow from '@lucide/svelte/icons/workflow';
 	import X from '@lucide/svelte/icons/x';
 
 	/** Noms du design system → composants Lucide */
 	export const icons = {
+		'arrow-left': ArrowLeft,
 		'arrow-right': ArrowRight,
 		'arrow-up-right': ArrowUpRight,
 		check: Check,
@@ -64,7 +69,10 @@
 		globe: Globe,
 		settings: Settings,
 		message: MessageCircleMore,
-		lightbulb: Lightbulb
+		lightbulb: Lightbulb,
+		briefcase: Briefcase,
+		target: Target,
+		trophy: Trophy
 	} satisfies Record<string, Component<Record<string, unknown>>>;
 
 	export type IconName = keyof typeof icons;

@@ -26,7 +26,7 @@
 
 <section class="section section--tight" aria-label="Projets">
 	<div class="container">
-		<ProjectGrid headingLevel={2} />
+		<ProjectGrid headingLevel={2} featured />
 	</div>
 </section>
 

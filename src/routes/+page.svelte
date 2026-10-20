@@ -118,7 +118,7 @@
 				>Un autre projet en tête ?</Button
 			>
 		</header>
-		<ProjectGrid limit={6} compact />
+		<ProjectGrid limit={6} />
 		<p class="home-projects__all">
 			<a class="link-arrow" href="/realisations/"
 				>Toutes les réalisations <Icon name="arrow-right" /></a
