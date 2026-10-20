@@ -1,13 +1,14 @@
 <!--
 	Politique de confidentialité : uniquement des faits vérifiables sur le fonctionnement du site.
 	Le premier paragraphe reprend le texte des mentions légales du site en ligne (content/legal.ts).
-	À mettre à jour si un service d'envoi de formulaire ou un outil de mesure est ajouté.
+	Le paragraphe « Formulaire de contact » suit le mode d'envoi (content/studio.ts, contactForm).
+	À mettre à jour si un outil de mesure ou un autre service est ajouté.
 -->
 <script lang="ts">
 	import { Seo } from '$lib/components';
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import { legal } from '$lib/content/legal';
-	import { links } from '$lib/content/studio';
+	import { contactForm, links } from '$lib/content/studio';
 </script>
 
 <Seo
@@ -31,11 +32,27 @@
 
 		<section class="stack stack--sm" aria-labelledby="c-formulaire">
 			<h2 class="t-h3" id="c-formulaire">Formulaire de contact</h2>
-			<p>
-				Le formulaire de la page Contact ne transmet rien au site : il prépare un email dans votre
-				propre messagerie, que vous choisissez d'envoyer ou non. Aucune information n'est conservée
-				par le site.
-			</p>
+			{#if contactForm.accessKey}
+				<!-- Source : FAQ Web3Forms (docs.web3forms.com), relevée le 20/10/2026 -->
+				<p>
+					Les informations saisies dans le formulaire de la page Contact (nom, email, entreprise,
+					type de projet, message) me sont transmises par email via le service <a
+						class="link"
+						href="https://web3forms.com/"
+						target="_blank"
+						rel="noopener">Web3Forms<span class="sr-only"> (nouvel onglet)</span></a
+					>, dont les serveurs sont situés aux États-Unis. Selon Web3Forms, les messages ne sont pas
+					conservés : ils sont seulement transmis ; ses journaux techniques sont effacés
+					périodiquement. Le site lui-même ne conserve aucune information. Vos données ne servent
+					qu'à répondre à votre demande.
+				</p>
+			{:else}
+				<p>
+					Le formulaire de la page Contact ne transmet rien au site : il prépare un email dans votre
+					propre messagerie, que vous choisissez d'envoyer ou non. Aucune information n'est
+					conservée par le site.
+				</p>
+			{/if}
 		</section>
 
 		<section class="stack stack--sm" aria-labelledby="c-tiers">

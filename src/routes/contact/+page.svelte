@@ -1,13 +1,12 @@
 <!--
-	Contact. Site 100 % statique (GitHub Pages) : aucun serveur ne reçoit le formulaire.
-	ENVOI ACTUEL : après validation, le formulaire ouvre la messagerie du visiteur avec le message
-	prérempli (lien mailto). Le site ne transmet ni ne stocke aucune donnée.
-	REPLI (choix de Sébastien, 20/10/2026, pas de service tiers) : si rien ne s'ouvre (webmail,
-	poste sans messagerie), boutons « Copier le message » et « Copier l'adresse » ; si le
-	presse-papiers est refusé, le message s'affiche pour une copie manuelle.
-	BRANCHEMENT FUTUR (service externe type Formspree / Web3Forms) : remplacer `send()` par un
-	appel au service, ajouter son domaine à `connect-src` / `form-action` dans vite.config.ts,
-	et mettre à jour la page /confidentialite/ (nouveau destinataire des données).
+	Contact. Site 100 % statique (GitHub Pages).
+	ENVOI DIRECT (si `contactForm.accessKey` est renseignée, content/studio.ts) : le message part
+	vers Web3Forms, qui le transmet par email (domaine autorisé dans `connect-src`, vite.config.ts).
+	SANS CLÉ, OU SI L'ENVOI ÉCHOUE : le formulaire ouvre la messagerie du visiteur avec le message
+	prérempli (mailto). Repli : « Copier le message » et « Copier l'adresse » ; si le presse-papiers
+	est refusé, le message s'affiche pour une copie manuelle.
+	La page /confidentialite/ décrit l'un ou l'autre fonctionnement selon la même clé.
+	En-tête : la mascotte au smartphone, à droite en grand écran.
 -->
 <script lang="ts">
 	import { Button, Check, Field, Honeypot, Notice, Seo } from '$lib/components';
@@ -15,7 +14,8 @@
 	import Icon from '$lib/components/brand/Icon.svelte';
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import { legal } from '$lib/content/legal';
-	import { contactIntro, hero, links } from '$lib/content/studio';
+	import { contactForm, contactIntro, hero, links } from '$lib/content/studio';
+	import mascot from '$lib/assets/mascotte/mascotte-renard-contact-smartphone-messages.jpg?enhanced&w=1200;720;360';
 	import { universes } from '$lib/content/services';
 
 	let name = $state('');
@@ -26,7 +26,10 @@
 	let consent = $state(false);
 	let trap = $state('');
 	let submitted = $state(false);
-	let status = $state<'idle' | 'opened' | 'error'>('idle');
+	let status = $state<'idle' | 'sending' | 'sent' | 'failed' | 'opened' | 'error'>('idle');
+	/** Envoi direct depuis le site (Web3Forms) ; sinon, préparation dans la messagerie */
+	const direct = !!contactForm.accessKey;
+	let mailto = '';
 	/** Message préparé (destinataire, objet, corps), réutilisé par « Copier le message » */
 	let prepared = $state('');
 	let copied = $state<'message' | 'email' | null>(null);
@@ -65,8 +68,14 @@
 	});
 	const show = (key: keyof typeof errors) => (submitted ? errors[key] : undefined);
 
-	function send(event: SubmitEvent) {
+	function openMail() {
+		window.location.href = mailto;
+		status = 'opened';
+	}
+
+	async function send(event: SubmitEvent) {
 		event.preventDefault();
+		if (status === 'sending') return;
 		submitted = true;
 		if (trap) return; // champ piège rempli : envoi ignoré
 		if (Object.values(errors).some(Boolean)) {
@@ -80,8 +89,35 @@
 		const body = [...lines, '', message.trim()].join('\n');
 		prepared = `À : ${legal.publisher.email}\nObjet : ${subject}\n\n${body}`;
 		copyFailed = false;
-		window.location.href = `mailto:${legal.publisher.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-		status = 'opened';
+		mailto = `mailto:${legal.publisher.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+		if (!direct) return openMail();
+
+		status = 'sending';
+		try {
+			const response = await fetch(contactForm.endpoint, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+				body: JSON.stringify({
+					access_key: contactForm.accessKey,
+					subject: `[devndone.com] ${subject}`,
+					from_name: "Site Dev'n Done",
+					// `email` : adresse de réponse de l'email reçu
+					email: email.trim(),
+					Nom: name.trim(),
+					Entreprise: company.trim() || '(non renseignée)',
+					'Type de projet': projectType || '(non renseigné)',
+					Message: message.trim()
+				})
+			});
+			const result = await response.json().catch(() => ({}));
+			if (!response.ok || !result.success) throw new Error(result.message ?? response.status);
+			status = 'sent';
+			submitted = false;
+			name = email = company = projectType = message = '';
+			consent = false;
+		} catch {
+			status = 'failed';
+		}
 	}
 </script>
 
@@ -97,6 +133,16 @@
 	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Contact' }]}
 >
 	{#snippet title()}{contactIntro.question} On le rend <DoneWord />{/snippet}
+	{#snippet aside()}
+		<div class="mascot">
+			<enhanced:img
+				src={mascot}
+				alt="Dev, la mascotte, lève le pouce, smartphone en main, entouré de bulles email, message et téléphone"
+				sizes="(min-width: 1100px) 520px, 92vw"
+				fetchpriority="high"
+			/>
+		</div>
+	{/snippet}
 </PageIntro>
 
 <section class="section section--tight" aria-label="Formulaire et prise de rendez-vous">
@@ -158,20 +204,38 @@
 			{#if show('consent')}<p class="field__error">{errors.consent}</p>{/if}
 			<Honeypot bind:value={trap} />
 
-			<Button type="submit" icon="arrow-right" size="lg">Préparer mon message</Button>
+			<Button type="submit" icon="arrow-right" size="lg" busy={status === 'sending'}
+				>{direct ? 'Envoyer mon message' : 'Préparer mon message'}</Button
+			>
 
-			{#if status === 'opened'}
-				<Notice tone="success" live title="Votre messagerie s'ouvre.">
-					Le message est prérempli : il ne reste qu'à l'envoyer.
+			{#if status === 'sent'}
+				<Notice tone="success" live title="Message envoyé, merci !">
+					Je vous réponds rapidement, à l'adresse indiquée. Pour aller plus vite, vous pouvez aussi
+					réserver un créneau de 15 minutes.
 				</Notice>
-				<!-- Repli : messagerie absente (webmail, ordinateur partagé) -->
+			{:else if status === 'opened' || status === 'failed'}
+				{#if status === 'failed'}
+					<Notice tone="error" live title="L'envoi n'a pas abouti.">
+						Votre message n'est pas perdu : envoyez-le depuis votre messagerie.
+					</Notice>
+				{:else}
+					<Notice tone="success" live title="Votre messagerie s'ouvre.">
+						Le message est prérempli : il ne reste qu'à l'envoyer.
+					</Notice>
+				{/if}
+				<!-- Repli : envoi impossible ou messagerie absente (webmail, ordinateur partagé) -->
 				<div class="fallback">
-					<p class="fallback__title">Rien ne s'est ouvert ?</p>
+					<p class="fallback__title">
+						{status === 'failed' ? 'Envoyer autrement' : "Rien ne s'est ouvert ?"}
+					</p>
 					<p class="fallback__text">
 						Copiez le message, puis collez-le dans votre messagerie habituelle (Gmail, Outlook…), à
 						l'adresse {legal.publisher.email}.
 					</p>
 					<div class="fallback__actions">
+						{#if status === 'failed'}
+							<Button icon="mail" onclick={openMail}>Ouvrir ma messagerie</Button>
+						{/if}
 						<Button variant="secondary" icon="copy" onclick={() => copy('message')}
 							>{copied === 'message' ? 'Message copié' : 'Copier le message'}</Button
 						>
@@ -193,10 +257,17 @@
 			{/if}
 			<p class="contact-form__info">
 				<Icon name="info" size="sm" />
-				<span
-					>Comment ça marche : le bouton ouvre votre messagerie avec le message déjà rédigé, il ne
-					reste qu'à l'envoyer. Le site ne transmet ni ne conserve aucune donnée.</span
-				>
+				{#if direct}
+					<span
+						>Votre message m'est transmis par email via le service Web3Forms, qui ne le conserve pas
+						(<a class="link" href="/confidentialite/">confidentialité</a>).</span
+					>
+				{:else}
+					<span
+						>Comment ça marche : le bouton ouvre votre messagerie avec le message déjà rédigé, il ne
+						reste qu'à l'envoyer. Le site ne transmet ni ne conserve aucune donnée.</span
+					>
+				{/if}
 			</p>
 			<noscript>
 				<p>Sans JavaScript, écrivez directement à {legal.publisher.email}.</p>
@@ -254,6 +325,24 @@
 </section>
 
 <style>
+	/* Mascotte sur fond blanc : multiply la fond dans l'Ivoire de la page */
+	.mascot {
+		max-width: 34rem;
+		margin-inline: auto;
+		aspect-ratio: 1343 / 1086;
+	}
+	.mascot :global(img) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		mix-blend-mode: multiply;
+	}
+	@media (max-width: 1099px) {
+		.mascot {
+			max-width: 22rem;
+		}
+	}
 	.contact-page {
 		display: grid;
 		gap: var(--space-7);

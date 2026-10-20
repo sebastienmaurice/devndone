@@ -60,7 +60,8 @@ export default defineConfig(() => {
 						'style-src': ['self', 'unsafe-inline'],
 						'img-src': ['self', 'data:'],
 						'font-src': ['self'],
-						'connect-src': ['self'],
+						// Formulaire de contact : envoi via Web3Forms (src/lib/content/studio.ts, contactForm)
+						'connect-src': ['self', 'https://api.web3forms.com'],
 						'form-action': ['self'],
 						'base-uri': ['self'],
 						'object-src': ['none']

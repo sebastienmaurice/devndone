@@ -14,6 +14,18 @@ export const links = {
 	email: `mailto:${legal.publisher.email}`
 } as const;
 
+/**
+ * Formulaire de contact : envoi direct via Web3Forms (https://web3forms.com), choisi le 20/10/2026.
+ * Offre gratuite : 250 envois par mois. D'après la FAQ Web3Forms, les messages ne sont pas stockés
+ * (transmis par email), les serveurs sont aux États-Unis (US-East) et la clé d'accès n'est pas un
+ * secret : elle permet seulement d'envoyer un message vers l'adresse de Sébastien.
+ * Clé vide : le formulaire prépare un email dans la messagerie du visiteur (mailto).
+ */
+export const contactForm: { endpoint: string; accessKey: string } = {
+	endpoint: 'https://api.web3forms.com/submit',
+	accessKey: ''
+};
+
 export const aboutIntro = {
 	eyebrow: 'À propos',
 	title: 'Un seul interlocuteur, du brief à la mise en ligne.',
