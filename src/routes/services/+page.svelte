@@ -1,5 +1,5 @@
 <!--
-	Vue d'ensemble des expertises : les quatre univers, le process, l'appel au contact.
+	Vue d'ensemble des expertises : les cinq expertises, le process, l'appel au contact.
 -->
 <script lang="ts">
 	import { Button, Seo } from '$lib/components';
@@ -15,7 +15,7 @@
 <Seo
 	title="Services"
 	path="/services/"
-	description="Web, design, automatisation et développement full stack : quatre univers, une seule vision, du premier brief jusqu'à la mise en ligne."
+	description="Web, design, automatisation, applications et logiciels, développement full stack : cinq expertises, une seule vision, du premier brief jusqu'à la mise en ligne."
 />
 
 <PageIntro
@@ -32,7 +32,7 @@
 	{/snippet}
 </PageIntro>
 
-<section class="section section--tight" aria-label="Les quatre expertises">
+<section class="section section--tight" aria-label="Les cinq expertises">
 	<div class="container">
 		<ExpertiseCards headingLevel={2} />
 	</div>

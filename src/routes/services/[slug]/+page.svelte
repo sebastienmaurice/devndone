@@ -10,6 +10,7 @@
 	import Icon from '$lib/components/brand/Icon.svelte';
 	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
 	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
+	import LogicielShowcase from '$lib/components/sections/LogicielShowcase.svelte';
 	import MaintenancePlans from '$lib/components/sections/MaintenancePlans.svelte';
 	import PackageGrid from '$lib/components/sections/PackageGrid.svelte';
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
@@ -78,6 +79,10 @@
 		{/if}
 	{/snippet}
 </PageIntro>
+
+{#if u.id === 'applications'}
+	<LogicielShowcase />
+{/if}
 
 {#if u.packages.length}
 	<section class="section section--tight" aria-labelledby="forfaits-title">
