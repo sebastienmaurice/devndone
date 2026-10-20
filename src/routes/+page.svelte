@@ -207,6 +207,89 @@
 		height: auto;
 	}
 
+	/* Entrée du hero (au chargement, CSS seul) : note manuscrite, titre ligne par ligne, mot DONE
+	   qui apparaît d'un coup, mots-clés et boutons, puis le visuel qui monte et flotte doucement */
+	.hero__text > :global(.hand-note) {
+		animation: hero-rise 640ms var(--ease-out) 80ms both;
+	}
+	.hero__line {
+		animation: hero-line 760ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+	}
+	.hero__line:nth-child(1) {
+		animation-delay: 200ms;
+	}
+	.hero__line:nth-child(2) {
+		animation-delay: 330ms;
+	}
+	.hero__line:nth-child(3) {
+		animation-delay: 460ms;
+	}
+	.hero__line :global(.done) {
+		display: inline-block;
+		animation: hero-pop 720ms cubic-bezier(0.34, 1.56, 0.64, 1) 900ms both;
+	}
+	.hero__keywords {
+		animation: hero-rise 640ms var(--ease-out) 760ms both;
+	}
+	.hero__ctas {
+		animation: hero-rise 640ms var(--ease-out) 880ms both;
+	}
+	.hero__visual {
+		animation: hero-visual 1000ms var(--ease-out) 300ms both;
+	}
+	.hero__visual :global(img) {
+		animation: hero-float 6s ease-in-out 1.6s infinite;
+	}
+	@keyframes hero-rise {
+		from {
+			opacity: 0;
+			transform: translateY(24px);
+		}
+	}
+	@keyframes hero-line {
+		from {
+			opacity: 0;
+			transform: translateY(0.6em);
+			filter: blur(6px);
+		}
+	}
+	@keyframes hero-pop {
+		0% {
+			opacity: 0;
+			transform: scale(0.5) rotate(-8deg);
+		}
+		100% {
+			opacity: 1;
+			transform: none;
+		}
+	}
+	@keyframes hero-visual {
+		from {
+			opacity: 0;
+			transform: translateY(48px) scale(0.94);
+		}
+	}
+	@keyframes hero-float {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-12px);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.hero__text > :global(.hand-note),
+		.hero__line,
+		.hero__line :global(.done),
+		.hero__keywords,
+		.hero__ctas,
+		.hero__visual,
+		.hero__visual :global(img) {
+			animation: none;
+		}
+	}
+
 	/* ------------------------------------------------------- En-têtes de section */
 	.center-head {
 		display: grid;

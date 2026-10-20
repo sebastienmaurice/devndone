@@ -44,6 +44,43 @@
 		padding-block: clamp(var(--space-6), 5vw, var(--space-9))
 			clamp(var(--space-6), 4vw, var(--space-8));
 	}
+	/* Entrée au chargement (CSS seul) : textes en cascade, visuel qui monte */
+	.page-intro__text > :global(*) {
+		animation: intro-rise 620ms var(--ease-out) both;
+	}
+	.page-intro__text > :global(:nth-child(2)) {
+		animation-delay: 80ms;
+	}
+	.page-intro__text > :global(:nth-child(3)) {
+		animation-delay: 160ms;
+	}
+	.page-intro__text > :global(:nth-child(4)) {
+		animation-delay: 260ms;
+	}
+	.page-intro__text > :global(:nth-child(n + 5)) {
+		animation-delay: 360ms;
+	}
+	.page-intro__aside {
+		animation: intro-visual 900ms var(--ease-out) 200ms both;
+	}
+	@keyframes intro-rise {
+		from {
+			opacity: 0;
+			transform: translateY(24px);
+		}
+	}
+	@keyframes intro-visual {
+		from {
+			opacity: 0;
+			transform: translateY(40px) scale(0.95);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.page-intro__text > :global(*),
+		.page-intro__aside {
+			animation: none;
+		}
+	}
 	.page-intro__grid {
 		display: grid;
 		gap: var(--space-7);

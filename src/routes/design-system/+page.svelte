@@ -388,7 +388,7 @@
 		eyebrow="Mouvement"
 		title="Apparition au défilement"
 		size="h2"
-		lede="use:reveal — les blocs hors écran au chargement apparaissent en montant de 12 px."
+		lede="use:reveal — les blocs hors écran au chargement apparaissent en montant de 24 px."
 	/>
 	<ol class="steps">
 		{#each ['Hors écran', 'Observé', 'Révélé', 'Terminé'] as label, i (label)}
