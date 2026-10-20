@@ -3,7 +3,7 @@
 	surtitre et titre (passage orange souligné), mascotte à gauche, cartes à droite. Première carte :
 	le logiciel de gestion d'affaires pour enseignistes (en développement), qui mène à sa présentation
 	plus bas dans la page ; les suivantes annoncent les projets à venir.
-	Textes : content/logiciel.ts. Mascotte provisoire (Sébastien fournira une pose dédiée).
+	Textes : content/logiciel.ts. Mascotte : pose « ordinateur portable à la main ».
 -->
 <script lang="ts">
 	import {
@@ -11,7 +11,7 @@
 		applicationsUpcoming as upcoming,
 		logicielIntro
 	} from '$lib/content/logiciel';
-	import mascotte from '$lib/assets/mascotte/mascotte-renard-process-projet-web.jpg?enhanced&w=1200;720;360';
+	import mascotte from '$lib/assets/mascotte/mascotte-renard-applications-ordinateur-portable.jpg?enhanced&w=720;360';
 	import visuel from '$lib/assets/logiciel/logiciel-enseigniste-releve-realite-augmentee.jpg?enhanced&w=720;360';
 	import AccentTitle from '../brand/AccentTitle.svelte';
 	import Icon from '../brand/Icon.svelte';
@@ -32,7 +32,7 @@
 	<div class="apps__mascot">
 		<enhanced:img
 			src={mascotte}
-			alt="Dev, la mascotte, à son bureau devant son ordinateur portable"
+			alt="Dev, la mascotte, debout, son ordinateur portable à la main, pointe du doigt les projets"
 			sizes="(min-width: 1100px) 380px, (min-width: 640px) 360px, 80vw"
 			loading="lazy"
 		/>
@@ -109,9 +109,10 @@
 	.apps__title :global(.accent-word) {
 		position: relative;
 	}
+	/* Pose en pied (portrait) : largeur réduite pour garder une hauteur proche des cartes */
 	.apps__mascot {
 		justify-self: center;
-		width: min(100%, 24rem);
+		width: min(100%, 17rem);
 	}
 	.apps__mascot :global(img) {
 		display: block;
