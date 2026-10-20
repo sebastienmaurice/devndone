@@ -30,7 +30,8 @@ export const aboutIntro = {
 	eyebrow: 'À propos',
 	title: 'Un seul interlocuteur, du brief à la mise en ligne.',
 	accent: 'Un seul interlocuteur',
-	text: "Je suis Sébastien Maurice, indépendant à Caudry. J'ai 15 ans d'expérience du design et de l'intégration web (WordPress, WooCommerce, PrestaShop), complétés par une formation au développement full stack (Titre Professionnel Développeur Web et Web Mobile, O'Clock, 2026). Je travaille avec des TPE, artisans et PME, avec un devis clair et un délai annoncé."
+	/** Texte fourni par Sébastien le 20/10/2026 */
+	text: "Je suis Sébastien Maurice, développeur web indépendant avec plus de 20 ans d'expérience dans le web, du design à l'intégration, en passant par WordPress, WooCommerce et PrestaShop. Formé au développement full stack, je conçois des sites et des solutions web adaptés aux besoins des professionnels. Je travaille avec des TPE, artisans et PME, avec un devis clair et un délai annoncé."
 } as const;
 
 export type Review = { quote: string; author: string };
