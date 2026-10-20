@@ -1,5 +1,5 @@
 <!--
-	Pied de page partagé, sur fond blanc (filet orange en tête) : logo, slogan manuscrit et signature,
+	Pied de page partagé, sur le fond Ivoire de la page : logo, slogan manuscrit et signature,
 	colonnes Expertises, Studio et Contact (liens déjà publiés), puis la mention du
 	site en ligne, les pages légales et le retour en haut de page. Colonnes : content/pages.ts.
 -->
@@ -95,22 +95,6 @@
 </footer>
 
 <style>
-	.site-footer {
-		position: relative;
-		overflow: hidden;
-		background: var(--surface);
-		color: var(--text);
-		border-top: 0;
-		padding-top: var(--space-8);
-	}
-	/* Filet orange en tête du pied de page */
-	.site-footer::before {
-		content: '';
-		position: absolute;
-		inset: 0 0 auto;
-		height: 4px;
-		background: var(--action);
-	}
 
 	/* Slogan manuscrit (Caveat), comme sur l'accueil */
 	.footer__slogan {
