@@ -16,7 +16,7 @@
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
-	import { expertiseMascots } from '$lib/assets/mascotte/expertises';
+	import { expertiseHeaderVisuals, expertiseMascots } from '$lib/assets/mascotte/expertises';
 	import { projects } from '$lib/content/realisations';
 	import { universes } from '$lib/content/services';
 	import { hero, links } from '$lib/content/studio';
@@ -36,7 +36,9 @@
 				? projects.filter((p) => p.stack.includes('Node.js')).map((p) => p.slug)
 				: []
 	);
-	const mascot = $derived(expertiseMascots[u.id]);
+	// Visuel d'en-tête dédié s'il existe (affiché en grand), sinon la mascotte de la carte
+	const headerVisual = $derived(expertiseHeaderVisuals[u.id]);
+	const mascot = $derived(headerVisual ?? expertiseMascots[u.id]);
 	const others = $derived(universes.filter((x) => x.id !== u.id));
 </script>
 
@@ -68,11 +70,13 @@
 	{/snippet}
 	{#snippet aside()}
 		{#if mascot}
-			<div class="mascot">
+			<div class="mascot" class:mascot--wide={headerVisual?.wide}>
 				<enhanced:img
 					src={mascot.src}
 					alt={mascot.alt}
-					sizes="(min-width: 1100px) 560px, 92vw"
+					sizes={headerVisual?.wide
+						? '(min-width: 1100px) 700px, 96vw'
+						: '(min-width: 1100px) 560px, 92vw'}
 					fetchpriority="high"
 				/>
 			</div>
@@ -186,6 +190,17 @@
 		height: 100%;
 		object-fit: contain;
 		mix-blend-mode: multiply;
+	}
+	/* Visuel d'en-tête dédié, en grand : il gagne sur l'espace entre les colonnes (vers la gauche),
+	   sans dépasser le bord droit du contenu */
+	.mascot--wide {
+		aspect-ratio: 1388 / 830;
+	}
+	@media (min-width: 1100px) {
+		.mascot--wide {
+			width: calc(100% + 4rem);
+			margin-left: -4rem;
+		}
 	}
 	/* Prestations : pleine ligne au-dessus des boutons, pastilles blanches cochées */
 	.domains {
