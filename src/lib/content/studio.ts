@@ -33,6 +33,62 @@ export const aboutIntro = {
 	text: "Je suis Sébastien Maurice, indépendant à Caudry. J'ai 15 ans d'expérience du design et de l'intégration web (WordPress, WooCommerce, PrestaShop), complétés par une formation au développement full stack (Titre Professionnel Développeur Web et Web Mobile, O'Clock, 2026). Je travaille avec des TPE, artisans et PME, avec un devis clair et un délai annoncé."
 } as const;
 
+/**
+ * Parcours (page À propos). Source : base de carrière de Sébastien (CV, faits fixes : dates,
+ * structures, villes, périmètres), relevée le 20/10/2026. Ne rien ajouter sans validation.
+ */
+export const aboutStory = {
+	eyebrow: 'Mon parcours',
+	title: 'Du design au code, 15 ans de projets web',
+	accent: '15 ans de projets web',
+	paragraphs: [
+		"Graphiste de formation (licence de design graphique, puis Master 2 en infographie et multimédia à l'Université Paris VIII), j'ai créé en 2009 ma première agence à Caudry : identités visuelles, sites web, boutique en ligne et signalétique.",
+		"J'ai ensuite dirigé un pôle web et infographie, piloté pendant 4 ans le web et l'e-commerce d'une PME industrielle de Caudry, dirigé une agence d'enseigne et de signalétique, puis travaillé en indépendant. En 2026, j'ai complété ce parcours par le Titre professionnel Développeur Web et Web Mobile (O'Clock).",
+		"Dev'n Done réunit ces deux métiers : le regard du designer et les compétences du développeur, avec un seul interlocuteur du premier échange à la mise en ligne."
+	]
+} as const;
+
+export type Milestone = { period: string; role: string; place: string; text: string };
+
+export const aboutTimeline: readonly Milestone[] = [
+	{
+		period: '2009 - 2015',
+		role: "Fondateur et directeur d'agence",
+		place: 'Eloustick, Caudry',
+		text: 'Agence de communication visuelle, e-commerce et signalétique : identités visuelles, sites web, boutique PrestaShop gérée en autonomie.'
+	},
+	{
+		period: '2014 - 2015',
+		role: 'Responsable du pôle web et infographie',
+		place: 'Thymep, Ligny-en-Cambrésis',
+		text: "Encadrement d'une équipe de 6 personnes, sites WordPress, création graphique, print et signalétique."
+	},
+	{
+		period: '2016 - 2020',
+		role: 'Responsable web et e-commerce',
+		place: "Alternativ' Uniforme, Caudry",
+		text: 'Sites WordPress et PrestaShop, e-commerce B2B, direction artistique, SEO et maintenance.'
+	},
+	{
+		period: '2021 - 2022',
+		role: "Responsable d'agence enseigne et signalétique",
+		place: "PANO Sign'Service, Dechy",
+		text: "Pilotage commercial et production de l'agence, coordination web et communication."
+	},
+	{
+		period: '2022 - 2025',
+		role: 'Indépendant',
+		place: 'Agence HOZ, Caudry',
+		text: 'Projets web, intégration front-end depuis Figma, Core Web Vitals, communication visuelle et print.'
+	},
+	{
+		period: '2026',
+		role: 'Titre professionnel Développeur Web et Web Mobile',
+		place: "O'Clock",
+		text: 'JavaScript, Svelte, Node.js, Express, API REST, PostgreSQL. Projet : Ciné Délices, application full stack.'
+	}
+];
+
 export type Review = { quote: string; author: string };
 
 export const reviewsIntro = {
