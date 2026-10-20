@@ -23,7 +23,7 @@ export const links = {
  */
 export const contactForm: { endpoint: string; accessKey: string } = {
 	endpoint: 'https://api.web3forms.com/submit',
-	accessKey: ''
+	accessKey: 'ff35290e-c90e-42e9-aecd-7de5b34768db'
 };
 
 export const aboutIntro = {
