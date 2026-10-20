@@ -10,6 +10,7 @@
 	import Icon from '$lib/components/brand/Icon.svelte';
 	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
 	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
+	import ApplicationsProjects from '$lib/components/sections/ApplicationsProjects.svelte';
 	import LogicielShowcase from '$lib/components/sections/LogicielShowcase.svelte';
 	import MaintenancePlans from '$lib/components/sections/MaintenancePlans.svelte';
 	import PackageGrid from '$lib/components/sections/PackageGrid.svelte';
@@ -81,6 +82,12 @@
 </PageIntro>
 
 {#if u.id === 'applications'}
+	<!-- Projets d'applications (cartes, comme « Mon process »), puis le détail du logiciel -->
+	<section class="section section--tight apps-projects" aria-labelledby="apps-projects-title">
+		<div class="container">
+			<ApplicationsProjects />
+		</div>
+	</section>
 	<LogicielShowcase />
 {/if}
 

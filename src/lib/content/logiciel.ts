@@ -52,3 +52,110 @@ export const logicielPrinciples = [
 
 export const logicielNote =
 	'Logiciel en cours de développement. Exemple conceptuel : « Zen & Beauté » est un commerce fictif, les images sont illustratives et les dimensions indicatives.';
+
+/**
+ * Compléments tirés du dossier de présentation (« business case signalétique »), en version
+ * générique : ni client, ni tarif, ni cadre contractuel propre à un prospect.
+ */
+
+/** Cartes de la section « Projets » de la page Applications & logiciels */
+export const applicationsProjectsIntro = {
+	eyebrow: 'Applications & logiciels',
+	title: 'Des outils métier, conçus avec ceux qui les utilisent.',
+	accent: 'conçus avec ceux qui les utilisent'
+} as const;
+
+export const applicationsUpcoming = {
+	title: 'Projet à venir',
+	text: "D'autres applications et logiciels métier rejoindront bientôt cette page."
+} as const;
+
+/** Les 4 idées clés du logiciel */
+export const logicielPillars = [
+	{
+		title: 'Un dossier unique par affaire',
+		text: "Les informations de l'affaire sont rassemblées dans un seul dossier, de la demande initiale à la préparation de la fabrication. Le dossier distingue ce qui est confirmé, ce qui reste une hypothèse et ce qui manque."
+	},
+	{
+		title: 'Un chiffrage qui se rejoue',
+		text: "Le prix se construit ligne par ligne, avec les règles propres à chaque entreprise, et peut se rejouer à l'identique. Si une donnée change, le calcul et le devis le signalent."
+	},
+	{
+		title: 'Des versions datées et traçables',
+		text: 'Chaque devis, chaque maquette garde son auteur, sa date et la décision du client sur une version précise. On retrouve ce qui a été décidé, et quand.'
+	},
+	{
+		title: "L'IA au service du métier",
+		text: "L'IA peut accélérer la proposition visuelle. Le professionnel garde le relevé, la validation et les documents de fabrication."
+	}
+] as const;
+
+/** Le parcours d'une affaire, en 5 phases */
+export const logicielPhases = [
+	{
+		title: "Cadrer l'affaire",
+		steps: ['Demande', 'Qualification', 'Relevé de site', 'Étude et conformité'],
+		text: 'Un dossier ouvert dès le premier contact, des informations marquées confirmées ou hypothèses, la liste des manques et des questions au client.',
+		output: 'Dossier qualifié : informations, cotes, contraintes'
+	},
+	{
+		title: 'Concevoir et chiffrer',
+		steps: ['Proposition visuelle', 'Fournisseurs', 'Chiffrage'],
+		text: 'Des demandes de prix préparées depuis le dossier, un calcul rejouable, une proposition visuelle assistée par IA et rattachée au dossier.',
+		output: 'Calcul traçable et proposition rattachée au dossier'
+	},
+	{
+		title: 'Proposer et faire décider',
+		steps: ['Devis', 'Maquette et décision'],
+		text: 'Des devis versionnés, avec validité et alerte si une donnée change. La décision du client porte sur une version précise de la maquette.',
+		output: 'Version validée, datée, avec son auteur'
+	},
+	{
+		title: 'Préparer la fabrication',
+		steps: ['BAT et signature', 'Fiche atelier'],
+		text: 'Un BAT préparé depuis la version validée et signé par le client. Une fiche atelier avec schéma coté et fichiers de découpe.',
+		output: 'Dossier de production : cotes, matières, couleurs, fichiers'
+	},
+	{
+		title: 'Réaliser et encaisser',
+		steps: ['Planning et pose', 'Réception', 'Facturation', 'Paiement'],
+		text: 'Un planning des équipes, un procès-verbal de réception, une facture liée au devis validé et le suivi des encaissements.',
+		output: 'Affaire close, facturée, encaissée'
+	}
+] as const;
+
+/** Ce que cela apporte */
+export const logicielBenefits = [
+	{
+		title: "À l'entreprise",
+		items: [
+			'Moins de ressaisies et de reprises',
+			'Une proposition prête plus vite',
+			'Un atelier qui reçoit un dossier complet'
+		]
+	},
+	{
+		title: 'Aux équipes',
+		items: [
+			'Des dossiers de niveau homogène',
+			'Des délais et des points de blocage visibles',
+			'Chaque équipe garde ses règles et ses données'
+		]
+	},
+	{
+		title: 'Au client final',
+		items: [
+			'Il visualise son futur commerce',
+			"Il comprend ce qu'il valide",
+			'Il retrouve ce qui a été décidé'
+		]
+	}
+] as const;
+
+/** Mises en situation (images : src/lib/assets/logiciel/) */
+export const logicielGallery = [
+	{ caption: 'Relevé de façade et cotes en réalité augmentée, sur tablette' },
+	{ caption: "Plan d'enseigne, couleurs RAL et documents dans l'interface" },
+	{ caption: 'Prise de mesures de la façade et des vitrages' },
+	{ caption: 'Plan technique partagé avec le client' }
+] as const;
