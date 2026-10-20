@@ -60,7 +60,9 @@
 	.page-intro__text > :global(:nth-child(n + 5)) {
 		animation-delay: 360ms;
 	}
-	.page-intro__aside {
+	/* Visuel : on anime l'image elle-même, pas son conteneur. Un conteneur animé (transform,
+	   opacité) isole l'image, et son fond blanc ne se fond plus dans l'Ivoire (mix-blend-mode) */
+	.page-intro__aside :global(:is(img, ul)) {
 		animation: intro-visual 900ms var(--ease-out) 200ms both;
 	}
 	@keyframes intro-rise {
@@ -77,7 +79,7 @@
 	}
 	@media (prefers-reduced-motion: reduce) {
 		.page-intro__text > :global(*),
-		.page-intro__aside {
+		.page-intro__aside :global(:is(img, ul)) {
 			animation: none;
 		}
 	}

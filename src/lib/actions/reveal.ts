@@ -67,10 +67,18 @@ export function revealPage(root: HTMLElement): () => void {
 			picked.push(el);
 		}
 	}
-	const observers = picked.map((el) => {
+	const observers = picked.flatMap((el) => {
 		// Cartes d'une même liste : apparition en cascade (6 au plus, puis même délai)
-		const index = el.matches('li') ? [...el.parentElement!.children].indexOf(el) : 0;
-		return watch(el, Math.min(index, 5) * 90);
+		if (el.matches('li')) {
+			const index = [...el.parentElement!.children].indexOf(el);
+			return [watch(el, Math.min(index, 5) * 90)];
+		}
+		// Image fondue dans le fond (mix-blend-mode) : on anime l'image elle-même ; un conteneur
+		// animé l'isolerait et son fond blanc apparaîtrait sur l'Ivoire
+		const blended = [...el.querySelectorAll('img')].filter(
+			(img) => getComputedStyle(img).mixBlendMode !== 'normal'
+		);
+		return blended.length ? blended.map((img) => watch(img)) : [watch(el)];
 	});
 	return () => observers.forEach((o) => o?.disconnect());
 }
