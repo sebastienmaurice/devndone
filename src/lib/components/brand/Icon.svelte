@@ -15,6 +15,7 @@
 	import Check from '@lucide/svelte/icons/check';
 	import Clock from '@lucide/svelte/icons/clock';
 	import CodeXml from '@lucide/svelte/icons/code-xml';
+	import Copy from '@lucide/svelte/icons/copy';
 	import Globe from '@lucide/svelte/icons/globe';
 	import Info from '@lucide/svelte/icons/info';
 	import Layers from '@lucide/svelte/icons/layers';
@@ -72,7 +73,8 @@
 		lightbulb: Lightbulb,
 		briefcase: Briefcase,
 		target: Target,
-		trophy: Trophy
+		trophy: Trophy,
+		copy: Copy
 	} satisfies Record<string, Component<Record<string, unknown>>>;
 
 	export type IconName = keyof typeof icons;
