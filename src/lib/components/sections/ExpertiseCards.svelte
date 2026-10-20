@@ -56,9 +56,6 @@
 			<p class="extra__label">{pad(cards.length + j)} · Expertise complémentaire</p>
 			<svelte:element this={`h${headingLevel}`} class="extra__title">{u.title}</svelte:element>
 			<p class="extra__lede">{u.text}</p>
-			<ul class="extra__tags" role="list">
-				{#each u.tags as tag (tag)}<li>{tag}</li>{/each}
-			</ul>
 			<Button href={u.path} icon="arrow-right"
 				>Découvrir l'expertise<span class="sr-only"> {u.title}</span></Button
 			>
@@ -210,22 +207,7 @@
 	}
 	.extra__lede {
 		max-width: 26rem;
-		margin: 0;
-	}
-	.extra__tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--space-2);
 		margin: 0 0 var(--space-2);
-		padding: 0;
-		list-style: none;
-	}
-	.extra__tags li {
-		padding: 0.15rem var(--space-4);
-		border: 1.5px solid var(--line-strong);
-		border-radius: 999px;
-		font-size: var(--text-body-sm);
-		font-weight: var(--weight-semibold);
 	}
 	/* Petits écrans : l'illustration détourée sous le texte, posée sur le bord bas */
 	.extra__visual {
@@ -252,15 +234,12 @@
 			grid-template-columns: minmax(0, 22rem);
 			padding: var(--space-5) var(--space-7);
 		}
-		.extra__tags {
-			margin: 0;
-		}
 		.extra__visual {
 			position: absolute;
 			right: 0;
 			bottom: 0;
 			width: auto;
-			height: calc(100% + 1.75rem);
+			height: calc(100% + 3.25rem);
 			margin: 0;
 		}
 		.extra__visual :global(picture),
