@@ -37,7 +37,7 @@
 	--dnd-mint-ink: #007a62; /* mint en texte sur Ivoire : 5.07 : 1 */
 	--dnd-mint-hover: #5cefd0; /* v1.1 · Night dessus : 13.64 : 1 */
 	--dnd-mint-ink-hover: #00614e; /* v1.1 · Ivoire dessus : 7.13 : 1 */
-	--dnd-mint-link: #11e0c4; /* v2.3 · essai liens (Sébastien) · Ivoire : 1.61 : 1, Night : 11.57 : 1 */
+	--dnd-link-ocean: #007c9c; /* v2.3 · bleu océan, liens sur Ivoire : 4.61 : 1 (blanc : 4.81 : 1) */
 
 	/* Feedback — proposé en v1.0, à valider */
 	--dnd-error: #ff6b6b; /* 7.02 : 1 sur Night */
@@ -256,10 +256,9 @@
 	--action-alt: var(--dnd-orange);
 	--action-alt-hover: var(--dnd-orange-hover);
 	--on-action-alt: var(--dnd-night);
-	/* v2.3 (20/10/2026) : liens et actions secondaires en texte = menthe clair #11E0C4, essai de
-     Sébastien malgré un contraste de 1.61 : 1 sur Ivoire (minimum WCAG 4.5 : 1). Alternative conforme :
-     menthe encre var(--dnd-mint-ink), 5.07 : 1. */
-	--action-alt-text: var(--dnd-mint-link);
+	/* v2.3 (20/10/2026) : liens et actions secondaires en texte = bleu océan #007C9C, choisi par
+     Sébastien (4.61 : 1 sur Ivoire, conforme WCAG AA). Fonds Night : menthe pur, inchangé. */
+	--action-alt-text: var(--dnd-link-ocean);
 	--action-alt-ring: var(--dnd-night);
 	/* v2.2 : titres bicolores Night + orange vif, choix de Sébastien (19/10/2026).
      Contraste 2.26 : 1 sur Ivoire, sous le seuil WCAG (3 : 1 pour un grand titre) :
