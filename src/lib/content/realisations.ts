@@ -53,7 +53,7 @@ export const projects: readonly Project[] = [
 		stack: 'WordPress · Elementor Pro · SEO',
 		text: "Agence d'architecture et d'urbanisme. Refonte WordPress, direction artistique, SEO.",
 		url: 'https://www.palimpseste-urbain.com/',
-		image: 'palimpseste-urbain',
+		image: 'palimpseste-urbain-refonte-wordpress',
 		details: {
 			subtitle: 'Refonte WordPress Elementor - site institutionnel, SEO & performance',
 			sector: 'Architecture & urbanisme',
@@ -86,7 +86,7 @@ export const projects: readonly Project[] = [
 		stack: 'Wix → WordPress · WooCommerce',
 		text: 'Migration de Wix vers WordPress et WooCommerce. Catalogue B2B et devis en ligne.',
 		url: 'https://gsti62.com/',
-		image: 'gsti',
+		image: 'gsti-site-wordpress-woocommerce-b2b',
 		details: {
 			subtitle: 'Refonte WordPress WooCommerce B2B - Catalogue & système de devis',
 			sector: 'Commerce de détail',
@@ -117,7 +117,7 @@ export const projects: readonly Project[] = [
 		stack: 'JavaScript · Node.js · Express · PostgreSQL',
 		text: 'Application full stack de recettes inspirées du cinéma.',
 		url: 'https://cinedelices.com/',
-		image: 'cine-delices',
+		image: 'cine-delices-application-recettes-cinema',
 		details: {
 			subtitle: 'Application web full stack, projet de formation (Titre professionnel DWWM)',
 			period: '12 semaines de développement',
@@ -143,7 +143,7 @@ export const projects: readonly Project[] = [
 		stack: 'WordPress · Catalogue · Devis',
 		text: 'Location de matériel BTP et espaces verts. Catalogue par catégories et devis en ligne.',
 		url: 'https://maxilou.fr/',
-		image: 'maxilou',
+		image: 'maxilou-site-wordpress-location-materiel',
 		details: {
 			subtitle: 'Site WordPress location matériel - devis en ligne & SEO',
 			sector: 'BTP & construction',
@@ -176,7 +176,7 @@ export const projects: readonly Project[] = [
 		stack: 'WordPress · Réservation · FR/EN',
 		text: "Chambres d'hôtes en Picardie. Réservation en ligne, versions française et anglaise.",
 		url: 'https://www.petitchateauvercourt.com/',
-		image: 'petit-chateau-vercourt',
+		image: 'petit-chateau-vercourt-site-chambres-hotes',
 		details: {
 			subtitle: 'Création site WordPress hôtelier - Réservations & SEO local',
 			sector: 'Hôtellerie',
@@ -207,7 +207,7 @@ export const projects: readonly Project[] = [
 		stack: 'WordPress · Elementor · E-commerce',
 		text: 'Refonte WordPress Elementor. Vitrine et e-commerce de signalétique.',
 		url: 'https://www.pano-douai.fr/',
-		image: 'pano-douai',
+		image: 'pano-signservice-refonte-wordpress',
 		details: {
 			subtitle:
 				'Refonte du site WordPress avec Elementor, boutique WooCommerce et demande de devis',
@@ -244,7 +244,7 @@ export const projects: readonly Project[] = [
 		stack: 'WordPress · PrestaShop · E-commerce B2B',
 		text: 'PME industrielle de Caudry, personnalisation textile. Sites WordPress et PrestaShop, e-commerce B2B et devis en ligne, sur 4 ans.',
 		url: 'https://alternativ-uniforme.fr/',
-		image: 'alternativ-uniforme',
+		image: 'alternativ-uniforme-site-ecommerce-b2b',
 		details: {
 			subtitle: 'Développement WordPress & E-commerce B2B',
 			sector: 'Commerce de détail',
@@ -276,7 +276,7 @@ export const projects: readonly Project[] = [
 		stack: 'WordPress · Elementor · WooCommerce',
 		text: 'Cours de valse à Paris. Refonte WordPress Elementor & WooCommerce : réservation et boutique en ligne.',
 		url: 'https://harmonyvalse.com/',
-		image: 'harmony-valse',
+		image: 'harmony-valse-site-wordpress-ecole-de-danse',
 		details: {
 			subtitle: 'Refonte WordPress Elementor & WooCommerce - réservation et boutique en ligne',
 			sector: 'Divertissements & loisirs',

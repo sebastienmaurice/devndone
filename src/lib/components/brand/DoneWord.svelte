@@ -6,7 +6,7 @@
 	<h1>Des projets pensés pour être <DoneWord sizes="(min-width: 1100px) 340px, 220px" /></h1>
 -->
 <script lang="ts">
-	import doneImage from '$lib/assets/brand/done-3d.png?enhanced&w=640;320';
+	import doneImage from '$lib/assets/brand/done-dev-n-done-3d-orange.png?enhanced&w=640;320';
 
 	let { sizes = '(min-width: 1100px) 300px, 200px' }: { sizes?: string } = $props();
 </script>

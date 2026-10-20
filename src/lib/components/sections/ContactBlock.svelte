@@ -5,7 +5,7 @@
 -->
 <script lang="ts">
 	import { contactIntro } from '$lib/content/studio';
-	import mascotte from '$lib/assets/mascotte/contact-pouce-leve.png?enhanced';
+	import mascotte from '$lib/assets/mascotte/mascotte-renard-dev-n-done-pouce-leve.png?enhanced';
 	import DoneWord from '../brand/DoneWord.svelte';
 	import Icon from '../brand/Icon.svelte';
 	import Button from '../ui/Button.svelte';

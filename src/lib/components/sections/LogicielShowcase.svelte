@@ -12,10 +12,10 @@
 		logicielPrinciples,
 		logicielSteps
 	} from '$lib/content/logiciel';
-	import commerce from '$lib/assets/logiciel/01-commerce-nu.jpg?enhanced&w=1200;720;360';
-	import cotes from '$lib/assets/logiciel/02-emplacements-cotes.jpg?enhanced&w=1200;720;360';
-	import proposition from '$lib/assets/logiciel/03-proposition-visuelle.jpg?enhanced&w=1200;720;360';
-	import fiche from '$lib/assets/logiciel/04-fiche-atelier.jpg?enhanced&w=1200;720;360';
+	import commerce from '$lib/assets/logiciel/logiciel-enseigniste-releve-facade-commerce.jpg?enhanced&w=1200;720;360';
+	import cotes from '$lib/assets/logiciel/logiciel-enseigniste-emplacements-enseigne-cotes.jpg?enhanced&w=1200;720;360';
+	import proposition from '$lib/assets/logiciel/logiciel-enseigniste-proposition-visuelle-enseigne.jpg?enhanced&w=1200;720;360';
+	import fiche from '$lib/assets/logiciel/logiciel-enseigniste-fiche-technique-atelier.jpg?enhanced&w=1200;720;360';
 	import AccentTitle from '../brand/AccentTitle.svelte';
 	import Icon from '../brand/Icon.svelte';
 	import SectionLabel from '../brand/SectionLabel.svelte';

@@ -32,12 +32,12 @@ for (const [name, size] of [
 
 // Image de partage Open Graph 1200 × 630 : visuel mascotte (fond Night exact)
 // centré sur un aplat Night.
-const kv = join(root, 'src/lib/assets/brand/key-visual-mascotte-night.png');
+const kv = join(root, 'src/lib/assets/brand/mascotte-renard-dev-n-done-fond-nuit.png');
 const kvResized = await sharp(kv).resize({ width: 1200 }).toBuffer();
 const { height: kvHeight = 0 } = await sharp(kvResized).metadata();
 
 await sharp({ create: { width: 1200, height: 630, channels: 3, background: NIGHT } })
 	.composite([{ input: kvResized, top: Math.round((630 - kvHeight) / 2), left: 0 }])
 	.jpeg({ quality: 86, mozjpeg: true })
-	.toFile(join(statik, 'og', 'og-default.jpg'));
-console.log('icons: og/og-default.jpg');
+	.toFile(join(statik, 'og', 'dev-n-done-studio-digital-wordpress.jpg'));
+console.log('icons: og/dev-n-done-studio-digital-wordpress.jpg');

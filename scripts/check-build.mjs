@@ -73,10 +73,10 @@ const required = [
 	'favicon.svg',
 	'apple-touch-icon.png',
 	'site.webmanifest',
-	'og/og-default.jpg',
+	'og/dev-n-done-studio-digital-wordpress.jpg',
 	'fonts/plus-jakarta-sans-var.woff2',
 	'fonts/lilita-one-400.woff2',
-	'brand/logo-horizontal-ivory.svg'
+	'brand/dev-n-done-logo-horizontal-ivory.svg'
 ];
 for (const r of required) if (!existsSync(join(build, r))) errors.push(`build/${r} manquant`);
 

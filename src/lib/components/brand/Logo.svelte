@@ -26,7 +26,7 @@
 	} as const;
 
 	const size = $derived(files[variant]);
-	const src = $derived(`/brand/logo-${variant}-${tone}.svg`);
+	const src = $derived(`/brand/dev-n-done-logo-${variant}-${tone}.svg`);
 	const displayHeight = $derived(height ?? (variant === 'horizontal' ? 42 : 44));
 </script>
 

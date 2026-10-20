@@ -10,11 +10,11 @@
 	import AccentTitle from '../brand/AccentTitle.svelte';
 	import SectionLabel from '../brand/SectionLabel.svelte';
 	import { processIntro, processSteps } from '$lib/content/services';
-	import mascotte from '$lib/assets/mascotte/process-renard-bureau.jpg?enhanced&w=1200;720;360';
-	import comprendre from '$lib/assets/process/etape-1.jpg?enhanced&w=720;360';
-	import concevoir from '$lib/assets/process/etape-2.jpg?enhanced&w=720;360';
-	import developper from '$lib/assets/process/etape-3.jpg?enhanced&w=720;360';
-	import livrer from '$lib/assets/process/etape-4.jpg?enhanced&w=720;360';
+	import mascotte from '$lib/assets/mascotte/mascotte-renard-process-projet-web.jpg?enhanced&w=1200;720;360';
+	import comprendre from '$lib/assets/process/process-comprendre-besoins-projet.jpg?enhanced&w=720;360';
+	import concevoir from '$lib/assets/process/process-concevoir-maquette-site.jpg?enhanced&w=720;360';
+	import developper from '$lib/assets/process/process-developper-site-web.jpg?enhanced&w=720;360';
+	import livrer from '$lib/assets/process/process-livrer-mise-en-ligne.jpg?enhanced&w=720;360';
 
 	let { level = 2 }: { level?: 1 | 2 } = $props();
 

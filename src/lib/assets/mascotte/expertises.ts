@@ -5,11 +5,11 @@
  * Clés : `id` des univers (content/services.ts).
  */
 import type { Picture } from 'vite-imagetools';
-import web from './expertise-web.jpg?enhanced&w=1200;720;360';
-import design from './expertise-design.jpg?enhanced&w=1200;720;360';
-import automatisation from './expertise-automatisation.jpg?enhanced&w=1200;720;360';
-import applications from './expertise-applications.jpg?enhanced&w=1200;720;360';
-import fullStack from './expertise-fullstack.png?enhanced&w=1200;720;360&quality=40';
+import web from './mascotte-renard-creation-site-web-wordpress.jpg?enhanced&w=1200;720;360';
+import design from './mascotte-renard-design-identite-visuelle.jpg?enhanced&w=1200;720;360';
+import automatisation from './mascotte-renard-automatisation-processus.jpg?enhanced&w=1200;720;360';
+import applications from './mascotte-renard-applications-logiciels-metier.jpg?enhanced&w=1200;720;360';
+import fullStack from './mascotte-renard-developpeur-full-stack.png?enhanced&w=1200;720;360&quality=40';
 
 export const expertiseMascots: Record<string, { src: Picture; alt: string }> = {
 	web: {

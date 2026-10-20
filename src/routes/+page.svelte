@@ -15,7 +15,7 @@
 	import ExpertiseCards from '$lib/components/sections/ExpertiseCards.svelte';
 	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
-	import heroImage from '$lib/assets/mascotte/hero-renard-outils.png?enhanced&w=1120;720;480&quality=40';
+	import heroImage from '$lib/assets/mascotte/mascotte-renard-developpeur-wordpress-elementor.png?enhanced&w=1120;720;480&quality=40';
 	import { realisationsIntro } from '$lib/content/realisations';
 	import { heroSlogan, servicesIntro } from '$lib/content/services';
 	import { hero, links } from '$lib/content/studio';

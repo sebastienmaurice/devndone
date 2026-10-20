@@ -17,7 +17,7 @@ export const site = {
 	ogTitle: "Dev'n Done · Des projets pensés pour être Done.",
 	ogDescription: 'Un studio digital indépendant qui conçoit, développe et livre des solutions web.',
 	themeColor: '#0A0D11',
-	ogImage: '/og/og-default.jpg',
+	ogImage: '/og/dev-n-done-studio-digital-wordpress.jpg',
 	ogImageAlt:
 		"Dev, la mascotte DEV'n DONE, derrière le lettrage Dev'n Done, avec la signature Développer / Piloter / Livrer"
 } as const;
