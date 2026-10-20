@@ -151,6 +151,12 @@
 		font-size: 1.25rem;
 		line-height: 1;
 		letter-spacing: 0.02em;
+		transition: background-color var(--duration-reveal) var(--ease-out);
+	}
+	/* Survol : la pastille passe au Bleu nuit */
+	.expertise:hover .expertise__num,
+	.expertise:focus-visible .expertise__num {
+		background: var(--text);
 	}
 	.expertise__title {
 		font-size: clamp(1.5rem, 1.35rem + 0.65vw, 2rem);

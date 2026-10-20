@@ -71,7 +71,7 @@
 				'intro intro'
 				'mascot steps';
 			column-gap: var(--space-5);
-			row-gap: var(--space-4);
+			row-gap: var(--space-7);
 			align-items: end;
 		}
 		.process__intro {
@@ -90,8 +90,9 @@
 		gap: var(--space-4);
 		justify-items: start;
 	}
+	/* Titre sur 3 lignes : « De l'idée à la mise / en ligne, / en toute confiance. » */
 	.process__title {
-		max-width: 16em;
+		max-width: 10em;
 		margin: 0;
 	}
 	/* Passage orange souligné d'un trait dessiné, comme sur la maquette */
@@ -202,6 +203,11 @@
 		font-size: 1.25rem;
 		line-height: 1;
 		letter-spacing: 0.02em;
+		transition: background-color var(--duration-reveal) var(--ease-out);
+	}
+	/* Survol : la pastille passe au Bleu nuit */
+	.process-card:hover .process-card__num {
+		background: var(--text);
 	}
 	.process-card__title {
 		margin: var(--space-1) 0 0;
