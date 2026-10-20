@@ -8,7 +8,7 @@
 	L'adresse email n'est pas affichée sur la page (choix de Sébastien, 20/10/2026) : elle ne
 	figure que dans les mentions légales, où la LCEN l'impose.
 	La page /confidentialite/ décrit l'un ou l'autre fonctionnement selon la même clé.
-	En-tête : la mascotte au smartphone, à droite en grand écran.
+	En-tête : photo de Sébastien avec la mascotte, à droite en grand écran.
 -->
 <script lang="ts">
 	import { Button, Check, Field, Honeypot, Notice, Seo } from '$lib/components';
@@ -17,7 +17,7 @@
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import { legal } from '$lib/content/legal';
 	import { contactForm, contactIntro, hero, links } from '$lib/content/studio';
-	import mascot from '$lib/assets/mascotte/mascotte-renard-contact-smartphone-messages.jpg?enhanced&w=1200;720;360';
+	import photo from '$lib/assets/photos/sebastien-maurice-dev-n-done-contact-avec-mascotte.jpg?enhanced&w=1200;720;360';
 	import { universes } from '$lib/content/services';
 
 	let name = $state('');
@@ -137,8 +137,8 @@
 	{#snippet aside()}
 		<div class="mascot">
 			<enhanced:img
-				src={mascot}
-				alt="Dev, la mascotte, lève le pouce, smartphone en main, entouré de bulles email, message et téléphone"
+				src={photo}
+				alt="Sébastien Maurice, fondateur de Dev'n Done, avec Dev, la mascotte, bras croisés en arrière-plan"
 				sizes="(min-width: 1100px) 520px, 92vw"
 				fetchpriority="high"
 			/>
@@ -315,7 +315,7 @@
 	.mascot {
 		max-width: 34rem;
 		margin-inline: auto;
-		aspect-ratio: 1343 / 1086;
+		aspect-ratio: 1246 / 957;
 	}
 	.mascot :global(img) {
 		display: block;
