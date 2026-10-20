@@ -34,6 +34,18 @@ export const aboutIntro = {
 	text: "Je suis Sébastien Maurice, développeur web indépendant avec plus de 20 ans d'expérience dans le web, du design à l'intégration, en passant par WordPress, WooCommerce et PrestaShop. Formé au développement full stack, je conçois des sites et des solutions web adaptés aux besoins des professionnels. Je travaille avec des TPE, artisans et PME, avec un devis clair et un délai annoncé."
 } as const;
 
+/** Section « La mascotte » de la page À propos : texte fourni par Sébastien le 20/10/2026 */
+export const aboutMascot = {
+	eyebrow: 'La mascotte',
+	title: "Le sérieux n'oblige pas à se prendre au sérieux.",
+	accent: 'se prendre au sérieux',
+	paragraphs: [
+		"Chez Dev'n Done, c'est un renard qui vous accueille, pas une énième photo de développeur devant son écran. Une mascotte à l'image de mon approche : accessible, curieuse et tournée vers les solutions.",
+		"Derrière le personnage, plus de 20 ans d'expérience dans le web, des compétences techniques solides et un seul objectif : concrétiser vos projets."
+	],
+	cta: 'Découvrir mes prestations'
+} as const;
+
 export type Review = { quote: string; author: string };
 
 export const reviewsIntro = {
