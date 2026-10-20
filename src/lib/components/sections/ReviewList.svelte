@@ -24,6 +24,24 @@
 	.reviews {
 		--auto-min: 17rem;
 	}
+	/* Survol (référence du site) : soulèvement, contour orange */
+	.reviews > :global(.card) {
+		transition:
+			transform var(--duration-reveal) var(--ease-out),
+			box-shadow var(--duration-reveal) var(--ease-out),
+			border-color var(--duration-reveal) var(--ease-out);
+	}
+	.reviews > :global(.card):hover {
+		transform: translateY(-6px);
+		box-shadow: var(--shadow-card-hover);
+		border-color: var(--accent-deco);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.reviews > :global(.card):hover {
+			transform: none;
+		}
+	}
+
 	.review {
 		display: grid;
 		gap: var(--space-4);

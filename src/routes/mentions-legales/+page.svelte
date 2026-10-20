@@ -1,8 +1,10 @@
 <!--
 	Mentions légales : mêmes textes que mentions-legales.html du site en ligne (content/legal.ts).
 	Ajouts validés : adresse de l'hébergeur GitHub, Inc. et données INPI (SIRET, registre, APE, TVA).
+	En-tête commun des pages internes (PageIntro : fil d'Ariane, surtitre, titre).
 -->
 <script lang="ts">
+	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import Seo from '$lib/components/seo/Seo.svelte';
 	import { legal } from '$lib/content/legal';
 
@@ -16,15 +18,14 @@
 	description="Mentions légales du site devndone.com : éditeur, hébergeur, données personnelles, propriété intellectuelle."
 />
 
-<section class="section surface-ivory" aria-labelledby="legal-title">
-	<div class="container">
-		<header class="section-head">
-			<p class="eyebrow eyebrow--rule">
-				<b>Informations</b><span class="slash" aria-hidden="true">/</span>Légal
-			</p>
-			<h1 class="t-h1" id="legal-title">Mentions légales</h1>
-		</header>
+<PageIntro
+	label="Informations légales"
+	heading="Mentions légales"
+	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Mentions légales' }]}
+/>
 
+<section class="section section--tight" aria-label="Mentions légales">
+	<div class="container">
 		<div class="stack stack--lg t-measure">
 			<section class="stack stack--sm" aria-labelledby="l-editeur">
 				<h2 class="t-h3" id="l-editeur">Éditeur du site</h2>

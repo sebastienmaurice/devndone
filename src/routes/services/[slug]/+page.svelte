@@ -111,7 +111,7 @@
 		<div class="container">
 			<div class="quote">
 				<h2 class="t-h3" id="devis-title">Un projet sur mesure</h2>
-				<p>{packagesIntro.note}</p>
+				<p>{packagesIntro.customNote}</p>
 				<Button href={links.calendly} icon="arrow-up-right">{hero.ctaCall}</Button>
 			</div>
 		</div>

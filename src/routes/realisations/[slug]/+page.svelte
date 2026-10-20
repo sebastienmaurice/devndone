@@ -197,10 +197,10 @@
 	.checks__icon {
 		display: grid;
 		place-items: center;
-		width: 24px;
-		height: 24px;
 		flex: none;
-		margin-top: 1px;
+		width: 22px;
+		height: 22px;
+		margin-top: 2px;
 		border-radius: 50%;
 		background: var(--action);
 		color: var(--on-action);

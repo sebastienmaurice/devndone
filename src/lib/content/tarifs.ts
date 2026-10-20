@@ -73,7 +73,10 @@ export const packagesIntro = {
 	title: 'Votre site en abonnement mensuel',
 	accent: 'abonnement mensuel',
 	lede: 'Création, hébergement et maintenance réunis dans un abonnement mensuel. Engagement de 24 mois ; à la fin, le site vous appartient.',
-	note: 'Les audits sont facturés en une fois. Identité visuelle, SEO, automatisation, développement sur mesure : chiffrés après un premier échange.'
+	note: 'Les audits sont facturés en une fois. Identité visuelle, SEO, automatisation, développement sur mesure : chiffrés après un premier échange.',
+	/** Encart « Un projet sur mesure » des pages de service */
+	customNote:
+		'Identité visuelle, SEO, automatisation, développement sur mesure : chiffrés après un premier échange.'
 } as const;
 
 export const packages: readonly Package[] = [

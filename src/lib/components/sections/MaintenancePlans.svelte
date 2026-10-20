@@ -2,7 +2,7 @@
 	Grille de maintenance WordPress pour les sites existants (content/tarifs.ts). GRILLE DE TEST :
 	textes et montants à ne pas modifier sans validation.
 	Présentation alignée sur les cartes tarif : cartes blanches de même hauteur, prix en Lilita One
-	orange, prestations en liste cochée (libellé, puis valeur en gras), bouton en bas de carte.
+	orange, prestations en liste cochée (rond orange, libellé, puis valeur en gras), bouton en bas.
 	La formule recommandée porte un bandeau orange en tête et un contour orange.
 -->
 <script lang="ts">
@@ -151,8 +151,8 @@
 		height: 22px;
 		margin-top: 2px;
 		border-radius: 50%;
-		background: color-mix(in srgb, var(--action-alt-text) 12%, var(--surface));
-		color: var(--action-alt-text);
+		background: var(--action);
+		color: var(--on-action);
 	}
 	.plan__row {
 		display: grid;

@@ -64,8 +64,9 @@
 
 		<!-- Les 4 idées clés -->
 		<ul class="pillars" role="list">
-			{#each logicielPillars as p (p.title)}
+			{#each logicielPillars as p, i (p.title)}
 				<li class="pillar">
+					<span class="pillar__num" aria-hidden="true">{pad(i)}</span>
 					<h3 class="pillar__title">{p.title}</h3>
 					<p>{p.text}</p>
 				</li>
@@ -320,11 +321,28 @@
 		}
 	}
 	.pillar {
+		display: grid;
+		align-content: start;
+		gap: var(--space-2);
 		padding: var(--space-5);
 		background: var(--surface);
 		border: 1px solid var(--line);
-		border-top: 4px solid var(--accent-deco);
 		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-card);
+	}
+	.pillar__num {
+		display: grid;
+		place-items: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		border-radius: 50%;
+		background: var(--action);
+		color: var(--surface);
+		font-family: var(--font-display);
+		font-weight: var(--weight-display);
+		font-size: 1.25rem;
+		line-height: 1;
+		margin-bottom: var(--space-2);
 	}
 	.pillar__title {
 		margin: 0 0 var(--space-2);
@@ -457,6 +475,7 @@
 		background: var(--surface);
 		border: 1px solid var(--line);
 		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-card);
 	}
 	.benefit__title {
 		margin: 0 0 var(--space-3);
@@ -476,12 +495,110 @@
 		gap: var(--space-2);
 	}
 	.benefit__check {
-		display: inline-flex;
+		display: grid;
+		place-items: center;
 		flex: none;
-		color: var(--accent-deco);
+		width: 22px;
+		height: 22px;
+		margin-top: 2px;
+		border-radius: 50%;
+		background: var(--action);
+		color: var(--on-action);
 	}
 	@media (prefers-reduced-motion: reduce) {
 		.gallery__item:hover .gallery__media :global(img) {
+			transform: none;
+		}
+	}
+	/* Survol (référence du site) : soulèvement, contour orange, titre orange */
+	.pillar {
+		transition:
+			transform var(--duration-reveal) var(--ease-out),
+			box-shadow var(--duration-reveal) var(--ease-out),
+			border-color var(--duration-reveal) var(--ease-out);
+	}
+	.pillar:hover {
+		transform: translateY(-6px);
+		box-shadow: var(--shadow-card-hover);
+		border-color: var(--accent-deco);
+	}
+	.pillar__title {
+		transition: color var(--duration-reveal) var(--ease-out);
+	}
+	.pillar:hover .pillar__title {
+		color: var(--accent-deco);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.pillar:hover {
+			transform: none;
+		}
+	}
+	/* Survol (référence du site) : soulèvement, contour orange, titre orange */
+	.phase {
+		transition:
+			transform var(--duration-reveal) var(--ease-out),
+			box-shadow var(--duration-reveal) var(--ease-out),
+			border-color var(--duration-reveal) var(--ease-out);
+	}
+	.phase:hover {
+		transform: translateY(-6px);
+		box-shadow: var(--shadow-card-hover);
+		border-color: var(--accent-deco);
+	}
+	.phase__title {
+		transition: color var(--duration-reveal) var(--ease-out);
+	}
+	.phase:hover .phase__title {
+		color: var(--accent-deco);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.phase:hover {
+			transform: none;
+		}
+	}
+	/* Survol (référence du site) : soulèvement, contour orange, titre orange */
+	.benefit {
+		transition:
+			transform var(--duration-reveal) var(--ease-out),
+			box-shadow var(--duration-reveal) var(--ease-out),
+			border-color var(--duration-reveal) var(--ease-out);
+	}
+	.benefit:hover {
+		transform: translateY(-6px);
+		box-shadow: var(--shadow-card-hover);
+		border-color: var(--accent-deco);
+	}
+	.benefit__title {
+		transition: color var(--duration-reveal) var(--ease-out);
+	}
+	.benefit:hover .benefit__title {
+		color: var(--accent-deco);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.benefit:hover {
+			transform: none;
+		}
+	}
+	/* Survol (référence du site) : soulèvement, contour orange, titre orange */
+	.example__step {
+		transition:
+			transform var(--duration-reveal) var(--ease-out),
+			box-shadow var(--duration-reveal) var(--ease-out),
+			border-color var(--duration-reveal) var(--ease-out);
+	}
+	.example__step:hover {
+		transform: translateY(-6px);
+		box-shadow: var(--shadow-card-hover);
+		border-color: var(--accent-deco);
+	}
+	.example__title {
+		transition: color var(--duration-reveal) var(--ease-out);
+	}
+	.example__step:hover .example__title {
+		color: var(--accent-deco);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.example__step:hover {
 			transform: none;
 		}
 	}
