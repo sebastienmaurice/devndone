@@ -33,7 +33,7 @@
 		<enhanced:img
 			src={mascotte}
 			alt="Dev, la mascotte, debout, son ordinateur portable à la main, pointe du doigt les projets"
-			sizes="(min-width: 1100px) 380px, (min-width: 640px) 360px, 80vw"
+			sizes="(min-width: 640px) 352px, 80vw"
 			loading="lazy"
 		/>
 	</div>
@@ -109,10 +109,10 @@
 	.apps__title :global(.accent-word) {
 		position: relative;
 	}
-	/* Pose en pied (portrait) : largeur réduite pour garder une hauteur proche des cartes */
+	/* Pose en pied (portrait), mise en avant à gauche des cartes */
 	.apps__mascot {
 		justify-self: center;
-		width: min(100%, 17rem);
+		width: min(100%, 22rem);
 	}
 	.apps__mascot :global(img) {
 		display: block;
