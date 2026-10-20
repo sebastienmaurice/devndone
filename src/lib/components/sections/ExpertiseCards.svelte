@@ -236,7 +236,7 @@
 		}
 		.extra__visual {
 			position: absolute;
-			right: 0;
+			right: var(--space-5);
 			bottom: 0;
 			width: auto;
 			height: calc(100% + 3.25rem);
