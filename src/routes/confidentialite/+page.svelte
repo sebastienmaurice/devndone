@@ -13,7 +13,7 @@
 <Seo
 	title="Confidentialité"
 	path="/confidentialite/"
-	description="Données personnelles et cookies sur devndone.com : aucun cookie, aucune collecte par le site."
+	description="Données personnelles et cookies sur devndone.com : aucun cookie, aucune collecte par le site lui-même. Prise de rendez-vous via Calendly, échanges par email."
 />
 
 <PageIntro

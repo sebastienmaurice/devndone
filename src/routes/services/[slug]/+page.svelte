@@ -40,7 +40,7 @@
 	const others = $derived(universes.filter((x) => x.id !== u.id));
 </script>
 
-<Seo title="{u.title} · Services" path={u.path} description={u.text} />
+<Seo title="{u.title} · Services" path={u.path} description={u.description ?? u.text} />
 
 <PageIntro
 	label="Expertise {num}"

@@ -60,7 +60,7 @@
 	<title>{fullTitle}</title>
 	<meta name="description" content={description} />
 	<meta name="robots" content={robots} />
-	<link rel="canonical" href={canonical} />
+	{#if !noindex}<link rel="canonical" href={canonical} />{/if}
 
 	<meta property="og:type" content={type} />
 	<meta property="og:site_name" content={site.wordmark} />

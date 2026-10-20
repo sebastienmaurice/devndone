@@ -32,6 +32,8 @@ export type Project = {
 	stack: string;
 	text: string;
 	url: string;
+	/** Description pour les moteurs de recherche (sinon `text`) */
+	description?: string;
 	/** Visuel de présentation : src/lib/assets/projets/<image>.jpg (1774 × 887 px) */
 	image: string;
 	/** Fiche complète, pour une future page projet (non affichée dans les cartes) */
@@ -54,6 +56,8 @@ export const projects: readonly Project[] = [
 		text: "Agence d'architecture et d'urbanisme. Refonte WordPress, direction artistique, SEO.",
 		url: 'https://www.palimpseste-urbain.com/',
 		image: 'palimpseste-urbain-refonte-wordpress',
+		description:
+			"Refonte WordPress Elementor du site d'une agence d'architecture et d'urbanisme : UX/UI, migration serveur, Core Web Vitals et structuration SEO des projets.",
 		details: {
 			subtitle: 'Refonte WordPress Elementor - site institutionnel, SEO & performance',
 			sector: 'Architecture & urbanisme',
@@ -87,6 +91,8 @@ export const projects: readonly Project[] = [
 		text: 'Migration de Wix vers WordPress et WooCommerce. Catalogue B2B et devis en ligne.',
 		url: 'https://gsti62.com/',
 		image: 'gsti-site-wordpress-woocommerce-b2b',
+		description:
+			"Migration de Wix vers WordPress et WooCommerce d'un site industriel B2B : fusion de deux activités, catalogue produits et système de devis en ligne.",
 		details: {
 			subtitle: 'Refonte WordPress WooCommerce B2B - Catalogue & système de devis',
 			sector: 'Commerce de détail',
@@ -118,6 +124,8 @@ export const projects: readonly Project[] = [
 		text: 'Application full stack de recettes inspirées du cinéma.',
 		url: 'https://cinedelices.com/',
 		image: 'cine-delices-application-recettes-cinema',
+		description:
+			'Application full stack de recettes inspirées du cinéma, développée from scratch en 12 semaines : JavaScript, Node.js, Express, PostgreSQL, sécurité OWASP.',
 		details: {
 			subtitle: 'Application web full stack, projet de formation (Titre professionnel DWWM)',
 			period: '12 semaines de développement',
@@ -144,6 +152,8 @@ export const projects: readonly Project[] = [
 		text: 'Location de matériel BTP et espaces verts. Catalogue par catégories et devis en ligne.',
 		url: 'https://maxilou.fr/',
 		image: 'maxilou-site-wordpress-location-materiel',
+		description:
+			'Site WordPress de location de matériel pour espaces verts et travaux publics : catalogue WooCommerce, demande de devis en ligne et référencement local.',
 		details: {
 			subtitle: 'Site WordPress location matériel - devis en ligne & SEO',
 			sector: 'BTP & construction',
@@ -177,6 +187,8 @@ export const projects: readonly Project[] = [
 		text: "Chambres d'hôtes en Picardie. Réservation en ligne, versions française et anglaise.",
 		url: 'https://www.petitchateauvercourt.com/',
 		image: 'petit-chateau-vercourt-site-chambres-hotes',
+		description:
+			"Site WordPress d'une chambre d'hôtes haut de gamme à Vercourt (Somme) : site vitrine orienté conversion, réservation en ligne et référencement local.",
 		details: {
 			subtitle: 'Création site WordPress hôtelier - Réservations & SEO local',
 			sector: 'Hôtellerie',
@@ -208,6 +220,8 @@ export const projects: readonly Project[] = [
 		text: 'Refonte WordPress Elementor. Vitrine et e-commerce de signalétique.',
 		url: 'https://www.pano-douai.fr/',
 		image: 'pano-signservice-refonte-wordpress',
+		description:
+			"Refonte WordPress Elementor d'une agence de signalétique et de marquage de véhicules : boutique WooCommerce, demande de devis en ligne et référencement.",
 		details: {
 			subtitle:
 				'Refonte du site WordPress avec Elementor, boutique WooCommerce et demande de devis',
@@ -277,6 +291,8 @@ export const projects: readonly Project[] = [
 		text: 'Cours de valse à Paris. Refonte WordPress Elementor & WooCommerce : réservation et boutique en ligne.',
 		url: 'https://harmonyvalse.com/',
 		image: 'harmony-valse-site-wordpress-ecole-de-danse',
+		description:
+			"Refonte WordPress Elementor et WooCommerce d'une école de valse à Paris : réservation de cours, ateliers et soirées, boutique en ligne et parcours mobile.",
 		details: {
 			subtitle: 'Refonte WordPress Elementor & WooCommerce - réservation et boutique en ligne',
 			sector: 'Divertissements & loisirs',

@@ -36,7 +36,11 @@
 	);
 </script>
 
-<Seo title="{p.name} · Réalisations" path="/realisations/{p.slug}/" description={p.text} />
+<Seo
+	title="{p.name} · Réalisations"
+	path="/realisations/{p.slug}/"
+	description={p.description ?? p.text}
+/>
 
 <PageIntro
 	label={p.stack}
