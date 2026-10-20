@@ -218,7 +218,7 @@
 			]}
 		/>
 		<div class="auto-grid" style="--auto-min: 12rem">
-			<Metric value="15 ans" label="d'expérience en projets clients" />
+			<Metric value="20 ans" label="d'expérience dans le web" />
 			<Metric value="7 j" label="pour un site vitrine en ligne" />
 			<Metric value="1" label="interlocuteur, du brief à la livraison" />
 		</div>
