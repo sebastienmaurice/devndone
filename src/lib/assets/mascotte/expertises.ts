@@ -9,7 +9,7 @@ import web from './expertise-web.jpg?enhanced&w=1200;720;360';
 import design from './expertise-design.jpg?enhanced&w=1200;720;360';
 import automatisation from './expertise-automatisation.jpg?enhanced&w=1200;720;360';
 import applications from './expertise-applications.jpg?enhanced&w=1200;720;360';
-import fullStack from './expertise-fullstack.png?enhanced&w=1200;720;360';
+import fullStack from './expertise-fullstack.png?enhanced&w=1200;720;360&quality=40';
 
 export const expertiseMascots: Record<string, { src: Picture; alt: string }> = {
 	web: {
