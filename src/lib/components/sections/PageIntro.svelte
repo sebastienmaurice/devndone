@@ -13,7 +13,7 @@
 		/** Titre texte (sinon `title` en snippet) */
 		heading?: string;
 		/** Passage du titre en orange (titre bicolore) */
-		accent?: string;
+		accent?: string | readonly string[];
 		lede?: string;
 		crumbs?: readonly { label: string; href?: string }[];
 		title?: Snippet;

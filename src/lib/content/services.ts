@@ -25,8 +25,8 @@ export type Universe = {
 
 export const servicesIntro = {
 	eyebrow: 'Notre expertise',
-	title: 'Cinq expertises. Un même objectif : votre projet.',
-	accent: 'votre projet',
+	title: '5 expertises. Un même objectif : votre projet.',
+	accent: ['5 expertises', 'votre projet'],
 	lede: "Web, design, automatisation et développement sur mesure. Une seule vision, du premier brief jusqu'à la mise en ligne."
 } as const;
 
