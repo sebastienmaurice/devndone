@@ -95,7 +95,6 @@
 </footer>
 
 <style>
-
 	/* Slogan manuscrit (Caveat), comme sur l'accueil */
 	.footer__slogan {
 		margin: 0;
