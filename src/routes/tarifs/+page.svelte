@@ -1,6 +1,7 @@
 <!--
 	Tarifs (tous HT), textes et montants du site en ligne. La grille de maintenance est une grille
 	de test (voir content/tarifs.ts) : elle n'est pas présentée comme définitive.
+	En-tête : la mascotte présentant trois formules, à droite en grand écran.
 -->
 <script lang="ts">
 	import { Seo } from '$lib/components';
@@ -11,6 +12,7 @@
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
 	import { maintenanceIntro, packagesIntro } from '$lib/content/tarifs';
+	import mascot from '$lib/assets/mascotte/mascotte-renard-tarifs-formules-abonnement.jpg?enhanced&w=1200;720;360';
 </script>
 
 <Seo
@@ -25,7 +27,18 @@
 	accent={packagesIntro.accent}
 	lede={packagesIntro.lede}
 	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Tarifs' }]}
-/>
+>
+	{#snippet aside()}
+		<div class="mascot">
+			<enhanced:img
+				src={mascot}
+				alt="Dev, la mascotte, présente trois cartes de formules, dont la formule populaire au centre, avec la note manuscrite « Des formules adaptées à vos besoins ! »"
+				sizes="(min-width: 1100px) 560px, 92vw"
+				fetchpriority="high"
+			/>
+		</div>
+	{/snippet}
+</PageIntro>
 
 <section class="section section--tight" aria-label="Forfaits">
 	<div class="container stack stack--lg">
@@ -50,6 +63,24 @@
 <ContactBlock />
 
 <style>
+	/* Mascotte sur fond blanc : multiply la fond dans l'Ivoire de la page */
+	.mascot {
+		max-width: 36rem;
+		margin-inline: auto;
+		aspect-ratio: 1448 / 1019;
+	}
+	.mascot :global(img) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		mix-blend-mode: multiply;
+	}
+	@media (max-width: 1099px) {
+		.mascot {
+			max-width: 26rem;
+		}
+	}
 	.note {
 		margin: 0;
 		max-width: 44rem;
