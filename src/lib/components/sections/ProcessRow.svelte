@@ -145,6 +145,17 @@
 		border: 1px solid var(--line);
 		border-radius: var(--radius-card);
 		box-shadow: var(--shadow-card);
+		transition:
+			transform var(--duration-reveal) var(--ease-out),
+			box-shadow var(--duration-reveal) var(--ease-out),
+			border-color var(--duration-reveal) var(--ease-out);
+	}
+	/* Survol (comme les cartes « Notre expertise ») : la carte se soulève, contour orange,
+	   titre orange, illustration zoomée */
+	.process-card:hover {
+		transform: translateY(-6px);
+		box-shadow: var(--shadow-card-hover);
+		border-color: var(--accent-deco);
 	}
 	/* Grand écran : petit trait orange qui relie une carte à la suivante */
 	@media (min-width: 1100px) {
@@ -161,6 +172,7 @@
 	}
 	.process-card__icon {
 		display: block;
+		overflow: hidden;
 		aspect-ratio: 528 / 478;
 		margin-inline: auto;
 		width: min(100%, 11rem);
@@ -171,21 +183,44 @@
 		height: 100%;
 		object-fit: contain;
 		mix-blend-mode: multiply;
+		transition: transform var(--duration-reveal) var(--ease-out);
 	}
+	.process-card:hover .process-card__icon :global(img) {
+		transform: scale(1.1);
+	}
+	/* Pastille numérotée : rond orange, chiffres en Lilita One, blancs comme le fond de la carte */
 	.process-card__num {
 		display: grid;
 		place-items: center;
-		width: 2.5rem;
-		height: 2.5rem;
+		width: 2.75rem;
+		height: 2.75rem;
 		border-radius: 50%;
 		background: var(--action);
-		color: var(--on-action);
-		font-size: var(--text-body-sm);
-		font-weight: var(--weight-extrabold);
+		color: var(--surface);
+		font-family: var(--font-display);
+		font-weight: var(--weight-display);
+		font-size: 1.25rem;
+		line-height: 1;
+		letter-spacing: 0.02em;
 	}
 	.process-card__title {
 		margin: var(--space-1) 0 0;
 		font-size: 1.375rem;
+		transition: color var(--duration-reveal) var(--ease-out);
+	}
+	.process-card:hover .process-card__title {
+		color: var(--accent-deco);
+	}
+	/* Mouvement réduit : seuls le contour, l'ombre et la couleur changent */
+	@media (prefers-reduced-motion: reduce) {
+		.process-card,
+		.process-card__icon :global(img) {
+			transition-property: border-color, box-shadow;
+		}
+		.process-card:hover,
+		.process-card:hover .process-card__icon :global(img) {
+			transform: none;
+		}
 	}
 	.process-card__text {
 		margin: 0;

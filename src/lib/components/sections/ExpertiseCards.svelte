@@ -1,6 +1,6 @@
 <!--
 	Les expertises (maquettes du 19 et du 20/10/2026) : quatre cartes blanches homogènes, mascotte de
-	l'expertise, numéro orange, titre, description, flèche. Chaque carte mène à la page du service
+	l'expertise, pastille numérotée orange, titre, description, flèche. Chaque carte mène à la page du service
 	(toute la carte est le lien). 4 colonnes en grand écran, 2 en tablette, 1 sur petit mobile.
 	Données : content/services.ts. Mascottes : $lib/assets/mascotte/expertises.ts (illustrations 3:2,
 	fond blanc posé sur la carte blanche), reprises dans l'en-tête de chaque page de service.
@@ -137,14 +137,29 @@
 	.expertise:focus-visible .expertise__mascot :global(img) {
 		transform: scale(1.1);
 	}
+	/* Pastille numérotée : rond orange, chiffres en Lilita One, blancs comme le fond de la carte */
 	.expertise__num {
-		font-size: var(--text-h3);
-		font-weight: var(--weight-extrabold);
+		display: grid;
+		place-items: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		border-radius: 50%;
+		background: var(--action);
+		color: var(--surface);
+		font-family: var(--font-display);
+		font-weight: var(--weight-display);
+		font-size: 1.25rem;
 		line-height: 1;
-		color: var(--accent-deco);
+		letter-spacing: 0.02em;
 	}
 	.expertise__title {
 		font-size: clamp(1.5rem, 1.35rem + 0.65vw, 2rem);
+		transition: color var(--duration-reveal) var(--ease-out);
+	}
+	/* Survol : le titre passe à l'orange */
+	.expertise:hover .expertise__title,
+	.expertise:focus-visible .expertise__title {
+		color: var(--accent-deco);
 	}
 	.expertise__text {
 		font-size: var(--text-body-sm);
