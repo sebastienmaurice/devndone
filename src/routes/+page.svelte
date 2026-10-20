@@ -232,8 +232,8 @@
 	.home-expertise {
 		padding-top: var(--space-6);
 	}
+	/* Fond Ivoire : les cartes blanches du process s'en détachent */
 	.home-process {
-		background: var(--surface);
 		border-block: 1px solid var(--line);
 	}
 	.home-projects__all {
