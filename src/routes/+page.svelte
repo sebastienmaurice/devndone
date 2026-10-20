@@ -53,7 +53,7 @@
 <section class="hero" aria-labelledby="hero-title">
 	<div class="container hero__grid">
 		<div class="hero__text">
-			<HandNote>{heroSlogan}</HandNote>
+			<HandNote lines={heroSlogan} />
 			<h1 class="hero__title" id="hero-title">
 				<span class="hero__line">Des projets</span>
 				<span class="hero__line">pensés pour</span>

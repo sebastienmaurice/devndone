@@ -127,4 +127,5 @@ export const processSteps = [
 ] as const;
 
 /** Slogan manuscrit du hero (maquette du 19/10/2026) */
-export const heroSlogan = 'Des solutions sur mesure pour faire décoller vos idées';
+/** Slogan manuscrit de l'accueil, en deux lignes fixes */
+export const heroSlogan = ['Des solutions sur mesure pour', 'faire décoller vos idées'] as const;
