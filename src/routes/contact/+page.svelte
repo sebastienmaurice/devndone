@@ -3,8 +3,10 @@
 	ENVOI DIRECT (si `contactForm.accessKey` est renseignée, content/studio.ts) : le message part
 	vers Web3Forms, qui le transmet par email (domaine autorisé dans `connect-src`, vite.config.ts).
 	SANS CLÉ, OU SI L'ENVOI ÉCHOUE : le formulaire ouvre la messagerie du visiteur avec le message
-	prérempli (mailto). Repli : « Copier le message » et « Copier l'adresse » ; si le presse-papiers
-	est refusé, le message s'affiche pour une copie manuelle.
+	prérempli (mailto). Repli : « Copier le message » ; si le presse-papiers est refusé, le message s'affiche pour une
+	copie manuelle.
+	L'adresse email n'est pas affichée sur la page (choix de Sébastien, 20/10/2026) : elle ne
+	figure que dans les mentions légales, où la LCEN l'impose.
 	La page /confidentialite/ décrit l'un ou l'autre fonctionnement selon la même clé.
 	En-tête : la mascotte au smartphone, à droite en grand écran.
 -->
@@ -32,20 +34,19 @@
 	let mailto = '';
 	/** Message préparé (destinataire, objet, corps), réutilisé par « Copier le message » */
 	let prepared = $state('');
-	let copied = $state<'message' | 'email' | null>(null);
+	let copied = $state(false);
 	let copyFailed = $state(false);
 	let copyTimer: ReturnType<typeof setTimeout> | undefined;
 
-	async function copy(what: 'message' | 'email') {
-		const text = what === 'message' ? prepared : legal.publisher.email;
+	async function copy() {
 		try {
-			await navigator.clipboard.writeText(text);
-			copied = what;
+			await navigator.clipboard.writeText(prepared);
+			copied = true;
 			clearTimeout(copyTimer);
-			copyTimer = setTimeout(() => (copied = null), 2500);
+			copyTimer = setTimeout(() => (copied = false), 2500);
 		} catch {
 			// Presse-papiers indisponible : le message s'affiche pour une copie manuelle
-			if (what === 'message') copyFailed = true;
+			copyFailed = true;
 		}
 	}
 
@@ -100,7 +101,7 @@
 				body: JSON.stringify({
 					access_key: contactForm.accessKey,
 					subject: `[devndone.com] ${subject}`,
-					from_name: "Site Dev'n Done",
+					from_name: 'devndone.com',
 					// `email` : adresse de réponse de l'email reçu
 					email: email.trim(),
 					Nom: name.trim(),
@@ -229,18 +230,15 @@
 						{status === 'failed' ? 'Envoyer autrement' : "Rien ne s'est ouvert ?"}
 					</p>
 					<p class="fallback__text">
-						Copiez le message, puis collez-le dans votre messagerie habituelle (Gmail, Outlook…), à
-						l'adresse {legal.publisher.email}.
+						Copiez le message (l'adresse de destination est incluse), puis collez-le dans votre
+						messagerie habituelle (Gmail, Outlook…).
 					</p>
 					<div class="fallback__actions">
 						{#if status === 'failed'}
 							<Button icon="mail" onclick={openMail}>Ouvrir ma messagerie</Button>
 						{/if}
-						<Button variant="secondary" icon="copy" onclick={() => copy('message')}
-							>{copied === 'message' ? 'Message copié' : 'Copier le message'}</Button
-						>
-						<Button variant="ghost" icon="copy" onclick={() => copy('email')}
-							>{copied === 'email' ? 'Adresse copiée' : "Copier l'adresse"}</Button
+						<Button variant="secondary" icon="copy" onclick={copy}
+							>{copied ? 'Message copié' : 'Copier le message'}</Button
 						>
 					</div>
 					{#if copyFailed}
@@ -270,7 +268,10 @@
 				{/if}
 			</p>
 			<noscript>
-				<p>Sans JavaScript, écrivez directement à {legal.publisher.email}.</p>
+				<p>
+					Sans JavaScript, le formulaire ne peut pas être envoyé : réservez un créneau avec le
+					bouton « Réserver 15 min ».
+				</p>
 			</noscript>
 		</form>
 
@@ -282,21 +283,6 @@
 				<Button href={links.calendly} icon="arrow-up-right" block>{hero.ctaCall}</Button>
 			</div>
 			<ul class="contact-links" role="list">
-				<li class="contact-mail">
-					<a href={links.email}
-						><span class="contact-links__icon"><Icon name="mail" /></span><span
-							class="contact-links__text"
-							><span class="contact-links__label">Email</span>{legal.publisher.email}</span
-						></a
-					>
-					<button
-						type="button"
-						class="contact-mail__copy"
-						onclick={() => copy('email')}
-						aria-label={copied === 'email' ? 'Adresse copiée' : "Copier l'adresse email"}
-						><Icon name={copied === 'email' ? 'check' : 'copy'} /></button
-					>
-				</li>
 				<li>
 					<a href={links.linkedin} target="_blank" rel="noopener"
 						><span class="contact-links__icon"><Icon name="arrow-up-right" /></span><span
@@ -470,33 +456,6 @@
 		letter-spacing: var(--tracking-label);
 		text-transform: uppercase;
 		color: var(--text-subtle);
-	}
-	/* Email : place à droite pour le bouton de copie */
-	.contact-mail a {
-		padding-right: 4.25rem;
-	}
-	.contact-mail__copy {
-		position: absolute;
-		top: 50%;
-		right: var(--space-4);
-		display: grid;
-		place-items: center;
-		width: 2.5rem;
-		height: 2.5rem;
-		padding: 0;
-		transform: translateY(-50%);
-		background: var(--surface);
-		border: 1px solid var(--line);
-		border-radius: 50%;
-		color: var(--action-alt-text);
-		cursor: pointer;
-	}
-	.contact-mail__copy:hover {
-		border-color: var(--action-alt-text);
-	}
-	.contact-mail__copy :global(.icon) {
-		width: 18px;
-		height: 18px;
 	}
 	/* Repli quand la messagerie ne s'ouvre pas */
 	.fallback {

@@ -15,7 +15,6 @@
 	const contactLinks = [
 		{ label: contactIntro.cta, href: '/contact/', external: false },
 		{ label: 'Réserver 15 min', href: links.calendly, external: true },
-		{ label: legal.publisher.email, href: links.email, external: false },
 		{ label: 'LinkedIn', href: links.linkedin, external: true },
 		{ label: 'Malt', href: links.malt, external: true }
 	];

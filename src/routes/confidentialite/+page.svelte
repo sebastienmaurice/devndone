@@ -72,7 +72,7 @@
 			<h2 class="t-h3" id="c-contact">Responsable et contact</h2>
 			<p>
 				{legal.publisher.name}, {legal.publisher.tradeName}. Pour toute question sur vos données :
-				<a class="link" href={links.email}>{legal.publisher.email}</a>. Voir aussi les
+				<a class="link" href="/contact/">formulaire de contact</a>. Voir aussi les
 				<a class="link" href="/mentions-legales/">mentions légales</a>.
 			</p>
 		</section>

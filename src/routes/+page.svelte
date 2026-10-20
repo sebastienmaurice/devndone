@@ -18,7 +18,6 @@
 	import heroImage from '$lib/assets/mascotte/mascotte-renard-developpeur-wordpress-elementor.png?enhanced&w=1120;720;480&quality=40';
 	import { realisationsIntro } from '$lib/content/realisations';
 	import { heroSlogan, servicesIntro } from '$lib/content/services';
-	import { legal } from '$lib/content/legal';
 	import { hero, links } from '$lib/content/studio';
 	import { site, absoluteUrl } from '$lib/config/site';
 
@@ -36,7 +35,6 @@
 		areaServed: 'FR',
 		// Coordonnées : celles des mentions légales (publication validée par Sébastien)
 		telephone: '+33 6 20 84 78 01',
-		email: legal.publisher.email,
 		address: {
 			'@type': 'PostalAddress',
 			streetAddress: '1 rue Blaise Pascal',
