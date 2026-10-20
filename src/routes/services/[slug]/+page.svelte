@@ -32,7 +32,7 @@
 		u.id === 'web'
 			? projects.filter((p) => p.stack.includes('WordPress')).map((p) => p.slug)
 			: u.id === 'full-stack'
-				? projects.filter((p) => p.stack.includes('Svelte')).map((p) => p.slug)
+				? projects.filter((p) => p.stack.includes('Node.js')).map((p) => p.slug)
 				: []
 	);
 	const mascot = $derived(expertiseMascots[u.id]);

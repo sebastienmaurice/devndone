@@ -1,22 +1,28 @@
 <!--
-	Les quatre expertises (maquette du 19/10/2026) : cartes blanches homogènes, mascotte de
+	Les expertises (maquettes du 19 et du 20/10/2026) : quatre cartes blanches homogènes, mascotte de
 	l'expertise, numéro orange, titre, description, flèche. Chaque carte mène à la page du service
 	(toute la carte est le lien). 4 colonnes en grand écran, 2 en tablette, 1 sur petit mobile.
 	Données : content/services.ts. Mascottes : $lib/assets/mascotte/expertises.ts (illustrations 3:2,
 	fond blanc posé sur la carte blanche), reprises dans l'en-tête de chaque page de service.
+	Sous les cartes : l'expertise complémentaire (Full Stack) en bandeau orange pleine largeur,
+	mascotte détourée qui déborde du haut du bandeau, bouton vers sa page.
 -->
 <script lang="ts">
 	import { expertiseMascots as mascots } from '$lib/assets/mascotte/expertises';
 	import { universes } from '$lib/content/services';
 	import Icon from '../brand/Icon.svelte';
+	import Button from '../ui/Button.svelte';
 
 	let { headingLevel = 3 }: { headingLevel?: 2 | 3 | 4 } = $props();
+
+	const cards = universes.filter((u) => !u.complementary);
+	const extras = universes.filter((u) => u.complementary);
 
 	const pad = (n: number) => String(n + 1).padStart(2, '0');
 </script>
 
 <ul class="expertises" role="list">
-	{#each universes as u, i (u.id)}
+	{#each cards as u, i (u.id)}
 		<li>
 			<a class="expertise" href={u.path}>
 				{#if mascots[u.id]}
@@ -43,6 +49,32 @@
 		</li>
 	{/each}
 </ul>
+
+{#each extras as u, j (u.id)}
+	<div class="extra surface-orange">
+		<div class="extra__text">
+			<p class="extra__label">{pad(cards.length + j)} · Expertise complémentaire</p>
+			<svelte:element this={`h${headingLevel}`} class="extra__title">{u.title}</svelte:element>
+			<p class="extra__lede">{u.text}</p>
+			<ul class="extra__tags" role="list">
+				{#each u.tags as tag (tag)}<li>{tag}</li>{/each}
+			</ul>
+			<Button href={u.path} icon="arrow-right"
+				>Découvrir l'expertise<span class="sr-only"> {u.title}</span></Button
+			>
+		</div>
+		{#if mascots[u.id]}
+			<div class="extra__visual">
+				<enhanced:img
+					src={mascots[u.id].src}
+					alt={mascots[u.id].alt}
+					sizes="(min-width: 900px) 640px, 92vw"
+					loading="lazy"
+				/>
+			</div>
+		{/if}
+	</div>
+{/each}
 
 <style>
 	.expertises {
@@ -145,6 +177,75 @@
 		.expertise:hover .expertise__go,
 		.expertise:focus-visible .expertise__go {
 			transform: none;
+		}
+	}
+	/* Bandeau orange de l'expertise complémentaire (un seul bandeau Orange par page) */
+	.extra {
+		display: grid;
+		gap: var(--space-5);
+		margin-top: calc(var(--col-gap) + var(--space-6));
+		padding: var(--space-6) var(--space-5) 0;
+		background: var(--bg);
+		color: var(--text);
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-card);
+	}
+	@media (min-width: 900px) {
+		.extra {
+			grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+			align-items: center;
+			gap: var(--space-6);
+			padding: var(--space-6) var(--space-7);
+		}
+	}
+	.extra__text {
+		display: grid;
+		gap: var(--space-3);
+		justify-items: start;
+	}
+	.extra__label {
+		margin: 0;
+		font-size: var(--text-label);
+		font-weight: var(--weight-extrabold);
+		letter-spacing: var(--tracking-label);
+		text-transform: uppercase;
+	}
+	.extra__title {
+		margin: 0;
+		font-size: var(--text-h2);
+		line-height: 1;
+	}
+	.extra__lede {
+		max-width: 26rem;
+		margin: 0;
+	}
+	.extra__tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+		margin: 0 0 var(--space-2);
+		padding: 0;
+		list-style: none;
+	}
+	.extra__tags li {
+		padding: 0.15rem var(--space-4);
+		border: 1.5px solid var(--line-strong);
+		border-radius: 999px;
+		font-size: var(--text-body-sm);
+		font-weight: var(--weight-semibold);
+	}
+	/* Mascotte détourée : déborde du haut du bandeau et s'appuie sur son bord bas */
+	.extra__visual {
+		align-self: end;
+	}
+	.extra__visual :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+	@media (min-width: 900px) {
+		.extra__visual {
+			margin: calc(-1 * var(--space-9)) 0 calc(-1 * var(--space-6));
 		}
 	}
 </style>

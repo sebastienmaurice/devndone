@@ -1,6 +1,7 @@
 /**
- * Les quatre univers et le process.
+ * Les univers (quatre cartes + une expertise complémentaire en bandeau) et le process.
  * Source : page provisoire (dépôt devndone, index.html, sections #services et #process).
+ * « Applications & logiciels » et le bandeau « Full Stack » : maquette de Sébastien du 20/10/2026.
  * Textes repris tels quels : ne rien ajouter sans validation.
  */
 export type Universe = {
@@ -13,11 +14,13 @@ export type Universe = {
 	/** Libellé court (header, pied de page) */
 	navLabel: string;
 	/** Icône Lucide (nom du composant Icon) */
-	icon: 'globe' | 'pen' | 'settings' | 'code';
+	icon: 'globe' | 'pen' | 'settings' | 'code' | 'layers';
 	/** Forfaits liés (noms de content/tarifs.ts) */
 	packages: readonly string[];
 	/** La maintenance WordPress en abonnement s'applique à cet univers */
 	maintenance?: boolean;
+	/** Expertise complémentaire : bandeau orange sous les cartes, pas une carte */
+	complementary?: boolean;
 };
 
 export const servicesIntro = {
@@ -66,14 +69,30 @@ export const universes: readonly Universe[] = [
 		packages: ['Audit automatisation']
 	},
 	{
+		id: 'applications',
+		title: 'Applications & logiciels',
+		text: 'Des applications métier, espaces clients, outils sur mesure et interfaces applicatives.',
+		tags: [
+			'Applications métier',
+			'Espaces clients',
+			'Outils sur mesure',
+			'Interfaces applicatives'
+		],
+		path: '/services/applications/',
+		navLabel: 'Apps & logiciels',
+		icon: 'layers',
+		packages: []
+	},
+	{
 		id: 'full-stack',
 		title: 'Full Stack',
-		text: 'Quand WordPress ne suffit plus : applications, API, espaces clients et outils métier sur mesure.',
-		tags: ['Svelte', 'Node.js', 'PostgreSQL', 'API'],
+		text: 'Du front-end au back-end, une solution complète pour votre projet.',
+		tags: ['Interfaces', 'API', 'Back-end'],
 		path: '/services/full-stack/',
 		navLabel: 'Full Stack',
 		icon: 'code',
-		packages: []
+		packages: [],
+		complementary: true
 	}
 ];
 

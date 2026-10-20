@@ -1,13 +1,15 @@
 /**
- * Illustrations de la mascotte, une par expertise (format 3:2, fond blanc).
- * Utilisées par les cartes « Notre expertise » (accueil, /services/) et par l'en-tête
- * de chaque page de service (/services/<id>/). Clés : `id` des univers (content/services.ts).
+ * Illustrations de la mascotte, une par expertise. Cartes : format 3:2 sur fond blanc ;
+ * Full Stack (bandeau orange) : PNG détouré. Utilisées par « Notre expertise » (accueil,
+ * /services/) et par l'en-tête de chaque page de service (/services/<id>/).
+ * Clés : `id` des univers (content/services.ts).
  */
 import type { Picture } from 'vite-imagetools';
 import web from './expertise-web.jpg?enhanced&w=1200;720;360';
 import design from './expertise-design.jpg?enhanced&w=1200;720;360';
 import automatisation from './expertise-automatisation.jpg?enhanced&w=1200;720;360';
-import fullStack from './expertise-fullstack.jpg?enhanced&w=1200;720;360';
+import applications from './expertise-applications.jpg?enhanced&w=1200;720;360';
+import fullStack from './expertise-fullstack.png?enhanced&w=1200;720;360';
 
 export const expertiseMascots: Record<string, { src: Picture; alt: string }> = {
 	web: {
@@ -22,8 +24,12 @@ export const expertiseMascots: Record<string, { src: Picture; alt: string }> = {
 		src: automatisation,
 		alt: 'Dev, la mascotte, relie des applications entre elles dans un flux automatisé'
 	},
+	applications: {
+		src: applications,
+		alt: "Dev, la mascotte, montre le tableau de bord d'une application métier sur écran et mobile"
+	},
 	'full-stack': {
 		src: fullStack,
-		alt: 'Dev, la mascotte, code sur son portable entre interface, API et base de données'
+		alt: 'Dev, la mascotte, code sur son portable entre un serveur Node.js, une API et une base de données'
 	}
 };
