@@ -1,6 +1,6 @@
 <!--
 	Page d'une expertise. Contenu réel uniquement : description et domaines (content/services.ts),
-	forfaits liés et maintenance (content/tarifs.ts), process, réalisations liées.
+	offres rattachées et maintenance (content/tarifs.ts), process, réalisations liées.
 	Rien n'est inventé : sans forfait, la page renvoie au premier échange (texte du site en ligne).
 	En-tête : la mascotte de l'expertise à droite (même illustration que sa carte sur l'accueil),
 	prestations en pastilles cochées sous le texte, au-dessus des boutons.
@@ -21,7 +21,7 @@
 	import { universes } from '$lib/content/services';
 	import { hero, links } from '$lib/content/studio';
 	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
-	import { maintenanceIntro, packagesIntro } from '$lib/content/tarifs';
+	import { maintenanceIntro, maintenancePage, offers, offersIntro } from '$lib/content/tarifs';
 
 	let { data } = $props();
 
@@ -40,6 +40,8 @@
 	const headerVisual = $derived(expertiseHeaderVisuals[u.id]);
 	const mascot = $derived(headerVisual ?? expertiseMascots[u.id]);
 	const others = $derived(universes.filter((x) => x.id !== u.id));
+	// Offres rattachées à l'expertise (pages /services/<id>/<offre>/)
+	const uOffers = $derived(offers.filter((o) => o.universe === u.id));
 </script>
 
 <Seo title={u.seoTitle} path={u.path} description={u.description ?? u.text} />
@@ -93,17 +95,17 @@
 	</section>
 {/if}
 
-{#if u.packages.length}
+{#if uOffers.length}
 	<section class="section section--tight" aria-labelledby="forfaits-title">
 		<div class="container stack stack--lg">
 			<header class="stack stack--sm">
-				<SectionLabel label="Forfaits" />
+				<SectionLabel label="Offres" />
 				<h2 class="t-h2" id="forfaits-title">
-					<AccentTitle text={packagesIntro.title} accent={packagesIntro.accent} />
+					<AccentTitle text={offersIntro.title} accent={offersIntro.accent} />
 				</h2>
-				<p class="muted">{packagesIntro.lede}</p>
+				<p class="muted">{offersIntro.lede}</p>
 			</header>
-			<PackageGrid only={u.packages} />
+			<PackageGrid only={uOffers.map((o) => o.slug)} />
 		</div>
 	</section>
 {:else}
@@ -111,7 +113,7 @@
 		<div class="container">
 			<div class="quote">
 				<h2 class="t-h3" id="devis-title">Un projet sur mesure</h2>
-				<p>{packagesIntro.customNote}</p>
+				<p>{offersIntro.customNote}</p>
 				<Button href={links.calendly} icon="arrow-up-right">{hero.ctaCall}</Button>
 			</div>
 		</div>
@@ -128,7 +130,12 @@
 				</h2>
 				<p class="muted">{maintenanceIntro.lede}</p>
 			</header>
-			<MaintenancePlans />
+			<MaintenancePlans detailLink />
+			<p>
+				<a class="link-arrow" href={maintenancePage.path}
+					>Tout savoir sur la maintenance <Icon name="arrow-right" /></a
+				>
+			</p>
 		</div>
 	</section>
 {/if}

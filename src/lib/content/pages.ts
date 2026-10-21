@@ -9,6 +9,7 @@
 import { projects } from './realisations';
 import { universes } from './services';
 import { logicielPage } from './logiciel';
+import { maintenancePage, offerPath, offers } from './tarifs';
 
 export type PageEntry = {
 	path: `/${string}`;
@@ -46,6 +47,14 @@ export const pages: PageEntry[] = [
 		sitemap: true,
 		priority: 0.8
 	})),
+	// Pages d'offre (catalogue au forfait) et maintenance, rattachées à leur rubrique
+	...offers.map((o): PageEntry => ({
+		path: offerPath(o),
+		label: o.name,
+		sitemap: true,
+		priority: 0.7
+	})),
+	{ path: maintenancePage.path, label: 'Maintenance WordPress', sitemap: true, priority: 0.7 },
 	{ path: logicielPage.path, label: 'Logiciel pour enseignistes', sitemap: true, priority: 0.6 },
 	{ path: '/realisations/', label: 'Réalisations', footer: 'studio', sitemap: true, priority: 0.8 },
 	...projects.map((p): PageEntry => ({

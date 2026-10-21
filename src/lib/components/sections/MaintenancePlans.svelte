@@ -1,28 +1,41 @@
 <!--
-	Grille de maintenance WordPress pour les sites existants (content/tarifs.ts). GRILLE DE TEST :
-	textes et montants à ne pas modifier sans validation.
+	Formules de maintenance WordPress (content/tarifs.ts), facultatives. Prix sans « HT » (franchise
+	en base de TVA). Chaque carte porte l'ancre de sa formule (#essentiel, #confort, #serenite) ;
+	`detailLink` : lien « Voir le détail » vers la page Maintenance (Tarifs, page Web).
+	Textes et montants à ne pas modifier sans validation.
 	Présentation alignée sur les cartes tarif : cartes blanches de même hauteur, prix en Lilita One
 	orange, prestations en liste cochée (rond orange, libellé, puis valeur en gras), bouton en bas.
 	La formule recommandée porte un bandeau orange en tête et un contour orange.
 -->
 <script lang="ts">
 	import { links } from '$lib/content/studio';
-	import { maintenanceIntro, maintenancePlans } from '$lib/content/tarifs';
+	import { maintenancePage, maintenancePlans, maintenanceRules } from '$lib/content/tarifs';
 	import Icon from '../brand/Icon.svelte';
+	import PriceTag from '../ui/PriceTag.svelte';
 	import Button from '../ui/Button.svelte';
 
-	let { headingLevel = 3 }: { headingLevel?: 2 | 3 | 4 } = $props();
+	type Props = {
+		headingLevel?: 2 | 3 | 4;
+		/** Lien vers la page Maintenance détaillée */
+		detailLink?: boolean;
+		/** Règles communes sous les cartes */
+		rules?: boolean;
+	};
+
+	let { headingLevel = 3, detailLink = false, rules = false }: Props = $props();
 </script>
 
 <ul class="plans" role="list">
 	{#each maintenancePlans as plan (plan.name)}
-		<li class="plan" class:plan--featured={plan.recommended}>
+		<li class="plan" class:plan--featured={plan.recommended} id={detailLink ? undefined : plan.id}>
 			{#if plan.recommended}<p class="plan__ribbon">Recommandé</p>{/if}
 			<div class="plan__head">
 				<svelte:element this={`h${headingLevel}`} class="plan__name">{plan.name}</svelte:element>
 				<p class="plan__target">{plan.target}</p>
 			</div>
-			<p class="plan__price">{plan.price} <span>/ mois HT</span></p>
+			<div class="plan__price">
+				<PriceTag label="Par mois" value={plan.price.replace(/\s*€$/, '')} />
+			</div>
 			<ul class="plan__rows" role="list">
 				{#each plan.rows as row (row.label)}
 					<li>
@@ -34,18 +47,65 @@
 					</li>
 				{/each}
 			</ul>
-			<Button
-				href={links.calendly}
-				variant={plan.recommended ? 'primary' : 'secondary'}
-				icon="arrow-up-right"
-				block>En parler</Button
-			>
+			<div class="plan__actions">
+				{#if detailLink}
+					<a class="link-arrow" href="{maintenancePage.path}#{plan.id}"
+						>Voir le détail<Icon name="arrow-right" /><span class="sr-only">
+							: formule {plan.name}</span
+						></a
+					>
+				{/if}
+				<Button
+					href={links.calendly}
+					variant={plan.recommended ? 'primary' : 'secondary'}
+					icon="arrow-up-right"
+					block>En parler</Button
+				>
+			</div>
 		</li>
 	{/each}
 </ul>
-<p class="t-body-sm t-muted t-measure">{maintenanceIntro.note}</p>
+{#if rules}
+	<ul class="plan-rules" role="list">
+		{#each maintenanceRules as rule (rule)}
+			<li><Icon name="info" size="sm" />{rule}</li>
+		{/each}
+	</ul>
+{/if}
 
 <style>
+	.plan__actions {
+		display: grid;
+		gap: var(--space-3);
+		justify-items: start;
+	}
+	.plan__actions :global(.btn) {
+		justify-self: stretch;
+	}
+	.plan {
+		scroll-margin-top: 110px;
+	}
+	/* Règles communes : petite liste sous les cartes */
+	.plan-rules {
+		display: grid;
+		gap: var(--space-2);
+		max-width: 52rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: var(--text-body-sm);
+		color: var(--text-muted);
+	}
+	.plan-rules li {
+		display: flex;
+		gap: var(--space-2);
+		align-items: flex-start;
+	}
+	.plan-rules :global(.icon) {
+		flex: none;
+		margin-top: 3px;
+		color: var(--tag-text);
+	}
 	.plans {
 		display: grid;
 		gap: var(--col-gap);
@@ -113,21 +173,10 @@
 		color: var(--text-muted);
 	}
 	/* Prix en Lilita One orange, comme les cartes tarif ; la périodicité en texte courant */
+	/* Prix (variante B, composant PriceTag) séparé des prestations par un filet */
 	.plan__price {
-		margin: 0;
 		padding-bottom: var(--space-4);
 		border-bottom: 1px solid var(--line);
-		font-family: var(--font-display);
-		font-weight: var(--weight-display);
-		font-size: var(--text-h2);
-		line-height: 1.1;
-		color: var(--accent-deco);
-	}
-	.plan__price span {
-		font-family: var(--font-ui);
-		font-size: var(--text-body-sm);
-		font-weight: var(--weight-semibold);
-		color: var(--text-muted);
 	}
 	/* Prestations : coche, libellé, valeur en gras dessous (lisible même en carte étroite) */
 	.plan__rows {

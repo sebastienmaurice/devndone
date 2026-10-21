@@ -13,9 +13,7 @@ export type Universe = {
 	path: `/services/${string}/`;
 	/** Icône Lucide (nom du composant Icon) */
 	icon: 'globe' | 'pen' | 'settings' | 'code' | 'layers';
-	/** Forfaits liés (noms de content/tarifs.ts) */
-	packages: readonly string[];
-	/** La maintenance WordPress en abonnement s'applique à cet univers */
+	/** La maintenance WordPress (facultative, mensuelle) s'applique à cet univers */
 	maintenance?: boolean;
 	/** Titre de la page pour les moteurs de recherche (sans « · Dev'n Done ») */
 	seoTitle: string;
@@ -36,18 +34,11 @@ export const universes: readonly Universe[] = [
 	{
 		id: 'web',
 		title: 'Web',
-		text: 'Sites vitrine, boutiques en ligne, refontes et optimisation SEO, avec une maintenance en abonnement pour garder votre site à jour et protégé.',
+		text: 'Sites vitrine, boutiques en ligne, refontes et optimisation SEO, avec une maintenance mensuelle facultative pour garder votre site à jour.',
 		tags: ['Création', 'Refonte', 'WooCommerce', 'SEO', 'Maintenance'],
 		seoTitle: 'Création et refonte de sites WordPress, maintenance',
 		path: '/services/web/',
 		icon: 'globe',
-		packages: [
-			'Landing page',
-			'Site vitrine',
-			'Site pro et refonte PME',
-			'Boutique WooCommerce',
-			'Audit technique WordPress'
-		],
 		maintenance: true
 	},
 	{
@@ -59,8 +50,7 @@ export const universes: readonly Universe[] = [
 			'Identité visuelle, direction artistique, images IA et mockups : une esthétique cohérente pour marquer les esprits. Studio digital indépendant à Caudry.',
 		seoTitle: 'Identité visuelle et direction artistique',
 		path: '/services/design/',
-		icon: 'pen',
-		packages: []
+		icon: 'pen'
 	},
 	{
 		id: 'automatisation',
@@ -71,8 +61,7 @@ export const universes: readonly Universe[] = [
 			'Et si cette tâche pouvait se faire toute seule ? Audit des processus, automatisation ciblée ou complète avec Make ou Zapier. Studio indépendant à Caudry.',
 		seoTitle: 'Automatisation des processus avec Make et Zapier',
 		path: '/services/automatisation/',
-		icon: 'settings',
-		packages: ['Audit automatisation']
+		icon: 'settings'
 	},
 	{
 		id: 'applications',
@@ -88,8 +77,7 @@ export const universes: readonly Universe[] = [
 			"Applications métier, espaces clients, outils sur mesure et interfaces applicatives. Exemple en développement : un logiciel de gestion d'affaires pour enseignistes.",
 		seoTitle: 'Applications métier et logiciels sur mesure',
 		path: '/services/applications/',
-		icon: 'layers',
-		packages: []
+		icon: 'layers'
 	},
 	{
 		id: 'full-stack',
@@ -101,7 +89,6 @@ export const universes: readonly Universe[] = [
 		seoTitle: 'Développement full stack : interfaces, API, back-end',
 		path: '/services/full-stack/',
 		icon: 'code',
-		packages: [],
 		complementary: true
 	}
 ];

@@ -13,7 +13,7 @@ export const site = {
 	// Titre, description et Open Graph de l'accueil : ceux du site en ligne (index.html, branche main)
 	homeTitle: "Dev'n Done · Studio digital indépendant · WordPress, design, automatisation",
 	description:
-		'Studio digital indépendant : sites WordPress, maintenance en abonnement, identité visuelle, automatisation et développement sur mesure pour TPE, artisans et PME.',
+		'Studio digital indépendant : sites WordPress au forfait, maintenance, identité visuelle, automatisation et développement sur mesure pour TPE, artisans et PME.',
 	ogTitle: "Dev'n Done · Des projets pensés pour être Done.",
 	ogDescription: 'Un studio digital indépendant qui conçoit, développe et livre des solutions web.',
 	themeColor: '#0A0D11',

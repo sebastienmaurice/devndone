@@ -1,33 +1,46 @@
 <!--
-	Forfaits à prix fermé (content/tarifs.ts), cartes blanches de la maquette du 19/10/2026 :
-	délai, nom, prix, contenu, lien de prise de rendez-vous. `only` : liste des noms à afficher
-	(pages de services). La carte « Boutique WooCommerce » porte l'ancre #woocommerce.
-	Textes et montants du site en ligne, inchangés.
+	Cartes d'offre (content/tarifs.ts) : pastille (limite de travail ou mode de chiffrage), nom, prix
+	(composant PriceTag : libellé « Forfait », « À partir de », « Tarif journalier » ou « Prix unique »), illustration,
+	puis « Découvrir l'offre » (page détaillée) et « En parler » (prise de rendez-vous).
+	`only` : slugs à afficher (pages de services) ; `group` : création ou interventions ponctuelles.
+	Prix affichés sans « HT » : franchise en base de TVA.
 	Illustration de la mascotte (assets/tarifs/visuels.ts) : au repos, la carte montre l'illustration ;
-	au survol (carte orange), l'illustration laisse la place à la description. Sans survol possible
-	(écrans tactiles), les deux restent affichées l'une sous l'autre.
+	au survol (carte orange), l'illustration laisse la place au résumé. Sans survol possible
+	(écrans tactiles), les deux restent affichés l'un sous l'autre.
 -->
 <script lang="ts">
 	import { links } from '$lib/content/studio';
-	import { packages } from '$lib/content/tarifs';
-	import { packageVisuals } from '$lib/assets/tarifs/visuels';
+	import { offerPath, offers, priceParts, type Offer } from '$lib/content/tarifs';
+	import PriceTag from '../ui/PriceTag.svelte';
+	import { offerVisuals } from '$lib/assets/tarifs/visuels';
 	import Icon from '../brand/Icon.svelte';
 
-	type Props = { only?: readonly string[]; headingLevel?: 2 | 3 | 4 };
+	type Props = {
+		only?: readonly string[];
+		group?: Offer['group'];
+		headingLevel?: 2 | 3 | 4;
+	};
 
-	let { only, headingLevel = 3 }: Props = $props();
+	let { only, group, headingLevel = 3 }: Props = $props();
 
-	const shown = $derived(only ? packages.filter((p) => only.includes(p.name)) : packages);
-	const anchor = (name: string) => (name === 'Boutique WooCommerce' ? 'woocommerce' : undefined);
+	const shown = $derived(
+		offers.filter((o) => (!only || only.includes(o.slug)) && (!group || o.group === group))
+	);
 </script>
 
 <ul class="packages" role="list">
-	{#each shown as pack (pack.name)}
-		{@const visual = packageVisuals[pack.name]}
-		<li class="package" class:package--visual={!!visual} id={anchor(pack.name)}>
-			<p class="package__delay"><Icon name="clock" size="sm" />{pack.delay}</p>
-			<svelte:element this={`h${headingLevel}`} class="package__name">{pack.name}</svelte:element>
-			<p class="package__price">{pack.price} <span>{pack.period}</span></p>
+	{#each shown as offer (offer.slug)}
+		{@const visual = offerVisuals[offer.slug]}
+		<li class="package" class:package--visual={!!visual}>
+			<p class="package__delay"><Icon name="clock" size="sm" />{offer.badge}</p>
+			<svelte:element
+				this={`h${headingLevel}`}
+				class="package__name"
+				class:package__name--lines={!!offer.cardLines}
+				>{#if offer.cardLines}{offer.cardLines[0] + ' '}<br />{offer
+						.cardLines[1]}{:else}{offer.name}{/if}</svelte:element
+			>
+			<div class="package__price"><PriceTag {...priceParts(offer)} /></div>
 			<div class="package__swap">
 				{#if visual}
 					<div class="package__visual">
@@ -39,13 +52,19 @@
 						/>
 					</div>
 				{/if}
-				<p class="package__text">{pack.text}</p>
+				<p class="package__text">{offer.summary}</p>
 			</div>
-			<a class="link-arrow package__cta" href={links.calendly} target="_blank" rel="noopener"
-				>En parler<Icon name="arrow-up-right" /><span class="sr-only"
-					>: {pack.name} (prise de rendez-vous, nouvel onglet)</span
-				></a
-			>
+			<div class="package__actions">
+				<a class="link-arrow package__cta" href={offerPath(offer)}
+					>Découvrir l'offre<Icon name="arrow-right" /><span class="sr-only">: {offer.name}</span
+					></a
+				>
+				<a class="package__talk" href={links.calendly} target="_blank" rel="noopener"
+					>En parler<span class="sr-only">
+						: {offer.name} (prise de rendez-vous, nouvel onglet)</span
+					></a
+				>
+			</div>
 		</li>
 	{/each}
 </ul>
@@ -61,7 +80,10 @@
 	}
 	.package {
 		display: grid;
-		grid-template-rows: auto auto auto 1fr auto;
+		/* Lignes partagées avec les cartes voisines (subgrid) : pastille, nom, prix, illustration et
+		   liens restent alignés d'une carte à l'autre, quelle que soit la longueur du nom */
+		grid-row: span 5;
+		grid-template-rows: subgrid;
 		align-items: start;
 		gap: var(--space-2);
 		padding: var(--space-5);
@@ -84,16 +106,19 @@
 		border-color: var(--action);
 		box-shadow: var(--shadow-card-hover);
 	}
-	.package:hover :is(.package__delay, .package__name, .package__text, .package__price span),
-	.package:focus-within :is(.package__delay, .package__name, .package__text, .package__price span) {
+	.package:hover :is(.package__delay, .package__name, .package__text),
+	.package:focus-within :is(.package__delay, .package__name, .package__text) {
 		color: var(--on-action);
 	}
+	/* Prix en Bleu nuit sur l'orange (8.24 : 1) */
 	.package:hover .package__price,
 	.package:focus-within .package__price {
-		color: var(--surface);
+		--price-color: var(--on-action);
+		--price-muted: var(--on-action);
+		border-color: var(--on-action);
 	}
-	.package:hover :global(.package__cta),
-	.package:focus-within :global(.package__cta) {
+	.package:hover :is(.package__cta, .package__talk),
+	.package:focus-within :is(.package__cta, .package__talk) {
 		color: var(--on-action);
 	}
 	@media (prefers-reduced-motion: reduce) {
@@ -122,27 +147,25 @@
 	.package__delay :global(.icon) {
 		color: var(--tag-text);
 	}
+	/* Nom en grand, réparti sur deux lignes équilibrées pour un rythme régulier d'une carte à l'autre */
 	.package__name {
+		max-width: 11ch;
 		margin: var(--space-2) 0 0;
-		font-size: var(--text-h3);
+		font-size: clamp(1.75rem, 1.55rem + 0.4vw, 2rem);
+		line-height: 1.05;
+		text-wrap: balance;
 	}
-	/* Prix en Lilita One, orange ; la périodicité reste en texte courant */
+	/* Coupure imposée par les données : pas de limite de largeur */
+	.package__name--lines {
+		max-width: none;
+	}
+	/* Prix (variante B) : filet au-dessus, libellé constant, montant en Bleu nuit (PriceTag) */
 	.package__price {
-		margin: 0;
-		font-family: var(--font-display);
-		font-weight: var(--weight-display);
-		font-size: var(--text-h2);
-		letter-spacing: 0.005em;
-		line-height: 1.1;
-		color: var(--accent-deco);
-		transition: color var(--duration-reveal) var(--ease-out);
-	}
-	.package__price span {
-		font-family: var(--font-ui);
-		font-size: var(--text-body-sm);
-		font-weight: var(--weight-semibold);
-		letter-spacing: 0;
-		color: var(--text-muted);
+		align-self: end;
+		margin-top: var(--space-2);
+		padding-top: var(--space-3);
+		border-top: 1px solid var(--line);
+		transition: border-color var(--duration-reveal) var(--ease-out);
 	}
 	.package__text {
 		margin: 0;
@@ -196,7 +219,21 @@
 			transform: scale(0.96);
 		}
 	}
-	.package__cta {
+	.package__actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-2) var(--space-4);
 		margin-top: var(--space-3);
+		padding-top: var(--space-3);
+		border-top: 1px solid var(--line);
+	}
+	.package__talk {
+		font-size: var(--text-body-sm);
+		font-weight: var(--weight-semibold);
+		color: var(--text-muted);
+		text-decoration: underline;
+		text-underline-offset: 3px;
 	}
 </style>
