@@ -513,6 +513,13 @@ export const offersIntro = {
 		'Identité visuelle, SEO, automatisation, développement sur mesure : chiffrés après un premier échange.'
 } as const;
 
+/** En-tête de la grille sur la page Automatisation : une seule offre, l'audit */
+export const offersIntroAutomatisation = {
+	title: 'Commencer par un audit',
+	accent: 'un audit',
+	lede: "Avant de développer quoi que ce soit, l'audit repère ce qui vaut la peine d'être automatisé dans un processus précis. Le prix affiché est celui que vous payez."
+} as const;
+
 /** Conditions communes (page Tarifs) */
 export const offersConditions = {
 	title: 'Comment se passe une commande',

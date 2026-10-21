@@ -21,7 +21,14 @@
 	import { universes } from '$lib/content/services';
 	import { hero, links } from '$lib/content/studio';
 	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
-	import { maintenanceIntro, maintenancePage, offers, offersIntro } from '$lib/content/tarifs';
+	import {
+		maintenanceIntro,
+		maintenancePage,
+		offers,
+		offersIntro,
+		offersIntroAutomatisation,
+		vatNotice
+	} from '$lib/content/tarifs';
 
 	let { data } = $props();
 
@@ -42,6 +49,8 @@
 	const others = $derived(universes.filter((x) => x.id !== u.id));
 	// Offres rattachées à l'expertise (pages /services/<id>/<offre>/)
 	const uOffers = $derived(offers.filter((o) => o.universe === u.id));
+	// En-tête de la grille : celui du catalogue WordPress, sauf pour l'automatisation
+	const offersHead = $derived(u.id === 'automatisation' ? offersIntroAutomatisation : offersIntro);
 </script>
 
 <Seo title={u.seoTitle} path={u.path} description={u.description ?? u.text} />
@@ -101,11 +110,12 @@
 			<header class="stack stack--sm">
 				<SectionLabel label="Offres" />
 				<h2 class="t-h2" id="forfaits-title">
-					<AccentTitle text={offersIntro.title} accent={offersIntro.accent} />
+					<AccentTitle text={offersHead.title} accent={offersHead.accent} />
 				</h2>
-				<p class="muted">{offersIntro.lede}</p>
+				<p class="muted">{offersHead.lede}</p>
 			</header>
 			<PackageGrid only={uOffers.map((o) => o.slug)} />
+			<p class="muted vat">{vatNotice}</p>
 		</div>
 	</section>
 {:else}
@@ -178,6 +188,10 @@
 <ContactBlock />
 
 <style>
+	.vat {
+		margin: 0;
+		font-size: var(--text-body-sm);
+	}
 	.muted {
 		margin: 0;
 		max-width: 40rem;
