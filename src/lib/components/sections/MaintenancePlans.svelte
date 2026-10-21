@@ -9,7 +9,13 @@
 -->
 <script lang="ts">
 	import { links } from '$lib/content/studio';
-	import { maintenancePage, maintenancePlans, maintenanceRules } from '$lib/content/tarifs';
+	import {
+		maintenancePage,
+		maintenancePlans,
+		maintenanceRules,
+		maintenanceStatus
+	} from '$lib/content/tarifs';
+	import Notice from '../ui/Notice.svelte';
 	import Icon from '../brand/Icon.svelte';
 	import PriceTag from '../ui/PriceTag.svelte';
 	import Button from '../ui/Button.svelte';
@@ -25,16 +31,26 @@
 	let { headingLevel = 3, detailLink = false, rules = false }: Props = $props();
 </script>
 
+{#if !maintenanceStatus.open}
+	<div class="plans-status">
+		<Notice>{maintenanceStatus.notice}</Notice>
+	</div>
+{/if}
 <ul class="plans" role="list">
 	{#each maintenancePlans as plan (plan.name)}
 		<li class="plan" class:plan--featured={plan.recommended} id={detailLink ? undefined : plan.id}>
-			{#if plan.recommended}<p class="plan__ribbon">Recommandé</p>{/if}
+			{#if plan.onStudy}<p class="plan__ribbon plan__ribbon--study">Sur étude préalable</p>
+			{:else if plan.recommended}<p class="plan__ribbon">Recommandé</p>{/if}
 			<div class="plan__head">
 				<svelte:element this={`h${headingLevel}`} class="plan__name">{plan.name}</svelte:element>
 				<p class="plan__target">{plan.target}</p>
 			</div>
 			<div class="plan__price">
-				<PriceTag label="Par mois" value={plan.price.replace(/\s*€$/, '')} />
+				<PriceTag
+					label={plan.onStudy ? 'Sur étude préalable' : 'Par mois'}
+					value={plan.price.replace(/\s*€$/, '')}
+					unit={plan.onStudy ? '/ mois' : undefined}
+				/>
 			</div>
 			<ul class="plan__rows" role="list">
 				{#each plan.rows as row (row.label)}
@@ -74,6 +90,9 @@
 {/if}
 
 <style>
+	.plans-status {
+		margin-bottom: var(--space-5);
+	}
 	.plan__actions {
 		display: grid;
 		gap: var(--space-3);
@@ -158,6 +177,12 @@
 		font-size: var(--text-caption);
 		font-weight: var(--weight-bold);
 		white-space: nowrap;
+	}
+	/* Formule non souscriptible : statut neutre (l'orange reste réservé à « Recommandé ») */
+	.plan__ribbon--study {
+		background: var(--surface-sunk);
+		color: var(--text);
+		border: 1px solid var(--line);
 	}
 	.plan__head {
 		display: grid;

@@ -44,7 +44,7 @@
 	{#snippet actions()}
 		<div class="price">
 			<PriceTag label="À partir de" value="99" unit="/ mois" size="hero" />
-			<span class="price__note">Facultative · {vatNotice}</span>
+			<span class="price__note">Formules en préparation · {vatNotice}</span>
 		</div>
 		<Button href="#formules" icon="arrow-right">Comparer les formules</Button>
 		<Button href={links.calendly} variant="secondary"><Icon name="calendar" />{hero.ctaCall}</Button

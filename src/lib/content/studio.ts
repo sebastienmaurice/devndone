@@ -97,7 +97,7 @@ export const homePaths = {
 			id: 'entreprises',
 			icon: 'site',
 			title: 'Vous avez un projet de site',
-			text: 'Landing page, site vitrine, refonte ou boutique WooCommerce : des forfaits au périmètre défini, et une maintenance si vous le souhaitez.',
+			text: 'Landing page, site vitrine, refonte ou boutique WooCommerce : des forfaits dont le périmètre est écrit au devis.',
 			links: [
 				{ label: 'Les prestations WordPress', href: '/services/web/' },
 				{ label: 'Les tarifs', href: '/tarifs/' }

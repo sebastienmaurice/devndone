@@ -606,7 +606,21 @@ export type MaintenancePlan = {
 	price: string;
 	rows: readonly { label: string; value: string }[];
 	recommended?: boolean;
+	/** Formule non souscriptible : proposée seulement sur étude préalable */
+	onStudy?: boolean;
 };
+
+/**
+ * Disponibilité de la maintenance (décision de Sébastien, 21/10/2026) : formules affichées mais
+ * pas encore proposées à la commande, tant que ne sont pas définis l'outil de sauvegarde, le
+ * stockage, la restauration, la durée d'engagement et la résiliation. Passer `open` à true
+ * (et retirer `onStudy` de Sérénité si elle est prête) le jour où tout est validé.
+ */
+export const maintenanceStatus = {
+	open: false,
+	notice:
+		"Formules en préparation : elles ne sont pas encore proposées à la commande. Vous pouvez déjà m'en parler pour votre site."
+} as const;
 
 export const maintenancePage = {
 	path: '/services/web/maintenance-wordpress/',
@@ -615,7 +629,7 @@ export const maintenancePage = {
 		'Maintenance WordPress facultative : mises à jour contrôlées, sauvegardes, petites interventions techniques incluses. Trois formules de 99 € à 229 € par mois.',
 	title: 'Un site WordPress à jour et suivi chaque mois',
 	accent: 'à jour et suivi',
-	lede: "Une maintenance facultative, sans formule imposée à la création : vous choisissez le niveau qui correspond à l'importance de votre site."
+	lede: 'Une maintenance facultative, sans formule imposée à la création. Les formules sont en préparation : elles ne sont pas encore proposées à la commande.'
 } as const;
 
 export const maintenanceIntro = {
@@ -663,6 +677,7 @@ export const maintenancePlans: readonly MaintenancePlan[] = [
 		name: 'Sérénité',
 		target: 'Site stratégique ou boutique',
 		price: '229 €',
+		onStudy: true,
 		rows: [
 			{
 				label: 'Mises à jour WordPress, thème et extensions',
@@ -677,6 +692,7 @@ export const maintenancePlans: readonly MaintenancePlan[] = [
 
 /** Règles communes aux trois formules (informations validées) */
 export const maintenanceRules = [
+	"Avant toute prise en maintenance d'un site existant, un état des lieux est obligatoire. Il est chiffré selon l'état et la complexité du site.",
 	'La maintenance est facultative et facturée chaque mois.',
 	"Le temps d'intervention inclus n'est pas reportable d'un mois sur l'autre.",
 	"Le délai de première réponse n'est pas un délai de résolution.",
@@ -689,7 +705,11 @@ export const maintenanceRules = [
 export const maintenanceFaq = [
 	{
 		q: "La maintenance est-elle obligatoire après la création d'un site ?",
-		a: 'Non. Elle est facultative : vous pouvez la souscrire à la mise en ligne, plus tard, ou pas du tout.'
+		a: "Non. Elle est facultative. Les formules sont en préparation et ne sont pas encore proposées à la commande ; vous pouvez déjà m'en parler."
+	},
+	{
+		q: 'Pourquoi un état des lieux avant la maintenance ?',
+		a: "Pour connaître l'état réel du site avant de m'engager : versions, extensions, sauvegardes existantes, erreurs. Il est obligatoire pour un site existant, chiffré selon son état et sa complexité, et accepté avant d'être réalisé."
 	},
 	{
 		q: 'Que comprennent les interventions techniques mineures ?',

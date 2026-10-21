@@ -14,7 +14,7 @@ export const site = {
 	// (entreprises en direct, agences web en renfort), décidé par Sébastien le 21/10/2026
 	homeTitle: "Dev'n Done · Développeur WordPress et WooCommerce indépendant",
 	description:
-		'Développeur WordPress et WooCommerce indépendant : création, refonte et maintenance de sites pour les entreprises, renfort technique pour les agences web.',
+		'Développeur WordPress et WooCommerce indépendant : création, refonte et évolution de sites pour les entreprises, renfort technique pour les agences web.',
 	ogTitle: "Dev'n Done · Des projets pensés pour être Done.",
 	ogDescription:
 		'Développeur WordPress et WooCommerce indépendant, pour les entreprises et en renfort des agences web.',
