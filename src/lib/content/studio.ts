@@ -5,13 +5,10 @@
  * Les avis sont de vrais avis publiés sur le profil Malt : ne jamais en ajouter,
  * en retirer un mot ni en reformuler sans source.
  */
-import { legal } from './legal';
-
 export const links = {
 	calendly: 'https://calendly.com/sebastienmaurice/prise-de-contact',
 	malt: 'https://www.malt.fr/profile/semauri',
-	linkedin: 'https://www.linkedin.com/in/sebastien-maurice/',
-	email: `mailto:${legal.publisher.email}`
+	linkedin: 'https://www.linkedin.com/in/sebastien-maurice/'
 } as const;
 
 /**
@@ -74,24 +71,14 @@ export const reviews: readonly Review[] = [
 
 export const contactIntro = {
 	eyebrow: 'Contact',
-	/** Le mot « Done. » est mis en forme par la page */
-	title: 'Un projet en tête ? On le rend',
 	/** Première ligne du titre du bloc contact (la seconde est « On le rend DONE. ») */
 	question: 'Un projet en tête ?',
 	lede: '15 minutes pour faire le point sur votre projet et définir la bonne approche, sans engagement.',
-	cta: 'Parlons de votre projet',
-	email: 'Écrire un email'
+	cta: 'Parlons de votre projet'
 } as const;
 
 export const hero = {
-	eyebrow: 'Un studio digital indépendant qui conçoit, développe et livre des solutions web.',
 	keywords: 'WordPress · WooCommerce · Automatisation · Identité · Full Stack',
 	ctaServices: 'Découvrir mes services',
 	ctaCall: 'Réserver 15 min'
-} as const;
-
-/** Bandeau sous les réalisations ; le mot « Done. » est mis en forme par le composant */
-export const ctaBand = {
-	text: 'Un autre projet en tête ? On le rend',
-	cta: 'Parlons de votre projet'
 } as const;

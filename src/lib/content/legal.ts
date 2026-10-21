@@ -1,5 +1,5 @@
 /**
- * Mentions légales (obligatoires en France — LCEN, art. 6-III et art. 19).
+ * Mentions légales (obligatoires en France : LCEN, art. 6-III et art. 19).
  * Sources : synthèse du Guichet unique INPI, formalité J00274978378 (validée le 26/08/2026),
  * et mentions-legales.html du site en ligne (branche main du dépôt devndone), dont les textes
  * affichés sont repris tels quels. Adresse et téléphone : publication validée par Sébastien.

@@ -13,7 +13,12 @@
 	import Button from '../ui/Button.svelte';
 </script>
 
-<Seo title="Page introuvable" path="/404/" noindex />
+<Seo
+	title="Page introuvable"
+	path="/404/"
+	description="Cette page n'existe pas ou a changé d'adresse. Retour à l'accueil de Dev'n Done."
+	noindex
+/>
 
 <div class="not-found">
 	<PageIntro

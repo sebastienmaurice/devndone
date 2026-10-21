@@ -9,7 +9,9 @@
  * Lieu du Petit Château Vercourt : adresse donnée par Sébastien (1 rue de l'Église, 80120 Vercourt).
  * Visuels : présentations complètes 1774 × 887 px (D:/GRAPHIQUE/MALT - GRAPISTE.COM/Web/CMS retenus
  * et visuels transmis par Sébastien le 19/10/2026).
- * Textes et liens repris tels quels : ne rien ajouter sans validation.
+ * Textes et liens repris tels quels : ne rien ajouter sans validation. Seule la ponctuation a été
+ * harmonisée (21/10/2026) : tiret isolé remplacé par deux-points dans les sous-titres, par « à »
+ * ou « depuis » dans les périodes.
  */
 export type ProjectDetails = {
 	subtitle: string;
@@ -62,9 +64,9 @@ export const projects: readonly Project[] = [
 		description:
 			"Refonte WordPress Elementor du site d'une agence d'architecture et d'urbanisme : UX/UI, migration serveur, Core Web Vitals et structuration SEO des projets.",
 		details: {
-			subtitle: 'Refonte WordPress Elementor - site institutionnel, SEO & performance',
+			subtitle: 'Refonte WordPress Elementor : site institutionnel, SEO & performance',
 			sector: 'Architecture & urbanisme',
-			period: 'mars 2024 - avril 2024',
+			period: 'mars 2024 à avril 2024',
 			location: 'Paris, France',
 			skills: [
 				'WordPress',
@@ -98,9 +100,9 @@ export const projects: readonly Project[] = [
 		description:
 			"Migration de Wix vers WordPress et WooCommerce d'un site industriel B2B : fusion de deux activités, catalogue produits et système de devis en ligne.",
 		details: {
-			subtitle: 'Refonte WordPress WooCommerce B2B - Catalogue & système de devis',
+			subtitle: 'Refonte WordPress WooCommerce B2B : catalogue & système de devis',
 			sector: 'Commerce de détail',
-			period: 'septembre 2023 - novembre 2023',
+			period: 'septembre 2023 à novembre 2023',
 			location: 'Bruay-la-Buissière, France',
 			skills: [
 				'WordPress',
@@ -161,9 +163,9 @@ export const projects: readonly Project[] = [
 		description:
 			'Site WordPress de location de matériel pour espaces verts et travaux publics : catalogue WooCommerce, demande de devis en ligne et référencement local.',
 		details: {
-			subtitle: 'Site WordPress location matériel - devis en ligne & SEO',
+			subtitle: 'Site WordPress location matériel : devis en ligne & SEO',
 			sector: 'BTP & construction',
-			period: "mai 2026 - aujourd'hui",
+			period: 'depuis mai 2026',
 			location: 'Caudry, France',
 			skills: [
 				'WordPress',
@@ -197,9 +199,9 @@ export const projects: readonly Project[] = [
 		description:
 			"Site WordPress d'une chambre d'hôtes haut de gamme à Vercourt (Somme) : site vitrine orienté conversion, réservation en ligne et référencement local.",
 		details: {
-			subtitle: 'Création site WordPress hôtelier - Réservations & SEO local',
+			subtitle: 'Création site WordPress hôtelier : réservations & SEO local',
 			sector: 'Hôtellerie',
-			period: 'juin 2024 - juillet 2024',
+			period: 'juin 2024 à juillet 2024',
 			location: 'Vercourt (Somme), France',
 			skills: [
 				'WordPress',
@@ -234,7 +236,7 @@ export const projects: readonly Project[] = [
 			subtitle:
 				'Refonte du site WordPress avec Elementor, boutique WooCommerce et demande de devis',
 			sector: 'Presse & médias',
-			period: 'février 2020 - novembre 2022',
+			period: 'février 2020 à novembre 2022',
 			location: 'Dechy, France',
 			skills: [
 				'Refonte WordPress',
@@ -271,7 +273,7 @@ export const projects: readonly Project[] = [
 		details: {
 			subtitle: 'Développement WordPress & E-commerce B2B',
 			sector: 'Commerce de détail',
-			period: 'février 2016 - janvier 2020',
+			period: 'février 2016 à janvier 2020',
 			location: 'Caudry, France',
 			skills: [
 				'WordPress',
@@ -304,9 +306,9 @@ export const projects: readonly Project[] = [
 		description:
 			"Refonte WordPress Elementor et WooCommerce d'une école de valse à Paris : réservation de cours, ateliers et soirées, boutique en ligne et parcours mobile.",
 		details: {
-			subtitle: 'Refonte WordPress Elementor & WooCommerce - réservation et boutique en ligne',
+			subtitle: 'Refonte WordPress Elementor & WooCommerce : réservation et boutique en ligne',
 			sector: 'Divertissements & loisirs',
-			period: 'août 2026 - septembre 2026',
+			period: 'août 2026 à septembre 2026',
 			location: 'Paris, France',
 			skills: [
 				'Refonte WordPress',

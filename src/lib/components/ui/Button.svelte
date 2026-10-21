@@ -1,6 +1,6 @@
 <!--
 	Bouton de marque. Avec `href` → lien <a> (navigation), sinon <button> (action).
-	Primaire : orange sur Night, Night sur Ivoire / Orange — automatique selon le contexte.
+	Primaire : orange sur Night, Night sur Ivoire / Orange, automatiquement selon le contexte.
 
 	<Button href="/contact/" icon="arrow-right">Parlons de votre projet</Button>
 	<Button variant="secondary" size="sm" onclick={…}>Filtrer</Button>

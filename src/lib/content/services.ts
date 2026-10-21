@@ -11,8 +11,6 @@ export type Universe = {
 	tags: readonly string[];
 	/** Page dédiée : /services/<id>/ */
 	path: `/services/${string}/`;
-	/** Libellé court (header, pied de page) */
-	navLabel: string;
 	/** Icône Lucide (nom du composant Icon) */
 	icon: 'globe' | 'pen' | 'settings' | 'code' | 'layers';
 	/** Forfaits liés (noms de content/tarifs.ts) */
@@ -42,7 +40,6 @@ export const universes: readonly Universe[] = [
 		tags: ['Création', 'Refonte', 'WooCommerce', 'SEO', 'Maintenance'],
 		seoTitle: 'Création et refonte de sites WordPress, maintenance',
 		path: '/services/web/',
-		navLabel: 'Web',
 		icon: 'globe',
 		packages: [
 			'Landing page',
@@ -62,7 +59,6 @@ export const universes: readonly Universe[] = [
 			'Identité visuelle, direction artistique, images IA et mockups : une esthétique cohérente pour marquer les esprits. Studio digital indépendant à Caudry.',
 		seoTitle: 'Identité visuelle et direction artistique',
 		path: '/services/design/',
-		navLabel: 'Identité',
 		icon: 'pen',
 		packages: []
 	},
@@ -75,7 +71,6 @@ export const universes: readonly Universe[] = [
 			'Et si cette tâche pouvait se faire toute seule ? Audit des processus, automatisation ciblée ou complète avec Make ou Zapier. Studio indépendant à Caudry.',
 		seoTitle: 'Automatisation des processus avec Make et Zapier',
 		path: '/services/automatisation/',
-		navLabel: 'Automatisation',
 		icon: 'settings',
 		packages: ['Audit automatisation']
 	},
@@ -93,7 +88,6 @@ export const universes: readonly Universe[] = [
 			"Applications métier, espaces clients, outils sur mesure et interfaces applicatives. Exemple en développement : un logiciel de gestion d'affaires pour enseignistes.",
 		seoTitle: 'Applications métier et logiciels sur mesure',
 		path: '/services/applications/',
-		navLabel: 'Apps & logiciels',
 		icon: 'layers',
 		packages: []
 	},
@@ -106,7 +100,6 @@ export const universes: readonly Universe[] = [
 			'Du front-end au back-end, une solution complète pour votre projet : interfaces, API et back-end en JavaScript, Node.js, Express et PostgreSQL.',
 		seoTitle: 'Développement full stack : interfaces, API, back-end',
 		path: '/services/full-stack/',
-		navLabel: 'Full Stack',
 		icon: 'code',
 		packages: [],
 		complementary: true
@@ -126,6 +119,5 @@ export const processSteps = [
 	{ title: 'Livrer', text: "On teste, on ajuste, et c'est en ligne !", icon: 'rocket' }
 ] as const;
 
-/** Slogan manuscrit du hero (maquette du 19/10/2026) */
-/** Slogan manuscrit de l'accueil, en deux lignes fixes */
+/** Slogan manuscrit de l'accueil (maquette du 19/10/2026), en deux lignes fixes */
 export const heroSlogan = ['Des solutions sur mesure pour', 'faire décoller vos idées'] as const;

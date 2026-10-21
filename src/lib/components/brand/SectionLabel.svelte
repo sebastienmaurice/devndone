@@ -1,6 +1,6 @@
 <!--
 	Surtitre de section (maquette du 19/10/2026) : capitales espacées, petit trait orange.
-	`center` : trait sous le libellé (« NOTRE EXPERTISE ») ; `left` : trait avant (« — MON PROCESS »).
+	`center` : trait sous le libellé (« NOTRE EXPERTISE ») ; `left` : trait avant (trait puis « MON PROCESS »).
 -->
 <script lang="ts">
 	type Props = { label: string; align?: 'center' | 'left'; as?: 'p' | 'span' };
