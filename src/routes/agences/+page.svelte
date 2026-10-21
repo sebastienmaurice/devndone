@@ -88,7 +88,7 @@
 			</h2>
 			<p class="muted">
 				Chaque mission a un périmètre et une estimation écrits avant de commencer. Ce qui dépasse
-				fait l'objet d'un nouveau devis, accepté avant d'être réalisé.
+				fait l'objet d'un nouveau devis, accepté par écrit avant d'être réalisé.
 			</p>
 		</header>
 		<div class="box">

@@ -69,7 +69,7 @@ const faqDomain = {
 };
 const faqOverrun = {
 	q: 'Et si mon projet dépasse le forfait ?',
-	a: "Le travail supplémentaire fait l'objet d'un devis complémentaire, accepté avant toute exécution. Rien n'est facturé sans votre accord."
+	a: "Le travail supplémentaire fait l'objet d'un devis complémentaire, accepté par écrit avant toute exécution. Rien n'est facturé sans votre accord."
 };
 const faqVat = {
 	q: 'Les prix sont-ils HT ou TTC ?',
@@ -88,7 +88,7 @@ export const offers: readonly Offer[] = [
 		name: 'Landing page',
 		cardLines: ['Landing', 'page'],
 		price: { amount: '1 750 €' },
-		badge: '5 jours de travail au plus',
+		badge: 'Une page, une proposition graphique',
 		summary:
 			'Une page sur mesure pour un objectif précis : prise de contact, demande de devis, lancement de service ou campagne.',
 		payment: 'staged',
@@ -100,37 +100,37 @@ export const offers: readonly Offer[] = [
 		lede: "Une page unique, pensée autour de l'action que vous attendez du visiteur : vous contacter, demander un devis, découvrir un nouveau service ou répondre à une campagne.",
 		need: "Une campagne, un nouveau service ou un salon arrive, et votre site actuel ne permet pas de présenter cette offre seule, avec un appel à l'action clair.",
 		includes: [
-			"Cadrage de l'objectif et de la structure de la page",
-			'Conception visuelle sur mesure',
+			"Cadrage de l'objectif et des sections de la page, fixées au devis",
+			'Une proposition graphique sur mesure',
 			'Intégration responsive sous WordPress',
 			'Formulaire simple, si nécessaire',
 			'SEO on-page de base et vérifications avant livraison',
-			'Un cycle de retours consolidés',
-			"Jusqu'à 5 jours de travail"
+			'Un cycle de retours consolidés'
 		],
 		excludes: [
 			'Rédaction complète des textes',
 			"Création d'identité visuelle (logo, charte)",
-			'Fonctionnalités complexes et intégration de services tiers',
+			'Animations complexes et version multilingue',
+			'Fonctionnalités non prévues au devis et intégration de services tiers',
 			'Nom de domaine, hébergement et licences premium'
 		],
 		steps: [
 			{ title: 'Cadrage', text: 'Objectif, public, message et structure de la page.' },
 			{ title: 'Devis et acompte', text: 'Le périmètre est écrit ; 50 % à la commande.' },
-			{ title: 'Conception', text: 'Proposition visuelle, puis intégration WordPress.' },
+			{ title: 'Conception', text: 'Une proposition graphique, puis intégration WordPress.' },
 			{
 				title: 'Retours et mise en ligne',
 				text: 'Un cycle de retours consolidés, vérifications, mise en ligne.'
 			}
 		],
 		duration:
-			'5 jours de travail au plus. Le calendrier dépend de la réception de vos contenus et de vos retours : il est fixé ensemble au devis.',
+			"Jusqu'à 5 jours de travail sur le périmètre du devis. Ce n'est pas un délai de livraison : le calendrier est fixé une fois le cadrage validé, les contenus et les accès reçus.",
 		clientProvides: [
-			'Les textes de la page, ou leurs éléments principaux',
-			'Les images et le logo',
+			"Les textes et les images de la page, avant le début de l'intégration",
+			'Le logo',
 			'Les accès nécessaires (WordPress, nom de domaine, hébergement)'
 		],
-		extras: ['Rédaction des textes', 'Pages supplémentaires', 'Maintenance mensuelle'],
+		extras: ['Rédaction des textes', 'Sections supplémentaires', 'Maintenance mensuelle'],
 		faq: [faqDomain, faqOverrun, faqPaymentStaged, faqVat]
 	},
 	{
@@ -139,9 +139,9 @@ export const offers: readonly Offer[] = [
 		group: 'creation',
 		name: 'Site vitrine WordPress',
 		price: { amount: '3 500 €' },
-		badge: '10 jours de travail au plus',
+		badge: "Jusqu'à 5 pages, 2 gabarits",
 		summary:
-			"Jusqu'à 5 pages pour présenter votre activité, conçues et intégrées sous WordPress, avec formulaire de contact et SEO de base.",
+			"Jusqu'à 5 pages sur 2 gabarits pour présenter votre activité, intégrées sous WordPress, avec formulaire de contact et SEO de base.",
 		payment: 'staged',
 		seoTitle: "Site vitrine WordPress jusqu'à 5 pages : 3 500 €",
 		description:
@@ -151,18 +151,19 @@ export const offers: readonly Offer[] = [
 		lede: 'Un site pour présenter votre activité, vos services et vos coordonnées, que vous pouvez mettre à jour vous-même. Le périmètre est fixé avant de commencer, le prix aussi.',
 		need: "Vous n'avez pas encore de site, ou votre présence se limite à une page de réseau social : vos clients ne trouvent pas facilement ce que vous faites ni comment vous joindre.",
 		includes: [
-			"Jusqu'à 5 pages",
+			"Jusqu'à 5 pages, dont la liste est fixée au devis",
+			'2 gabarits de page distincts au plus (par exemple accueil et page intérieure)',
 			'Conception visuelle et intégration WordPress responsive',
-			'Formulaire de contact et intégrations simples',
+			'Intégrations simples listées au devis (par exemple formulaire de contact, carte, liens vers vos réseaux)',
 			'SEO on-page de base',
 			'Contrôles techniques et mise en ligne',
-			'Un cycle de retours consolidés',
-			"Jusqu'à 10 jours de travail"
+			'Un cycle de retours consolidés'
 		],
 		excludes: [
 			'Rédaction des textes et production des photos',
 			"Création d'identité visuelle (logo, charte)",
-			'Pages au-delà de 5, fonctionnalités avancées',
+			'Blog avancé, version multilingue et fonctionnalités spécifiques non prévues au devis',
+			'Pages et modifications au-delà du devis',
 			'Nom de domaine, hébergement et licences premium'
 		],
 		steps: [
@@ -175,9 +176,9 @@ export const offers: readonly Offer[] = [
 			}
 		],
 		duration:
-			"10 jours de travail au plus. Ce n'est pas un délai de livraison : le calendrier dépend de la réception de vos contenus et de vos validations, et il est fixé ensemble au devis.",
+			"Jusqu'à 10 jours de travail sur le périmètre du devis. Ce n'est pas un délai de livraison : le calendrier est fixé une fois le devis validé, les contenus et les accès reçus.",
 		clientProvides: [
-			'Les textes de chaque page',
+			"Les textes de chaque page, avant le début de l'intégration",
 			'Les photos, le logo et les informations pratiques (horaires, adresse, coordonnées)',
 			"La validation de la direction graphique avant l'intégration",
 			'Les accès nécessaires (nom de domaine, hébergement)'
@@ -195,7 +196,7 @@ export const offers: readonly Offer[] = [
 			},
 			{
 				q: "Je n'ai pas encore mes textes : est-ce un problème ?",
-				a: "Les textes, photos et informations sont fournis par vous. Le travail avance à mesure qu'ils arrivent ; la rédaction peut être chiffrée à part si besoin."
+				a: "Les textes, photos et informations sont fournis par vous avant l'intégration : le calendrier démarre à leur réception. La rédaction peut être chiffrée à part si besoin."
 			},
 			faqDomain,
 			faqOverrun,
@@ -219,14 +220,15 @@ export const offers: readonly Offer[] = [
 			"Refonte de site WordPress : analyse de l'existant, nouvelle structure, reprise des contenus, migrations et redirections au devis. À partir de 4 900 €.",
 		title: 'Refondre votre site WordPress sans repartir de zéro',
 		accent: 'sans repartir de zéro',
-		lede: 'Votre site existe, mais il a vieilli, il est lent ou difficile à faire évoluer. La refonte part de ce qui fonctionne déjà et de ce qui doit changer, après un diagnostic.',
+		lede: 'Votre site existe, mais il a vieilli, il est lent ou difficile à faire évoluer. La refonte part de ce qui fonctionne déjà et de ce qui doit changer, sur un périmètre écrit au devis.',
 		need: 'Un site daté, lent sur mobile ou difficile à mettre à jour, qui ne reflète plus votre activité et dont vous ne voulez pas perdre le référencement.',
 		includes: [
-			"Analyse initiale de l'existant",
+			"Analyse détaillée de l'existant, une fois le devis accepté",
 			"Refonte de la structure et de l'interface",
-			'Reprise des contenus définis au devis',
+			'Pages, contenus repris, fonctionnalités et redirections fixés au devis',
 			'Intégration responsive sous WordPress',
 			'Migrations et redirections prévues au périmètre',
+			'Un cycle de retours consolidés',
 			'Contrôles avant mise en ligne'
 		],
 		excludes: [
@@ -236,7 +238,10 @@ export const offers: readonly Offer[] = [
 			'Nom de domaine, hébergement et licences premium'
 		],
 		steps: [
-			{ title: 'Diagnostic', text: 'Analyse du site actuel : structure, contenus, technique.' },
+			{
+				title: 'Premier examen',
+				text: 'Un examen rapide du site actuel pour établir le devis. Une analyse approfondie est chiffrée à part, après accord.'
+			},
 			{
 				title: 'Cadrage et devis',
 				text: 'Pages, contenus repris, redirections : le prix est confirmé.'
@@ -245,7 +250,7 @@ export const offers: readonly Offer[] = [
 			{ title: 'Contrôles et mise en ligne', text: 'Redirections, vérifications, bascule.' }
 		],
 		duration:
-			'La durée de travail dépend du périmètre : elle est estimée au diagnostic et écrite dans le devis.',
+			'La durée de travail dépend du périmètre : elle est estimée au premier examen et écrite dans le devis. Le calendrier est fixé une fois le devis validé, les contenus et les accès reçus.',
 		clientProvides: [
 			"Les accès au site actuel et à l'hébergement",
 			'La liste des pages et contenus à conserver, à modifier ou à supprimer',
@@ -259,7 +264,7 @@ export const offers: readonly Offer[] = [
 		faq: [
 			{
 				q: 'Pourquoi un prix « à partir de » ?',
-				a: 'Chaque site existant est différent : nombre de pages, contenus à reprendre, redirections. Le prix final est confirmé après le diagnostic, avant tout engagement.'
+				a: 'Chaque site existant est différent : nombre de pages, contenus à reprendre, redirections. Le prix final est confirmé au devis, après un premier examen, avant tout engagement.'
 			},
 			faqDomain,
 			faqOverrun,
@@ -292,6 +297,8 @@ export const offers: readonly Offer[] = [
 			'Règles de livraison simples',
 			'Pages de boutique, panier et commande',
 			"Tests du parcours d'achat et des emails standards",
+			'Produits, fonctionnalités, pages et contenus fixés au devis',
+			'Un cycle de retours consolidés',
 			'Mise en ligne et vérifications responsive'
 		],
 		excludes: [
@@ -352,18 +359,19 @@ export const offers: readonly Offer[] = [
 			'Sprint WordPress ou WooCommerce : diagnostic, devis, intervention ciblée sur un site existant. 350 € par jour, 175 € la demi-journée pour une intervention courte.',
 		title: 'Un problème ou une évolution sur votre site WordPress ?',
 		accent: 'votre site WordPress',
-		lede: 'Une intervention ciblée, chiffrée en jours ou en demi-journées après un diagnostic, pour régler un problème précis ou faire évoluer un site existant.',
+		lede: 'Une intervention ciblée, chiffrée en jours ou en demi-journées après une courte analyse, pour régler un problème précis ou faire évoluer un site existant.',
 		need: 'Votre site fonctionne, mais quelque chose bloque ou manque : une erreur, une extension en conflit, une section à ajouter, un réglage WooCommerce à revoir.',
 		includes: [
-			'Échange et diagnostic de la demande',
+			'Échange et courte analyse préalable de la demande',
 			'Devis en jours ou en demi-journées, validé avant de commencer',
 			'Intervention ciblée sur le périmètre du devis',
-			"Votre accord avant tout dépassement de l'estimation",
+			"Votre accord écrit avant tout dépassement de l'estimation",
 			'Compte rendu de ce qui a été fait'
 		],
 		excludes: [
 			'Refonte complète du site',
 			'Développement complexe',
+			'Analyse approfondie avant devis : facturée, après votre accord',
 			'Demandes hors du périmètre validé au devis'
 		],
 		steps: [
@@ -376,7 +384,7 @@ export const offers: readonly Offer[] = [
 			{ title: 'Intervention', text: 'Travail sur le périmètre validé, puis compte rendu.' }
 		],
 		duration:
-			'La durée est estimée au diagnostic, en jours ou en demi-journées, et fixée dans le devis. Si le travail doit dépasser cette estimation, je vous demande votre accord avant de continuer.',
+			"La durée est estimée après une courte analyse, en jours ou en demi-journées, et fixée dans le devis. L'analyse préalable reste limitée : au-delà, elle est facturée après votre accord. Si le travail doit dépasser l'estimation, je vous demande votre accord écrit avant de continuer.",
 		clientProvides: [
 			"Une description du problème ou de l'évolution souhaitée",
 			'Les accès nécessaires (administration WordPress, hébergement)'
@@ -389,7 +397,7 @@ export const offers: readonly Offer[] = [
 			},
 			{
 				q: 'Peut-on commander une demi-journée ?',
-				a: 'Oui, pour une intervention courte, clairement définie et acceptée avant le démarrage : 175 €. Toutes les demandes ne tiennent pas en une demi-journée : la durée est estimée au diagnostic, et un travail plus long est chiffré en jours.'
+				a: 'Oui, pour une intervention courte, clairement définie et acceptée avant le démarrage : 175 €. Toutes les demandes ne tiennent pas en une demi-journée : la durée est estimée avant de commencer, et un travail plus long est chiffré en jours.'
 			},
 			{
 				q: 'Comment se passe le paiement ?',
@@ -423,15 +431,18 @@ export const offers: readonly Offer[] = [
 			'SEO technique de base',
 			'Affichage responsive et erreurs visibles',
 			'Sauvegardes et sécurité de base',
-			'Synthèse écrite avec recommandations priorisées',
-			'Courte restitution'
+			'Une synthèse concise et exploitable, avec des recommandations classées par priorité',
+			'Une restitution de 30 minutes au plus'
 		],
 		excludes: ['La correction des problèmes détectés', "L'audit de contenu ou de stratégie SEO"],
 		steps: [
 			{ title: 'Commande', text: 'Paiement à la commande et transmission des accès.' },
 			{ title: 'Analyse', text: 'Environ une journée de diagnostic technique.' },
-			{ title: 'Synthèse', text: 'Constats et recommandations, classés par priorité.' },
-			{ title: 'Restitution', text: 'Un court échange pour parcourir les priorités.' }
+			{
+				title: 'Synthèse',
+				text: 'Une synthèse concise : constats et recommandations par priorité.'
+			},
+			{ title: 'Restitution', text: '30 minutes au plus pour parcourir les priorités.' }
 		],
 		duration: 'Environ une journée de travail. La date de remise est fixée à la commande.',
 		clientProvides: ['Un accès administrateur au site', "Si possible, un accès à l'hébergement"],
@@ -463,26 +474,26 @@ export const offers: readonly Offer[] = [
 		lede: "Une analyse d'un processus précis de votre activité pour identifier les tâches répétitives et les automatisations qui valent la peine d'être mises en place.",
 		need: 'Une tâche revient chaque semaine (relances, saisies, copier-coller entre outils) et vous vous demandez si elle pourrait se faire toute seule.',
 		includes: [
-			"Analyse d'un processus métier défini",
+			"Un échange d'une heure au plus pour décrire le processus",
+			"L'analyse d'un besoin clairement défini (un processus)",
 			'Repérage des tâches répétitives',
 			"Pistes d'automatisation identifiées et hiérarchisées",
-			'Recommandations concrètes',
-			'Synthèse écrite et courte restitution'
+			'Une synthèse courte et une restitution limitée'
 		],
 		excludes: [
 			"Le développement ou la mise en production d'automatisations",
-			"L'analyse de plusieurs processus dans le même forfait"
+			'Toute étude plus large (plusieurs processus, analyse approfondie) : devis séparé'
 		],
 		steps: [
 			{ title: 'Commande', text: 'Le processus à analyser est défini ; paiement à la commande.' },
-			{ title: 'Échange', text: 'Vous décrivez le processus et les outils utilisés.' },
+			{ title: 'Échange', text: 'Une heure au plus : le processus et les outils utilisés.' },
 			{ title: 'Analyse', text: 'Tâches répétitives, pistes, priorités.' },
-			{ title: 'Restitution', text: 'Synthèse écrite et court échange.' }
+			{ title: 'Restitution', text: 'Synthèse courte et échange limité.' }
 		],
 		duration: 'Environ une journée de travail. La date de remise est fixée à la commande.',
 		clientProvides: [
 			'La description du processus et des outils utilisés',
-			"Un moment d'échange pour le parcourir ensemble"
+			"Une heure d'échange au plus pour le parcourir ensemble"
 		],
 		extras: ['Mise en place des automatisations, sur devis séparé'],
 		faq: [
@@ -568,7 +579,8 @@ export const offersConditions = {
 		'Un devis qui fixe le périmètre, le prix et les échéances.',
 		'Pour les créations et refontes : 50 % à la commande, 30 % à une étape intermédiaire définie au devis, 20 % avant la mise en ligne. Pour les audits et les sprints commandés par une entreprise : paiement à la commande.',
 		'Pour une mission de sous-traitance confiée par une agence : facturation avec une échéance définie au devis ou au contrat.',
-		"Tout travail hors périmètre fait l'objet d'un devis complémentaire, accepté avant son exécution."
+		"Tout travail hors périmètre fait l'objet d'un devis complémentaire, accepté par écrit avant son exécution.",
+		'Les délais sont fixés une fois le devis validé, les contenus et les accès nécessaires reçus.'
 	],
 	excludedTitle: 'Facturés séparément',
 	excluded: [

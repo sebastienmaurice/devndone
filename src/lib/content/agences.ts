@@ -56,12 +56,16 @@ export const agencesFrame = [
 	{
 		label: 'Tarif de référence',
 		value:
-			'350 € par jour, ou 175 € la demi-journée pour une intervention courte, clairement définie et acceptée avant le démarrage. La durée estimée est écrite au devis ; si elle doit être dépassée, je vous demande votre accord avant de continuer.'
+			'350 € par jour, ou 175 € la demi-journée pour une intervention courte, clairement définie et acceptée avant le démarrage. La durée estimée est écrite au devis ; si elle doit être dépassée, je vous demande votre accord écrit avant de continuer.'
 	},
 	{
 		label: 'Facturation',
 		value:
 			'Sur facture, avec une échéance fixée au devis ou au contrat, selon la mission. Aucun paiement à la commande imposé.'
+	},
+	{
+		label: 'Délais',
+		value: 'Fixés une fois le devis validé et les accès nécessaires reçus.'
 	},
 	{
 		label: 'Marque blanche',
