@@ -2,7 +2,7 @@
 	Vue d'ensemble des expertises : les cinq expertises, le process, l'appel au contact.
 -->
 <script lang="ts">
-	import { Button, Seo } from '$lib/components';
+	import { Button, LinkArrow, Seo } from '$lib/components';
 	import Icon from '$lib/components/brand/Icon.svelte';
 	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
 	import ExpertiseCards from '$lib/components/sections/ExpertiseCards.svelte';
@@ -13,9 +13,9 @@
 </script>
 
 <Seo
-	title="Services web : WordPress, design, automatisation, applications"
+	title="Services WordPress et WooCommerce"
 	path="/services/"
-	description="Web, design, automatisation, applications et logiciels, développement full stack : cinq expertises, une seule vision, du premier brief jusqu'à la mise en ligne."
+	description="Création, refonte et évolution de sites WordPress et WooCommerce, renfort pour les agences web. En complément : design, automatisation, applications et full stack."
 />
 
 <PageIntro
@@ -32,9 +32,14 @@
 	{/snippet}
 </PageIntro>
 
-<section class="section section--tight" aria-label="Les cinq expertises">
+<section class="section section--tight" aria-label="Les expertises">
 	<div class="container">
 		<ExpertiseCards headingLevel={2} />
+		<p class="agencies">
+			Vous êtes une agence web ? <LinkArrow href="/agences/"
+				>Le renfort WordPress et WooCommerce</LinkArrow
+			>
+		</p>
 	</div>
 </section>
 
@@ -47,6 +52,10 @@
 <ContactBlock />
 
 <style>
+	.agencies {
+		margin: var(--space-6) 0 0;
+		font-weight: var(--weight-semibold);
+	}
 	.band {
 		background: var(--surface);
 		border-block: 1px solid var(--line);

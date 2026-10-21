@@ -1,5 +1,5 @@
 <!--
-	À propos : présentation (texte du site en ligne) avec la photo de Sébastien (mascotte en
+	À propos : présentation (recentrée sur WordPress et WooCommerce le 21/10/2026) avec la photo de Sébastien (mascotte en
 	arrière-plan), la mascotte comme visage de la marque (content/studio.ts, aboutMascot), méthode
 	de travail (process), avis clients
 	réels publiés sur Malt (cités à l'identique). Aucune valeur ni chiffre ajouté.
@@ -18,9 +18,9 @@
 </script>
 
 <Seo
-	title="À propos : Sébastien Maurice, développeur WordPress à Caudry"
+	title="À propos : Sébastien Maurice, développeur WordPress"
 	path="/apropos/"
-	description="Sébastien Maurice, indépendant à Caudry : un seul interlocuteur, du brief à la mise en ligne, pour les TPE, artisans et PME."
+	description="Sébastien Maurice, développeur WordPress et WooCommerce indépendant : sites pour les entreprises, renfort pour les agences web, un seul interlocuteur."
 />
 
 <PageIntro

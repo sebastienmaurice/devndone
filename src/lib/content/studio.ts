@@ -27,8 +27,11 @@ export const aboutIntro = {
 	eyebrow: 'À propos',
 	title: 'Un seul interlocuteur, du brief à la mise en ligne.',
 	accent: 'Un seul interlocuteur',
-	/** Texte fourni par Sébastien le 20/10/2026 */
-	text: "Je suis Sébastien Maurice, développeur web indépendant avec plus de 20 ans d'expérience dans le web, du design à l'intégration, en passant par WordPress, WooCommerce et PrestaShop. Formé au développement full stack, je conçois des sites et des solutions web adaptés aux besoins des professionnels. Je travaille avec des TPE, artisans et PME, avec un devis clair et un délai annoncé."
+	/** Recentré le 21/10/2026 (décision de Sébastien) sur WordPress, WooCommerce, entreprises et
+	 *  agences. Ancienneté retirée : aucun justificatif vérifiable (seule source, une déclaration
+	 *  de Sébastien du 20/10/2026, « plus de 20 ans d'expérience dans le web ») ; à remettre s'il
+	 *  la confirme. */
+	text: "Je suis Sébastien Maurice, développeur web indépendant. Mon cœur de métier : WordPress et WooCommerce. Je crée et fais évoluer des sites pour les entreprises, et j'interviens en renfort pour les agences web sur des missions au périmètre défini. Vous échangez directement avec la personne qui réalise le projet, avec un devis clair et un délai annoncé."
 } as const;
 
 /** Section « La mascotte » de la page À propos : texte fourni par Sébastien le 20/10/2026 */
@@ -38,7 +41,7 @@ export const aboutMascot = {
 	accent: 'se prendre au sérieux',
 	paragraphs: [
 		"Chez Dev'n Done, c'est un renard qui vous accueille, pas une énième photo de développeur devant son écran. Une mascotte à l'image de mon approche : accessible, curieuse et tournée vers les solutions.",
-		"Derrière le personnage, plus de 20 ans d'expérience dans le web, des compétences techniques solides et un seul objectif : concrétiser vos projets."
+		'Derrière le personnage, un développeur web expérimenté, des compétences techniques solides et un seul objectif : concrétiser vos projets.'
 	],
 	cta: 'Découvrir mes prestations'
 } as const;
@@ -77,8 +80,36 @@ export const contactIntro = {
 	cta: 'Parlons de votre projet'
 } as const;
 
+/** Bloc d'orientation de l'accueil : un parcours par public (21/10/2026) */
+export const homePaths = {
+	eyebrow: 'Par où commencer',
+	title: 'Agence ou entreprise, voici votre parcours',
+	accent: 'votre parcours',
+	paths: [
+		{
+			id: 'agences',
+			icon: 'briefcase',
+			title: 'Vous êtes une agence web',
+			text: "Un renfort WordPress, WooCommerce ou front-end sur un projet en cours : vous me confiez une partie définie, en marque blanche si la mission s'y prête.",
+			links: [{ label: 'Le renfort pour les agences', href: '/agences/' }]
+		},
+		{
+			id: 'entreprises',
+			icon: 'site',
+			title: 'Vous avez un projet de site',
+			text: 'Landing page, site vitrine, refonte ou boutique WooCommerce : des forfaits au périmètre défini, et une maintenance si vous le souhaitez.',
+			links: [
+				{ label: 'Les prestations WordPress', href: '/services/web/' },
+				{ label: 'Les tarifs', href: '/tarifs/' }
+			]
+		}
+	]
+} as const;
+
 export const hero = {
-	keywords: 'WordPress · WooCommerce · Automatisation · Identité · Full Stack',
+	/** Le métier dès le premier écran (21/10/2026) */
+	lede: "Développeur WordPress et WooCommerce indépendant. Je crée et fais évoluer des sites pour les entreprises, et j'interviens en renfort pour les agences web.",
+	keywords: 'WordPress · WooCommerce · Intégration front-end',
 	ctaServices: 'Découvrir mes services',
 	ctaCall: 'Réserver 15 min'
 } as const;

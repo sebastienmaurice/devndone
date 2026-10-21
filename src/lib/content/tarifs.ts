@@ -343,21 +343,22 @@ export const offers: readonly Offer[] = [
 		name: 'Sprint WordPress / WooCommerce',
 		cardLines: ['Sprint WordPress', '/ WooCommerce'],
 		price: { amount: '350 €', unit: '/ jour' },
-		badge: 'À la journée, sur devis',
+		badge: 'Demi-journée à 175 €, sur devis',
 		summary:
-			'Une intervention ponctuelle pour corriger un problème ou faire évoluer un site WordPress ou WooCommerce existant.',
+			'Une intervention ponctuelle pour corriger ou faire évoluer un site WordPress ou WooCommerce existant, à la journée ou à la demi-journée.',
 		payment: 'upfront',
 		seoTitle: 'Intervention WordPress et WooCommerce : 350 € par jour',
 		description:
-			'Sprint WordPress ou WooCommerce : diagnostic, devis en jours, intervention ciblée pour corriger ou faire évoluer un site existant. 350 € par jour.',
+			'Sprint WordPress ou WooCommerce : diagnostic, devis, intervention ciblée sur un site existant. 350 € par jour, 175 € la demi-journée pour une intervention courte.',
 		title: 'Un problème ou une évolution sur votre site WordPress ?',
 		accent: 'votre site WordPress',
-		lede: 'Une intervention courte et ciblée, chiffrée en jours après un diagnostic, pour régler un problème précis ou faire évoluer un site existant.',
+		lede: 'Une intervention ciblée, chiffrée en jours ou en demi-journées après un diagnostic, pour régler un problème précis ou faire évoluer un site existant.',
 		need: 'Votre site fonctionne, mais quelque chose bloque ou manque : une erreur, une extension en conflit, une section à ajouter, un réglage WooCommerce à revoir.',
 		includes: [
 			'Échange et diagnostic de la demande',
-			'Devis exprimé en jours, validé avant de commencer',
+			'Devis en jours ou en demi-journées, validé avant de commencer',
 			'Intervention ciblée sur le périmètre du devis',
+			"Votre accord avant tout dépassement de l'estimation",
 			'Compte rendu de ce qui a été fait'
 		],
 		excludes: [
@@ -367,11 +368,15 @@ export const offers: readonly Offer[] = [
 		],
 		steps: [
 			{ title: 'Échange', text: "Vous décrivez le problème ou l'évolution souhaitée." },
-			{ title: 'Diagnostic et devis', text: 'Le nombre de jours est estimé et écrit au devis.' },
+			{
+				title: 'Diagnostic et devis',
+				text: 'Périmètre et durée estimée (jours ou demi-journées) écrits au devis.'
+			},
 			{ title: 'Validation et paiement', text: 'Le devis est accepté et réglé à la commande.' },
 			{ title: 'Intervention', text: 'Travail sur le périmètre validé, puis compte rendu.' }
 		],
-		duration: 'Le nombre de jours est estimé au diagnostic et fixé dans le devis.',
+		duration:
+			'La durée est estimée au diagnostic, en jours ou en demi-journées, et fixée dans le devis. Si le travail doit dépasser cette estimation, je vous demande votre accord avant de continuer.',
 		clientProvides: [
 			"Une description du problème ou de l'évolution souhaitée",
 			'Les accès nécessaires (administration WordPress, hébergement)'
@@ -383,8 +388,14 @@ export const offers: readonly Offer[] = [
 				a: "Une demande précise sur un site existant : corriger une erreur, résoudre un conflit d'extensions, ajouter une section ou ajuster un réglage WooCommerce. Une refonte complète relève d'un autre forfait."
 			},
 			{
+				q: 'Peut-on commander une demi-journée ?',
+				a: 'Oui, pour une intervention courte, clairement définie et acceptée avant le démarrage : 175 €. Toutes les demandes ne tiennent pas en une demi-journée : la durée est estimée au diagnostic, et un travail plus long est chiffré en jours.'
+			},
+			{
 				q: 'Comment se passe le paiement ?',
-				a: paymentTerms.upfront + ' Le montant correspond au nombre de jours écrit au devis.'
+				a:
+					paymentTerms.upfront +
+					" Le montant correspond à la durée écrite au devis. Pour une mission de sous-traitance confiée par une agence, la facturation suit les modalités et l'échéance fixées au devis ou au contrat."
 			},
 			faqVat
 		]
@@ -513,6 +524,35 @@ export const offersIntro = {
 		'Identité visuelle, SEO, automatisation, développement sur mesure : chiffrés après un premier échange.'
 } as const;
 
+/**
+ * Guide « quelle offre pour votre situation » (page Tarifs). Chaque situation reprend le besoin
+ * décrit sur la page de l'offre (champ `need`) : rien de nouveau n'est promis ici.
+ */
+export const offersGuide = {
+	title: 'Quelle offre pour votre situation ?',
+	accent: 'votre situation',
+	rows: [
+		{ situation: "Vous n'avez pas encore de site", slug: 'site-vitrine-wordpress' },
+		{ situation: 'Une campagne, un service ou un salon à mettre en avant', slug: 'landing-page' },
+		{
+			situation: 'Votre site a vieilli, il est lent ou difficile à mettre à jour',
+			slug: 'refonte-site-wordpress'
+		},
+		{ situation: 'Vous voulez vendre en ligne un catalogue simple', slug: 'boutique-woocommerce' },
+		{
+			situation: 'Un problème précis ou une évolution sur un site existant',
+			slug: 'sprint-wordpress-woocommerce'
+		},
+		{
+			situation: 'Vous ne savez pas par où commencer avec votre site',
+			slug: 'audit-technique-wordpress'
+		},
+		{ situation: 'Une tâche répétitive revient chaque semaine', slug: 'audit-automatisation' }
+	],
+	maintenance: 'Garder votre site à jour chaque mois',
+	agencies: 'Vous êtes une agence web et cherchez un renfort ?'
+} as const;
+
 /** En-tête de la grille sur la page Automatisation : une seule offre, l'audit */
 export const offersIntroAutomatisation = {
 	title: 'Commencer par un audit',
@@ -526,7 +566,8 @@ export const offersConditions = {
 	steps: [
 		'Un premier échange pour comprendre le besoin.',
 		'Un devis qui fixe le périmètre, le prix et les échéances.',
-		'Pour les créations et refontes : 50 % à la commande, 30 % à une étape intermédiaire définie au devis, 20 % avant la mise en ligne. Pour les audits et les sprints : paiement à la commande.',
+		'Pour les créations et refontes : 50 % à la commande, 30 % à une étape intermédiaire définie au devis, 20 % avant la mise en ligne. Pour les audits et les sprints commandés par une entreprise : paiement à la commande.',
+		'Pour une mission de sous-traitance confiée par une agence : facturation avec une échéance définie au devis ou au contrat.',
 		"Tout travail hors périmètre fait l'objet d'un devis complémentaire, accepté avant son exécution."
 	],
 	excludedTitle: 'Facturés séparément',
@@ -627,8 +668,9 @@ export const maintenanceRules = [
 	'La maintenance est facultative et facturée chaque mois.',
 	"Le temps d'intervention inclus n'est pas reportable d'un mois sur l'autre.",
 	"Le délai de première réponse n'est pas un délai de résolution.",
-	'Les modifications de contenu, nouvelles pages, nouvelles fonctionnalités, refontes et urgences hors forfait sont facturées séparément.',
-	"Toute intervention exceptionnelle est chiffrée avant d'être réalisée.",
+	'Les petites interventions techniques sont incluses dans la limite du temps de votre formule.',
+	"Une intervention exceptionnelle ou urgente au-delà de ce temps est chiffrée au cas par cas et acceptée avant d'être réalisée : elle n'est pas facturée d'office à la demi-journée.",
+	"Les évolutions (modifications de contenu, nouvelles pages, nouvelles fonctionnalités, refontes) font l'objet d'un devis séparé.",
 	"L'hébergement, le nom de domaine, les licences premium et les services tiers sont séparés, sauf mention explicite au devis."
 ] as const;
 
@@ -643,7 +685,7 @@ export const maintenanceFaq = [
 	},
 	{
 		q: 'Que se passe-t-il si le temps inclus ne suffit pas ?',
-		a: "L'intervention supplémentaire est chiffrée et validée avec vous avant d'être réalisée."
+		a: "L'intervention supplémentaire est chiffrée au cas par cas et validée avec vous avant d'être réalisée. Une petite correction n'est pas facturée d'office à la demi-journée."
 	},
 	faqVat
 ] as const;

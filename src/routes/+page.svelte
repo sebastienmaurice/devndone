@@ -18,7 +18,7 @@
 	import heroImage from '$lib/assets/mascotte/mascotte-renard-developpeur-wordpress-elementor.png?enhanced&w=1120;720;480&quality=40';
 	import { realisationsIntro } from '$lib/content/realisations';
 	import { heroSlogan, servicesIntro } from '$lib/content/services';
-	import { hero, links } from '$lib/content/studio';
+	import { hero, homePaths, links } from '$lib/content/studio';
 	import { site, absoluteUrl } from '$lib/config/site';
 
 	const keywords = hero.keywords.split(' · ');
@@ -59,6 +59,7 @@
 				<span class="hero__line">pensés pour</span>
 				<span class="hero__line">être <DoneWord sizes="(min-width: 1100px) 340px, 220px" /></span>
 			</h1>
+			<p class="hero__lede">{hero.lede}</p>
 			<p class="hero__keywords">
 				{#each keywords as word, i (word)}{#if i > 0}<span class="hero__slash" aria-hidden="true"
 							>/</span
@@ -79,6 +80,32 @@
 				fetchpriority="high"
 			/>
 		</div>
+	</div>
+</section>
+
+<!-- Orientation : un parcours pour les agences, un pour les entreprises -->
+<section class="section section--tight home-paths" aria-labelledby="paths-title">
+	<div class="container">
+		<header class="center-head center-head--tight">
+			<SectionLabel label={homePaths.eyebrow} align="center" />
+			<h2 class="t-h2" id="paths-title">
+				<AccentTitle text={homePaths.title} accent={homePaths.accent} />
+			</h2>
+		</header>
+		<ul class="paths" role="list">
+			{#each homePaths.paths as p (p.id)}
+				<li class="path">
+					<span class="path__icon"><Icon name={p.icon} /></span>
+					<h3 class="path__title">{p.title}</h3>
+					<p>{p.text}</p>
+					<p class="path__links">
+						{#each p.links as l (l.href)}
+							<a class="link-arrow" href={l.href}>{l.label} <Icon name="arrow-right" /></a>
+						{/each}
+					</p>
+				</li>
+			{/each}
+		</ul>
 	</div>
 </section>
 
@@ -166,6 +193,12 @@
 		display: block;
 		white-space: nowrap;
 	}
+	.hero__lede {
+		max-width: 34rem;
+		margin: 0;
+		font-size: var(--text-body-lg);
+		color: var(--text-muted);
+	}
 	.hero__keywords {
 		display: flex;
 		flex-wrap: wrap;
@@ -228,6 +261,7 @@
 		display: inline-block;
 		animation: hero-pop 720ms cubic-bezier(0.34, 1.56, 0.64, 1) 900ms both;
 	}
+	.hero__lede,
 	.hero__keywords {
 		animation: hero-rise 640ms var(--ease-out) 760ms both;
 	}
@@ -282,6 +316,7 @@
 		.hero__text > :global(.hand-note),
 		.hero__line,
 		.hero__line :global(.done),
+		.hero__lede,
 		.hero__keywords,
 		.hero__ctas,
 		.hero__visual,
@@ -320,6 +355,60 @@
 	.split-head__text p {
 		margin: 0;
 		color: var(--text-muted);
+	}
+
+	.center-head--tight {
+		margin-bottom: var(--space-7);
+	}
+
+	/* ----------------------------------------------------------- Orientation */
+	.home-paths {
+		border-top: 1px solid var(--line);
+	}
+	.paths {
+		display: grid;
+		gap: var(--col-gap);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	@media (min-width: 768px) {
+		.paths {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+	.path {
+		display: grid;
+		gap: var(--space-3);
+		align-content: start;
+		padding: clamp(var(--space-5), 3vw, var(--space-7));
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-card);
+	}
+	.path__icon {
+		display: grid;
+		place-items: center;
+		width: 3rem;
+		height: 3rem;
+		border-radius: var(--radius-card);
+		background: var(--tag-bg);
+		color: var(--tag-text);
+	}
+	.path__title {
+		margin: 0;
+		font-size: var(--text-h3);
+	}
+	.path p {
+		margin: 0;
+		color: var(--text-muted);
+	}
+	.path .path__links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2) var(--space-5);
+		margin-top: var(--space-2);
 	}
 
 	/* ------------------------------------------------------------- Sections */

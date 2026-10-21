@@ -23,11 +23,12 @@ export type Universe = {
 	complementary?: boolean;
 };
 
+/** Recentrage du 21/10/2026 : WordPress et WooCommerce d'abord, les autres expertises en complément */
 export const servicesIntro = {
-	eyebrow: 'Notre expertise',
-	title: '5 expertises. Un même objectif : votre projet.',
-	accent: ['5 expertises', 'votre projet'],
-	lede: "Web, design, automatisation et développement sur mesure. Une seule vision, du premier brief jusqu'à la mise en ligne."
+	eyebrow: 'Expertises',
+	title: "WordPress et WooCommerce d'abord",
+	accent: 'WordPress et WooCommerce',
+	lede: "Créer, refondre et faire évoluer des sites WordPress et des boutiques WooCommerce : c'est le cœur de mon travail. Le design, l'automatisation et le développement sur mesure viennent en complément, quand un projet en a besoin."
 } as const;
 
 export const universes: readonly Universe[] = [
@@ -106,5 +107,6 @@ export const processSteps = [
 	{ title: 'Livrer', text: "On teste, on ajuste, et c'est en ligne !", icon: 'rocket' }
 ] as const;
 
-/** Slogan manuscrit de l'accueil (maquette du 19/10/2026), en deux lignes fixes */
-export const heroSlogan = ['Des solutions sur mesure pour', 'faire décoller vos idées'] as const;
+/** Slogan de marque (accueil, note manuscrite ; pied de page, sur une ligne), en deux lignes fixes.
+ *  Formulation exacte choisie par Sébastien le 21/10/2026. */
+export const heroSlogan = ['WordPress, WooCommerce', 'et du travail bien fini'] as const;

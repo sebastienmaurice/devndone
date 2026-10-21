@@ -1,5 +1,6 @@
 <!--
 	Tarifs : page de comparaison (catalogue validé le 21/10/2026, content/tarifs.ts).
+	Guide d'orientation en tête (situation, offre adaptée, renvoi vers la page Agences).
 	Création et refonte au forfait, interventions et audits, maintenance facultative, conditions de
 	commande, avis Malt réels (composant existant, textes inchangés), bloc contact.
 	Prix sans « HT » : franchise en base de TVA (mention affichée en tête et dans les conditions).
@@ -19,10 +20,20 @@
 	import {
 		maintenanceIntro,
 		maintenancePage,
+		offerPath,
+		offers,
 		offersConditions,
+		offersGuide,
 		offersIntro,
 		vatNotice
 	} from '$lib/content/tarifs';
+
+	// Guide : chaque situation renvoie à la page de son offre
+	const guide = offersGuide.rows.map((r) => {
+		const o = offers.find((x) => x.slug === r.slug);
+		if (!o) throw new Error(`Offre inconnue : ${r.slug}`);
+		return { situation: r.situation, name: o.name, href: offerPath(o) };
+	});
 	import mascot from '$lib/assets/mascotte/mascotte-renard-tarifs-formules-abonnement.jpg?enhanced&w=1200;720;360';
 </script>
 
@@ -50,6 +61,37 @@
 		</div>
 	{/snippet}
 </PageIntro>
+
+<section class="section section--tight band" aria-labelledby="guide-title">
+	<div class="container stack stack--lg">
+		<header class="stack stack--sm">
+			<SectionLabel label="Orientation" />
+			<h2 class="t-h2" id="guide-title">
+				<AccentTitle text={offersGuide.title} accent={offersGuide.accent} />
+			</h2>
+		</header>
+		<ul class="guide" role="list">
+			{#each guide as g (g.href)}
+				<li>
+					<a class="guide__item" href={g.href}>
+						<span class="guide__situation">{g.situation}</span>
+						<span class="guide__offer">{g.name}<Icon name="arrow-right" /></span>
+					</a>
+				</li>
+			{/each}
+			<li>
+				<a class="guide__item" href={maintenancePage.path}>
+					<span class="guide__situation">{offersGuide.maintenance}</span>
+					<span class="guide__offer">Maintenance WordPress<Icon name="arrow-right" /></span>
+				</a>
+			</li>
+		</ul>
+		<p class="guide__agencies">
+			{offersGuide.agencies}
+			<LinkArrow href="/agences/">Le renfort pour les agences</LinkArrow>
+		</p>
+	</div>
+</section>
 
 <section class="section section--tight" aria-labelledby="creation-title">
 	<div class="container stack stack--lg">
@@ -163,6 +205,51 @@
 	.band {
 		background: var(--surface);
 		border-block: 1px solid var(--line);
+	}
+	/* Guide : situation en texte courant, offre en lien fléché ; tuiles Ivoire sur la bande blanche */
+	.guide {
+		display: grid;
+		gap: var(--space-3);
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.guide li {
+		display: grid;
+	}
+	.guide__item {
+		display: grid;
+		gap: var(--space-2);
+		align-content: space-between;
+		padding: var(--space-4) var(--space-5);
+		background: var(--bg);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-card);
+		color: var(--text);
+		text-decoration: none;
+		transition: border-color var(--duration-base) var(--ease-out);
+	}
+	.guide__item:hover {
+		border-color: var(--accent-deco);
+	}
+	.guide__situation {
+		color: var(--text-muted);
+	}
+	.guide__offer {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
+		font-weight: var(--weight-bold);
+		color: var(--action-alt-text);
+	}
+	.guide__offer :global(.icon) {
+		width: 18px;
+		height: 18px;
+	}
+	.guide__agencies {
+		margin: 0;
+		font-weight: var(--weight-semibold);
 	}
 	/* Conditions de commande : étapes numérotées à gauche, encarts à droite */
 	.conditions {

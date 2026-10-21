@@ -11,6 +11,7 @@
 	En-tête : la mascotte au smartphone, à droite en grand écran.
 -->
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { Button, Check, Field, Honeypot, Notice, Seo } from '$lib/components';
 	import DoneWord from '$lib/components/brand/DoneWord.svelte';
 	import Icon from '$lib/components/brand/Icon.svelte';
@@ -50,11 +51,20 @@
 		}
 	}
 
+	/** Demande d'une agence (renfort, sous-traitance) : préremplie depuis /contact/?type=agence */
+	const agencyType = 'Renfort ou sous-traitance';
 	const types = [
 		{ value: '', label: 'Choisir…' },
+		{ value: agencyType, label: agencyType },
 		...universes.map((u) => ({ value: u.title, label: u.title })),
 		{ value: 'Je ne sais pas encore', label: 'Je ne sais pas encore' }
 	];
+
+	// Lu dans le navigateur : la page est prérendue, le lien n'est connu qu'à l'affichage
+	onMount(() => {
+		if (new URLSearchParams(window.location.search).get('type') === 'agence')
+			projectType = agencyType;
+	});
 
 	const errors = $derived({
 		name: name.trim() ? undefined : 'Indiquez votre nom.',
@@ -171,14 +181,14 @@
 			</div>
 			<div class="contact-form__row">
 				<Field
-					label="Entreprise"
+					label="Entreprise ou agence"
 					name="company"
 					autocomplete="organization"
 					optional
 					bind:value={company}
 				/>
 				<Field
-					label="Type de projet"
+					label="Type de demande"
 					name="type"
 					as="select"
 					options={types}

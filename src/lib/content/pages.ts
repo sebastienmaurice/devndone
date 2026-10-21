@@ -10,6 +10,7 @@ import { projects } from './realisations';
 import { universes } from './services';
 import { logicielPage } from './logiciel';
 import { maintenancePage, offerPath, offers } from './tarifs';
+import { agencesPage } from './agences';
 
 export type PageEntry = {
 	path: `/${string}`;
@@ -31,6 +32,7 @@ export type NavItem = {
  *  page et sur ses sous-pages (ex. /services/web/ active « Services »). */
 export const headerNav: NavItem[] = [
 	{ label: 'Services', href: '/services/', match: '/services/' },
+	{ label: 'Agences', href: agencesPage.path, match: agencesPage.path },
 	{ label: 'Réalisations', href: '/realisations/', match: '/realisations/' },
 	{ label: 'Tarifs', href: '/tarifs/', match: '/tarifs/' },
 	{ label: 'À propos', href: '/apropos/', match: '/apropos/' },
@@ -40,6 +42,7 @@ export const headerNav: NavItem[] = [
 export const pages: PageEntry[] = [
 	{ path: '/', label: 'Accueil', sitemap: true, priority: 1 },
 	{ path: '/services/', label: 'Services', footer: 'studio', sitemap: true, priority: 0.9 },
+	{ path: agencesPage.path, label: 'Agences', footer: 'studio', sitemap: true, priority: 0.8 },
 	...universes.map((u): PageEntry => ({
 		path: u.path,
 		label: u.title,

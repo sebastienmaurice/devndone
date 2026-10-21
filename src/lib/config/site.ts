@@ -10,12 +10,14 @@ export const site = {
 	lang: 'fr',
 	locale: 'fr_FR',
 	tagline: ['Développer', 'Piloter', 'Livrer'],
-	// Titre, description et Open Graph de l'accueil : ceux du site en ligne (index.html, branche main)
-	homeTitle: "Dev'n Done · Studio digital indépendant · WordPress, design, automatisation",
+	// Titre, description et Open Graph de l'accueil : spécialité WordPress / WooCommerce, deux publics
+	// (entreprises en direct, agences web en renfort), décidé par Sébastien le 21/10/2026
+	homeTitle: "Dev'n Done · Développeur WordPress et WooCommerce indépendant",
 	description:
-		'Studio digital indépendant : sites WordPress au forfait, maintenance, identité visuelle, automatisation et développement sur mesure pour TPE, artisans et PME.',
+		'Développeur WordPress et WooCommerce indépendant : création, refonte et maintenance de sites pour les entreprises, renfort technique pour les agences web.',
 	ogTitle: "Dev'n Done · Des projets pensés pour être Done.",
-	ogDescription: 'Un studio digital indépendant qui conçoit, développe et livre des solutions web.',
+	ogDescription:
+		'Développeur WordPress et WooCommerce indépendant, pour les entreprises et en renfort des agences web.',
 	themeColor: '#0A0D11',
 	ogImage: '/og/dev-n-done-studio-digital-wordpress.jpg',
 	ogImageAlt:
