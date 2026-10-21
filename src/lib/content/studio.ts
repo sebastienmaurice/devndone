@@ -28,10 +28,9 @@ export const aboutIntro = {
 	title: 'Un seul interlocuteur, du brief à la mise en ligne.',
 	accent: 'Un seul interlocuteur',
 	/** Recentré le 21/10/2026 (décision de Sébastien) sur WordPress, WooCommerce, entreprises et
-	 *  agences. Ancienneté retirée : aucun justificatif vérifiable (seule source, une déclaration
-	 *  de Sébastien du 20/10/2026, « plus de 20 ans d'expérience dans le web ») ; à remettre s'il
-	 *  la confirme. */
-	text: "Je suis Sébastien Maurice, développeur web indépendant. Mon cœur de métier : WordPress et WooCommerce. Je crée et fais évoluer des sites pour les entreprises, et j'interviens en renfort pour les agences web sur des missions au périmètre défini. Vous échangez directement avec la personne qui réalise le projet, avec un devis clair et un délai annoncé."
+	 *  agences. « Plus de 20 ans d'expérience professionnelle » confirmé par Sébastien le 21/10/2026
+	 *  (expérience globale, pas seulement WordPress). */
+	text: "Je suis Sébastien Maurice, développeur web indépendant, avec plus de 20 ans d'expérience professionnelle, du design à l'intégration. Aujourd'hui, je me concentre sur WordPress et WooCommerce : je crée et fais évoluer des sites pour les entreprises, et j'interviens en renfort pour les agences web sur des missions au périmètre défini. Vous échangez directement avec la personne qui réalise le projet, avec un devis clair et un délai annoncé."
 } as const;
 
 /** Section « La mascotte » de la page À propos : texte fourni par Sébastien le 20/10/2026 */
@@ -41,7 +40,7 @@ export const aboutMascot = {
 	accent: 'se prendre au sérieux',
 	paragraphs: [
 		"Chez Dev'n Done, c'est un renard qui vous accueille, pas une énième photo de développeur devant son écran. Une mascotte à l'image de mon approche : accessible, curieuse et tournée vers les solutions.",
-		'Derrière le personnage, un développeur web expérimenté, des compétences techniques solides et un seul objectif : concrétiser vos projets.'
+		"Derrière le personnage, plus de 20 ans d'expérience professionnelle, des compétences techniques solides et un seul objectif : concrétiser vos projets."
 	],
 	cta: 'Découvrir mes prestations'
 } as const;
