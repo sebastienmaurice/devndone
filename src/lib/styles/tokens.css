@@ -38,6 +38,7 @@
 	--dnd-mint-hover: #5cefd0; /* v1.1 · Night dessus : 13.64 : 1 */
 	--dnd-mint-ink-hover: #00614e; /* v1.1 · Ivoire dessus : 7.13 : 1 */
 	--dnd-link-ocean: #007c9c; /* v2.3 · bleu océan, liens sur Ivoire : 4.61 : 1 (blanc : 4.81 : 1) */
+	--dnd-ocean-tint: #eaf5f7; /* v2.4 · bleu océan très clair, fond des pastilles (texte océan : 4.35 : 1) */
 
 	/* Feedback — proposé en v1.0, à valider */
 	--dnd-error: #ff6b6b; /* 7.02 : 1 sur Night */
@@ -212,6 +213,9 @@
 	--on-action-alt: var(--dnd-night);
 	--action-alt-text: var(--dnd-mint);
 	--action-alt-ring: transparent;
+	/* v2.4 · pastilles (technologies, métadonnées) */
+	--tag-bg: var(--dnd-night-raised);
+	--tag-text: var(--dnd-mint);
 	/* Mot accent d'un titre bicolore : orange sur Night */
 	--accent-word-fg: var(--dnd-orange);
 	--accent-word-bg: transparent;
@@ -260,6 +264,10 @@
      Sébastien (4.61 : 1 sur Ivoire, conforme WCAG AA). Fonds Night : menthe pur, inchangé. */
 	--action-alt-text: var(--dnd-link-ocean);
 	--action-alt-ring: var(--dnd-night);
+	/* v2.4 (21/10/2026) : pastilles de technologies et de métadonnées, fond bleu océan très clair,
+     texte bleu océan (palette proposée par Sébastien). L'orange reste réservé aux actions. */
+	--tag-bg: var(--dnd-ocean-tint);
+	--tag-text: var(--dnd-link-ocean);
 	/* v2.2 : titres bicolores Night + orange vif, choix de Sébastien (19/10/2026).
      Contraste 2.26 : 1 sur Ivoire, sous le seuil WCAG (3 : 1 pour un grand titre) :
      réservé aux titres H1 et H2, jamais au texte courant. */
@@ -297,6 +305,9 @@
 	--on-action-alt: var(--dnd-ivory);
 	--action-alt-text: var(--dnd-night);
 	--action-alt-ring: var(--dnd-night);
+	/* v2.4 · pastilles */
+	--tag-bg: var(--dnd-ivory);
+	--tag-text: var(--dnd-night);
 	/* Mot accent : surlignage Night, texte orange (8.24 : 1) */
 	--accent-word-fg: var(--dnd-orange);
 	--accent-word-bg: var(--dnd-night);

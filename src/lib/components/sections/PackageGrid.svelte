@@ -87,7 +87,7 @@
 			transform: none;
 		}
 	}
-	/* Délai en pastille (essai) : bleu océan à 8 % sur la carte, texte Bleu nuit, icône bleu océan */
+	/* Délai en pastille (essai) : bleu océan très clair (--tag-bg) sur la carte, texte Bleu nuit, icône bleu océan */
 	.package__delay {
 		justify-self: start;
 		display: inline-flex;
@@ -96,13 +96,13 @@
 		margin: 0;
 		padding: 0.3rem var(--space-3) 0.3rem var(--space-2);
 		border-radius: 999px;
-		background: color-mix(in srgb, var(--action-alt-text) 8%, var(--surface));
+		background: var(--tag-bg);
 		font-size: var(--text-caption);
 		font-weight: var(--weight-bold);
 		color: var(--text);
 	}
 	.package__delay :global(.icon) {
-		color: var(--action-alt-text);
+		color: var(--tag-text);
 	}
 	.package__name {
 		margin: var(--space-2) 0 0;

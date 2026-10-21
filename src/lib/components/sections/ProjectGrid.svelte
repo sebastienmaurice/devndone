@@ -231,7 +231,7 @@
 		line-height: 1.55;
 		color: var(--text-muted);
 	}
-	/* Technologies : pastilles bleu océan à 8 % (comme les délais des cartes tarif) */
+	/* Technologies : pastilles bleu océan très clair (--tag-bg) (comme les délais des cartes tarif) */
 	.project__tags {
 		display: flex;
 		align-items: flex-start;
@@ -242,8 +242,8 @@
 	.project__tag {
 		padding: 0.15rem var(--space-3);
 		border-radius: 999px;
-		background: color-mix(in srgb, var(--action-alt-text) 8%, var(--surface));
-		color: var(--action-alt-text);
+		background: var(--tag-bg);
+		color: var(--tag-text);
 		font-size: var(--text-caption);
 		font-weight: var(--weight-bold);
 	}

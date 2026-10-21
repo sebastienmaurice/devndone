@@ -230,7 +230,7 @@
 <ContactBlock />
 
 <style>
-	/* Technologies sous le chapô : pastilles bleu océan à 8 %, pleine ligne au-dessus des boutons */
+	/* Technologies sous le chapô : pastilles bleu océan très clair (--tag-bg), pleine ligne au-dessus des boutons */
 	.intro-tags {
 		display: flex;
 		flex-basis: 100%;
@@ -244,8 +244,8 @@
 	.tags li {
 		padding: 0.2rem var(--space-3);
 		border-radius: 999px;
-		background: color-mix(in srgb, var(--action-alt-text) 8%, var(--surface));
-		color: var(--action-alt-text);
+		background: var(--tag-bg);
+		color: var(--tag-text);
 		font-size: var(--text-body-sm);
 		font-weight: var(--weight-bold);
 	}
