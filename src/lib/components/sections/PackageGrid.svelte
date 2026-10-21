@@ -150,7 +150,9 @@
 		color: var(--text-muted);
 	}
 	/* Illustration (fond blanc fondu dans la carte) puis description */
+	/* Calé en bas de la carte, juste au-dessus du lien : les illustrations s'alignent d'une carte à l'autre */
 	.package__swap {
+		align-self: end;
 		display: grid;
 		gap: var(--space-3);
 		align-items: center;
