@@ -18,9 +18,9 @@
 </script>
 
 <Seo
-	title="À propos : Sébastien Maurice, développeur WordPress"
+	title="À propos de Dev'n Done et de Sébastien Maurice"
 	path="/apropos/"
-	description="Sébastien Maurice, développeur WordPress et WooCommerce indépendant : sites pour les entreprises, renfort pour les agences web, un seul interlocuteur."
+	description="Dev'n Done, l'activité de Sébastien Maurice, développeur web indépendant : sites pour les entreprises, spécialité WordPress, renfort pour les agences web."
 />
 
 <PageIntro
@@ -33,7 +33,7 @@
 	{#snippet actions()}
 		<Button href="/contact/" icon="arrow-right">{contactIntro.cta}</Button>
 		<Button href="/realisations/" variant="secondary" icon="arrow-right"
-			>Voir mes réalisations</Button
+			>Voir les réalisations</Button
 		>
 	{/snippet}
 	{#snippet aside()}

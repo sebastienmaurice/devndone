@@ -19,7 +19,7 @@
 	import { expertiseHeaderVisuals, expertiseMascots } from '$lib/assets/mascotte/expertises';
 	import { projects } from '$lib/content/realisations';
 	import { universes } from '$lib/content/services';
-	import { hero, links } from '$lib/content/studio';
+	import { contactIntro, hero, links } from '$lib/content/studio';
 	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
 	import {
 		maintenanceIntro,
@@ -75,7 +75,7 @@
 				{/each}
 			</ul>
 		</div>
-		<Button href="/contact/" icon="arrow-right">Parlons de votre projet</Button>
+		<Button href="/contact/" icon="arrow-right">{contactIntro.cta}</Button>
 		<Button href={links.calendly} variant="secondary"><Icon name="calendar" />{hero.ctaCall}</Button
 		>
 	{/snippet}

@@ -27,10 +27,9 @@ export const aboutIntro = {
 	eyebrow: 'À propos',
 	title: 'Un seul interlocuteur, du brief à la mise en ligne.',
 	accent: 'Un seul interlocuteur',
-	/** Recentré le 21/10/2026 (décision de Sébastien) sur WordPress, WooCommerce, entreprises et
-	 *  agences. « Plus de 20 ans d'expérience professionnelle » confirmé par Sébastien le 21/10/2026
-	 *  (expérience globale, pas seulement WordPress). */
-	text: "Je suis Sébastien Maurice, développeur web indépendant, avec plus de 20 ans d'expérience professionnelle, du design à l'intégration. Aujourd'hui, je me concentre sur WordPress et WooCommerce : je crée et fais évoluer des sites pour les entreprises, et j'interviens en renfort pour les agences web sur des missions au périmètre défini. Vous échangez directement avec la personne qui réalise le projet, avec un devis clair et un délai annoncé."
+	/** Voix de marque (22/10/2026) : troisième personne, sans « je » ni « nous ». « Plus de 20 ans
+	 *  d'expérience professionnelle » confirmé par Sébastien (expérience globale, pas seulement WordPress). */
+	text: "Derrière Dev'n Done, il y a Sébastien Maurice : développeur web indépendant, plus de 20 ans d'expérience professionnelle, du design à l'intégration. Cette expérience se traduit par une méthode simple : un cadrage précis avant de commencer, un devis clair, un délai annoncé, puis une validation à chaque étape importante. Vous échangez directement avec la personne qui réalise le projet, sans intermédiaire."
 } as const;
 
 /** Section « La mascotte » de la page À propos : texte fourni par Sébastien le 20/10/2026 */
@@ -39,10 +38,10 @@ export const aboutMascot = {
 	title: "Le sérieux n'oblige pas à se prendre au sérieux.",
 	accent: 'se prendre au sérieux',
 	paragraphs: [
-		"Chez Dev'n Done, c'est un renard qui vous accueille, pas une énième photo de développeur devant son écran. Une mascotte à l'image de mon approche : accessible, curieuse et tournée vers les solutions.",
+		"Chez Dev'n Done, c'est un renard qui vous accueille, pas une énième photo de développeur devant son écran. Une mascotte à l'image de l'approche de Dev'n Done : accessible, curieuse et tournée vers les solutions.",
 		"Derrière le personnage, plus de 20 ans d'expérience professionnelle, des compétences techniques solides et un seul objectif : concrétiser vos projets."
 	],
-	cta: 'Découvrir mes prestations'
+	cta: 'Découvrir les prestations'
 } as const;
 
 /** `id` : repère interne pour choisir un avis selon la page ; `project` : étude de cas du même
@@ -56,9 +55,9 @@ export type Review = {
 
 export const reviewsIntro = {
 	eyebrow: 'Avis clients',
-	title: "Ce qu'en disent mes clients",
-	accent: 'mes clients',
-	lede: 'Avis publiés sur mon profil Malt.',
+	title: "Ce qu'en disent les clients",
+	accent: 'les clients',
+	lede: 'Avis publiés sur le profil Malt de Sébastien Maurice.',
 	more: 'Voir tous les avis sur Malt'
 } as const;
 
@@ -96,7 +95,7 @@ export const contactIntro = {
 	/** Variante du titre de la page Contact pour les agences (/contact/?type=agence) */
 	agencyQuestion: 'Un besoin de renfort ?',
 	lede: '15 minutes pour faire le point sur votre projet et définir la bonne approche, sans engagement.',
-	cta: 'Parlons de votre projet'
+	cta: 'Discuter de votre projet'
 } as const;
 
 /** Bloc d'orientation de l'accueil : un parcours par public (21/10/2026). Illustrations : une
@@ -109,7 +108,7 @@ export const homePaths = {
 		{
 			id: 'agences',
 			title: 'Vous êtes une agence web',
-			text: "Un renfort WordPress, WooCommerce ou front-end sur un projet en cours : vous me confiez une partie définie, en marque blanche si la mission s'y prête.",
+			text: "Un renfort WordPress, WooCommerce ou front-end sur un projet en cours : une partie définie du projet, en marque blanche si la mission s'y prête.",
 			/** Repère de prix : tarifs validés (content/tarifs.ts, content/agences.ts) */
 			price: '350 € par jour, demi-journée à 175 €',
 			links: [{ label: 'Le renfort pour les agences', href: '/agences/' }]
@@ -130,9 +129,9 @@ export const homePaths = {
 } as const;
 
 export const hero = {
-	/** Le métier dès le premier écran (21/10/2026) */
-	lede: "Développeur WordPress et WooCommerce indépendant. Je crée et fais évoluer des sites pour les entreprises, et j'interviens en renfort pour les agences web.",
-	keywords: 'WordPress · WooCommerce · Intégration front-end',
-	ctaServices: 'Découvrir mes services',
+	/** Le métier dès le premier écran, voix de marque (22/10/2026) */
+	lede: "Dev'n Done crée et fait évoluer des sites web : développement, intégration front-end, spécialité WordPress et WooCommerce. Pour les entreprises comme en renfort des agences.",
+	keywords: 'Front-end · WordPress · WooCommerce',
+	ctaServices: 'Découvrir les services',
 	ctaCall: 'Réserver 15 min'
 } as const;

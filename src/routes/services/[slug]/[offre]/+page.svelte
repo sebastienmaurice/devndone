@@ -178,7 +178,8 @@
 			</header>
 			<ReviewList only={o.reviews} mission />
 			<p class="malt">
-				Note de {maltRating.score} sur {maltRating.count} avis Malt ·
+				Note de {maltRating.score} sur {maltRating.count} avis publiés sur le profil Malt de Sébastien
+				Maurice ·
 				<LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow>
 			</p>
 			<div class="cta-row">
@@ -192,7 +193,8 @@
 	<section class="section section--tight" aria-label="Avis clients">
 		<div class="container">
 			<p class="malt">
-				Note de {maltRating.score} sur {maltRating.count} avis publiés sur mon profil Malt ·
+				Note de {maltRating.score} sur {maltRating.count} avis publiés sur le profil Malt de Sébastien
+				Maurice ·
 				<LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow>
 			</p>
 		</div>

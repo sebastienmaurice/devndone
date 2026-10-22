@@ -23,12 +23,13 @@ export type Universe = {
 	complementary?: boolean;
 };
 
-/** Recentrage du 21/10/2026 : WordPress et WooCommerce d'abord, les autres expertises en complément */
+/** Positionnement du 22/10/2026 : le web au centre, WordPress et WooCommerce en spécialité,
+ *  le sur-mesure étudié au cas par cas. Voix de marque : Dev'n Done à la troisième personne. */
 export const servicesIntro = {
 	eyebrow: 'Expertises',
-	title: "WordPress et WooCommerce d'abord",
-	accent: 'WordPress et WooCommerce',
-	lede: "Créer, refondre et faire évoluer des sites WordPress et des boutiques WooCommerce : c'est le cœur de mon travail. Le design, l'automatisation et le développement sur mesure viennent en complément, quand un projet en a besoin."
+	title: 'Cinq expertises autour du web',
+	accent: 'autour du web',
+	lede: "Le web d'abord, avec WordPress et WooCommerce pour spécialité. Le design et l'automatisation complètent les projets qui en ont besoin ; le développement sur mesure, jusqu'aux applications web, s'étudie au cas par cas."
 } as const;
 
 export const universes: readonly Universe[] = [
@@ -67,15 +68,10 @@ export const universes: readonly Universe[] = [
 	{
 		id: 'applications',
 		title: 'Applications & logiciels',
-		text: 'Des applications métier, espaces clients, outils sur mesure et interfaces applicatives.',
-		tags: [
-			'Applications métier',
-			'Espaces clients',
-			'Outils sur mesure',
-			'Interfaces applicatives'
-		],
+		text: 'Outils métier et applications web sur mesure, étudiés au cas par cas. Un logiciel pour enseignistes est en cours de développement.',
+		tags: ['Outils sur mesure', 'Applications web', 'Étude au cas par cas'],
 		description:
-			"Applications métier, espaces clients, outils sur mesure et interfaces applicatives. Exemple en développement : un logiciel de gestion d'affaires pour enseignistes.",
+			"Outils métier et applications web sur mesure, étudiés au cas par cas. Exemple en développement : un logiciel de gestion d'affaires pour enseignistes.",
 		seoTitle: 'Applications métier et logiciels sur mesure',
 		path: '/services/applications/',
 		icon: 'layers'
@@ -83,10 +79,10 @@ export const universes: readonly Universe[] = [
 	{
 		id: 'full-stack',
 		title: 'Full Stack',
-		text: 'Du front-end au back-end, une solution complète pour votre projet.',
+		text: 'Interfaces, API et back-end, pour les besoins qui dépassent un site WordPress. Étudié au cas par cas.',
 		tags: ['Interfaces', 'API', 'Back-end'],
 		description:
-			'Du front-end au back-end, une solution complète pour votre projet : interfaces, API et back-end en JavaScript, Node.js, Express et PostgreSQL.',
+			'Interfaces, API et back-end en JavaScript, Node.js, Express et PostgreSQL, pour les besoins qui dépassent un site WordPress. Étudié au cas par cas.',
 		seoTitle: 'Développement full stack : interfaces, API, back-end',
 		path: '/services/full-stack/',
 		icon: 'code',
@@ -95,18 +91,18 @@ export const universes: readonly Universe[] = [
 ];
 
 export const processIntro = {
-	eyebrow: 'Mon process',
+	eyebrow: 'La méthode',
 	title: "De l'idée à la mise en ligne, étape par étape.",
 	accent: 'étape par étape'
 } as const;
 
 export const processSteps = [
-	{ title: 'Comprendre', text: 'On échange sur vos besoins et vos objectifs.', icon: 'message' },
-	{ title: 'Concevoir', text: 'Je vous propose une solution sur mesure.', icon: 'lightbulb' },
+	{ title: 'Comprendre', text: 'Un échange sur vos besoins et vos objectifs.', icon: 'message' },
+	{ title: 'Concevoir', text: 'Une solution sur mesure, proposée et chiffrée.', icon: 'lightbulb' },
 	{ title: 'Développer', text: 'Le design prend vie, le code fait le reste.', icon: 'code' },
-	{ title: 'Livrer', text: "On teste, on ajuste, et c'est en ligne !", icon: 'rocket' }
+	{ title: 'Livrer', text: 'Tests, ajustements, puis mise en ligne.', icon: 'rocket' }
 ] as const;
 
 /** Slogan de marque (accueil, note manuscrite ; pied de page, sur une ligne), en deux lignes fixes.
- *  Formulation exacte choisie par Sébastien le 21/10/2026. */
-export const heroSlogan = ['WordPress, WooCommerce', 'et du travail bien fini'] as const;
+ *  Formulation choisie par Sébastien le 22/10/2026 (positionnement élargi au développement web). */
+export const heroSlogan = ['Du web bien conçu.', 'Du travail bien fait.'] as const;

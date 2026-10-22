@@ -1,6 +1,6 @@
 <!--
 	En-tête du site (maquette du 19/10/2026) : logo officiel à gauche, les pages du site au centre
-	séparées par des slashs orange, bouton « Parlons de votre projet » à droite. Fond Ivoire, collant.
+	séparées par des slashs orange, bouton « Discuter de votre projet » à droite. Fond Ivoire, collant.
 	Sous 1100 px : logo, bouton Menu et panneau plein écran. Sous 640 px, le bouton de contact garde
 	un libellé court (« Contact ») pour rester visible sur téléphone.
 	Navigation : content/pages.ts (headerNav, mobileNav).

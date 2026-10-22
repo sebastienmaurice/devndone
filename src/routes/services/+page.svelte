@@ -13,13 +13,13 @@
 	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
 	import { servicesIntro } from '$lib/content/services';
-	import { hero, links, maltRating, reviewsIntro } from '$lib/content/studio';
+	import { contactIntro, hero, links, maltRating, reviewsIntro } from '$lib/content/studio';
 </script>
 
 <Seo
-	title="Services WordPress et WooCommerce"
+	title="Services : développement web, WordPress et WooCommerce"
 	path="/services/"
-	description="Création, refonte et évolution de sites WordPress et WooCommerce, renfort pour les agences web. En complément : design, automatisation, applications et full stack."
+	description="Création, refonte et optimisation de sites, intégration front-end, spécialité WordPress et WooCommerce. En complément : design, automatisation, applications."
 />
 
 <PageIntro
@@ -30,7 +30,7 @@
 	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Services' }]}
 >
 	{#snippet actions()}
-		<Button href="/contact/" icon="arrow-right">Parlons de votre projet</Button>
+		<Button href="/contact/" icon="arrow-right">{contactIntro.cta}</Button>
 		<Button href={links.calendly} variant="secondary"><Icon name="calendar" />{hero.ctaCall}</Button
 		>
 	{/snippet}
@@ -68,7 +68,8 @@
 				<AccentTitle text={reviewsIntro.title} accent={reviewsIntro.accent} />
 			</h2>
 			<p class="note">
-				Note de {maltRating.score} sur {maltRating.count} avis publiés sur mon profil Malt.
+				Note de {maltRating.score} sur {maltRating.count} avis publiés sur le profil Malt de Sébastien
+				Maurice.
 			</p>
 		</header>
 		<ReviewList />

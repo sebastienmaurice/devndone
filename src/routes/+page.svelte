@@ -204,7 +204,8 @@
 				<AccentTitle text={reviewsIntro.title} accent={reviewsIntro.accent} />
 			</h2>
 			<p class="home-reviews__note">
-				Note de {maltRating.score} sur {maltRating.count} avis publiés sur mon profil Malt.
+				Note de {maltRating.score} sur {maltRating.count} avis publiés sur le profil Malt de Sébastien
+				Maurice.
 			</p>
 		</header>
 		<ReviewList />
