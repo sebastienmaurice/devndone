@@ -108,22 +108,27 @@
 		</header>
 		<ul class="paths" role="list">
 			{#each homePaths.paths as p (p.id)}
-				<li class="path">
-					<enhanced:img
-						class="path__visual"
-						src={pathVisuals[p.id].src}
-						alt={pathVisuals[p.id].alt}
-						sizes="(min-width: 1100px) 220px, (min-width: 768px) 240px, 200px"
-						loading="lazy"
-					/>
-					<div class="path__body">
-						<h3 class="path__title">{p.title}</h3>
-						<p>{p.text}</p>
-						<p class="path__links">
-							{#each p.links as l (l.href)}
-								<a class="link-arrow" href={l.href}>{l.label} <Icon name="arrow-right" /></a>
-							{/each}
-						</p>
+				<!-- Le li porte l'apparition au défilement (revealPage), la carte porte le survol -->
+				<li class="paths__item">
+					<div class="path">
+						<div class="path__media">
+							<enhanced:img
+								class="path__img"
+								src={pathVisuals[p.id].src}
+								alt={pathVisuals[p.id].alt}
+								sizes="(min-width: 1100px) 220px, (min-width: 768px) 240px, 200px"
+								loading="lazy"
+							/>
+						</div>
+						<div class="path__body">
+							<h3 class="path__title">{p.title}</h3>
+							<p>{p.text}</p>
+							<p class="path__links">
+								{#each p.links as l (l.href)}
+									<a class="link-arrow" href={l.href}>{l.label} <Icon name="arrow-right" /></a>
+								{/each}
+							</p>
+						</div>
 					</div>
 				</li>
 			{/each}
@@ -401,6 +406,10 @@
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 	}
+	/* Cartes de même hauteur sur une ligne */
+	.paths__item {
+		display: grid;
+	}
 	.path {
 		display: grid;
 		gap: var(--space-4);
@@ -410,6 +419,10 @@
 		border: 1px solid var(--line);
 		border-radius: var(--radius-card);
 		box-shadow: var(--shadow-card);
+		transition:
+			transform var(--duration-reveal) var(--ease-out),
+			box-shadow var(--duration-reveal) var(--ease-out),
+			border-color var(--duration-reveal) var(--ease-out);
 	}
 	/* Mascotte à gauche, contenu à droite ; empilés sur téléphone */
 	@media (min-width: 600px) {
@@ -418,15 +431,20 @@
 			gap: var(--space-5);
 		}
 	}
-	.path__visual {
-		display: block;
+	/* Cadre de l'image : arrondi léger (adoucit le décor coupé au bord) ; le zoom y reste contenu */
+	.path__media {
 		width: 100%;
 		max-width: 15rem;
+		justify-self: center;
+		overflow: hidden;
+		border-radius: var(--radius-md);
+	}
+	.path__media :global(img) {
+		display: block;
+		width: 100%;
 		height: auto;
 		aspect-ratio: 1;
-		justify-self: center;
-		/* Arrondi léger : adoucit les éléments du décor coupés au bord de l'image */
-		border-radius: var(--radius-md);
+		transition: transform var(--duration-scene) var(--ease-out);
 	}
 	.path__body {
 		display: grid;
@@ -436,6 +454,69 @@
 	.path__title {
 		margin: 0;
 		font-size: var(--text-h3);
+		transition: color var(--duration-reveal) var(--ease-out);
+	}
+	/* Survol (référence des cartes du site) : la carte se soulève, contour et titre orange,
+	   la mascotte s'avance légèrement, les flèches glissent */
+	.path:hover,
+	.path:focus-within {
+		transform: translateY(-6px);
+		box-shadow: var(--shadow-card-hover);
+		border-color: var(--accent-deco);
+	}
+	.path:hover .path__title,
+	.path:focus-within .path__title {
+		color: var(--accent-deco);
+	}
+	.path:hover .path__media :global(img),
+	.path:focus-within .path__media :global(img) {
+		transform: scale(1.06);
+	}
+	.path .path__links :global(.icon) {
+		transition: transform var(--duration-reveal) var(--ease-out);
+	}
+	.path:hover .path__links :global(.icon),
+	.path:focus-within .path__links :global(.icon) {
+		transform: translateX(4px);
+	}
+	/* Apparition : la carte monte (revealPage, sur le li), puis la mascotte arrive par la gauche
+	   et le texte par la droite, avec un léger décalage */
+	.path__media,
+	.path__body {
+		transition:
+			opacity var(--duration-scene) var(--ease-out) 120ms,
+			transform var(--duration-scene) var(--ease-out) 120ms;
+	}
+	/* Deuxième carte : même décalage que sa cascade d'apparition (+90 ms) */
+	.paths__item:nth-child(2) :is(.path__media, .path__body) {
+		transition-delay: 210ms;
+	}
+	/* data-reveal est posé par JavaScript : sélecteur global pour que Svelte ne l'élimine pas */
+	.paths__item:global([data-reveal='pending']) .path__media {
+		opacity: 0;
+		transform: translateX(-32px) scale(0.92);
+	}
+	.paths__item:global([data-reveal='pending']) .path__body {
+		opacity: 0;
+		transform: translateX(32px);
+	}
+	/* Mouvement réduit : seuls le contour, l'ombre et les couleurs changent */
+	@media (prefers-reduced-motion: reduce) {
+		.path,
+		.path__media,
+		.path__body,
+		.path__media :global(img),
+		.path .path__links :global(.icon) {
+			transition-property: border-color, box-shadow, color;
+		}
+		.path:hover,
+		.path:focus-within,
+		.path:hover .path__media :global(img),
+		.path:focus-within .path__media :global(img),
+		.path:hover .path__links :global(.icon),
+		.path:focus-within .path__links :global(.icon) {
+			transform: none;
+		}
 	}
 	.path p {
 		margin: 0;
