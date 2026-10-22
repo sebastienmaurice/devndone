@@ -79,7 +79,8 @@ export const contactIntro = {
 	cta: 'Parlons de votre projet'
 } as const;
 
-/** Bloc d'orientation de l'accueil : un parcours par public (21/10/2026) */
+/** Bloc d'orientation de l'accueil : un parcours par public (21/10/2026). Illustrations : une
+ *  mascotte par parcours, associée par `id` dans la page d'accueil (22/10/2026). */
 export const homePaths = {
 	eyebrow: 'Par où commencer',
 	title: 'Agence ou entreprise, voici votre parcours',
@@ -87,14 +88,12 @@ export const homePaths = {
 	paths: [
 		{
 			id: 'agences',
-			icon: 'briefcase',
 			title: 'Vous êtes une agence web',
 			text: "Un renfort WordPress, WooCommerce ou front-end sur un projet en cours : vous me confiez une partie définie, en marque blanche si la mission s'y prête.",
 			links: [{ label: 'Le renfort pour les agences', href: '/agences/' }]
 		},
 		{
 			id: 'entreprises',
-			icon: 'site',
 			title: 'Vous avez un projet de site',
 			text: 'Landing page, site vitrine, refonte ou boutique WooCommerce : des forfaits dont le périmètre est écrit au devis.',
 			links: [

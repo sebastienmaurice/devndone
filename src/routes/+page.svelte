@@ -19,9 +19,23 @@
 	import { realisationsIntro } from '$lib/content/realisations';
 	import { heroSlogan, servicesIntro } from '$lib/content/services';
 	import { hero, homePaths, links } from '$lib/content/studio';
+	import pathAgences from '$lib/assets/mascotte/mascotte-renard-agence-web-partenariat-poignee-de-main.jpg?enhanced&w=640;320';
+	import pathEntreprises from '$lib/assets/mascotte/mascotte-renard-projet-site-web-presentation-client.jpg?enhanced&w=640;320';
 	import { site, absoluteUrl } from '$lib/config/site';
 
 	const keywords = hero.keywords.split(' · ');
+
+	// Mascotte de chaque parcours du bloc d'orientation (fond blanc, comme la carte)
+	const pathVisuals = {
+		agences: {
+			src: pathAgences,
+			alt: "Dev, la mascotte, serre la main d'une professionnelle devant une maquette de page web"
+		},
+		entreprises: {
+			src: pathEntreprises,
+			alt: 'Dev, la mascotte, présente un site web sur son ordinateur portable à une cliente'
+		}
+	};
 
 	const jsonLd = {
 		'@context': 'https://schema.org',
@@ -95,14 +109,22 @@
 		<ul class="paths" role="list">
 			{#each homePaths.paths as p (p.id)}
 				<li class="path">
-					<span class="path__icon"><Icon name={p.icon} /></span>
-					<h3 class="path__title">{p.title}</h3>
-					<p>{p.text}</p>
-					<p class="path__links">
-						{#each p.links as l (l.href)}
-							<a class="link-arrow" href={l.href}>{l.label} <Icon name="arrow-right" /></a>
-						{/each}
-					</p>
+					<enhanced:img
+						class="path__visual"
+						src={pathVisuals[p.id].src}
+						alt={pathVisuals[p.id].alt}
+						sizes="(min-width: 1100px) 220px, (min-width: 768px) 240px, 200px"
+						loading="lazy"
+					/>
+					<div class="path__body">
+						<h3 class="path__title">{p.title}</h3>
+						<p>{p.text}</p>
+						<p class="path__links">
+							{#each p.links as l (l.href)}
+								<a class="link-arrow" href={l.href}>{l.label} <Icon name="arrow-right" /></a>
+							{/each}
+						</p>
+					</div>
 				</li>
 			{/each}
 		</ul>
@@ -372,29 +394,44 @@
 		padding: 0;
 		list-style: none;
 	}
-	@media (min-width: 768px) {
+	/* Deux cartes côte à côte en grand écran ; une par ligne en dessous, pour garder
+	   la mascotte à gauche du texte dès la tablette */
+	@media (min-width: 1100px) {
 		.paths {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 	}
 	.path {
 		display: grid;
-		gap: var(--space-3);
-		align-content: start;
-		padding: clamp(var(--space-5), 3vw, var(--space-7));
+		gap: var(--space-4);
+		align-items: center;
+		padding: clamp(var(--space-5), 3vw, var(--space-6));
 		background: var(--surface);
 		border: 1px solid var(--line);
 		border-radius: var(--radius-card);
 		box-shadow: var(--shadow-card);
 	}
-	.path__icon {
+	/* Mascotte à gauche, contenu à droite ; empilés sur téléphone */
+	@media (min-width: 600px) {
+		.path {
+			grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+			gap: var(--space-5);
+		}
+	}
+	.path__visual {
+		display: block;
+		width: 100%;
+		max-width: 15rem;
+		height: auto;
+		aspect-ratio: 1;
+		justify-self: center;
+		/* Arrondi léger : adoucit les éléments du décor coupés au bord de l'image */
+		border-radius: var(--radius-md);
+	}
+	.path__body {
 		display: grid;
-		place-items: center;
-		width: 3rem;
-		height: 3rem;
-		border-radius: var(--radius-card);
-		background: var(--tag-bg);
-		color: var(--tag-text);
+		gap: var(--space-3);
+		align-content: center;
 	}
 	.path__title {
 		margin: 0;
