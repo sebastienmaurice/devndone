@@ -12,6 +12,9 @@
  * Volontairement absents tant qu'ils ne sont pas confirmés : Gutenberg, ACF, Divi, Figma, Svelte.
  * Les réalisations sont des projets menés en direct : ne jamais les présenter comme de la
  * sous-traitance. Aucun délai de réponse, aucune disponibilité chiffrée, aucune référence d'agence.
+ * 22/10/2026 : disponibilité (« Disponible immédiatement ») et modalités de collaboration
+ * (Git, téléphone et visio, e-mail, environnement de test, tickets, accord de confidentialité)
+ * confirmées par Sébastien.
  */
 export const agencesPage = {
 	path: '/agences/',
@@ -23,6 +26,12 @@ export const agencesPage = {
 	accent: 'en renfort',
 	lede: 'Un pic de charge, une boutique WooCommerce à terminer, un site client qui plante : vous me confiez une partie précise du projet, sur un périmètre écrit avant de commencer.',
 	cta: "Discuter d'un besoin de renfort",
+	/**
+	 * Disponibilité annoncée par Sébastien le 22/10/2026. À mettre à jour dès qu'elle change.
+	 * Ce n'est pas un délai de livraison : les délais de chaque mission sont fixés au devis.
+	 */
+	availability: 'Disponible immédiatement',
+	availabilityNote: 'Les délais de chaque mission sont fixés ensemble au devis.',
 	/** Lien du formulaire avec le type de demande prérempli (voir contact/+page.svelte) */
 	contactHref: '/contact/?type=agence'
 } as const;
@@ -64,6 +73,10 @@ export const agencesFrame = [
 			'Sur facture, avec une échéance fixée au devis ou au contrat, selon la mission. Aucun paiement à la commande imposé.'
 	},
 	{
+		label: 'Disponibilité',
+		value: 'Disponible immédiatement pour de nouvelles missions.'
+	},
+	{
 		label: 'Délais',
 		value: 'Fixés une fois le devis validé et les accès nécessaires reçus.'
 	},
@@ -81,6 +94,49 @@ export const agencesFrame = [
 		value: 'Un compte rendu de ce qui a été fait.'
 	}
 ] as const;
+
+/**
+ * Modalités de collaboration confirmées par Sébastien le 22/10/2026. Aucun logiciel précis, aucune
+ * fréquence de réunion ni aucun délai de réponse : ils ne sont pas validés.
+ */
+export const agencesWorkflow = {
+	title: "Je m'adapte à votre organisation",
+	accent: 'votre organisation',
+	lede: "Vous gardez vos outils et vos habitudes de production : je m'y intègre pour la durée de la mission.",
+	items: [
+		{
+			icon: 'code',
+			title: 'Git',
+			text: 'Je travaille avec Git, sur votre dépôt et selon vos règles de branches.'
+		},
+		{
+			icon: 'site',
+			title: 'Environnement de test',
+			text: "J'interviens sur l'environnement de test que vous me fournissez, avant toute mise en ligne."
+		},
+		{
+			icon: 'layers',
+			title: 'Vos tickets',
+			text: 'Je suis les tâches dans votre outil de tickets ou de gestion de projet.'
+		},
+		{
+			icon: 'message',
+			title: 'Téléphone et visio',
+			text: 'Pour cadrer la mission, faire un point ou débloquer une question.'
+		},
+		{
+			icon: 'mail',
+			title: 'E-mail',
+			text: 'Pour les échanges écrits, les validations et le suivi.'
+		},
+		{
+			icon: 'target',
+			title: 'Confidentialité',
+			text: "J'accepte de signer un accord de confidentialité."
+		}
+	],
+	note: 'Ces modalités se précisent avec vous au début de chaque mission.'
+} as const;
 
 export const agencesSteps = [
 	{
@@ -122,7 +178,11 @@ export const agencesFaq = [
 	},
 	{
 		q: 'Êtes-vous disponible rapidement ?',
-		a: 'Cela dépend des missions en cours. Décrivez-moi votre besoin : je vous dis si je peux le prendre, et à partir de quand.'
+		a: 'Oui, je suis disponible immédiatement pour de nouvelles missions. Les délais de chaque mission sont fixés ensemble au devis, selon son périmètre.'
+	},
+	{
+		q: 'Signez-vous un accord de confidentialité ?',
+		a: "Oui, j'accepte de signer un accord de confidentialité avant de commencer."
 	},
 	{
 		q: 'Avez-vous une équipe ?',

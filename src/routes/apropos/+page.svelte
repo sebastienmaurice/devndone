@@ -5,14 +5,14 @@
 	réels publiés sur Malt (cités à l'identique). Aucune valeur ni chiffre ajouté.
 -->
 <script lang="ts">
-	import { LinkArrow, Seo } from '$lib/components';
+	import { Button, LinkArrow, Seo } from '$lib/components';
 	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
 	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
 	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
-	import { aboutIntro, aboutMascot, links, reviewsIntro } from '$lib/content/studio';
+	import { aboutIntro, aboutMascot, contactIntro, links, reviewsIntro } from '$lib/content/studio';
 	import mascot from '$lib/assets/mascotte/mascotte-renard-dev-n-done-developpeur-wordpress-code.jpg?enhanced&w=1200;720;360';
 	import portrait from '$lib/assets/photos/sebastien-maurice-fondateur-dev-n-done-avec-mascotte.jpg?enhanced&w=1200;720;360';
 </script>
@@ -30,6 +30,12 @@
 	lede={aboutIntro.text}
 	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'À propos' }]}
 >
+	{#snippet actions()}
+		<Button href="/contact/" icon="arrow-right">{contactIntro.cta}</Button>
+		<Button href="/realisations/" variant="secondary" icon="arrow-right"
+			>Voir mes réalisations</Button
+		>
+	{/snippet}
 	{#snippet aside()}
 		<div class="portrait">
 			<enhanced:img

@@ -19,13 +19,18 @@
 	import { legal } from '$lib/content/legal';
 	import { contactForm, contactIntro, hero, links } from '$lib/content/studio';
 	import mascot from '$lib/assets/mascotte/mascotte-renard-contact-smartphone-messages.jpg?enhanced&w=1200;720;360';
-	import { universes } from '$lib/content/services';
+	import { offers } from '$lib/content/tarifs';
 
 	let name = $state('');
 	let email = $state('');
 	let company = $state('');
 	let projectType = $state('');
+	/** Facultatifs : aident à qualifier la demande sans alourdir le premier contact */
+	let website = $state('');
+	let deadline = $state('');
 	let message = $state('');
+	/** Arrivée depuis la page Agences (/contact/?type=agence) : titre adapté */
+	let agency = $state(false);
 	let consent = $state(false);
 	let trap = $state('');
 	let submitted = $state(false);
@@ -51,19 +56,30 @@
 		}
 	}
 
-	/** Demande d'une agence (renfort, sous-traitance) : préremplie depuis /contact/?type=agence */
-	const agencyType = 'Renfort ou sous-traitance';
+	/**
+	 * Type de demande : les intitulés exacts du catalogue (content/tarifs.ts), le renfort agence et
+	 * « Je ne sais pas encore ». Préremplissage : /contact/?type=agence ou /contact/?offre=<slug>.
+	 */
+	const agencyType = 'Renfort agence';
 	const types = [
 		{ value: '', label: 'Choisir…' },
 		{ value: agencyType, label: agencyType },
-		...universes.map((u) => ({ value: u.title, label: u.title })),
+		...offers.map((o) => ({ value: o.name, label: o.name })),
+		{ value: 'Maintenance WordPress', label: 'Maintenance WordPress (en préparation)' },
 		{ value: 'Je ne sais pas encore', label: 'Je ne sais pas encore' }
 	];
 
-	// Lu dans le navigateur : la page est prérendue, le lien n'est connu qu'à l'affichage
+	// Lu dans le navigateur : la page est prérendue, le lien n'est connu qu'à l'affichage.
+	// Les paramètres ne sont jamais repris tels quels : seules des valeurs connues sont acceptées.
 	onMount(() => {
-		if (new URLSearchParams(window.location.search).get('type') === 'agence')
+		const params = new URLSearchParams(window.location.search);
+		if (params.get('type') === 'agence') {
+			agency = true;
 			projectType = agencyType;
+			return;
+		}
+		const offer = offers.find((o) => o.slug === params.get('offre'));
+		if (offer) projectType = offer.name;
 	});
 
 	const errors = $derived({
@@ -97,6 +113,8 @@
 		const lines = [`Nom : ${name.trim()}`, `Email : ${email.trim()}`];
 		if (company.trim()) lines.push(`Entreprise : ${company.trim()}`);
 		if (projectType) lines.push(`Type de projet : ${projectType}`);
+		if (website.trim()) lines.push(`Site actuel : ${website.trim()}`);
+		if (deadline.trim()) lines.push(`Échéance souhaitée : ${deadline.trim()}`);
 		const body = [...lines, '', message.trim()].join('\n');
 		prepared = `À : ${legal.publisher.email}\nObjet : ${subject}\n\n${body}`;
 		copyFailed = false;
@@ -117,6 +135,8 @@
 					Nom: name.trim(),
 					Entreprise: company.trim() || '(non renseignée)',
 					'Type de projet': projectType || '(non renseigné)',
+					'Site actuel': website.trim() || '(non renseigné)',
+					'Échéance souhaitée': deadline.trim() || '(non renseignée)',
 					Message: message.trim()
 				})
 			});
@@ -124,7 +144,7 @@
 			if (!response.ok || !result.success) throw new Error(result.message ?? response.status);
 			status = 'sent';
 			submitted = false;
-			name = email = company = projectType = message = '';
+			name = email = company = projectType = website = deadline = message = '';
 			consent = false;
 		} catch {
 			status = 'failed';
@@ -143,7 +163,8 @@
 	lede={contactIntro.lede}
 	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Contact' }]}
 >
-	{#snippet title()}{contactIntro.question} On le rend <DoneWord />{/snippet}
+	{#snippet title()}{agency ? contactIntro.agencyQuestion : contactIntro.question} On le rend
+		<DoneWord />{/snippet}
 	{#snippet aside()}
 		<div class="mascot">
 			<enhanced:img
@@ -194,6 +215,24 @@
 					options={types}
 					optional
 					bind:value={projectType}
+				/>
+			</div>
+			<div class="contact-form__row">
+				<Field
+					label="Adresse du site actuel"
+					name="website"
+					type="url"
+					autocomplete="url"
+					placeholder="exemple.fr"
+					optional
+					bind:value={website}
+				/>
+				<Field
+					label="Échéance souhaitée"
+					name="deadline"
+					placeholder="Par exemple : fin janvier"
+					optional
+					bind:value={deadline}
 				/>
 			</div>
 			<Field

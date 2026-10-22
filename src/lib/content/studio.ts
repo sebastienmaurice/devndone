@@ -45,7 +45,14 @@ export const aboutMascot = {
 	cta: 'Découvrir mes prestations'
 } as const;
 
-export type Review = { quote: string; author: string };
+/** `id` : repère interne pour choisir un avis selon la page ; `project` : étude de cas du même
+ *  client (correspondance vérifiable par le nom de l'entreprise dans la signature) */
+export type Review = {
+	id: 'palimpseste-urbain' | 'gsti' | 'hache';
+	quote: string;
+	author: string;
+	project?: string;
+};
 
 export const reviewsIntro = {
 	eyebrow: 'Avis clients',
@@ -55,17 +62,28 @@ export const reviewsIntro = {
 	more: 'Voir tous les avis sur Malt'
 } as const;
 
+/**
+ * Note publique du profil Malt, relevée sur https://www.malt.fr/profile/semauri le 22/10/2026 :
+ * 5 sur 5, 3 avis. À mettre à jour si elle change (nouveaux avis).
+ */
+export const maltRating = { score: '5/5', count: 3, checked: '22/10/2026' } as const;
+
 export const reviews: readonly Review[] = [
 	{
+		id: 'palimpseste-urbain',
+		project: 'palimpseste-urbain',
 		quote:
 			'Un travail extraordinaire. Il a parfaitement intégré les enjeux de notre communication, force de proposition sur les textes et les graphiques.',
 		author: 'Ryad Asselah, Directeur, Palimpseste Urbain'
 	},
 	{
+		id: 'gsti',
+		project: 'gsti',
 		quote: 'Efficace, professionnelle, respecte les délais demandés. Je le recommande à 100 %.',
 		author: 'Virginie, SARL GSTI (pièces détachées industrielles)'
 	},
 	{
+		id: 'hache',
 		quote: "Rapide, précis, efficace... je te recontacte dès que j'ai un nouveau besoin.",
 		author: 'Eric Havard, Gérant, Hache'
 	}
@@ -75,6 +93,8 @@ export const contactIntro = {
 	eyebrow: 'Contact',
 	/** Première ligne du titre du bloc contact (la seconde est « On le rend DONE. ») */
 	question: 'Un projet en tête ?',
+	/** Variante du titre de la page Contact pour les agences (/contact/?type=agence) */
+	agencyQuestion: 'Un besoin de renfort ?',
 	lede: '15 minutes pour faire le point sur votre projet et définir la bonne approche, sans engagement.',
 	cta: 'Parlons de votre projet'
 } as const;
@@ -90,12 +110,17 @@ export const homePaths = {
 			id: 'agences',
 			title: 'Vous êtes une agence web',
 			text: "Un renfort WordPress, WooCommerce ou front-end sur un projet en cours : vous me confiez une partie définie, en marque blanche si la mission s'y prête.",
+			/** Repère de prix : tarifs validés (content/tarifs.ts, content/agences.ts) */
+			price: '350 € par jour, demi-journée à 175 €',
 			links: [{ label: 'Le renfort pour les agences', href: '/agences/' }]
 		},
 		{
 			id: 'entreprises',
 			title: 'Vous avez un projet de site',
 			text: 'Landing page, site vitrine, refonte ou boutique WooCommerce : des forfaits dont le périmètre est écrit au devis.',
+			/** La landing page (1 750 €) est le forfait de création le moins cher du catalogue ;
+			 *  Sprint : 350 € par jour (content/tarifs.ts) */
+			price: 'Forfaits à partir de 1 750 € · Sprint à 350 € par jour',
 			links: [
 				{ label: 'Les prestations WordPress', href: '/services/web/' },
 				{ label: 'Les tarifs', href: '/tarifs/' }

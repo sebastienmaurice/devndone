@@ -5,7 +5,9 @@
 	Textes : $lib/content.
 -->
 <script lang="ts">
-	import { Button, Seo } from '$lib/components';
+	import { Button, LinkArrow, Seo } from '$lib/components';
+	import ReviewList from '$lib/components/sections/ReviewList.svelte';
+	import { vatNotice } from '$lib/content/tarifs';
 	import HandNote from '$lib/components/brand/HandNote.svelte';
 	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
 	import DoneWord from '$lib/components/brand/DoneWord.svelte';
@@ -18,12 +20,22 @@
 	import heroImage from '$lib/assets/mascotte/mascotte-renard-developpeur-wordpress-elementor.png?enhanced&w=1120;720;480&quality=40';
 	import { realisationsIntro } from '$lib/content/realisations';
 	import { heroSlogan, servicesIntro } from '$lib/content/services';
-	import { hero, homePaths, links } from '$lib/content/studio';
+	import { hero, homePaths, links, maltRating, reviewsIntro } from '$lib/content/studio';
 	import pathAgences from '$lib/assets/mascotte/mascotte-renard-agence-web-partenariat-poignee-de-main.jpg?enhanced&w=640;320';
 	import pathEntreprises from '$lib/assets/mascotte/mascotte-renard-projet-site-web-presentation-client.jpg?enhanced&w=640;320';
 	import { site, absoluteUrl } from '$lib/config/site';
 
 	const keywords = hero.keywords.split(' · ');
+
+	// Réalisations de l'accueil : projets WordPress et WooCommerce réalisés pour des clients
+	const homeProjects = [
+		'palimpseste-urbain',
+		'gsti',
+		'maxilou',
+		'petit-chateau-vercourt',
+		'pano-signservice',
+		'harmony-valse'
+	];
 
 	// Mascotte de chaque parcours du bloc d'orientation (fond blanc, comme la carte)
 	const pathVisuals = {
@@ -123,6 +135,7 @@
 						<div class="path__body">
 							<h3 class="path__title">{p.title}</h3>
 							<p>{p.text}</p>
+							<p class="path__price">{p.price}</p>
 							<p class="path__links">
 								{#each p.links as l (l.href)}
 									<a class="link-arrow" href={l.href}>{l.label} <Icon name="arrow-right" /></a>
@@ -133,6 +146,7 @@
 				</li>
 			{/each}
 		</ul>
+		<p class="paths-vat">{vatNotice}</p>
 	</div>
 </section>
 
@@ -170,12 +184,31 @@
 				>Un autre projet en tête ?</Button
 			>
 		</header>
-		<ProjectGrid limit={6} />
+		<!-- Projets WordPress et WooCommerce menés pour des clients (Ciné Délices, projet de
+		     formation, et Alternativ' Uniforme restent sur /realisations/) -->
+		<ProjectGrid only={homeProjects} />
 		<p class="home-projects__all">
 			<a class="link-arrow" href="/realisations/"
 				>Toutes les réalisations <Icon name="arrow-right" /></a
 			>
 		</p>
+	</div>
+</section>
+
+<!-- Avis Malt réels, cités à l'identique -->
+<section class="section section--tight home-reviews" aria-labelledby="avis-title">
+	<div class="container stack stack--lg">
+		<header class="stack stack--sm">
+			<SectionLabel label={reviewsIntro.eyebrow} />
+			<h2 class="t-h2" id="avis-title">
+				<AccentTitle text={reviewsIntro.title} accent={reviewsIntro.accent} />
+			</h2>
+			<p class="home-reviews__note">
+				Note de {maltRating.score} sur {maltRating.count} avis publiés sur mon profil Malt.
+			</p>
+		</header>
+		<ReviewList />
+		<p><LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow></p>
 	</div>
 </section>
 
@@ -536,6 +569,24 @@
 	/* Fond Ivoire : les cartes blanches du process s'en détachent */
 	.home-process {
 		border-block: 1px solid var(--line);
+	}
+	/* Repère de prix des cartes d'orientation (tarifs validés, sans « HT ») */
+	.path .path__price {
+		font-weight: var(--weight-bold);
+		color: var(--text);
+	}
+	.paths-vat {
+		margin: var(--space-4) 0 0;
+		font-size: var(--text-body-sm);
+		color: var(--text-muted);
+		text-align: center;
+	}
+	.home-reviews {
+		border-top: 1px solid var(--line);
+	}
+	.home-reviews__note {
+		margin: 0;
+		color: var(--text-muted);
 	}
 	.home-projects__all {
 		margin: var(--space-6) 0 0;

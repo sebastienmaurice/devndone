@@ -96,8 +96,8 @@ export const universes: readonly Universe[] = [
 
 export const processIntro = {
 	eyebrow: 'Mon process',
-	title: "De l'idée à la mise en ligne, en toute confiance.",
-	accent: 'en toute confiance'
+	title: "De l'idée à la mise en ligne, étape par étape.",
+	accent: 'étape par étape'
 } as const;
 
 export const processSteps = [

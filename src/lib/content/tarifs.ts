@@ -9,6 +9,8 @@
  * Ne rien ajouter (garantie, délai, quota, outil) sans validation de Sébastien.
  */
 
+import type { Review } from './studio';
+
 /** Mention TVA affichée près des prix (franchise en base) */
 export const vatNotice = 'TVA non applicable, art. 293 B du CGI.';
 
@@ -60,6 +62,15 @@ export type Offer = {
 	faq: readonly { q: string; a: string }[];
 	/** Réalisations directement liées à l'offre (slugs de content/realisations.ts) */
 	projects?: readonly string[];
+	/** Libellé du bouton principal de la page d'offre (vers /contact/?offre=<slug>) */
+	cta: string;
+	/**
+	 * Avis Malt affichés sur la page d'offre (identifiants de content/studio.ts), cités à l'identique.
+	 * Uniquement un avis laissé sur une mission de même nature, documentée par une étude de cas
+	 * (vérifié le 22/10/2026 : Palimpseste Urbain et GSTI, deux refontes). Sans avis de ce type, la
+	 * page affiche seulement la note globale du profil Malt.
+	 */
+	reviews?: readonly Review['id'][];
 };
 
 /** Réponses communes aux pages d'offre (informations validées) */
@@ -83,6 +94,7 @@ const faqPaymentStaged = {
 export const offers: readonly Offer[] = [
 	{
 		slug: 'landing-page',
+		cta: 'Demander un devis pour une landing page',
 		universe: 'web',
 		group: 'creation',
 		name: 'Landing page',
@@ -135,6 +147,7 @@ export const offers: readonly Offer[] = [
 	},
 	{
 		slug: 'site-vitrine-wordpress',
+		cta: 'Demander un devis pour un site vitrine',
 		universe: 'web',
 		group: 'creation',
 		name: 'Site vitrine WordPress',
@@ -207,6 +220,8 @@ export const offers: readonly Offer[] = [
 	},
 	{
 		slug: 'refonte-site-wordpress',
+		cta: 'Demander un devis pour une refonte WordPress',
+		reviews: ['palimpseste-urbain', 'gsti'],
 		universe: 'web',
 		group: 'creation',
 		name: 'Refonte WordPress',
@@ -275,6 +290,7 @@ export const offers: readonly Offer[] = [
 	},
 	{
 		slug: 'boutique-woocommerce',
+		cta: 'Échanger sur mon projet WooCommerce',
 		universe: 'web',
 		group: 'creation',
 		name: 'Boutique WooCommerce',
@@ -345,6 +361,7 @@ export const offers: readonly Offer[] = [
 	},
 	{
 		slug: 'sprint-wordpress-woocommerce',
+		cta: "Décrire mon besoin d'intervention",
 		universe: 'web',
 		group: 'ponctuel',
 		name: 'Sprint WordPress / WooCommerce',
@@ -410,6 +427,7 @@ export const offers: readonly Offer[] = [
 	},
 	{
 		slug: 'audit-technique-wordpress',
+		cta: 'Demander un audit technique WordPress',
 		universe: 'web',
 		group: 'ponctuel',
 		name: 'Audit technique WordPress',
@@ -458,6 +476,7 @@ export const offers: readonly Offer[] = [
 	},
 	{
 		slug: 'audit-automatisation',
+		cta: "Demander un audit d'automatisation",
 		universe: 'automatisation',
 		group: 'ponctuel',
 		name: 'Audit automatisation',

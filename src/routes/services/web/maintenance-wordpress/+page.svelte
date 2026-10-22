@@ -78,7 +78,7 @@
 	<div class="container stack stack--lg faq">
 		<header class="stack stack--sm">
 			<SectionLabel label="Questions fréquentes" />
-			<h2 class="t-h2" id="faq-title">Avant de souscrire</h2>
+			<h2 class="t-h2" id="faq-title">Avant d'en parler</h2>
 		</header>
 		<Accordion items={faq} />
 	</div>

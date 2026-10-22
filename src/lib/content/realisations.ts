@@ -128,7 +128,7 @@ export const projects: readonly Project[] = [
 		seoTitle: 'Ciné Délices : application full stack de recettes de cinéma',
 		name: 'Ciné Délices',
 		stack: 'JavaScript · Node.js · Express · PostgreSQL',
-		text: 'Application full stack de recettes inspirées du cinéma.',
+		text: 'Projet de formation (titre professionnel DWWM) : application full stack de recettes inspirées du cinéma.',
 		url: 'https://cinedelices.com/',
 		image: 'cine-delices-application-recettes-cinema',
 		description:

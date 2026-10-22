@@ -6,7 +6,7 @@
 	Illustration : pose existante réutilisée provisoirement (même visuel que le Sprint).
 -->
 <script lang="ts">
-	import { Button, LinkArrow, Seo } from '$lib/components';
+	import { Button, LinkArrow, Seo, Status } from '$lib/components';
 	import Icon from '$lib/components/brand/Icon.svelte';
 	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
 	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
@@ -23,7 +23,8 @@
 		agencesProjects,
 		agencesProjectsNote,
 		agencesSteps,
-		agencesTasks
+		agencesTasks,
+		agencesWorkflow
 	} from '$lib/content/agences';
 	import { hero, links, reviewsIntro } from '$lib/content/studio';
 	import { vatNotice } from '$lib/content/tarifs';
@@ -41,6 +42,10 @@
 	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Agences' }]}
 >
 	{#snippet actions()}
+		<p class="availability">
+			<Status state="live">{agencesPage.availability}</Status>
+			<span class="availability__note">{agencesPage.availabilityNote}</span>
+		</p>
 		<Button href={agencesPage.contactHref} icon="arrow-right">{agencesPage.cta}</Button>
 		<Button href={links.calendly} variant="secondary"><Icon name="calendar" />{hero.ctaCall}</Button
 		>
@@ -102,6 +107,28 @@
 			</dl>
 			<p class="small">{vatNotice}</p>
 		</div>
+	</div>
+
+	<!-- Modalités de collaboration confirmées (content/agences.ts) -->
+	<div class="container stack stack--lg workflow">
+		<header class="stack stack--sm">
+			<h3 class="t-h3" id="workflow-title">
+				<AccentTitle text={agencesWorkflow.title} accent={agencesWorkflow.accent} />
+			</h3>
+			<p class="muted">{agencesWorkflow.lede}</p>
+		</header>
+		<ul class="workflow__list" role="list" aria-labelledby="workflow-title">
+			{#each agencesWorkflow.items as item (item.title)}
+				<li class="workflow__item">
+					<span class="task__icon"><Icon name={item.icon} /></span>
+					<span>
+						<strong class="workflow__title">{item.title}</strong>
+						<span class="workflow__text">{item.text}</span>
+					</span>
+				</li>
+			{/each}
+		</ul>
+		<p class="muted small-note">{agencesWorkflow.note}</p>
 	</div>
 </section>
 
@@ -191,6 +218,50 @@
 	.band {
 		background: var(--surface);
 		border-block: 1px solid var(--line);
+	}
+	/* Disponibilité : pleine ligne au-dessus des boutons de l'en-tête */
+	.availability {
+		display: flex;
+		flex-basis: 100%;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-2) var(--space-3);
+		margin: 0 0 var(--space-2);
+	}
+	.availability__note {
+		font-size: var(--text-body-sm);
+		color: var(--text-muted);
+	}
+	/* Modalités de collaboration : grille de tuiles d'icônes sous le cadre */
+	.workflow {
+		margin-top: var(--space-8);
+	}
+	.workflow__list {
+		display: grid;
+		gap: var(--space-4) var(--col-gap);
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.workflow__item {
+		display: flex;
+		gap: var(--space-3);
+		align-items: flex-start;
+	}
+	.workflow__item .task__icon {
+		flex: none;
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+	.workflow__title {
+		display: block;
+	}
+	.workflow__text {
+		color: var(--text-muted);
+	}
+	.small-note {
+		font-size: var(--text-body-sm);
 	}
 	/* Illustration sur fond blanc : multiply la fond dans l'Ivoire de la page */
 	.visual {

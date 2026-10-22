@@ -1,7 +1,8 @@
 <!--
 	En-tête du site (maquette du 19/10/2026) : logo officiel à gauche, les pages du site au centre
 	séparées par des slashs orange, bouton « Parlons de votre projet » à droite. Fond Ivoire, collant.
-	Sous 1100 px : logo, bouton Menu et panneau plein écran.
+	Sous 1100 px : logo, bouton Menu et panneau plein écran. Sous 640 px, le bouton de contact garde
+	un libellé court (« Contact ») pour rester visible sur téléphone.
 	Navigation : content/pages.ts (headerNav, mobileNav).
 -->
 <script lang="ts">
@@ -65,7 +66,11 @@
 		</nav>
 
 		<div class="header__actions">
-			<Button href="/contact/" icon="arrow-right" class="header__cta">{contactIntro.cta}</Button>
+			<Button href="/contact/" icon="arrow-right" class="header__cta"
+				><span class="header__cta-long">{contactIntro.cta}</span><span class="header__cta-short"
+					>Contact</span
+				></Button
+			>
 			<button
 				bind:this={toggle}
 				class="header__toggle"
@@ -164,8 +169,15 @@
 		align-items: center;
 		gap: var(--space-3);
 	}
-	.header__actions :global(.header__cta) {
+	/* Bouton de contact toujours visible : libellé court sur téléphone, complet dès 640 px */
+	.header__cta-long {
 		display: none;
+	}
+	/* Téléphone : sans la flèche, logo + Contact + Menu tiennent dès 360 px */
+	@media (max-width: 639px) {
+		.header__actions :global(.header__cta .icon) {
+			display: none;
+		}
 	}
 
 	.header__toggle {
@@ -206,8 +218,11 @@
 	}
 
 	@media (min-width: 640px) {
-		.header__actions :global(.header__cta) {
-			display: inline-flex;
+		.header__cta-long {
+			display: inline;
+		}
+		.header__cta-short {
+			display: none;
 		}
 	}
 	@media (min-width: 1100px) {

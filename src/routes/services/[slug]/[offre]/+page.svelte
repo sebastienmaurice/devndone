@@ -6,7 +6,8 @@
 	Prix sans « HT » : franchise en base de TVA (mention affichée près du prix).
 -->
 <script lang="ts">
-	import { Button, Seo } from '$lib/components';
+	import { Button, LinkArrow, Seo } from '$lib/components';
+	import ReviewList from '$lib/components/sections/ReviewList.svelte';
 	import Icon from '$lib/components/brand/Icon.svelte';
 	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
 	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
@@ -14,7 +15,7 @@
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import Accordion from '$lib/components/ui/Accordion.svelte';
 	import { offerVisuals } from '$lib/assets/tarifs/visuels';
-	import { hero, links } from '$lib/content/studio';
+	import { hero, links, maltRating, reviewsIntro } from '$lib/content/studio';
 	import PriceTag from '$lib/components/ui/PriceTag.svelte';
 	import { offerPath, offers, paymentTerms, priceParts, vatNotice } from '$lib/content/tarifs';
 
@@ -46,7 +47,7 @@
 			<PriceTag {...priceParts(o)} size="hero" />
 			<span class="price__note">{o.badge} · {vatNotice}</span>
 		</div>
-		<Button href="/contact/" icon="arrow-right">Parlons de votre projet</Button>
+		<Button href="/contact/?offre={o.slug}" icon="arrow-right" class="offer-cta">{o.cta}</Button>
 		<Button href={links.calendly} variant="secondary"><Icon name="calendar" />{hero.ctaCall}</Button
 		>
 	{/snippet}
@@ -163,6 +164,37 @@
 				<h2 class="t-h2" id="projets-title">Des projets de ce type déjà livrés</h2>
 			</header>
 			<ProjectGrid only={o.projects} />
+		</div>
+	</section>
+{/if}
+
+{#if o.reviews?.length}
+	<!-- Avis Malt cités à l'identique, laissés sur une mission de même nature (mission indiquée) -->
+	<section class="section section--tight" aria-labelledby="avis-title">
+		<div class="container stack stack--lg">
+			<header class="stack stack--sm">
+				<SectionLabel label={reviewsIntro.eyebrow} />
+				<h2 class="t-h3" id="avis-title">{reviewsIntro.title}</h2>
+			</header>
+			<ReviewList only={o.reviews} mission />
+			<p class="malt">
+				Note de {maltRating.score} sur {maltRating.count} avis Malt ·
+				<LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow>
+			</p>
+			<div class="cta-row">
+				<Button href="/contact/?offre={o.slug}" icon="arrow-right" class="offer-cta">{o.cta}</Button
+				>
+			</div>
+		</div>
+	</section>
+{:else}
+	<!-- Pas d'avis sur une mission de même nature : seule la note globale du profil Malt -->
+	<section class="section section--tight" aria-label="Avis clients">
+		<div class="container">
+			<p class="malt">
+				Note de {maltRating.score} sur {maltRating.count} avis publiés sur mon profil Malt ·
+				<LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow>
+			</p>
 		</div>
 	</section>
 {/if}
@@ -362,6 +394,23 @@
 	}
 	.faq {
 		max-width: 52rem;
+	}
+	/* Boutons « Demander un devis pour… » : libellés longs, retour à la ligne permis sur téléphone
+	   (le bouton du design system ne passe pas à la ligne) */
+	:global(.btn.offer-cta) {
+		max-width: 100%;
+		white-space: normal;
+		text-align: left;
+	}
+	.malt {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: var(--text-body-sm);
+	}
+	.cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-4);
 	}
 	/* Autres offres : pastilles-liens */
 	.others {

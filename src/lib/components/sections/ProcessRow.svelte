@@ -90,7 +90,7 @@
 		gap: var(--space-4);
 		justify-items: start;
 	}
-	/* Titre sur 3 lignes : « De l'idée à la mise / en ligne, / en toute confiance. » */
+	/* Titre sur 3 lignes : « De l'idée à la mise / en ligne, / étape par étape. » */
 	.process__title {
 		max-width: 10em;
 		margin: 0;

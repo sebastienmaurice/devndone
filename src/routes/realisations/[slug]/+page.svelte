@@ -14,10 +14,14 @@
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import { projects } from '$lib/content/realisations';
+	import { links, reviews } from '$lib/content/studio';
+	import ReviewList from '$lib/components/sections/ReviewList.svelte';
 
 	let { data } = $props();
 
 	const p = $derived(data.project);
+	// Avis Malt du même client, s'il existe (correspondance déclarée dans content/studio.ts)
+	const review = $derived(reviews.find((r) => r.project === p.slug));
 	const d = $derived(p.details);
 	const technologies = $derived(p.stack.split(' · '));
 
@@ -164,6 +168,17 @@
 					</div>
 				</div>
 			{/if}
+
+			{#if review}
+				<!-- Avis Malt laissé par ce client, cité à l'identique -->
+				<div class="stack stack--sm client-review">
+					<SectionLabel label="L'avis du client" />
+					<ReviewList only={[review.id]} />
+					<p class="client-review__source">
+						Avis publié sur Malt · <a class="link" href={links.malt}>voir le profil</a>
+					</p>
+				</div>
+			{/if}
 		</div>
 
 		<aside class="case__aside" aria-label="Fiche technique">
@@ -230,6 +245,15 @@
 <ContactBlock />
 
 <style>
+	/* Avis du client sous le résultat */
+	.client-review {
+		margin-top: var(--space-6);
+	}
+	.client-review__source {
+		margin: 0;
+		font-size: var(--text-body-sm);
+		color: var(--text-muted);
+	}
 	/* Technologies sous le chapô : pastilles bleu océan très clair (--tag-bg), pleine ligne au-dessus des boutons */
 	.intro-tags {
 		display: flex;

@@ -1,12 +1,23 @@
 <!--
-	Avis clients Malt (content/studio.ts), cités à l'identique. `limit` pour n'en montrer qu'une partie.
+	Avis clients Malt (content/studio.ts), cités à l'identique. `limit` pour n'en montrer qu'une partie,
+	`only` pour choisir des avis précis (identifiants `id` des avis), `mission` pour indiquer sous la
+	signature la mission concernée (étude de cas liée à l'avis), quand elle est documentée.
 -->
 <script lang="ts">
-	import { reviews } from '$lib/content/studio';
+	import { projects } from '$lib/content/realisations';
+	import { reviews, type Review } from '$lib/content/studio';
 
-	let { limit }: { limit?: number } = $props();
+	let {
+		limit,
+		only,
+		mission = false
+	}: { limit?: number; only?: readonly Review['id'][]; mission?: boolean } = $props();
 
-	const shown = $derived(limit ? reviews.slice(0, limit) : reviews);
+	/** Étude de cas du client qui a laissé l'avis (texte des réalisations, pas du client) */
+	const projectOf = (r: Review) => projects.find((p) => p.slug === r.project);
+
+	const picked = $derived(only ? reviews.filter((r) => only.includes(r.id)) : reviews);
+	const shown = $derived(limit ? picked.slice(0, limit) : picked);
 </script>
 
 <ul class="auto-grid reviews" role="list">
@@ -14,7 +25,16 @@
 		<li class="card">
 			<figure class="review">
 				<blockquote><p class="t-body-lg">« {r.quote} »</p></blockquote>
-				<figcaption class="t-body-sm t-muted">{r.author}</figcaption>
+				<figcaption class="t-body-sm t-muted">
+					{r.author}
+					{#if mission && projectOf(r)}
+						<span class="review__mission"
+							>Mission : <a class="link" href="/realisations/{r.project}/"
+								>{projectOf(r)?.seoTitle}</a
+							></span
+						>
+					{/if}
+				</figcaption>
 			</figure>
 		</li>
 	{/each}
@@ -47,6 +67,10 @@
 		gap: var(--space-4);
 		height: 100%;
 		grid-template-rows: 1fr auto;
+	}
+	.review__mission {
+		display: block;
+		margin-top: var(--space-1);
 	}
 	figcaption {
 		padding-top: var(--space-4);
