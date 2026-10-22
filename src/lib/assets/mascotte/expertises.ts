@@ -10,7 +10,7 @@ import design from './mascotte-renard-design-identite-visuelle.jpg?enhanced&w=12
 import automatisation from './mascotte-renard-automatisation-processus.jpg?enhanced&w=1200;720;360';
 import applications from './mascotte-renard-applications-logiciels-metier.jpg?enhanced&w=1200;720;360';
 import applicationsHeader from './applications-tableau-de-bord-3d-dev-n-done.jpg?enhanced&w=1388;960;480';
-import fullStack from './mascotte-renard-developpeur-full-stack.png?enhanced&w=1200;720;360&quality=40';
+import fullStack from './mascotte-renard-developpeur-full-stack-api-base-de-donnees.png?enhanced&w=1200;720;360&quality=40';
 
 export const expertiseMascots: Record<string, { src: Picture; alt: string }> = {
 	web: {
@@ -31,7 +31,7 @@ export const expertiseMascots: Record<string, { src: Picture; alt: string }> = {
 	},
 	'full-stack': {
 		src: fullStack,
-		alt: 'Dev, la mascotte, code sur son portable entre un serveur Node.js, une API et une base de données'
+		alt: "Dev, la mascotte, code sur son portable entre un éditeur de code et un écran montrant l'API, la base de données et le serveur d'une application, entouré d'icônes Node.js et cloud"
 	}
 };
 
