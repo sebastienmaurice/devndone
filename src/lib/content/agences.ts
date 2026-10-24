@@ -36,25 +36,26 @@ export const agencesPage = {
 	contactHref: '/contact/?type=agence'
 } as const;
 
-/** Ce qu'une agence peut confier, d'après les réalisations */
+/** Ce qu'une agence peut confier, d'après les réalisations. Illustration de chaque carte :
+ *  $lib/assets/agences/missions.ts, par `id`. */
 export const agencesTasks = [
 	{
-		icon: 'site',
+		id: 'integration',
 		title: 'Intégration WordPress',
 		text: 'Monter des pages ou un site complet à partir de votre maquette et de votre charte. Les réalisations publiées sont construites avec Elementor ; pour un autre outil, la faisabilité se vérifie avant tout engagement.'
 	},
 	{
-		icon: 'cart',
+		id: 'woocommerce',
 		title: 'Renfort WooCommerce',
 		text: "Configurer une boutique, intégrer un catalogue, régler paiement et livraison, mettre en place une demande de devis ou faire évoluer un parcours d'achat existant."
 	},
 	{
-		icon: 'bug',
+		id: 'corrections',
 		title: 'Corrections et évolutions',
 		text: "Résoudre une erreur serveur, un conflit d'extensions ou un bug d'affichage, ajouter une section ou une fonctionnalité sur un site déjà en ligne."
 	},
 	{
-		icon: 'code',
+		id: 'front-end',
 		title: 'Responsive et front-end',
 		text: "Reprendre l'affichage mobile, intégrer des éléments en HTML, CSS et JavaScript, alléger les pages qui chargent trop lentement."
 	}

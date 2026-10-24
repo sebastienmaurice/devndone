@@ -3,7 +3,8 @@
 	Ce que l'agence peut confier, cadre de travail, démarrage, projets menés en direct (présentés
 	comme tels), avis Malt, questions fréquentes, renvoi vers les prestations pour les entreprises.
 	Le bouton principal ouvre le formulaire de contact avec le type « agence » prérempli.
-	Illustration : pose existante réutilisée provisoirement (même visuel que le Sprint).
+	Illustration : pose existante réutilisée provisoirement (même visuel que le Sprint). Cartes des
+	missions illustrées (assets/agences/missions.ts).
 -->
 <script lang="ts">
 	import { Button, LinkArrow, Seo, Status } from '$lib/components';
@@ -16,6 +17,8 @@
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
 	import Accordion from '$lib/components/ui/Accordion.svelte';
 	import visual from '$lib/assets/mascotte/mascotte-renard-dev-n-done-developpeur-wordpress-code.jpg?enhanced&w=1200;720;360';
+	import { missionVisuals } from '$lib/assets/agences/missions';
+	import presentation from '$lib/assets/mascotte/mascotte-renard-projet-site-web-presentation-client.jpg?enhanced&w=720;360';
 	import {
 		agencesFaq,
 		agencesFrame,
@@ -74,7 +77,13 @@
 		<ul class="tasks" role="list">
 			{#each agencesTasks as task (task.title)}
 				<li class="task">
-					<span class="task__icon"><Icon name={task.icon} /></span>
+					<enhanced:img
+						class="task__visual"
+						src={missionVisuals[task.id]}
+						alt=""
+						sizes="(min-width: 768px) 144px, 120px"
+						loading="lazy"
+					/>
 					<h3 class="task__title">{task.title}</h3>
 					<p>{task.text}</p>
 				</li>
@@ -86,16 +95,26 @@
 <!-- Cadre de travail -->
 <section class="section section--tight" aria-labelledby="cadre-title">
 	<div class="container split">
-		<header class="stack stack--sm">
-			<SectionLabel label="Le cadre" />
-			<h2 class="t-h2" id="cadre-title">
-				<AccentTitle text="Comment on travaille ensemble" accent="ensemble" />
-			</h2>
-			<p class="muted">
-				Chaque mission a un périmètre et une estimation écrits avant de commencer. Ce qui dépasse
-				fait l'objet d'un nouveau devis, accepté par écrit avant d'être réalisé.
-			</p>
-		</header>
+		<!-- Colonne de gauche : titre, principe, puis l'illustration qui équilibre le tableau du cadre -->
+		<div class="cadre__intro">
+			<header class="stack stack--sm">
+				<SectionLabel label="Le cadre" />
+				<h2 class="t-h2" id="cadre-title">
+					<AccentTitle text="Comment on travaille ensemble" accent="ensemble" />
+				</h2>
+				<p class="muted">
+					Chaque mission a un périmètre et une estimation écrits avant de commencer. Ce qui dépasse
+					fait l'objet d'un nouveau devis, accepté par écrit avant d'être réalisé.
+				</p>
+			</header>
+			<enhanced:img
+				class="cadre__visual"
+				src={presentation}
+				alt="Dev, la mascotte, présente un site web sur son ordinateur portable à une cliente"
+				sizes="(min-width: 900px) 560px, 448px"
+				loading="lazy"
+			/>
+		</div>
 		<div class="box">
 			<dl class="frame">
 				{#each agencesFrame as row (row.label)}
@@ -309,6 +328,14 @@
 		background: var(--tag-bg);
 		color: var(--tag-text);
 	}
+	/* Illustration de la mission (fond blanc, comme la carte) */
+	.task__visual {
+		display: block;
+		width: 9rem;
+		max-width: 100%;
+		height: auto;
+		aspect-ratio: 1;
+	}
 	.task__title {
 		margin: 0;
 		font-size: 1.375rem;
@@ -327,6 +354,27 @@
 		.split {
 			grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
 			gap: var(--space-8);
+		}
+	}
+	/* Le cadre : titre et principe, puis l'illustration (arrondi et filet de 1 px) */
+	.cadre__intro {
+		display: grid;
+		gap: var(--space-6);
+		align-content: start;
+	}
+	.cadre__visual {
+		display: block;
+		width: 100%;
+		max-width: 28rem;
+		height: auto;
+		aspect-ratio: 1;
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-card);
+	}
+	@media (min-width: 900px) {
+		.cadre__visual {
+			max-width: none;
 		}
 	}
 	.box {
