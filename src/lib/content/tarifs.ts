@@ -290,7 +290,7 @@ export const offers: readonly Offer[] = [
 	},
 	{
 		slug: 'boutique-woocommerce',
-		cta: 'Échanger sur mon projet WooCommerce',
+		cta: 'Échanger sur votre projet WooCommerce',
 		universe: 'web',
 		group: 'creation',
 		name: 'Boutique WooCommerce',
@@ -361,7 +361,7 @@ export const offers: readonly Offer[] = [
 	},
 	{
 		slug: 'sprint-wordpress-woocommerce',
-		cta: "Décrire mon besoin d'intervention",
+		cta: "Décrire votre besoin d'intervention",
 		universe: 'web',
 		group: 'ponctuel',
 		name: 'Sprint WordPress / WooCommerce',
@@ -401,7 +401,7 @@ export const offers: readonly Offer[] = [
 			{ title: 'Intervention', text: 'Travail sur le périmètre validé, puis compte rendu.' }
 		],
 		duration:
-			"La durée est estimée après une courte analyse, en jours ou en demi-journées, et fixée dans le devis. L'analyse préalable reste limitée : au-delà, elle est facturée après votre accord. Si le travail doit dépasser l'estimation, je vous demande votre accord écrit avant de continuer.",
+			"La durée est estimée après une courte analyse, en jours ou en demi-journées, et fixée dans le devis. L'analyse préalable reste limitée : au-delà, elle est facturée après votre accord. Si le travail doit dépasser l'estimation, Dev'n Done vous demande votre accord écrit avant de continuer.",
 		clientProvides: [
 			"Une description du problème ou de l'évolution souhaitée",
 			'Les accès nécessaires (administration WordPress, hébergement)'
@@ -638,7 +638,7 @@ export type MaintenancePlan = {
 export const maintenanceStatus = {
 	open: false,
 	notice:
-		"Formules en préparation : elles ne sont pas encore proposées à la commande. Vous pouvez déjà m'en parler pour votre site."
+		'Formules en préparation : elles ne sont pas encore proposées à la commande. Vous pouvez déjà en discuter pour votre site.'
 } as const;
 
 export const maintenancePage = {
@@ -724,11 +724,11 @@ export const maintenanceRules = [
 export const maintenanceFaq = [
 	{
 		q: "La maintenance est-elle obligatoire après la création d'un site ?",
-		a: "Non. Elle est facultative. Les formules sont en préparation et ne sont pas encore proposées à la commande ; vous pouvez déjà m'en parler."
+		a: 'Non. Elle est facultative. Les formules sont en préparation et ne sont pas encore proposées à la commande ; vous pouvez déjà en discuter.'
 	},
 	{
 		q: 'Pourquoi un état des lieux avant la maintenance ?',
-		a: "Pour connaître l'état réel du site avant de m'engager : versions, extensions, sauvegardes existantes, erreurs. Il est obligatoire pour un site existant, chiffré selon son état et sa complexité, et accepté avant d'être réalisé."
+		a: "Pour connaître l'état réel du site avant que Dev'n Done s'engage : versions, extensions, sauvegardes existantes, erreurs. Il est obligatoire pour un site existant, chiffré selon son état et sa complexité, et accepté avant d'être réalisé."
 	},
 	{
 		q: 'Que comprennent les interventions techniques mineures ?',

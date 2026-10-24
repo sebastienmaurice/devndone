@@ -68,7 +68,7 @@
 		<header class="stack stack--sm">
 			<SectionLabel label="Missions" />
 			<h2 class="t-h2" id="missions-title">
-				<AccentTitle text="Ce que vous pouvez me confier" accent="me confier" />
+				<AccentTitle text="Ce que vous pouvez déléguer" accent="déléguer" />
 			</h2>
 		</header>
 		<ul class="tasks" role="list">
@@ -159,7 +159,7 @@
 	<div class="container stack stack--lg">
 		<header class="stack stack--sm">
 			<SectionLabel label="Réalisations" />
-			<h2 class="t-h2" id="projets-title">Le type de travail que je peux reprendre</h2>
+			<h2 class="t-h2" id="projets-title">Des exemples de travail réalisé</h2>
 			<p class="muted note">{agencesProjectsNote}</p>
 		</header>
 		<ProjectGrid only={agencesProjects} />
@@ -187,7 +187,7 @@
 	<div class="container stack stack--lg faq">
 		<header class="stack stack--sm">
 			<SectionLabel label="Questions fréquentes" />
-			<h2 class="t-h2" id="faq-title">Avant de me confier une mission</h2>
+			<h2 class="t-h2" id="faq-title">Avant de confier une mission</h2>
 		</header>
 		<Accordion items={faq} />
 	</div>

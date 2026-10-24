@@ -36,7 +36,8 @@
 				<!-- Source : FAQ Web3Forms (docs.web3forms.com), relevée le 20/10/2026 -->
 				<p>
 					Les informations saisies dans le formulaire de la page Contact (nom, email, entreprise,
-					type de projet, message) me sont transmises par email via le service <a
+					type de demande, adresse du site actuel, échéance souhaitée, message) sont transmises à
+					Dev'n Done par email via le service <a
 						class="link"
 						href="https://web3forms.com/"
 						target="_blank"

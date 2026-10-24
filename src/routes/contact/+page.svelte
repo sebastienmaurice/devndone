@@ -153,7 +153,7 @@
 </script>
 
 <Seo
-	title="Contact : parlons de votre projet web"
+	title="Contact : discuter de votre projet web"
 	path="/contact/"
 	description="15 minutes pour faire le point sur votre projet et définir la bonne approche, sans engagement. Prise de rendez-vous en ligne ou formulaire de contact."
 />
@@ -180,7 +180,7 @@
 <section class="section section--tight" aria-label="Formulaire et prise de rendez-vous">
 	<div class="container contact-page">
 		<form class="form contact-form" novalidate onsubmit={send}>
-			<h2 class="t-h3">Parlez-moi de votre projet</h2>
+			<h2 class="t-h3">Présentez votre projet</h2>
 			<div class="contact-form__row">
 				<Field
 					label="Nom"
@@ -240,7 +240,7 @@
 				name="message"
 				as="textarea"
 				required
-				hint="Quelques lignes suffisent : on en parle ensuite ensemble."
+				hint="Quelques lignes suffisent : le reste se précise lors d'un premier échange."
 				bind:value={message}
 				error={show('message')}
 				maxlength={4000}
@@ -260,7 +260,7 @@
 
 			{#if status === 'sent'}
 				<Notice tone="success" live title="Message envoyé, merci !">
-					Je vous réponds rapidement, à l'adresse indiquée. Pour aller plus vite, vous pouvez aussi
+					Dev'n Done vous répond à l'adresse indiquée. Pour aller plus vite, vous pouvez aussi
 					réserver un créneau de 15 minutes.
 				</Notice>
 			{:else if status === 'opened' || status === 'failed'}
@@ -306,8 +306,8 @@
 				<Icon name="info" size="sm" />
 				{#if direct}
 					<span
-						>Votre message m'est transmis par email via le service Web3Forms, qui ne le conserve pas
-						(<a class="link" href="/confidentialite/">confidentialité</a>).</span
+						>Votre message est transmis par email à Dev'n Done via le service Web3Forms, qui ne le
+						conserve pas (<a class="link" href="/confidentialite/">confidentialité</a>).</span
 					>
 				{:else}
 					<span
@@ -328,7 +328,7 @@
 			<div class="contact-card contact-card--main surface-night">
 				<Icon name="calendar" />
 				<h2 class="t-h3">Réserver 15 minutes</h2>
-				<p>Choisissez un créneau : on fait le point sur votre projet, sans engagement.</p>
+				<p>Choisissez un créneau pour faire le point sur votre projet, sans engagement.</p>
 				<Button href={links.calendly} icon="arrow-up-right" block>{hero.ctaCall}</Button>
 			</div>
 			<ul class="contact-links" role="list">

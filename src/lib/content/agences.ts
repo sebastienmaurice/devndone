@@ -24,7 +24,7 @@ export const agencesPage = {
 	label: 'Agences web',
 	title: 'Un développeur WordPress en renfort pour votre agence',
 	accent: 'en renfort',
-	lede: 'Un pic de charge, une boutique WooCommerce à terminer, un site client qui plante : vous me confiez une partie précise du projet, sur un périmètre écrit avant de commencer.',
+	lede: "Un pic de charge, une boutique WooCommerce à terminer, un site client qui plante : vous confiez à Dev'n Done une partie précise du projet, sur un périmètre écrit avant de commencer.",
 	cta: "Discuter d'un besoin de renfort",
 	/**
 	 * Disponibilité annoncée par Sébastien le 22/10/2026. À mettre à jour dès qu'elle change.
@@ -41,7 +41,7 @@ export const agencesTasks = [
 	{
 		icon: 'site',
 		title: 'Intégration WordPress',
-		text: "Monter des pages ou un site complet à partir de votre maquette et de votre charte. Mes projets sont construits avec Elementor ; pour un autre outil, on en parle avant de s'engager."
+		text: 'Monter des pages ou un site complet à partir de votre maquette et de votre charte. Les réalisations publiées sont construites avec Elementor ; pour un autre outil, la faisabilité se vérifie avant tout engagement.'
 	},
 	{
 		icon: 'cart',
@@ -65,7 +65,7 @@ export const agencesFrame = [
 	{
 		label: 'Tarif de référence',
 		value:
-			'350 € par jour, ou 175 € la demi-journée pour une intervention courte, clairement définie et acceptée avant le démarrage. La durée estimée est écrite au devis ; si elle doit être dépassée, je vous demande votre accord écrit avant de continuer.'
+			"350 € par jour, ou 175 € la demi-journée pour une intervention courte, clairement définie et acceptée avant le démarrage. La durée estimée est écrite au devis ; si elle doit être dépassée, Dev'n Done vous demande votre accord écrit avant de continuer."
 	},
 	{
 		label: 'Facturation',
@@ -87,7 +87,7 @@ export const agencesFrame = [
 	{
 		label: 'Interlocuteur',
 		value:
-			"Vous échangez avec la personne qui fait le travail. Dev'n Done n'a pas d'équipe : la charge que je peux prendre se décide mission par mission."
+			"Vous échangez avec la personne qui fait le travail. Dev'n Done n'a pas d'équipe : la charge acceptée se décide mission par mission."
 	},
 	{
 		label: 'Fin de mission',
@@ -100,24 +100,24 @@ export const agencesFrame = [
  * fréquence de réunion ni aucun délai de réponse : ils ne sont pas validés.
  */
 export const agencesWorkflow = {
-	title: "Je m'adapte à votre organisation",
-	accent: 'votre organisation',
-	lede: "Vous gardez vos outils et vos habitudes de production : je m'y intègre pour la durée de la mission.",
+	title: 'Vos outils, vos méthodes',
+	accent: 'vos méthodes',
+	lede: "Vous gardez vos outils et vos habitudes de production : Dev'n Done s'y intègre pour la durée de la mission.",
 	items: [
 		{
 			icon: 'code',
 			title: 'Git',
-			text: 'Je travaille avec Git, sur votre dépôt et selon vos règles de branches.'
+			text: 'Travail avec Git, sur votre dépôt et selon vos règles de branches.'
 		},
 		{
 			icon: 'site',
 			title: 'Environnement de test',
-			text: "J'interviens sur l'environnement de test que vous me fournissez, avant toute mise en ligne."
+			text: "Interventions sur l'environnement de test que vous fournissez, avant toute mise en ligne."
 		},
 		{
 			icon: 'layers',
 			title: 'Vos tickets',
-			text: 'Je suis les tâches dans votre outil de tickets ou de gestion de projet.'
+			text: 'Suivi des tâches dans votre outil de tickets ou de gestion de projet.'
 		},
 		{
 			icon: 'message',
@@ -132,7 +132,7 @@ export const agencesWorkflow = {
 		{
 			icon: 'target',
 			title: 'Confidentialité',
-			text: "J'accepte de signer un accord de confidentialité."
+			text: 'Un accord de confidentialité peut être signé avant la mission.'
 		}
 	],
 	note: 'Ces modalités se précisent avec vous au début de chaque mission.'
@@ -144,15 +144,15 @@ export const agencesSteps = [
 		text: 'Le contexte, la maquette ou le site existant, ce qui est attendu et votre échéance.'
 	},
 	{
-		title: 'On fixe le cadre',
+		title: 'Le cadre est fixé',
 		text: 'Périmètre, durée en jours ou en demi-journées, échéance de facturation, marque blanche ou non : tout est écrit au devis.'
 	},
 	{
-		title: "J'interviens",
-		text: 'Sur le périmètre validé, avec les accès que vous me transmettez.'
+		title: "L'intervention",
+		text: 'Sur le périmètre validé, avec les accès que vous transmettez.'
 	},
 	{
-		title: 'Je vous rends compte',
+		title: 'Le compte rendu',
 		text: 'Ce qui a été fait, ce qui reste éventuellement à prévoir.'
 	}
 ] as const;
@@ -161,7 +161,7 @@ export const agencesSteps = [
 export const agencesProjects = ['gsti', 'harmony-valse', 'palimpseste-urbain'] as const;
 
 export const agencesProjectsNote =
-	"Ces projets ont été réalisés en direct pour leurs clients, pas en sous-traitance. Ils montrent le type de travail que je peux prendre en charge pour vous : migration vers WooCommerce, résolution d'erreurs serveur, refonte et performance.";
+	"Ces projets ont été réalisés en direct pour leurs clients, pas en sous-traitance. Ils montrent le type de travail que Dev'n Done peut prendre en charge pour vous : migration vers WooCommerce, résolution d'erreurs serveur, refonte et performance.";
 
 export const agencesFaq = [
 	{
@@ -178,14 +178,14 @@ export const agencesFaq = [
 	},
 	{
 		q: 'Êtes-vous disponible rapidement ?',
-		a: 'Oui, je suis disponible immédiatement pour de nouvelles missions. Les délais de chaque mission sont fixés ensemble au devis, selon son périmètre.'
+		a: "Oui, Dev'n Done est disponible immédiatement pour de nouvelles missions. Les délais de chaque mission sont fixés ensemble au devis, selon son périmètre."
 	},
 	{
 		q: 'Signez-vous un accord de confidentialité ?',
-		a: "Oui, j'accepte de signer un accord de confidentialité avant de commencer."
+		a: 'Oui, un accord de confidentialité peut être signé avant de commencer.'
 	},
 	{
 		q: 'Avez-vous une équipe ?',
-		a: "Non. Dev'n Done est une activité indépendante : je réalise moi-même le travail que vous me confiez."
+		a: "Non. Dev'n Done est une activité indépendante : Sébastien Maurice réalise lui-même le travail que vous confiez."
 	}
 ] as const;
