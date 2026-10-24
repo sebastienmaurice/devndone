@@ -32,9 +32,24 @@
 	const guide = offersGuide.rows.map((r) => {
 		const o = offers.find((x) => x.slug === r.slug);
 		if (!o) throw new Error(`Offre inconnue : ${r.slug}`);
-		return { situation: r.situation, name: o.name, href: offerPath(o) };
+		return {
+			situation: r.situation,
+			name: o.name,
+			href: offerPath(o),
+			visual: guideVisuals[o.slug]
+		};
 	});
+	const guideItems = [
+		...guide,
+		{
+			situation: offersGuide.maintenance,
+			name: 'Maintenance WordPress',
+			href: maintenancePage.path,
+			visual: guideVisuals.maintenance
+		}
+	];
 	import mascot from '$lib/assets/mascotte/mascotte-renard-tarifs-formules-abonnement.jpg?enhanced&w=1200;720;360';
+	import { guideVisuals } from '$lib/assets/tarifs/orientation';
 </script>
 
 <Seo
@@ -71,20 +86,22 @@
 			</h2>
 		</header>
 		<ul class="guide" role="list">
-			{#each guide as g (g.href)}
+			{#each guideItems as g (g.href)}
 				<li>
 					<a class="guide__item" href={g.href}>
-						<span class="guide__situation">{g.situation}</span>
-						<span class="guide__offer">{g.name}<Icon name="arrow-right" /></span>
+						{#if g.visual}
+							<enhanced:img class="guide__icon" src={g.visual} alt="" sizes="96px" loading="lazy" />
+						{:else}
+							<!-- Icône à venir : la place reste réservée, les textes restent alignés -->
+							<span class="guide__icon" aria-hidden="true"></span>
+						{/if}
+						<span class="guide__text">
+							<span class="guide__situation">{g.situation}</span>
+							<span class="guide__offer">{g.name}<Icon name="arrow-right" /></span>
+						</span>
 					</a>
 				</li>
 			{/each}
-			<li>
-				<a class="guide__item" href={maintenancePage.path}>
-					<span class="guide__situation">{offersGuide.maintenance}</span>
-					<span class="guide__offer">Maintenance WordPress<Icon name="arrow-right" /></span>
-				</a>
-			</li>
 		</ul>
 		<p class="guide__agencies">
 			{offersGuide.agencies}
@@ -206,46 +223,98 @@
 		background: var(--surface);
 		border-block: 1px solid var(--line);
 	}
-	/* Guide : situation en texte courant, offre en lien fléché ; tuiles Ivoire sur la bande blanche */
+	/* Guide : tuiles Ivoire sur la bande blanche, icône en tête, situation, puis offre en lien
+	   fléché calé en bas. 1 colonne, 2 dès 640 px, 4 dès 1100 px (8 tuiles : deux rangées pleines) */
 	.guide {
 		display: grid;
-		gap: var(--space-3);
-		grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+		gap: var(--col-gap);
+		grid-template-columns: minmax(0, 1fr);
 		margin: 0;
 		padding: 0;
 		list-style: none;
+	}
+	@media (min-width: 640px) {
+		.guide {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+	@media (min-width: 1100px) {
+		.guide {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
 	}
 	.guide li {
 		display: grid;
 	}
 	.guide__item {
 		display: grid;
-		gap: var(--space-2);
-		align-content: space-between;
-		padding: var(--space-4) var(--space-5);
+		grid-template-rows: auto 1fr;
+		gap: var(--space-4);
+		padding: var(--space-5);
 		background: var(--bg);
 		border: 1px solid var(--line);
 		border-radius: var(--radius-card);
 		color: var(--text);
 		text-decoration: none;
-		transition: border-color var(--duration-base) var(--ease-out);
+		transition:
+			border-color var(--duration-base) var(--ease-out),
+			box-shadow var(--duration-base) var(--ease-out),
+			transform var(--duration-base) var(--ease-out);
 	}
-	.guide__item:hover {
+	/* Survol et focus : filet orange, légère élévation, l'icône s'avance, la flèche glisse */
+	.guide__item:is(:hover, :focus-visible) {
 		border-color: var(--accent-deco);
+		box-shadow: var(--shadow-card-hover);
+		transform: translateY(-4px);
 	}
+	/* Icône décorative : fond blanc fondu dans l'Ivoire, même boîte pour toutes les proportions */
+	.guide__icon {
+		display: block;
+		width: 7rem;
+		height: 5.25rem;
+		object-fit: contain;
+		object-position: left center;
+		mix-blend-mode: multiply;
+		transition: transform var(--duration-base) var(--ease-out);
+		transform-origin: left center;
+	}
+	.guide__item:is(:hover, :focus-visible) .guide__icon {
+		transform: scale(1.06);
+	}
+	.guide__text {
+		display: grid;
+		gap: var(--space-3);
+		align-content: space-between;
+	}
+	/* La situation se lit d'abord : texte courant foncé ; l'offre suit en lien bleu océan */
 	.guide__situation {
-		color: var(--text-muted);
+		font-weight: var(--weight-medium);
+		color: var(--text);
 	}
+	.guide__offer :global(.icon) {
+		transition: transform var(--duration-base) var(--ease-out);
+	}
+	.guide__item:is(:hover, :focus-visible) .guide__offer :global(.icon) {
+		transform: translateX(4px);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.guide__item,
+		.guide__icon,
+		.guide__offer :global(.icon) {
+			transform: none !important;
+		}
+	}
+	/* Flèche en ligne, collée au dernier mot, même quand le nom passe sur deux lignes */
 	.guide__offer {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--space-2);
 		font-weight: var(--weight-bold);
 		color: var(--action-alt-text);
 	}
 	.guide__offer :global(.icon) {
 		width: 18px;
 		height: 18px;
+		display: inline-block;
+		margin-left: var(--space-2);
+		vertical-align: -0.2em;
 	}
 	.guide__agencies {
 		margin: 0;
