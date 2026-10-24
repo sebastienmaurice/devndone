@@ -2,8 +2,8 @@
  * Illustrations de la mascotte pour les cartes et les pages d'offre (association choisie par
  * Sébastien le 21/10/2026). Fond blanc pur : fondues dans la carte blanche (PackageGrid), au repos
  * seulement : au survol, la carte passe en Bleu nuit et la mascotte s'efface (fond blanc).
- * Clés : `slug` des offres (content/tarifs.ts) et `maintenance`.
- * Sprint et maintenance : visuels existants réutilisés provisoirement, en attendant des poses
+ * Clés : `slug` des offres (content/tarifs.ts). Maintenance : $lib/assets/maintenance/formules.ts.
+ * Sprint : visuel existant réutilisé provisoirement, en attendant des poses
  * dédiées (à proposer à Sébastien avant toute création).
  */
 import type { Picture } from 'vite-imagetools';
@@ -14,7 +14,6 @@ import boutique from './mascotte-renard-tarif-boutique-woocommerce-mobile.jpg?en
 import auditWp from './mascotte-renard-tarif-audit-technique-wordpress.jpg?enhanced&w=640;320';
 import auditAuto from './mascotte-renard-tarif-audit-automatisation-processus.jpg?enhanced&w=640;320';
 import sprint from '../mascotte/mascotte-renard-dev-n-done-developpeur-wordpress-code.jpg?enhanced&w=640;320';
-import maintenance from '../mascotte/mascotte-renard-creation-site-web-wordpress.jpg?enhanced&w=640;320';
 
 export const offerVisuals: Record<string, { src: Picture; alt: string }> = {
 	'landing-page': {
@@ -44,9 +43,5 @@ export const offerVisuals: Record<string, { src: Picture; alt: string }> = {
 	'sprint-wordpress-woocommerce': {
 		src: sprint,
 		alt: 'Dev, la mascotte, assis en tailleur avec son portable, entre une fenêtre de code et un site WordPress'
-	},
-	maintenance: {
-		src: maintenance,
-		alt: 'Dev, la mascotte, à son bureau, devant un site WordPress affiché sur grand écran'
 	}
 };

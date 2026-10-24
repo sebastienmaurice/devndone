@@ -15,11 +15,11 @@
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import Accordion from '$lib/components/ui/Accordion.svelte';
 	import PriceTag from '$lib/components/ui/PriceTag.svelte';
-	import { offerVisuals } from '$lib/assets/tarifs/visuels';
+	import { maintenanceVisual } from '$lib/assets/maintenance/formules';
 	import { hero, links } from '$lib/content/studio';
 	import { maintenanceFaq, maintenancePage, vatNotice } from '$lib/content/tarifs';
 
-	const visual = offerVisuals.maintenance;
+	const visual = maintenanceVisual;
 	const faq = maintenanceFaq.map((f) => ({ question: f.q, answer: f.a }));
 </script>
 

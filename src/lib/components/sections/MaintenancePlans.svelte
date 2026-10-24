@@ -19,6 +19,7 @@
 	import Icon from '../brand/Icon.svelte';
 	import PriceTag from '../ui/PriceTag.svelte';
 	import Button from '../ui/Button.svelte';
+	import { planVisuals } from '$lib/assets/maintenance/formules';
 
 	type Props = {
 		headingLevel?: 2 | 3 | 4;
@@ -42,8 +43,19 @@
 			{#if plan.onStudy}<p class="plan__ribbon plan__ribbon--study">Sur étude préalable</p>
 			{:else if plan.recommended}<p class="plan__ribbon">Recommandé</p>{/if}
 			<div class="plan__head">
-				<svelte:element this={`h${headingLevel}`} class="plan__name">{plan.name}</svelte:element>
-				<p class="plan__target">{plan.target}</p>
+				<div class="plan__titles">
+					<svelte:element this={`h${headingLevel}`} class="plan__name">{plan.name}</svelte:element>
+					<p class="plan__target">{plan.target}</p>
+				</div>
+				{#if planVisuals[plan.id]}
+					<enhanced:img
+						class="plan__icon"
+						src={planVisuals[plan.id]}
+						alt=""
+						sizes="144px"
+						loading="lazy"
+					/>
+				{/if}
 			</div>
 			<div class="plan__price">
 				<PriceTag
@@ -184,9 +196,24 @@
 		color: var(--text);
 		border: 1px solid var(--line);
 	}
+	/* Nom et cible à gauche, icône de la formule à droite, dans l'espace libre de l'en-tête */
 	.plan__head {
 		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: center;
+		gap: var(--space-3);
+	}
+	.plan__titles {
+		display: grid;
 		gap: var(--space-1);
+	}
+	/* Icône décorative (fond blanc fondu dans la carte), proportions d'origine 518 × 373 */
+	.plan__icon {
+		display: block;
+		width: clamp(5.5rem, 3.5rem + 5vw, 9rem);
+		height: auto;
+		aspect-ratio: 518 / 373;
+		mix-blend-mode: multiply;
 	}
 	.plan__name {
 		margin: 0;
