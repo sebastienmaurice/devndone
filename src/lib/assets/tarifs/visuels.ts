@@ -1,7 +1,7 @@
 /**
  * Illustrations de la mascotte pour les cartes et les pages d'offre (association choisie par
- * Sébastien le 21/10/2026). Fond blanc pur : fondues dans la carte blanche (PackageGrid), dans une
- * zone dédiée à droite du prix ; la carte reste blanche au survol.
+ * Sébastien le 21/10/2026). Fond blanc pur : fondues dans la carte blanche (PackageGrid), au repos
+ * seulement : au survol, la carte passe en Bleu nuit et la mascotte s'efface (fond blanc).
  * Clés : `slug` des offres (content/tarifs.ts) et `maintenance`.
  * Sprint et maintenance : visuels existants réutilisés provisoirement, en attendant des poses
  * dédiées (à proposer à Sébastien avant toute création).
