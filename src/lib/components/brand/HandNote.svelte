@@ -21,9 +21,9 @@
 				viewBox="0 0 300 12"
 				preserveAspectRatio="none"
 				aria-hidden="true"><path d="M2 8 C 80 3, 190 2, 298 6" /></svg
+			><svg class="hand-note__spark" viewBox="0 0 24 24" aria-hidden="true"
+				><path d="M4 9 L14 4 M6 15 L18 13" /></svg
 			></span
-		><svg class="hand-note__spark" viewBox="0 0 24 24" aria-hidden="true"
-			><path d="M4 9 L14 4 M6 15 L18 13" /></svg
 		></span
 	>
 </p>
@@ -43,6 +43,10 @@
 		display: block;
 		white-space: nowrap;
 	}
+	/* Deuxième ligne rapprochée de la première : le soulignement occupe le bas de la ligne */
+	.hand-note__row + .hand-note__row {
+		margin-top: -0.05em;
+	}
 	/* Dernière ligne : soulignement sur toute sa largeur (un peu au-delà, comme un trait à main levée) */
 	.hand-note__last {
 		position: relative;
@@ -60,11 +64,12 @@
 		stroke-width: 3;
 		stroke-linecap: round;
 	}
-	/* Traits d'énergie collés au dernier mot, en haut à droite */
+	/* Traits d'énergie collés au dernier mot, en haut à droite. Hors du flux du texte : ils ne
+	   changent pas la hauteur de la ligne (sinon l'écart entre les deux lignes grandit) */
 	.hand-note__spark {
-		display: inline-block;
-		margin-left: 0.25em;
-		vertical-align: 0.55em;
+		position: absolute;
+		left: calc(100% + 0.15em);
+		top: -0.1em;
 		width: 0.9em;
 		height: 0.9em;
 		fill: none;
