@@ -89,12 +89,18 @@
 			{#each guideItems as g (g.href)}
 				<li>
 					<a class="guide__item" href={g.href}>
-						{#if g.visual}
-							<enhanced:img class="guide__icon" src={g.visual} alt="" sizes="96px" loading="lazy" />
-						{:else}
-							<!-- Icône à venir : la place reste réservée, les textes restent alignés -->
-							<span class="guide__icon" aria-hidden="true"></span>
-						{/if}
+						<!-- Médaillon blanc : l'icône (fond blanc) y reste lisible sur la tuile Bleu nuit -->
+						<span class="guide__medal">
+							{#if g.visual}
+								<enhanced:img
+									class="guide__icon"
+									src={g.visual}
+									alt=""
+									sizes="80px"
+									loading="lazy"
+								/>
+							{/if}
+						</span>
 						<span class="guide__text">
 							<span class="guide__situation">{g.situation}</span>
 							<span class="guide__offer">{g.name}<Icon name="arrow-right" /></span>
@@ -223,8 +229,11 @@
 		background: var(--surface);
 		border-block: 1px solid var(--line);
 	}
-	/* Guide : tuiles Ivoire sur la bande blanche, icône en tête, situation, puis offre en lien
-	   fléché calé en bas. 1 colonne, 2 dès 640 px, 4 dès 1100 px (8 tuiles : deux rangées pleines) */
+	/* Guide : tuiles Ivoire sur la bande blanche ; médaillon d'icône, situation, puis offre en lien
+	   fléché calé en bas. 1 colonne, 2 dès 640 px, 4 dès 1100 px (8 tuiles : deux rangées pleines).
+	   Survol et focus : la tuile passe en Bleu nuit (fond --text, variables sémantiques inversées),
+	   filet orange ; le médaillon reste blanc, se soulève et pivote légèrement ; l'offre passe en
+	   orange et sa flèche glisse. */
 	.guide {
 		display: grid;
 		gap: var(--col-gap);
@@ -247,41 +256,62 @@
 		display: grid;
 	}
 	.guide__item {
+		position: relative;
 		display: grid;
 		grid-template-rows: auto 1fr;
-		gap: var(--space-4);
+		gap: var(--space-5);
 		padding: var(--space-5);
+		overflow: hidden;
 		background: var(--bg);
 		border: 1px solid var(--line);
 		border-radius: var(--radius-card);
 		color: var(--text);
 		text-decoration: none;
 		transition:
+			background-color var(--duration-base) var(--ease-out),
 			border-color var(--duration-base) var(--ease-out),
 			box-shadow var(--duration-base) var(--ease-out),
 			transform var(--duration-base) var(--ease-out);
 	}
-	/* Survol et focus : filet orange, légère élévation, l'icône s'avance, la flèche glisse */
-	.guide__item:is(:hover, :focus-visible) {
-		border-color: var(--accent-deco);
-		box-shadow: var(--shadow-card-hover);
-		transform: translateY(-4px);
+	/* Halo orange discret derrière le médaillon, révélé au survol */
+	.guide__item::before {
+		content: '';
+		position: absolute;
+		top: -3rem;
+		left: -3rem;
+		width: 11rem;
+		height: 11rem;
+		border-radius: 50%;
+		background: radial-gradient(circle, var(--action) 0%, transparent 70%);
+		opacity: 0;
+		transition: opacity var(--duration-reveal) var(--ease-out);
+		pointer-events: none;
 	}
-	/* Icône décorative : fond blanc fondu dans l'Ivoire, même boîte pour toutes les proportions */
+	.guide__medal {
+		position: relative;
+		display: grid;
+		place-items: center;
+		width: 6.5rem;
+		height: 6.5rem;
+		border-radius: 50%;
+		background: var(--surface);
+		border: 1px solid var(--line);
+		box-shadow: var(--shadow-card);
+		transition:
+			transform var(--duration-reveal) var(--ease-out),
+			border-color var(--duration-base) var(--ease-out),
+			box-shadow var(--duration-base) var(--ease-out);
+	}
+	/* Icône : fond blanc fondu dans le médaillon blanc */
 	.guide__icon {
 		display: block;
-		width: 7rem;
-		height: 5.25rem;
+		width: 5rem;
+		height: 5rem;
 		object-fit: contain;
-		object-position: left center;
 		mix-blend-mode: multiply;
-		transition: transform var(--duration-base) var(--ease-out);
-		transform-origin: left center;
-	}
-	.guide__item:is(:hover, :focus-visible) .guide__icon {
-		transform: scale(1.06);
 	}
 	.guide__text {
+		position: relative;
 		display: grid;
 		gap: var(--space-3);
 		align-content: space-between;
@@ -290,31 +320,51 @@
 	.guide__situation {
 		font-weight: var(--weight-medium);
 		color: var(--text);
+		transition: color var(--duration-base) var(--ease-out);
+	}
+	/* Flèche en ligne, collée au dernier mot, même quand le nom passe sur deux lignes */
+	.guide__offer {
+		font-weight: var(--weight-bold);
+		color: var(--action-alt-text);
+		transition: color var(--duration-base) var(--ease-out);
 	}
 	.guide__offer :global(.icon) {
+		display: inline-block;
+		width: 18px;
+		height: 18px;
+		margin-left: var(--space-2);
+		vertical-align: -0.2em;
 		transition: transform var(--duration-base) var(--ease-out);
+	}
+	.guide__item:is(:hover, :focus-visible) {
+		background: var(--text);
+		border-color: var(--action);
+		box-shadow: var(--shadow-card-hover);
+		transform: translateY(-4px);
+	}
+	.guide__item:is(:hover, :focus-visible)::before {
+		opacity: 0.35;
+	}
+	.guide__item:is(:hover, :focus-visible) .guide__medal {
+		transform: translateY(-2px) rotate(-6deg) scale(1.06);
+		border-color: var(--action);
+		box-shadow: var(--shadow-card-hover);
+	}
+	.guide__item:is(:hover, :focus-visible) .guide__situation {
+		color: var(--bg);
+	}
+	.guide__item:is(:hover, :focus-visible) .guide__offer {
+		color: var(--action);
 	}
 	.guide__item:is(:hover, :focus-visible) .guide__offer :global(.icon) {
 		transform: translateX(4px);
 	}
 	@media (prefers-reduced-motion: reduce) {
 		.guide__item,
-		.guide__icon,
+		.guide__medal,
 		.guide__offer :global(.icon) {
 			transform: none !important;
 		}
-	}
-	/* Flèche en ligne, collée au dernier mot, même quand le nom passe sur deux lignes */
-	.guide__offer {
-		font-weight: var(--weight-bold);
-		color: var(--action-alt-text);
-	}
-	.guide__offer :global(.icon) {
-		width: 18px;
-		height: 18px;
-		display: inline-block;
-		margin-left: var(--space-2);
-		vertical-align: -0.2em;
 	}
 	.guide__agencies {
 		margin: 0;
