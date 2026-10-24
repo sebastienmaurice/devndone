@@ -89,20 +89,20 @@
 			{#each guideItems as g (g.href)}
 				<li>
 					<a class="guide__item" href={g.href}>
-						<!-- Médaillon blanc : l'icône (fond blanc) y reste lisible sur la tuile Bleu nuit -->
-						<span class="guide__medal">
+						<span class="guide__visual">
 							{#if g.visual}
 								<enhanced:img
 									class="guide__icon"
 									src={g.visual}
 									alt=""
-									sizes="80px"
+									sizes="144px"
 									loading="lazy"
 								/>
 							{/if}
 						</span>
 						<span class="guide__text">
 							<span class="guide__situation">{g.situation}</span>
+							<span class="guide__dash" aria-hidden="true"></span>
 							<span class="guide__offer">{g.name}<Icon name="arrow-right" /></span>
 						</span>
 					</a>
@@ -110,8 +110,11 @@
 			{/each}
 		</ul>
 		<p class="guide__agencies">
-			{offersGuide.agencies}
-			<LinkArrow href="/agences/">Le renfort pour les agences</LinkArrow>
+			<span class="guide__agencies-mark" aria-hidden="true"><Icon name="arrow-right" /></span>
+			<span>
+				{offersGuide.agencies}
+				<LinkArrow href="/agences/">Le renfort pour les agences</LinkArrow>
+			</span>
 		</p>
 	</div>
 </section>
@@ -229,11 +232,11 @@
 		background: var(--surface);
 		border-block: 1px solid var(--line);
 	}
-	/* Guide : tuiles Ivoire sur la bande blanche ; médaillon d'icône, situation, puis offre en lien
-	   fléché calé en bas. 1 colonne, 2 dès 640 px, 4 dès 1100 px (8 tuiles : deux rangées pleines).
-	   Survol et focus : la tuile passe en Bleu nuit (fond --text, variables sémantiques inversées),
-	   filet orange ; le médaillon reste blanc, se soulève et pivote légèrement ; l'offre passe en
-	   orange et sa flèche glisse. */
+	/* Guide (maquette du 24/10/2026) : tuiles Ivoire sur la bande blanche ; grande icône posée sur
+	   la tuile, situation en texte foncé, tiret orange, puis offre en lien fléché calé en bas.
+	   1 colonne, 2 dès 640 px, 4 dès 1100 px (8 tuiles : deux rangées pleines).
+	   Survol et focus : la tuile reste claire (les icônes ont un fond blanc), filet orange, légère
+	   élévation ; l'icône s'avance, le tiret s'allonge, la flèche glisse. */
 	.guide {
 		display: grid;
 		gap: var(--col-gap);
@@ -256,77 +259,58 @@
 		display: grid;
 	}
 	.guide__item {
-		position: relative;
 		display: grid;
 		grid-template-rows: auto 1fr;
 		gap: var(--space-5);
-		padding: var(--space-5);
-		overflow: hidden;
+		padding: var(--space-5) var(--space-5) var(--space-6);
 		background: var(--bg);
 		border: 1px solid var(--line);
 		border-radius: var(--radius-card);
 		color: var(--text);
 		text-decoration: none;
 		transition:
-			background-color var(--duration-base) var(--ease-out),
 			border-color var(--duration-base) var(--ease-out),
 			box-shadow var(--duration-base) var(--ease-out),
 			transform var(--duration-base) var(--ease-out);
 	}
-	/* Halo orange discret derrière le médaillon, révélé au survol */
-	.guide__item::before {
-		content: '';
-		position: absolute;
-		top: -3rem;
-		left: -3rem;
-		width: 11rem;
-		height: 11rem;
-		border-radius: 50%;
-		background: radial-gradient(circle, var(--action) 0%, transparent 70%);
-		opacity: 0;
-		transition: opacity var(--duration-reveal) var(--ease-out);
-		pointer-events: none;
+	/* Même boîte pour toutes les icônes (carrées ou plus larges), calées en bas à gauche */
+	.guide__visual {
+		display: block;
+		width: 9rem;
+		max-width: 100%;
+		height: 7rem;
 	}
-	.guide__medal {
-		position: relative;
-		display: grid;
-		place-items: center;
-		width: 6.5rem;
-		height: 6.5rem;
-		border-radius: 50%;
-		background: var(--surface);
-		border: 1px solid var(--line);
-		box-shadow: var(--shadow-card);
-		transition:
-			transform var(--duration-reveal) var(--ease-out),
-			border-color var(--duration-base) var(--ease-out),
-			box-shadow var(--duration-base) var(--ease-out);
-	}
-	/* Icône : fond blanc fondu dans le médaillon blanc */
 	.guide__icon {
 		display: block;
-		width: 5rem;
-		height: 5rem;
+		width: 100%;
+		height: 100%;
 		object-fit: contain;
+		object-position: left bottom;
 		mix-blend-mode: multiply;
+		transform-origin: left bottom;
+		transition: transform var(--duration-reveal) var(--ease-out);
 	}
 	.guide__text {
-		position: relative;
 		display: grid;
+		grid-template-rows: 1fr auto auto;
 		gap: var(--space-3);
-		align-content: space-between;
 	}
 	/* La situation se lit d'abord : texte courant foncé ; l'offre suit en lien bleu océan */
 	.guide__situation {
 		font-weight: var(--weight-medium);
 		color: var(--text);
-		transition: color var(--duration-base) var(--ease-out);
+	}
+	.guide__dash {
+		width: 1.5rem;
+		height: 2px;
+		border-radius: 2px;
+		background: var(--accent-deco);
+		transition: width var(--duration-reveal) var(--ease-out);
 	}
 	/* Flèche en ligne, collée au dernier mot, même quand le nom passe sur deux lignes */
 	.guide__offer {
 		font-weight: var(--weight-bold);
 		color: var(--action-alt-text);
-		transition: color var(--duration-base) var(--ease-out);
 	}
 	.guide__offer :global(.icon) {
 		display: inline-block;
@@ -337,38 +321,53 @@
 		transition: transform var(--duration-base) var(--ease-out);
 	}
 	.guide__item:is(:hover, :focus-visible) {
-		background: var(--text);
-		border-color: var(--action);
+		border-color: var(--accent-deco);
 		box-shadow: var(--shadow-card-hover);
 		transform: translateY(-4px);
 	}
-	.guide__item:is(:hover, :focus-visible)::before {
-		opacity: 0.35;
+	.guide__item:is(:hover, :focus-visible) .guide__icon {
+		transform: scale(1.06) rotate(-2deg);
 	}
-	.guide__item:is(:hover, :focus-visible) .guide__medal {
-		transform: translateY(-2px) rotate(-6deg) scale(1.06);
-		border-color: var(--action);
-		box-shadow: var(--shadow-card-hover);
-	}
-	.guide__item:is(:hover, :focus-visible) .guide__situation {
-		color: var(--bg);
-	}
-	.guide__item:is(:hover, :focus-visible) .guide__offer {
-		color: var(--action);
+	.guide__item:is(:hover, :focus-visible) .guide__dash {
+		width: 3rem;
 	}
 	.guide__item:is(:hover, :focus-visible) .guide__offer :global(.icon) {
 		transform: translateX(4px);
 	}
 	@media (prefers-reduced-motion: reduce) {
 		.guide__item,
-		.guide__medal,
+		.guide__icon,
 		.guide__offer :global(.icon) {
 			transform: none !important;
 		}
 	}
+	/* Renvoi agences : filet au-dessus, pastille orange fléchée, texte puis lien */
 	.guide__agencies {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--space-3);
 		margin: 0;
-		font-weight: var(--weight-semibold);
+		padding-top: var(--space-5);
+		border-top: 1px solid var(--line);
+		font-weight: var(--weight-medium);
+	}
+	.guide__agencies-mark {
+		display: grid;
+		place-items: center;
+		flex: none;
+		width: 1.75rem;
+		height: 1.75rem;
+		border-radius: 50%;
+		background: var(--action);
+		color: var(--on-action);
+	}
+	/* Lien à la taille du texte qu'il prolonge */
+	.guide__agencies :global(.link-arrow) {
+		font-size: inherit;
+	}
+	.guide__agencies-mark :global(.icon) {
+		width: 16px;
+		height: 16px;
 	}
 	/* Conditions de commande : étapes numérotées à gauche, encarts à droite */
 	.conditions {
