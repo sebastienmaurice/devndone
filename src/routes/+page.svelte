@@ -7,6 +7,7 @@
 <script lang="ts">
 	import { Button, LinkArrow, Seo } from '$lib/components';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
+	import PriceTag from '$lib/components/ui/PriceTag.svelte';
 	import { vatNotice } from '$lib/content/tarifs';
 	import HandNote from '$lib/components/brand/HandNote.svelte';
 	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
@@ -120,17 +121,29 @@
 		</header>
 		<ul class="paths" role="list">
 			{#each homePaths.paths as p (p.id)}
-				<!-- Le li porte l'apparition au défilement (revealPage), la carte porte le survol -->
+				<!-- Le li porte l'apparition au défilement (revealPage), la carte porte le survol.
+				     Zone visuelle : la mascotte au repos, le prix en grand au survol (même case) -->
 				<li class="paths__item">
 					<div class="path">
-						<div class="path__media">
-							<enhanced:img
-								class="path__img"
-								src={pathVisuals[p.id].src}
-								alt={pathVisuals[p.id].alt}
-								sizes="(min-width: 1100px) 220px, (min-width: 768px) 240px, 200px"
-								loading="lazy"
-							/>
+						<div class="path__stage">
+							<div class="path__media">
+								<enhanced:img
+									class="path__img"
+									src={pathVisuals[p.id].src}
+									alt={pathVisuals[p.id].alt}
+									sizes="(min-width: 1100px) 220px, (min-width: 768px) 240px, 200px"
+									loading="lazy"
+								/>
+							</div>
+							<div class="path__deal">
+								<PriceTag
+									label={p.priceTag.label}
+									value={p.priceTag.value}
+									unit={'unit' in p.priceTag ? p.priceTag.unit : undefined}
+									size="hero"
+								/>
+								<p class="path__note">{p.priceTag.note}</p>
+							</div>
 						</div>
 						<div class="path__body">
 							<h3 class="path__title">{p.title}</h3>
@@ -445,6 +458,11 @@
 		display: grid;
 	}
 	.path {
+		/* Teintes du survol, tirées des variables sémantiques du contexte clair (inversées) */
+		--deal-muted: color-mix(in srgb, var(--bg) 74%, var(--text));
+		/* Délai des changements de couleur : nul au retour, le temps que la mascotte s'efface à
+		   l'entrée du survol */
+		--swap-delay: 0s;
 		display: grid;
 		gap: var(--space-4);
 		align-items: center;
@@ -454,9 +472,9 @@
 		border-radius: var(--radius-card);
 		box-shadow: var(--shadow-card);
 		transition:
-			transform var(--duration-reveal) var(--ease-out),
-			box-shadow var(--duration-reveal) var(--ease-out),
-			border-color var(--duration-reveal) var(--ease-out);
+			background-color var(--duration-base) var(--ease-out) var(--swap-delay),
+			box-shadow var(--duration-base) var(--ease-out) var(--swap-delay),
+			border-color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	/* Mascotte à gauche, contenu à droite ; empilés sur téléphone */
 	@media (min-width: 600px) {
@@ -465,11 +483,15 @@
 			gap: var(--space-5);
 		}
 	}
-	/* Cadre de l'image : arrondi léger (adoucit le décor coupé au bord) ; le zoom y reste contenu */
-	.path__media {
+	/* Zone visuelle : la mascotte au repos ; au survol, le prix en grand à sa place */
+	.path__stage {
+		display: grid;
 		width: 100%;
 		max-width: 15rem;
 		justify-self: center;
+	}
+	/* Cadre de l'image : arrondi léger (adoucit le décor coupé au bord) */
+	.path__media {
 		overflow: hidden;
 		border-radius: var(--radius-md);
 	}
@@ -478,7 +500,11 @@
 		width: 100%;
 		height: auto;
 		aspect-ratio: 1;
-		transition: transform var(--duration-scene) var(--ease-out);
+	}
+	.path__deal {
+		display: grid;
+		gap: var(--space-2);
+		align-content: center;
 	}
 	.path__body {
 		display: grid;
@@ -488,45 +514,106 @@
 	.path__title {
 		margin: 0;
 		font-size: var(--text-h3);
-		transition: color var(--duration-reveal) var(--ease-out);
+		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
-	/* Survol (référence des cartes du site) : la carte se soulève, contour et titre orange,
-	   la mascotte s'avance légèrement, les flèches glissent */
-	.path:hover,
-	.path:focus-within {
-		transform: translateY(-6px);
-		box-shadow: var(--shadow-card-hover);
-		border-color: var(--accent-deco);
+	.path p {
+		margin: 0;
+		color: var(--text-muted);
+		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
-	.path:hover .path__title,
-	.path:focus-within .path__title {
-		color: var(--accent-deco);
+	.path .path__links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2) var(--space-5);
+		margin-top: var(--space-2);
 	}
-	.path:hover .path__media :global(img),
-	.path:focus-within .path__media :global(img) {
-		transform: scale(1.06);
+	.path .path__links a {
+		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	.path .path__links :global(.icon) {
-		transition: transform var(--duration-reveal) var(--ease-out);
+		transition: transform var(--duration-base) var(--ease-out);
 	}
-	.path:hover .path__links :global(.icon),
-	.path:focus-within .path__links :global(.icon) {
-		transform: translateX(4px);
+
+	/* Écrans à survol : au repos, mascotte, titre et texte seulement ; le prix (à la place de la
+	   mascotte) et les liens n'apparaissent qu'au survol ou au focus clavier, sur une carte Bleu
+	   nuit. Les liens gardent leur place au repos (aucun saut de hauteur) et restent atteignables
+	   au clavier : le focus révèle la carte.
+	   Enchaînement sans transparence : la mascotte s'efface d'abord, sur la carte encore blanche,
+	   puis fond et couleurs changent ; au retour, la carte redevient blanche avant que la mascotte
+	   revienne. */
+	@media (hover: hover) {
+		.path .path__price {
+			display: none;
+		}
+		.path__stage > * {
+			grid-area: 1 / 1;
+		}
+		.path__media {
+			transition: opacity var(--duration-micro) var(--ease-out) var(--duration-base);
+		}
+		.path__deal,
+		.path .path__links {
+			opacity: 0;
+			transform: translateY(8px);
+			transition:
+				opacity var(--duration-micro) var(--ease-out),
+				transform var(--duration-micro) var(--ease-out);
+		}
+		.path:is(:hover, :focus-within) {
+			--swap-delay: var(--duration-micro);
+			background: var(--text);
+			border-color: var(--action);
+			box-shadow: var(--shadow-card-hover);
+		}
+		.path:is(:hover, :focus-within) .path__media {
+			opacity: 0;
+			transition: opacity var(--duration-micro) var(--ease-out);
+		}
+		.path:is(:hover, :focus-within) :is(.path__deal, .path__links) {
+			opacity: 1;
+			transform: none;
+			transition:
+				opacity var(--duration-base) var(--ease-out) var(--duration-micro),
+				transform var(--duration-base) var(--ease-out) var(--duration-micro);
+		}
+		.path:is(:hover, :focus-within) .path__deal {
+			--price-color: var(--action);
+			--price-muted: var(--deal-muted);
+		}
+		.path:is(:hover, :focus-within) .path__title {
+			color: var(--bg);
+		}
+		.path:is(:hover, :focus-within) p {
+			color: var(--deal-muted);
+		}
+		.path:is(:hover, :focus-within) .path__links a {
+			color: var(--action);
+		}
+		.path:is(:hover, :focus-within) .path__links :global(.icon) {
+			transform: translateX(4px);
+		}
 	}
+	/* Sans survol possible : la carte reste claire, mascotte, repère de prix et liens visibles */
+	@media (hover: none) {
+		.path__deal {
+			display: none;
+		}
+	}
+
 	/* Apparition : la carte monte (revealPage, sur le li), puis la mascotte arrive par la gauche
 	   et le texte par la droite, avec un léger décalage */
-	.path__media,
+	.path__stage,
 	.path__body {
 		transition:
 			opacity var(--duration-scene) var(--ease-out) 120ms,
 			transform var(--duration-scene) var(--ease-out) 120ms;
 	}
 	/* Deuxième carte : même décalage que sa cascade d'apparition (+90 ms) */
-	.paths__item:nth-child(2) :is(.path__media, .path__body) {
+	.paths__item:nth-child(2) :is(.path__stage, .path__body) {
 		transition-delay: 210ms;
 	}
 	/* data-reveal est posé par JavaScript : sélecteur global pour que Svelte ne l'élimine pas */
-	.paths__item:global([data-reveal='pending']) .path__media {
+	.paths__item:global([data-reveal='pending']) .path__stage {
 		opacity: 0;
 		transform: translateX(-32px) scale(0.92);
 	}
@@ -534,33 +621,15 @@
 		opacity: 0;
 		transform: translateX(32px);
 	}
-	/* Mouvement réduit : seuls le contour, l'ombre et les couleurs changent */
+	/* Mouvement réduit : pas de déplacement, seules l'opacité et les couleurs changent */
 	@media (prefers-reduced-motion: reduce) {
-		.path,
-		.path__media,
+		.path__stage,
 		.path__body,
-		.path__media :global(img),
+		.path__deal,
+		.path .path__links,
 		.path .path__links :global(.icon) {
-			transition-property: border-color, box-shadow, color;
+			transform: none !important;
 		}
-		.path:hover,
-		.path:focus-within,
-		.path:hover .path__media :global(img),
-		.path:focus-within .path__media :global(img),
-		.path:hover .path__links :global(.icon),
-		.path:focus-within .path__links :global(.icon) {
-			transform: none;
-		}
-	}
-	.path p {
-		margin: 0;
-		color: var(--text-muted);
-	}
-	.path .path__links {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--space-2) var(--space-5);
-		margin-top: var(--space-2);
 	}
 
 	/* ------------------------------------------------------------- Sections */

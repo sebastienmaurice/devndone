@@ -111,6 +111,13 @@ export const homePaths = {
 			text: "Un renfort WordPress, WooCommerce ou front-end sur un projet en cours : une partie définie du projet, en marque blanche si la mission s'y prête.",
 			/** Repère de prix : tarifs validés (content/tarifs.ts, content/agences.ts) */
 			price: '350 € par jour, demi-journée à 175 €',
+			/** Même repère, mis en scène au survol de la carte (composant PriceTag) */
+			priceTag: {
+				label: 'Tarif journalier',
+				value: '350',
+				unit: '/ jour',
+				note: 'Demi-journée à 175 €'
+			},
 			links: [{ label: 'Le renfort pour les agences', href: '/agences/' }]
 		},
 		{
@@ -120,6 +127,7 @@ export const homePaths = {
 			/** La landing page (1 750 €) est le forfait de création le moins cher du catalogue ;
 			 *  Sprint : 350 € par jour (content/tarifs.ts) */
 			price: 'Forfaits à partir de 1 750 € · Sprint à 350 € par jour',
+			priceTag: { label: 'Forfaits à partir de', value: '1 750', note: 'Sprint à 350 € par jour' },
 			links: [
 				{ label: 'Les prestations WordPress', href: '/services/web/' },
 				{ label: 'Les tarifs', href: '/tarifs/' }
