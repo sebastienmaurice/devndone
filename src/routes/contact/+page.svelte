@@ -20,6 +20,7 @@
 	import { contactForm, contactIntro, hero, links } from '$lib/content/studio';
 	import mascot from '$lib/assets/mascotte/mascotte-renard-contact-smartphone-messages.jpg?enhanced&w=1200;720;360';
 	import { offers } from '$lib/content/tarifs';
+	import { agencesTasks } from '$lib/content/agences';
 
 	let name = $state('');
 	let email = $state('');
@@ -29,8 +30,14 @@
 	let website = $state('');
 	let deadline = $state('');
 	let message = $state('');
-	/** Arrivée depuis la page Agences (/contact/?type=agence) : titre adapté */
-	let agency = $state(false);
+	/**
+	 * Demande d'agence (type « Renfort agence », choisi dans la liste ou prérempli par
+	 * /contact/?type=agence) : titre adapté et trois champs facultatifs en plus. Les documents ne
+	 * sont pas déposés sur le site : l'agence partage un lien, ses fichiers restent chez elle.
+	 */
+	let mission = $state('');
+	let whiteLabel = $state('');
+	let docsLink = $state('');
 	let consent = $state(false);
 	let trap = $state('');
 	let submitted = $state(false);
@@ -68,13 +75,25 @@
 		{ value: 'Maintenance WordPress', label: 'Maintenance WordPress (en préparation)' },
 		{ value: 'Je ne sais pas encore', label: 'Je ne sais pas encore' }
 	];
+	const agency = $derived(projectType === agencyType);
+	/** Missions : celles de la page Agences (content/agences.ts) */
+	const missions = [
+		{ value: '', label: 'Choisir…' },
+		...agencesTasks.map((t) => ({ value: t.title, label: t.title })),
+		{ value: 'Autre ou à préciser', label: 'Autre ou à préciser' }
+	];
+	const whiteLabels = [
+		{ value: '', label: 'Choisir…' },
+		{ value: 'Oui', label: 'Oui' },
+		{ value: 'Non', label: 'Non' },
+		{ value: 'À discuter', label: 'À discuter' }
+	];
 
 	// Lu dans le navigateur : la page est prérendue, le lien n'est connu qu'à l'affichage.
 	// Les paramètres ne sont jamais repris tels quels : seules des valeurs connues sont acceptées.
 	onMount(() => {
 		const params = new URLSearchParams(window.location.search);
 		if (params.get('type') === 'agence') {
-			agency = true;
 			projectType = agencyType;
 			return;
 		}
@@ -115,6 +134,11 @@
 		if (projectType) lines.push(`Type de projet : ${projectType}`);
 		if (website.trim()) lines.push(`Site actuel : ${website.trim()}`);
 		if (deadline.trim()) lines.push(`Échéance souhaitée : ${deadline.trim()}`);
+		if (agency) {
+			if (mission) lines.push(`Mission : ${mission}`);
+			if (whiteLabel) lines.push(`Marque blanche : ${whiteLabel}`);
+			if (docsLink.trim()) lines.push(`Documents : ${docsLink.trim()}`);
+		}
 		const body = [...lines, '', message.trim()].join('\n');
 		prepared = `À : ${legal.publisher.email}\nObjet : ${subject}\n\n${body}`;
 		copyFailed = false;
@@ -137,6 +161,12 @@
 					'Type de projet': projectType || '(non renseigné)',
 					'Site actuel': website.trim() || '(non renseigné)',
 					'Échéance souhaitée': deadline.trim() || '(non renseignée)',
+					// Champs propres aux demandes d'agence, envoyés seulement dans ce cas
+					...(agency && {
+						Mission: mission || '(non renseignée)',
+						'Marque blanche': whiteLabel || '(non renseignée)',
+						Documents: docsLink.trim() || '(non renseigné)'
+					}),
 					Message: message.trim()
 				})
 			});
@@ -145,6 +175,7 @@
 			status = 'sent';
 			submitted = false;
 			name = email = company = projectType = website = deadline = message = '';
+			mission = whiteLabel = docsLink = '';
 			consent = false;
 		} catch {
 			status = 'failed';
@@ -235,6 +266,39 @@
 					bind:value={deadline}
 				/>
 			</div>
+			{#if agency}
+				<!-- Demande d'agence : précisions facultatives, sans dépôt de fichiers sur le site -->
+				<fieldset class="agency">
+					<legend class="agency__title">Votre mission</legend>
+					<div class="contact-form__row">
+						<Field
+							label="Type de mission"
+							name="mission"
+							as="select"
+							options={missions}
+							optional
+							bind:value={mission}
+						/>
+						<Field
+							label="Marque blanche"
+							name="white-label"
+							as="select"
+							options={whiteLabels}
+							optional
+							bind:value={whiteLabel}
+						/>
+					</div>
+					<Field
+						label="Lien vers vos documents"
+						name="docs"
+						type="url"
+						placeholder="https://"
+						hint="Dossier partagé, maquette ou brief : vos fichiers restent chez vous, partagez seulement un lien d'accès."
+						optional
+						bind:value={docsLink}
+					/>
+				</fieldset>
+			{/if}
 			<Field
 				label="Votre besoin"
 				name="message"
@@ -413,6 +477,25 @@
 	}
 	.contact-form :global(.btn) {
 		justify-self: start;
+	}
+	/* Précisions d'agence : bloc encadré, même rythme que le reste du formulaire */
+	.agency {
+		display: grid;
+		gap: var(--space-5);
+		min-width: 0;
+		margin: 0;
+		padding: var(--space-5);
+		background: var(--tag-bg);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-md);
+	}
+	.agency__title {
+		float: left;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		font-weight: var(--weight-bold);
+		color: var(--text);
 	}
 	.contact-form__info {
 		display: flex;
