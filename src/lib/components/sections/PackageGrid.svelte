@@ -120,6 +120,9 @@
 		/* Teintes du survol, tirées des variables sémantiques du contexte clair (inversées) */
 		--deal-muted: color-mix(in srgb, var(--bg) 74%, var(--text));
 		--deal-line: color-mix(in srgb, var(--bg) 16%, var(--text));
+		/* Délai des changements de couleur : nul au retour, le temps que la mascotte s'efface à
+		   l'entrée du survol (voir plus bas) */
+		--swap-delay: 0s;
 		display: grid;
 		/* Lignes partagées avec les cartes voisines (subgrid) : pastille, nom, description, zone
 		   visuelle et liens restent alignés d'une carte à l'autre */
@@ -134,9 +137,9 @@
 		box-shadow: var(--shadow-card);
 		scroll-margin-top: 110px;
 		transition:
-			background-color var(--duration-reveal) var(--ease-out),
-			border-color var(--duration-reveal) var(--ease-out),
-			box-shadow var(--duration-reveal) var(--ease-out);
+			background-color var(--duration-base) var(--ease-out) var(--swap-delay),
+			border-color var(--duration-base) var(--ease-out) var(--swap-delay),
+			box-shadow var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	/* Délai en pastille : bleu océan très clair, texte Bleu nuit, icône bleu océan */
 	.package__delay {
@@ -152,13 +155,13 @@
 		font-weight: var(--weight-bold);
 		color: var(--text);
 		transition:
-			background-color var(--duration-reveal) var(--ease-out),
-			color var(--duration-reveal) var(--ease-out);
+			background-color var(--duration-base) var(--ease-out) var(--swap-delay),
+			color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	.package__delay :global(.icon) {
 		flex: none;
 		color: var(--tag-text);
-		transition: color var(--duration-reveal) var(--ease-out);
+		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	/* Nom en grand, réparti sur deux lignes équilibrées */
 	.package__name {
@@ -167,7 +170,7 @@
 		font-size: clamp(1.625rem, 1.45rem + 0.4vw, 1.875rem);
 		line-height: 1.05;
 		text-wrap: balance;
-		transition: color var(--duration-reveal) var(--ease-out);
+		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	.package__name--lines {
 		max-width: none;
@@ -176,7 +179,7 @@
 		margin: 0;
 		font-size: var(--text-body-sm);
 		color: var(--text-muted);
-		transition: color var(--duration-reveal) var(--ease-out);
+		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	/* Zone visuelle : mascotte au repos, éléments compris et prix au survol */
 	.package__stage {
@@ -224,7 +227,7 @@
 	.package__price {
 		padding-top: var(--space-3);
 		border-top: 1px solid var(--line);
-		transition: border-color var(--duration-reveal) var(--ease-out);
+		transition: border-color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	.package__actions {
 		display: flex;
@@ -234,7 +237,7 @@
 		gap: var(--space-2);
 		padding-top: var(--space-4);
 		border-top: 1px solid var(--line);
-		transition: border-color var(--duration-reveal) var(--ease-out);
+		transition: border-color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	/* Hauteur constante : le lien a déjà la hauteur du bouton qu'il devient au survol */
 	.package__cta {
@@ -242,9 +245,9 @@
 		padding-inline: 0;
 		border-radius: var(--radius-btn);
 		transition:
-			background-color var(--duration-reveal) var(--ease-out),
-			color var(--duration-reveal) var(--ease-out),
-			padding var(--duration-reveal) var(--ease-out);
+			background-color var(--duration-base) var(--ease-out) var(--swap-delay),
+			color var(--duration-base) var(--ease-out) var(--swap-delay),
+			padding var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	.package__talk {
 		font-size: var(--text-body-sm);
@@ -252,7 +255,7 @@
 		color: var(--text-muted);
 		text-decoration: underline;
 		text-underline-offset: 3px;
-		transition: color var(--duration-reveal) var(--ease-out);
+		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 
 	/* Écrans à survol : les deux compositions dans la même case, prix caché au repos */
@@ -260,18 +263,35 @@
 		.package__stage > :global(*) {
 			grid-area: 1 / 1;
 		}
+		/* Enchaînement sans transparence : la mascotte (JPG à fond blanc, en multiply) n'est jamais
+		   visible sur un fond qui fonce. Entrée : elle s'efface d'abord, sur la carte encore blanche,
+		   puis fond, couleurs et prix changent (--swap-delay). Sortie : le prix s'efface, la carte
+		   redevient blanche, puis la mascotte revient. */
 		.package__visual {
 			align-self: center;
 			transition:
-				opacity var(--duration-base) var(--ease-out),
-				transform var(--duration-reveal) var(--ease-out);
+				opacity var(--duration-micro) var(--ease-out) var(--duration-base),
+				transform var(--duration-base) var(--ease-out) var(--duration-base);
 		}
 		.package__deal {
 			opacity: 0;
 			transform: translateY(8px);
 			transition:
-				opacity var(--duration-reveal) var(--ease-out),
-				transform var(--duration-reveal) var(--ease-out);
+				opacity var(--duration-micro) var(--ease-out),
+				transform var(--duration-micro) var(--ease-out);
+		}
+		.package:is(:hover, :focus-within) {
+			--swap-delay: var(--duration-micro);
+		}
+		.package:is(:hover, :focus-within) .package__visual {
+			transition:
+				opacity var(--duration-micro) var(--ease-out),
+				transform var(--duration-micro) var(--ease-out);
+		}
+		.package:is(:hover, :focus-within) .package__deal {
+			transition:
+				opacity var(--duration-base) var(--ease-out) var(--duration-micro),
+				transform var(--duration-base) var(--ease-out) var(--duration-micro);
 		}
 
 		/* Offre sans illustration : rien à remplacer, le prix reste affiché */
