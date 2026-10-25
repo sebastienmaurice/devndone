@@ -21,7 +21,7 @@ export const legal = {
 		intro:
 			"Dev'n Done, nom commercial de Sébastien Maurice, entrepreneur individuel (EI), micro-entreprise.",
 		address: '1 rue Blaise Pascal, 59540 Caudry, France.',
-		email: 'overseb75@gmail.com',
+		email: 'contact@devndone.com',
 		phone: '06 20 84 78 01',
 		publicationDirector: 'Sébastien Maurice'
 	},

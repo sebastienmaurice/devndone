@@ -25,6 +25,7 @@
 	import pathAgences from '$lib/assets/mascotte/mascotte-renard-agence-web-partenariat-poignee-de-main.jpg?enhanced&w=640;320';
 	import pathEntreprises from '$lib/assets/mascotte/mascotte-renard-projet-site-web-presentation-client.jpg?enhanced&w=640;320';
 	import { site, absoluteUrl, organizationId } from '$lib/config/site';
+	import { legal } from '$lib/content/legal';
 
 	const keywords = hero.keywords.split(' · ');
 
@@ -51,8 +52,7 @@
 	};
 
 	// Données structurées : l'entreprise (identifiant partagé avec les pages d'offre et À propos) et
-	// le site. Slogan : celui du hero, validé le 22/10/2026. Email : ajouté seulement après la bascule
-	// vers l'adresse professionnelle.
+	// le site. Slogan : celui du hero, validé le 22/10/2026. Email : celui des mentions légales.
 	const jsonLd = [
 		{
 			'@context': 'https://schema.org',
@@ -80,6 +80,7 @@
 				'@id': `${absoluteUrl('/apropos/')}#sebastien-maurice`,
 				name: 'Sébastien Maurice'
 			},
+			email: legal.publisher.email,
 			sameAs: [links.malt, links.linkedin]
 		},
 		{
