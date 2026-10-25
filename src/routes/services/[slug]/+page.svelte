@@ -6,7 +6,7 @@
 	prestations en pastilles cochées sous le texte, au-dessus des boutons.
 -->
 <script lang="ts">
-	import { Button, Seo } from '$lib/components';
+	import { Button, LinkArrow, Seo } from '$lib/components';
 	import Icon from '$lib/components/brand/Icon.svelte';
 	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
 	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
@@ -57,7 +57,8 @@
 
 <PageIntro
 	label="Expertise {num}"
-	heading={u.title}
+	heading={u.heading ?? u.title}
+	accent={u.headingAccent}
 	lede={u.text}
 	crumbs={[
 		{ label: 'Accueil', href: '/' },
@@ -116,6 +117,13 @@
 			</header>
 			<PackageGrid only={uOffers.map((o) => o.slug)} />
 			<p class="muted vat">{vatNotice}</p>
+			{#if u.id === 'web'}
+				<!-- Renvoi vers la page Agences (maillage interne, audit SEO du 24/10/2026) -->
+				<p class="agencies-note">
+					Vous êtes une agence web ?
+					<LinkArrow href="/agences/">Le renfort pour les agences</LinkArrow>
+				</p>
+			{/if}
 		</div>
 	</section>
 {:else}
@@ -191,6 +199,10 @@
 	.vat {
 		margin: 0;
 		font-size: var(--text-body-sm);
+	}
+	.agencies-note {
+		margin: 0;
+		font-weight: var(--weight-semibold);
 	}
 	.muted {
 		margin: 0;

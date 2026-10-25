@@ -24,6 +24,10 @@ export const site = {
 		"Dev, la mascotte DEV'n DONE, derrière le lettrage Dev'n Done, avec la signature Développer / Piloter / Livrer"
 } as const;
 
+/** Identifiant de l'entreprise dans les données structurées (JSON-LD) : relie l'entreprise, le
+ *  site, la personne et les services d'une page à l'autre */
+export const organizationId = `${site.url}/#organisation`;
+
 /** Transforme un chemin interne en URL absolue canonique. */
 export function absoluteUrl(path: string): string {
 	return new URL(path, site.url).href;

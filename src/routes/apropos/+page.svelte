@@ -15,12 +15,27 @@
 	import { aboutIntro, aboutMascot, contactIntro, links, reviewsIntro } from '$lib/content/studio';
 	import mascot from '$lib/assets/mascotte/mascotte-renard-dev-n-done-developpeur-wordpress-code.jpg?enhanced&w=1200;720;360';
 	import portrait from '$lib/assets/photos/sebastien-maurice-fondateur-dev-n-done-avec-mascotte.jpg?enhanced&w=1200;720;360';
+	import { absoluteUrl, organizationId } from '$lib/config/site';
+
+	// Données structurées Person : uniquement des informations publiées sur le site
+	const personLd = {
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		'@id': `${absoluteUrl('/apropos/')}#sebastien-maurice`,
+		name: 'Sébastien Maurice',
+		jobTitle: 'Développeur web indépendant',
+		url: absoluteUrl('/apropos/'),
+		worksFor: { '@id': organizationId },
+		knowsAbout: ['WordPress', 'WooCommerce', 'Intégration front-end'],
+		sameAs: [links.malt, links.linkedin]
+	};
 </script>
 
 <Seo
 	title="À propos de Dev'n Done et de Sébastien Maurice"
 	path="/apropos/"
 	description="Dev'n Done, l'activité de Sébastien Maurice, développeur web indépendant : sites pour les entreprises, spécialité WordPress, renfort pour les agences web."
+	jsonLd={personLd}
 />
 
 <PageIntro

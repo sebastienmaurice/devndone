@@ -17,7 +17,16 @@
 	import { offerVisuals } from '$lib/assets/tarifs/visuels';
 	import { hero, links, maltRating, reviewsIntro } from '$lib/content/studio';
 	import PriceTag from '$lib/components/ui/PriceTag.svelte';
-	import { offerPath, offers, paymentTerms, priceParts, vatNotice } from '$lib/content/tarifs';
+	import {
+		maintenancePage,
+		maintenanceStatus,
+		offerPath,
+		offers,
+		paymentTerms,
+		priceParts,
+		vatNotice
+	} from '$lib/content/tarifs';
+	import { absoluteUrl, organizationId } from '$lib/config/site';
 
 	let { data } = $props();
 
@@ -26,9 +35,60 @@
 	const visual = $derived(offerVisuals[o.slug]);
 	const siblings = $derived(offers.filter((x) => x.universe === o.universe && x.slug !== o.slug));
 	const faq = $derived(o.faq.map((f) => ({ question: f.q, answer: f.a })));
+
+	// Liens « Pour aller plus loin » (hors offres déjà listées en bas de page). La maintenance
+	// porte la mention de son statut tant que les formules ne sont pas proposées à la commande.
+	const relatedLinks = $derived(
+		(o.related ?? []).map((r) =>
+			r === 'maintenance'
+				? {
+						href: maintenancePage.path,
+						label: maintenanceStatus.open
+							? 'Maintenance WordPress'
+							: 'Maintenance WordPress (formules en préparation)'
+					}
+				: { href: '/agences/', label: 'Le renfort pour les agences' }
+		)
+	);
+
+	// Données structurées Service : prix lus dans le catalogue (même source que la page).
+	// Prix fixe : `price` ; « à partir de » : `minPrice` ; tarif journalier : prix par jour (DAY).
+	const serviceLd = $derived.by(() => {
+		const url = absoluteUrl(offerPath(o));
+		const amount = Number(o.price.amount.replace(/\D/g, ''));
+		const offer: Record<string, unknown> = { '@type': 'Offer', priceCurrency: 'EUR', url };
+		if (o.price.unit) {
+			offer.priceSpecification = {
+				'@type': 'UnitPriceSpecification',
+				price: amount,
+				priceCurrency: 'EUR',
+				unitCode: 'DAY',
+				unitText: 'jour'
+			};
+		} else if (o.price.from) {
+			offer.priceSpecification = {
+				'@type': 'PriceSpecification',
+				minPrice: amount,
+				priceCurrency: 'EUR'
+			};
+		} else {
+			offer.price = amount;
+		}
+		return {
+			'@context': 'https://schema.org',
+			'@type': 'Service',
+			name: o.name,
+			serviceType: o.name,
+			description: o.description,
+			url,
+			areaServed: { '@type': 'Country', name: 'France' },
+			provider: { '@id': organizationId },
+			offers: offer
+		};
+	});
 </script>
 
-<Seo title={o.seoTitle} path={offerPath(o)} description={o.description} />
+<Seo title={o.seoTitle} path={offerPath(o)} description={o.description} jsonLd={serviceLd} />
 
 <PageIntro
 	label={o.name}
@@ -203,6 +263,15 @@
 
 <section class="section section--tight" aria-labelledby="autres-title">
 	<div class="container">
+		{#if relatedLinks.length}
+			<!-- Liens complémentaires validés le 24/10/2026 (audit SEO) -->
+			<h2 class="t-h3" id="plus-loin-title">Pour aller plus loin</h2>
+			<ul class="others others--related" role="list" aria-labelledby="plus-loin-title">
+				{#each relatedLinks as r (r.href)}
+					<li><a class="other" href={r.href}>{r.label}<Icon name="arrow-right" /></a></li>
+				{/each}
+			</ul>
+		{/if}
 		<h2 class="t-h3" id="autres-title">Les autres offres {u.title}</h2>
 		<ul class="others" role="list">
 			{#each siblings as s (s.slug)}
@@ -422,6 +491,10 @@
 		margin: var(--space-5) 0 0;
 		padding: 0;
 		list-style: none;
+	}
+	/* « Pour aller plus loin » au-dessus des autres offres : espace avant le titre suivant */
+	.others--related {
+		margin-bottom: var(--space-7);
 	}
 	.other {
 		display: inline-flex;

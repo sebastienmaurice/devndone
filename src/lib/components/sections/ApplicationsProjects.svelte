@@ -2,13 +2,13 @@
 	Projets de la page « Applications & logiciels », sur le modèle de la section « Mon process » :
 	surtitre et titre (passage orange souligné), mascotte à gauche, cartes à droite. Première carte :
 	le logiciel de gestion d'affaires pour enseignistes (en développement), qui mène à sa présentation
-	sur sa page dédiée ; les suivantes annoncent les projets à venir.
+	sur sa page dédiée ; la seconde invite à présenter un besoin d'outil métier (contact).
 	Textes : content/logiciel.ts. Mascotte : pose « ordinateur portable à la main ».
 -->
 <script lang="ts">
 	import {
 		applicationsProjectsIntro as intro,
-		applicationsUpcoming as upcoming,
+		applicationsCta as cta,
 		logicielIntro,
 		logicielPage
 	} from '$lib/content/logiciel';
@@ -17,9 +17,7 @@
 	import AccentTitle from '../brand/AccentTitle.svelte';
 	import Icon from '../brand/Icon.svelte';
 	import SectionLabel from '../brand/SectionLabel.svelte';
-
-	/** Nombre de cartes « Projet à venir » affichées après le logiciel */
-	const upcomingSlots = [1, 2];
+	import { contactIntro } from '$lib/content/studio';
 </script>
 
 <div class="apps">
@@ -59,15 +57,14 @@
 				<span class="app-card__go">Découvrir le projet<Icon name="arrow-right" size="sm" /></span>
 			</a>
 		</li>
-		{#each upcomingSlots as i (i)}
-			<li>
-				<div class="app-card app-card--soon">
-					<span class="app-card__soon-icon"><Icon name="sparkles" /></span>
-					<h3 class="app-card__title">{upcoming.title}</h3>
-					<p class="app-card__text">{upcoming.text}</p>
-				</div>
-			</li>
-		{/each}
+		<li>
+			<a class="app-card app-card--cta" href="/contact/">
+				<span class="app-card__icon"><Icon name="layers" /></span>
+				<h3 class="app-card__title">{cta.title}</h3>
+				<p class="app-card__text">{cta.text}</p>
+				<span class="app-card__go">{contactIntro.cta}<Icon name="arrow-right" size="sm" /></span>
+			</a>
+		</li>
 	</ul>
 </div>
 
@@ -131,7 +128,7 @@
 	}
 	@media (min-width: 1100px) {
 		.apps__cards {
-			grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr));
+			grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
 			gap: var(--space-5);
 		}
 	}
@@ -215,17 +212,14 @@
 		font-weight: var(--weight-bold);
 		color: var(--action-alt-text);
 	}
-	/* Projets à venir : carte en pointillés, sans lien */
-	.app-card--soon {
-		align-content: center;
-		justify-items: center;
-		text-align: center;
-		grid-template-rows: none;
-		background: transparent;
-		border: 2px dashed var(--line-strong);
-		box-shadow: none;
+	/* Carte d'appel « Votre outil métier » : même carte cliquable que le logiciel, avec une tuile
+	   d'icône à la place du visuel ; le lien reste calé en bas */
+	.app-card--cta {
+		grid-template-rows: auto auto 1fr auto;
+		align-content: start;
+		padding: var(--space-5);
 	}
-	.app-card__soon-icon {
+	.app-card__icon {
 		display: grid;
 		place-items: center;
 		width: 3.5rem;

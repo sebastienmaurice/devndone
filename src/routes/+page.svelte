@@ -24,7 +24,7 @@
 	import { hero, homePaths, links, maltRating, reviewsIntro } from '$lib/content/studio';
 	import pathAgences from '$lib/assets/mascotte/mascotte-renard-agence-web-partenariat-poignee-de-main.jpg?enhanced&w=640;320';
 	import pathEntreprises from '$lib/assets/mascotte/mascotte-renard-projet-site-web-presentation-client.jpg?enhanced&w=640;320';
-	import { site, absoluteUrl } from '$lib/config/site';
+	import { site, absoluteUrl, organizationId } from '$lib/config/site';
 
 	const keywords = hero.keywords.split(' · ');
 
@@ -50,28 +50,48 @@
 		}
 	};
 
-	const jsonLd = {
-		'@context': 'https://schema.org',
-		'@type': 'ProfessionalService',
-		name: site.wordmark,
-		url: site.url,
-		logo: absoluteUrl('/icon-512.png'),
-		image: absoluteUrl(site.ogImage),
-		description: site.description,
-		slogan: site.tagline.join(' / '),
-		areaServed: 'FR',
-		// Coordonnées : celles des mentions légales (publication validée par Sébastien)
-		telephone: '+33 6 20 84 78 01',
-		address: {
-			'@type': 'PostalAddress',
-			streetAddress: '1 rue Blaise Pascal',
-			postalCode: '59540',
-			addressLocality: 'Caudry',
-			addressCountry: 'FR'
+	// Données structurées : l'entreprise (identifiant partagé avec les pages d'offre et À propos) et
+	// le site. Slogan : celui du hero, validé le 22/10/2026. Email : ajouté seulement après la bascule
+	// vers l'adresse professionnelle.
+	const jsonLd = [
+		{
+			'@context': 'https://schema.org',
+			'@type': 'ProfessionalService',
+			'@id': organizationId,
+			name: site.wordmark,
+			url: site.url,
+			logo: absoluteUrl('/icon-512.png'),
+			image: absoluteUrl(site.ogImage),
+			description: site.description,
+			slogan: heroSlogan.join(' '),
+			knowsAbout: ['WordPress', 'WooCommerce', 'Intégration front-end'],
+			areaServed: 'FR',
+			// Coordonnées : celles des mentions légales (publication validée par Sébastien)
+			telephone: '+33 6 20 84 78 01',
+			address: {
+				'@type': 'PostalAddress',
+				streetAddress: '1 rue Blaise Pascal',
+				postalCode: '59540',
+				addressLocality: 'Caudry',
+				addressCountry: 'FR'
+			},
+			founder: {
+				'@type': 'Person',
+				'@id': `${absoluteUrl('/apropos/')}#sebastien-maurice`,
+				name: 'Sébastien Maurice'
+			},
+			sameAs: [links.malt, links.linkedin]
 		},
-		founder: { '@type': 'Person', name: 'Sébastien Maurice' },
-		sameAs: [links.malt, links.linkedin]
-	};
+		{
+			'@context': 'https://schema.org',
+			'@type': 'WebSite',
+			'@id': `${site.url}/#site`,
+			name: site.wordmark,
+			url: site.url,
+			inLanguage: 'fr-FR',
+			publisher: { '@id': organizationId }
+		}
+	];
 </script>
 
 <Seo path="/" ogTitle={site.ogTitle} ogDescription={site.ogDescription} {jsonLd} />
@@ -222,7 +242,11 @@
 			</p>
 		</header>
 		<ReviewList />
-		<p><LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow></p>
+		<!-- Lien vers À propos (maillage interne, validé le 24/10/2026) -->
+		<p class="home-reviews__links">
+			<LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow>
+			<LinkArrow href="/apropos/">Qui est derrière Dev'n Done</LinkArrow>
+		</p>
 	</div>
 </section>
 
@@ -653,6 +677,12 @@
 	}
 	.home-reviews {
 		border-top: 1px solid var(--line);
+	}
+	.home-reviews__links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2) var(--space-6);
+		margin: 0;
 	}
 	.home-reviews__note {
 		margin: 0;

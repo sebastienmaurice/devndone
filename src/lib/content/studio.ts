@@ -27,9 +27,10 @@ export const aboutIntro = {
 	eyebrow: 'À propos',
 	title: 'Un seul interlocuteur, du brief à la mise en ligne.',
 	accent: 'Un seul interlocuteur',
-	/** Voix de marque (22/10/2026) : troisième personne, sans « je » ni « nous ». « Plus de 20 ans
+	/** Texte validé le 24/10/2026 (audit SEO : identité de développeur web indépendant).
+	 *  Voix de marque (22/10/2026) : troisième personne, sans « je » ni « nous ». « Plus de 20 ans
 	 *  d'expérience professionnelle » confirmé par Sébastien (expérience globale, pas seulement WordPress). */
-	text: "Derrière Dev'n Done, il y a Sébastien Maurice : développeur web indépendant, plus de 20 ans d'expérience professionnelle, du design à l'intégration. Cette expérience se traduit par une méthode simple : un cadrage précis avant de commencer, un devis clair, un délai annoncé, puis une validation à chaque étape importante. Vous échangez directement avec la personne qui réalise le projet, sans intermédiaire."
+	text: "Dev'n Done est l'activité de Sébastien Maurice, développeur web indépendant, avec plus de 20 ans d'expérience professionnelle, du design à l'intégration. Sa spécialité : WordPress et WooCommerce, pour les entreprises comme en renfort des agences web. Sa méthode reste simple : un cadrage précis avant de commencer, un devis clair, un délai annoncé, puis une validation à chaque étape importante. Vous échangez directement avec la personne qui réalise le projet, sans intermédiaire."
 } as const;
 
 /** Section « La mascotte » de la page À propos : texte fourni par Sébastien le 20/10/2026 */

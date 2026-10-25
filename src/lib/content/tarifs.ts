@@ -71,6 +71,11 @@ export type Offer = {
 	 * page affiche seulement la note globale du profil Malt.
 	 */
 	reviews?: readonly Review['id'][];
+	/**
+	 * Liens « Pour aller plus loin » de la page d'offre, hors catalogue Web déjà listé dans « Les
+	 * autres offres » (validés par Sébastien le 24/10/2026) : maintenance, page Agences.
+	 */
+	related?: readonly ('maintenance' | 'agences')[];
 };
 
 /** Réponses communes aux pages d'offre (informations validées) */
@@ -222,6 +227,7 @@ export const offers: readonly Offer[] = [
 		slug: 'refonte-site-wordpress',
 		cta: 'Demander un devis pour une refonte WordPress',
 		reviews: ['palimpseste-urbain', 'gsti'],
+		related: ['maintenance'],
 		universe: 'web',
 		group: 'creation',
 		name: 'Refonte WordPress',
@@ -362,6 +368,7 @@ export const offers: readonly Offer[] = [
 	{
 		slug: 'sprint-wordpress-woocommerce',
 		cta: "Décrire votre besoin d'intervention",
+		related: ['agences'],
 		universe: 'web',
 		group: 'ponctuel',
 		name: 'Sprint WordPress / WooCommerce',
@@ -374,8 +381,8 @@ export const offers: readonly Offer[] = [
 		seoTitle: 'Intervention WordPress et WooCommerce : 350 € par jour',
 		description:
 			'Sprint WordPress ou WooCommerce : diagnostic, devis, intervention ciblée sur un site existant. 350 € par jour, 175 € la demi-journée pour une intervention courte.',
-		title: 'Un problème ou une évolution sur votre site WordPress ?',
-		accent: 'votre site WordPress',
+		title: 'Intervention et dépannage sur votre site WordPress ou WooCommerce',
+		accent: 'dépannage',
 		lede: 'Une intervention ciblée, chiffrée en jours ou en demi-journées après une courte analyse, pour régler un problème précis ou faire évoluer un site existant.',
 		need: 'Votre site fonctionne, mais quelque chose bloque ou manque : une erreur, une extension en conflit, une section à ajouter, un réglage WooCommerce à revoir.',
 		includes: [
@@ -439,8 +446,8 @@ export const offers: readonly Offer[] = [
 		seoTitle: 'Audit technique de site WordPress : 490 €',
 		description:
 			"Audit technique WordPress d'environ une journée : extensions, performance, SEO technique de base, sécurité et sauvegardes de base, recommandations priorisées. 490 €.",
-		title: 'Savoir où en est votre site WordPress',
-		accent: 'votre site WordPress',
+		title: 'Un audit technique pour savoir où en est votre site WordPress',
+		accent: 'audit technique',
 		lede: "Un diagnostic d'environ une journée pour savoir ce qui ralentit, fragilise ou pénalise votre site, et par quoi commencer.",
 		need: "Votre site est lent, affiche des erreurs ou n'a pas été entretenu depuis longtemps, et vous ne savez pas par où commencer.",
 		includes: [

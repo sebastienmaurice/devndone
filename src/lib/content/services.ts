@@ -15,6 +15,10 @@ export type Universe = {
 	icon: 'globe' | 'pen' | 'settings' | 'code' | 'layers';
 	/** La maintenance WordPress (facultative, mensuelle) s'applique à cet univers */
 	maintenance?: boolean;
+	/** H1 de la page dédiée, quand `title` (menu, fil d'Ariane, cartes) est trop court pour la page */
+	heading?: string;
+	/** Passage du H1 en orange (titre bicolore) */
+	headingAccent?: string;
 	/** Titre de la page pour les moteurs de recherche (sans « · Dev'n Done ») */
 	seoTitle: string;
 	/** Description pour les moteurs de recherche (sinon `text`) */
@@ -36,6 +40,9 @@ export const universes: readonly Universe[] = [
 	{
 		id: 'web',
 		title: 'Web',
+		/** H1 validé par Sébastien le 24/10/2026 (audit SEO) */
+		heading: 'Création et refonte de sites WordPress et WooCommerce',
+		headingAccent: 'WordPress et WooCommerce',
 		text: 'Sites vitrine, boutiques en ligne, refontes et optimisation SEO, avec une maintenance mensuelle facultative pour garder votre site à jour.',
 		tags: ['Création', 'Refonte', 'WooCommerce', 'SEO', 'Maintenance'],
 		seoTitle: 'Création et refonte de sites WordPress, maintenance',

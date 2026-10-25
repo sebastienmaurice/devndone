@@ -73,9 +73,11 @@ export const applicationsProjectsIntro = {
 	accent: 'conçus avec ceux qui les utilisent'
 } as const;
 
-export const applicationsUpcoming = {
-	title: 'Projet à venir',
-	text: "D'autres applications et logiciels métier rejoindront bientôt cette page."
+/** Carte d'appel de la page Applications, à la place des deux cartes « Projet à venir » (option A
+ *  validée par Sébastien le 24/10/2026). Lien : formulaire de contact. */
+export const applicationsCta = {
+	title: 'Votre outil métier',
+	text: "Un outil interne, un logiciel métier ou une application web pour votre activité ? Chaque besoin s'étudie au cas par cas, après un premier échange."
 } as const;
 
 /** Les 4 idées clés du logiciel */

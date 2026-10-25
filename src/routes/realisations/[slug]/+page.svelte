@@ -7,7 +7,7 @@
 -->
 <script lang="ts">
 	import type { Picture } from 'vite-imagetools';
-	import { Button, Seo } from '$lib/components';
+	import { Button, LinkArrow, Seo } from '$lib/components';
 	import Icon, { type IconName } from '$lib/components/brand/Icon.svelte';
 	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
 	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
@@ -15,6 +15,7 @@
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import { projects } from '$lib/content/realisations';
 	import { links, reviews } from '$lib/content/studio';
+	import { offerPath, offers } from '$lib/content/tarifs';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
 
 	let { data } = $props();
@@ -22,6 +23,9 @@
 	const p = $derived(data.project);
 	// Avis Malt du même client, s'il existe (correspondance déclarée dans content/studio.ts)
 	const review = $derived(reviews.find((r) => r.project === p.slug));
+	// Offres illustrées par ce projet : uniquement les correspondances déclarées dans le catalogue
+	// (content/tarifs.ts, champ `projects` de chaque offre), sans rattachement ajouté ici
+	const relatedOffers = $derived(offers.filter((o) => o.projects?.includes(p.slug)));
 	const d = $derived(p.details);
 	const technologies = $derived(p.stack.split(' · '));
 
@@ -195,6 +199,16 @@
 					<ul class="skills" role="list">
 						{#each d.skills as s (s)}
 							<li><span class="skills__check"><Icon name="check" size="sm" /></span>{s}</li>
+						{/each}
+					</ul>
+				</div>
+			{/if}
+			{#if relatedOffers.length}
+				<div class="aside__group">
+					<p class="aside__label">Offre correspondante :</p>
+					<ul class="aside__offers" role="list">
+						{#each relatedOffers as o (o.slug)}
+							<li><LinkArrow href={offerPath(o)}>{o.name}</LinkArrow></li>
 						{/each}
 					</ul>
 				</div>
@@ -522,6 +536,13 @@
 		padding-bottom: var(--space-4);
 		border-bottom: 1px solid var(--line);
 		font-size: var(--text-h3);
+	}
+	.aside__offers {
+		display: grid;
+		gap: var(--space-2);
+		margin: 0;
+		padding: 0;
+		list-style: none;
 	}
 	.aside__group {
 		display: grid;
