@@ -378,9 +378,9 @@ export const offers: readonly Offer[] = [
 		summary:
 			'Une intervention ponctuelle pour corriger ou faire évoluer un site WordPress ou WooCommerce existant, à la journée ou à la demi-journée.',
 		payment: 'upfront',
-		seoTitle: 'Intervention WordPress et WooCommerce : 350 € par jour',
+		seoTitle: 'Dépannage WordPress et WooCommerce : 175 € la demi-journée',
 		description:
-			'Sprint WordPress ou WooCommerce : diagnostic, devis, intervention ciblée sur un site existant. 350 € par jour, 175 € la demi-journée pour une intervention courte.',
+			'Dépannage WordPress ou WooCommerce : diagnostic, devis, intervention ciblée sur un site existant. 175 € la demi-journée pour une intervention courte et définie, 350 € par jour.',
 		title: 'Intervention et dépannage sur votre site WordPress ou WooCommerce',
 		accent: 'dépannage',
 		lede: 'Une intervention ciblée, chiffrée en jours ou en demi-journées après une courte analyse, pour régler un problème précis ou faire évoluer un site existant.',
