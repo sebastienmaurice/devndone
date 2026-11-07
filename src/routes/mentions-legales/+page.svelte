@@ -19,22 +19,21 @@
 	description="Mentions légales du site devndone.com : éditeur, hébergeur, données personnelles, propriété intellectuelle."
 />
 
+<div class="container mascot">
+	<!-- Illustration sur fond blanc : multiply la fond dans l'Ivoire de la page -->
+	<enhanced:img
+		src={mascot}
+		alt="Dev, la mascotte de Dev'n Done, allongé sur un gros livre intitulé « Mentions légales et Cookies »"
+		sizes="(min-width: 768px) 320px, 240px"
+		fetchpriority="high"
+	/>
+</div>
+
 <PageIntro
 	label="Informations légales"
 	heading="Mentions légales"
 	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Mentions légales' }]}
->
-	{#snippet aside()}
-		<!-- Illustration sur fond blanc : multiply la fond dans l'Ivoire de la page -->
-		<div class="mascot">
-			<enhanced:img
-				src={mascot}
-				alt="Dev, la mascotte de Dev'n Done, allongé sur un gros livre intitulé « Mentions légales et Cookies »"
-				sizes="(min-width: 1100px) 420px, 240px"
-			/>
-		</div>
-	{/snippet}
-</PageIntro>
+/>
 
 <section class="section section--tight" aria-label="Mentions légales">
 	<div class="container">
@@ -87,21 +86,22 @@
 </section>
 
 <style>
-	/* Petite sur mobile et tablette (le texte légal reste en haut de page), plus grande à côté du titre */
+	/* En haut de page, centrée, avant le fil d'Ariane et le titre */
 	.mascot {
-		max-width: 15rem;
-		margin-inline: auto;
+		display: flex;
+		justify-content: center;
+		padding-top: var(--space-5);
 	}
 	.mascot :global(img) {
 		display: block;
-		width: 100%;
+		width: min(15rem, 62vw);
 		height: auto;
 		/* Fond blanc de l'image : multiply le fait disparaître dans l'Ivoire */
 		mix-blend-mode: multiply;
 	}
-	@media (min-width: 1100px) {
-		.mascot {
-			max-width: 26rem;
+	@media (min-width: 768px) {
+		.mascot :global(img) {
+			width: 20rem;
 		}
 	}
 </style>
