@@ -19,16 +19,6 @@
 	description="Mentions légales du site devndone.com : éditeur, hébergeur, données personnelles, propriété intellectuelle."
 />
 
-<div class="container mascot">
-	<!-- Illustration sur fond blanc : multiply la fond dans l'Ivoire de la page -->
-	<enhanced:img
-		src={mascot}
-		alt="Dev, la mascotte de Dev'n Done, allongé sur un gros livre intitulé « Mentions légales et Cookies »"
-		sizes="(min-width: 768px) 320px, 240px"
-		fetchpriority="high"
-	/>
-</div>
-
 <PageIntro
 	label="Informations légales"
 	heading="Mentions légales"
@@ -37,30 +27,40 @@
 
 <section class="section section--tight" aria-label="Mentions légales">
 	<div class="container">
-		<div class="stack stack--lg t-measure">
-			<section class="stack stack--sm" aria-labelledby="l-editeur">
-				<h2 class="t-h3" id="l-editeur">Éditeur du site</h2>
-				<p>{p.intro}</p>
-				<dl class="spec-list">
-					<dt>SIREN</dt>
-					<dd>{p.siren}</dd>
-					<dt>SIRET</dt>
-					<dd>{p.siret}</dd>
-					<dt>Registre</dt>
-					<dd>{p.registration}</dd>
-					<dt>Code APE</dt>
-					<dd>{p.ape}</dd>
-					<dt>TVA</dt>
-					<dd>{p.vat}</dd>
-					<dt>Adresse</dt>
-					<dd>{p.address}</dd>
-					<dt>Téléphone</dt>
-					<dd><a class="link" href="tel:{p.phone.replace(/\s/g, '')}">{p.phone}</a></dd>
-					<dt>Email</dt>
-					<dd><a class="link" href="mailto:{p.email}">{p.email}</a></dd>
-				</dl>
-				<p>Directeur de la publication : {p.publicationDirector}.</p>
-			</section>
+		<div class="stack stack--lg legal">
+			<div class="editor">
+				<section class="stack stack--sm" aria-labelledby="l-editeur">
+					<h2 class="t-h3" id="l-editeur">Éditeur du site</h2>
+					<p>{p.intro}</p>
+					<dl class="spec-list">
+						<dt>SIREN</dt>
+						<dd>{p.siren}</dd>
+						<dt>SIRET</dt>
+						<dd>{p.siret}</dd>
+						<dt>Registre</dt>
+						<dd>{p.registration}</dd>
+						<dt>Code APE</dt>
+						<dd>{p.ape}</dd>
+						<dt>TVA</dt>
+						<dd>{p.vat}</dd>
+						<dt>Adresse</dt>
+						<dd>{p.address}</dd>
+						<dt>Téléphone</dt>
+						<dd><a class="link" href="tel:{p.phone.replace(/\s/g, '')}">{p.phone}</a></dd>
+						<dt>Email</dt>
+						<dd><a class="link" href="mailto:{p.email}">{p.email}</a></dd>
+					</dl>
+					<p>Directeur de la publication : {p.publicationDirector}.</p>
+				</section>
+				<div class="mascot">
+					<!-- Illustration sur fond blanc : multiply la fond dans l'Ivoire de la page -->
+					<enhanced:img
+						src={mascot}
+						alt="Dev, la mascotte de Dev'n Done, allongé sur un gros livre intitulé « Mentions légales et Cookies »"
+						sizes="(min-width: 900px) 352px, 240px"
+					/>
+				</div>
+			</div>
 
 			<section class="stack stack--sm" aria-labelledby="l-hebergeur">
 				<h2 class="t-h3" id="l-hebergeur">Hébergement</h2>
@@ -86,22 +86,34 @@
 </section>
 
 <style>
-	/* En haut de page, centrée, avant le fil d'Ariane et le titre */
+	/* Blocs de texte à la largeur de lecture ; la rangée Éditeur + mascotte peut être plus large */
+	.legal > section,
+	.legal > p {
+		max-width: var(--measure);
+	}
+	.editor {
+		display: grid;
+		gap: var(--space-6);
+		align-items: center;
+	}
 	.mascot {
-		display: flex;
-		justify-content: center;
-		padding-top: var(--space-5);
+		justify-self: center;
+		width: min(15rem, 62vw);
 	}
 	.mascot :global(img) {
 		display: block;
-		width: min(15rem, 62vw);
+		width: 100%;
 		height: auto;
 		/* Fond blanc de l'image : multiply le fait disparaître dans l'Ivoire */
 		mix-blend-mode: multiply;
 	}
-	@media (min-width: 768px) {
-		.mascot :global(img) {
-			width: 20rem;
+	/* À droite du paragraphe Éditeur du site dès que la place le permet */
+	@media (min-width: 900px) {
+		.editor {
+			grid-template-columns: minmax(0, var(--measure)) minmax(0, 1fr);
+		}
+		.mascot {
+			width: min(100%, 22rem);
 		}
 	}
 </style>
