@@ -4,6 +4,7 @@
 	En-tête commun des pages internes (PageIntro : fil d'Ariane, surtitre, titre).
 -->
 <script lang="ts">
+	import mascot from '$lib/assets/mascotte/mascotte-renard-dev-n-done-mentions-legales-cookies.webp?enhanced&w=720;360';
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import Seo from '$lib/components/seo/Seo.svelte';
 	import { legal } from '$lib/content/legal';
@@ -22,7 +23,18 @@
 	label="Informations légales"
 	heading="Mentions légales"
 	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Mentions légales' }]}
-/>
+>
+	{#snippet aside()}
+		<!-- Illustration sur fond blanc : multiply la fond dans l'Ivoire de la page -->
+		<div class="mascot">
+			<enhanced:img
+				src={mascot}
+				alt="Dev, la mascotte de Dev'n Done, allongé sur un gros livre intitulé « Mentions légales et Cookies »"
+				sizes="(min-width: 1100px) 420px, 240px"
+			/>
+		</div>
+	{/snippet}
+</PageIntro>
 
 <section class="section section--tight" aria-label="Mentions légales">
 	<div class="container">
@@ -73,3 +85,23 @@
 		</div>
 	</div>
 </section>
+
+<style>
+	/* Petite sur mobile et tablette (le texte légal reste en haut de page), plus grande à côté du titre */
+	.mascot {
+		max-width: 15rem;
+		margin-inline: auto;
+	}
+	.mascot :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		/* Fond blanc de l'image : multiply le fait disparaître dans l'Ivoire */
+		mix-blend-mode: multiply;
+	}
+	@media (min-width: 1100px) {
+		.mascot {
+			max-width: 26rem;
+		}
+	}
+</style>
