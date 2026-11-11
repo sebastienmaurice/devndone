@@ -27,6 +27,7 @@
 		vatNotice
 	} from '$lib/content/tarifs';
 	import { absoluteUrl, organizationId } from '$lib/config/site';
+	import { articleBySlug, articlePath } from '$lib/content/ressources';
 
 	let { data } = $props();
 
@@ -52,6 +53,9 @@
 			}
 			if (r === 'agences') return [{ href: '/agences/', label: 'Le renfort pour les agences' }];
 			if (r === 'realisations') return [{ href: '/realisations/', label: 'Les réalisations' }];
+			// Article de la rubrique Ressources : lien vers l'article
+			const article = articleBySlug(r);
+			if (article) return [{ href: articlePath(article.slug), label: article.title }];
 			// Offre d'une autre rubrique ou d'un autre type : lien vers sa page
 			const target = offers.find((x) => x.slug === r);
 			return target ? [{ href: offerPath(target), label: target.name }] : [];

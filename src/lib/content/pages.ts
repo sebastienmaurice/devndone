@@ -11,6 +11,7 @@ import { universes } from './services';
 import { logicielPage } from './logiciel';
 import { maintenancePage, offerPath, offers } from './tarifs';
 import { agencesPage } from './agences';
+import { articlePath, articles, ressourcesPage } from './ressources';
 
 export type PageEntry = {
 	path: `/${string}`;
@@ -63,6 +64,20 @@ export const pages: PageEntry[] = [
 	...projects.map((p): PageEntry => ({
 		path: `/realisations/${p.slug}/`,
 		label: p.name,
+		sitemap: true,
+		priority: 0.6
+	})),
+	// Ressources : articles pratiques (hors menu principal, accès par le pied de page)
+	{
+		path: ressourcesPage.path,
+		label: 'Ressources',
+		footer: 'studio',
+		sitemap: true,
+		priority: 0.6
+	},
+	...articles.map((a): PageEntry => ({
+		path: articlePath(a.slug),
+		label: a.title,
 		sitemap: true,
 		priority: 0.6
 	})),

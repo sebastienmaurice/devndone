@@ -88,7 +88,8 @@ export type OfferRelated =
 	| 'realisations'
 	| 'sprint-wordpress-woocommerce'
 	| 'audit-technique-wordpress'
-	| 'audit-automatisation';
+	| 'audit-automatisation'
+	| 'formulaire-wordpress-qui-n-envoie-plus';
 
 /** Réponses communes aux pages d'offre (informations validées) */
 const faqDomain = {
@@ -383,7 +384,7 @@ export const offers: readonly Offer[] = [
 	{
 		slug: 'sprint-wordpress-woocommerce',
 		cta: "Décrire votre besoin d'intervention",
-		related: ['agences', 'realisations'],
+		related: ['agences', 'realisations', 'formulaire-wordpress-qui-n-envoie-plus'],
 		universe: 'web',
 		group: 'ponctuel',
 		name: 'Sprint WordPress / WooCommerce',
