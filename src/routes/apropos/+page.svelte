@@ -56,7 +56,7 @@
 			<enhanced:img
 				src={portrait}
 				alt="Sébastien Maurice, fondateur de Dev'n Done, assis en tailleur, avec Dev, la mascotte, qui fait le signe de la victoire derrière lui"
-				sizes="(min-width: 1100px) 480px, 92vw"
+				sizes="(min-width: 1100px) 560px, 92vw"
 				fetchpriority="high"
 			/>
 		</div>
@@ -111,7 +111,7 @@
 <style>
 	/* Photo sur fond blanc : multiply la fond dans l'Ivoire de la page */
 	.portrait {
-		max-width: 30rem;
+		max-width: 35rem;
 		margin-inline: auto;
 		aspect-ratio: 1 / 1;
 	}
@@ -160,7 +160,7 @@
 	}
 	@media (max-width: 1099px) {
 		.portrait {
-			max-width: 24rem;
+			max-width: 28rem;
 		}
 	}
 	.note {
