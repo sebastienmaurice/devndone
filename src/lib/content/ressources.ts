@@ -13,9 +13,10 @@
  * - `quote` : bandeau sombre avec une phrase mise en avant (`quote`) et le texte ;
  * - `checklist` : liste de contrôles en cartes (`list`) ;
  * - `steps` : étapes numérotées en cartes (`steps`) ;
+ * - `case` : retour d'expérience en carte (cas vécu, anonymisé, faits fournis par Sébastien) ;
  * - `closing` : texte et carte d'appel vers l'offre de dépannage.
  */
-export type ArticleSectionKind = 'flow' | 'quote' | 'checklist' | 'steps' | 'closing';
+export type ArticleSectionKind = 'flow' | 'quote' | 'checklist' | 'steps' | 'case' | 'closing';
 
 export type ArticleSection = {
 	/** Ancre de la section (sommaire) */
@@ -154,6 +155,16 @@ export const articles: readonly Article[] = [
 						title: 'Un domaine correctement déclaré',
 						text: "Cette étape ne suffit pas seule. La documentation WordPress insiste sur les enregistrements SPF, DKIM et DMARC du domaine, et l'aide de Google demande de les compléter auprès du fournisseur du service d'envoi. Les identifiants SMTP se vérifient chez ce fournisseur, pas dans la console de la messagerie."
 					}
+				]
+			},
+			{
+				id: 'cas',
+				nav: 'Un cas rencontré',
+				title: 'Rencontré pendant une migration',
+				kind: 'case',
+				paragraphs: [
+					"Lors d'une mission de migration d'un site WordPress pour un concepteur-rédacteur et photographe indépendant, le formulaire de contact ne livrait déjà aucun message au début de la mission. J'ai créé un compte d'envoi SMTP dédié chez l'hébergeur de messagerie du client et configuré l'extension WP Mail SMTP. Un test réel a confirmé que les messages arrivaient à l'adresse du site.",
+					"Une limite, qui illustre le propos : un test vers une adresse Gmail externe échouait toujours, alors que SPF, DKIM et DMARC étaient valides et que l'adresse IP d'envoi était propre sur les listes noires pertinentes. La cause exacte n'a pas été identifiée, et le client a choisi de reprendre ce point lui-même."
 				]
 			},
 			{

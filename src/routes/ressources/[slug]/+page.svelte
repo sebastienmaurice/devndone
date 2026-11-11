@@ -184,6 +184,22 @@
 				</ol>
 			</div>
 		</section>
+	{:else if s.kind === 'case'}
+		<!-- Retour d'expérience : carte avec filet orange -->
+		<section class="section section--tight anchor" id={s.id} aria-labelledby="{s.id}-title">
+			<div class="container">
+				<div class="guide-case">
+					<span class="guide-case__icon" aria-hidden="true"><Icon name="lightbulb" /></span>
+					<div class="guide-case__body stack stack--sm">
+						<SectionLabel label="Retour d'expérience" />
+						<h2 class="t-h3" id="{s.id}-title">{s.title}</h2>
+						{#each s.paragraphs ?? [] as p, j (j)}
+							<p>{p}</p>
+						{/each}
+					</div>
+				</div>
+			</div>
+		</section>
 	{:else if s.kind === 'closing'}
 		<!-- Texte et carte d'appel vers l'offre de dépannage -->
 		<section class="section section--tight band anchor" id={s.id} aria-labelledby="{s.id}-title">
@@ -509,6 +525,42 @@
 	.guide-step p {
 		margin: 0;
 		color: var(--text-muted);
+	}
+
+	/* Retour d'expérience */
+	.guide-case {
+		display: grid;
+		gap: var(--space-4);
+		padding: var(--space-6) var(--space-5);
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-left: 6px solid var(--action);
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-card);
+	}
+	.guide-case__icon {
+		display: grid;
+		place-items: center;
+		width: 3rem;
+		height: 3rem;
+		border-radius: 50%;
+		background: var(--tag-bg);
+		color: var(--tag-text);
+	}
+	.guide-case__body :global(p) {
+		margin: 0;
+		color: var(--text-muted);
+		max-width: 52rem;
+	}
+	.guide-case__body :global(p:first-of-type) {
+		color: var(--text);
+	}
+	@media (min-width: 720px) {
+		.guide-case {
+			grid-template-columns: 3rem minmax(0, 1fr);
+			gap: var(--space-5);
+			padding: var(--space-6);
+		}
 	}
 
 	/* Carte d'appel vers l'offre */
