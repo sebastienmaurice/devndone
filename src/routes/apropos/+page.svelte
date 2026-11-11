@@ -14,7 +14,7 @@
 	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
 	import { aboutIntro, aboutMascot, contactIntro, links, reviewsIntro } from '$lib/content/studio';
 	import mascot from '$lib/assets/mascotte/mascotte-renard-dev-n-done-developpeur-wordpress-code.jpg?enhanced&w=1200;720;360';
-	import portrait from '$lib/assets/photos/sebastien-maurice-fondateur-dev-n-done-avec-mascotte.jpg?enhanced&w=1200;720;360';
+	import portrait from '$lib/assets/photos/sebastien-maurice-fondateur-dev-n-done-assis-avec-mascotte.webp?enhanced&w=1200;720;360';
 	import { absoluteUrl, organizationId } from '$lib/config/site';
 
 	// Données structurées Person : uniquement des informations publiées sur le site
@@ -55,8 +55,8 @@
 		<div class="portrait">
 			<enhanced:img
 				src={portrait}
-				alt="Sébastien Maurice, fondateur de Dev'n Done, avec Dev, la mascotte, bras croisés en arrière-plan"
-				sizes="(min-width: 1100px) 560px, 92vw"
+				alt="Sébastien Maurice, fondateur de Dev'n Done, assis en tailleur, avec Dev, la mascotte, qui fait le signe de la victoire derrière lui"
+				sizes="(min-width: 1100px) 480px, 92vw"
 				fetchpriority="high"
 			/>
 		</div>
@@ -111,9 +111,9 @@
 <style>
 	/* Photo sur fond blanc : multiply la fond dans l'Ivoire de la page */
 	.portrait {
-		max-width: 36rem;
+		max-width: 30rem;
 		margin-inline: auto;
-		aspect-ratio: 1246 / 957;
+		aspect-ratio: 1 / 1;
 	}
 	.portrait :global(img) {
 		display: block;
@@ -160,7 +160,7 @@
 	}
 	@media (max-width: 1099px) {
 		.portrait {
-			max-width: 28rem;
+			max-width: 24rem;
 		}
 	}
 	.note {
