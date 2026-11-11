@@ -16,6 +16,7 @@
 	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
 	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
 	import ExpertiseCards from '$lib/components/sections/ExpertiseCards.svelte';
+	import OfferShortcuts from '$lib/components/sections/OfferShortcuts.svelte';
 	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import heroImage from '$lib/assets/mascotte/mascotte-renard-developpeur-wordpress-elementor.png?enhanced&w=1120;720;480&quality=40';
@@ -28,6 +29,16 @@
 	import { legal } from '$lib/content/legal';
 
 	const keywords = hero.keywords.split(' · ');
+
+	// Offres de l'accueil (accès direct, maillage interne) : slugs du catalogue content/tarifs.ts
+	const homeOffers = [
+		'sprint-wordpress-woocommerce',
+		'audit-technique-wordpress',
+		'landing-page',
+		'site-vitrine-wordpress',
+		'refonte-site-wordpress',
+		'boutique-woocommerce'
+	];
 
 	// Réalisations de l'accueil : projets WordPress et WooCommerce réalisés pour des clients
 	const homeProjects = [
@@ -195,6 +206,13 @@
 			<p>{servicesIntro.lede}</p>
 		</header>
 		<ExpertiseCards />
+	</div>
+</section>
+
+<!-- Forfaits : accès direct aux offres (maillage interne) -->
+<section class="section section--tight home-offers" aria-labelledby="forfaits-title">
+	<div class="container">
+		<OfferShortcuts only={homeOffers} />
 	</div>
 </section>
 

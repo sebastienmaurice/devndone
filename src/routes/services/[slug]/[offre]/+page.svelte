@@ -39,16 +39,23 @@
 	// Liens « Pour aller plus loin » (hors offres déjà listées en bas de page). La maintenance
 	// porte la mention de son statut tant que les formules ne sont pas proposées à la commande.
 	const relatedLinks = $derived(
-		(o.related ?? []).map((r) =>
-			r === 'maintenance'
-				? {
+		(o.related ?? []).flatMap((r) => {
+			if (r === 'maintenance') {
+				return [
+					{
 						href: maintenancePage.path,
 						label: maintenanceStatus.open
 							? 'Maintenance WordPress'
 							: 'Maintenance WordPress (formules en préparation)'
 					}
-				: { href: '/agences/', label: 'Le renfort pour les agences' }
-		)
+				];
+			}
+			if (r === 'agences') return [{ href: '/agences/', label: 'Le renfort pour les agences' }];
+			if (r === 'realisations') return [{ href: '/realisations/', label: 'Les réalisations' }];
+			// Offre d'une autre rubrique ou d'un autre type : lien vers sa page
+			const target = offers.find((x) => x.slug === r);
+			return target ? [{ href: offerPath(target), label: target.name }] : [];
+		})
 	);
 
 	// Données structurées Service : prix lus dans le catalogue (même source que la page).

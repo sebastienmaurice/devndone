@@ -75,8 +75,20 @@ export type Offer = {
 	 * Liens « Pour aller plus loin » de la page d'offre, hors catalogue Web déjà listé dans « Les
 	 * autres offres » (validés par Sébastien le 24/10/2026) : maintenance, page Agences.
 	 */
-	related?: readonly ('maintenance' | 'agences')[];
+	related?: readonly OfferRelated[];
 };
+
+/**
+ * Cibles possibles des liens « Pour aller plus loin » : maintenance, page Agences, page
+ * Réalisations, ou une offre d'une autre rubrique (maillage interne, 11/11/2026).
+ */
+export type OfferRelated =
+	| 'maintenance'
+	| 'agences'
+	| 'realisations'
+	| 'sprint-wordpress-woocommerce'
+	| 'audit-technique-wordpress'
+	| 'audit-automatisation';
 
 /** Réponses communes aux pages d'offre (informations validées) */
 const faqDomain = {
@@ -100,6 +112,7 @@ export const offers: readonly Offer[] = [
 	{
 		slug: 'landing-page',
 		cta: 'Demander un devis pour une landing page',
+		related: ['realisations'],
 		universe: 'web',
 		group: 'creation',
 		name: 'Landing page',
@@ -153,6 +166,7 @@ export const offers: readonly Offer[] = [
 	{
 		slug: 'site-vitrine-wordpress',
 		cta: 'Demander un devis pour un site vitrine',
+		related: ['realisations'],
 		universe: 'web',
 		group: 'creation',
 		name: 'Site vitrine WordPress',
@@ -227,7 +241,7 @@ export const offers: readonly Offer[] = [
 		slug: 'refonte-site-wordpress',
 		cta: 'Demander un devis pour une refonte WordPress',
 		reviews: ['palimpseste-urbain', 'gsti'],
-		related: ['maintenance'],
+		related: ['maintenance', 'realisations'],
 		universe: 'web',
 		group: 'creation',
 		name: 'Refonte WordPress',
@@ -297,6 +311,7 @@ export const offers: readonly Offer[] = [
 	{
 		slug: 'boutique-woocommerce',
 		cta: 'Échanger sur votre projet WooCommerce',
+		related: ['realisations'],
 		universe: 'web',
 		group: 'creation',
 		name: 'Boutique WooCommerce',
@@ -368,7 +383,7 @@ export const offers: readonly Offer[] = [
 	{
 		slug: 'sprint-wordpress-woocommerce',
 		cta: "Décrire votre besoin d'intervention",
-		related: ['agences'],
+		related: ['agences', 'realisations'],
 		universe: 'web',
 		group: 'ponctuel',
 		name: 'Sprint WordPress / WooCommerce',
@@ -435,6 +450,7 @@ export const offers: readonly Offer[] = [
 	{
 		slug: 'audit-technique-wordpress',
 		cta: 'Demander un audit technique WordPress',
+		related: ['audit-automatisation', 'realisations'],
 		universe: 'web',
 		group: 'ponctuel',
 		name: 'Audit technique WordPress',
@@ -484,6 +500,7 @@ export const offers: readonly Offer[] = [
 	{
 		slug: 'audit-automatisation',
 		cta: "Demander un audit d'automatisation",
+		related: ['audit-technique-wordpress', 'sprint-wordpress-woocommerce'],
 		universe: 'automatisation',
 		group: 'ponctuel',
 		name: 'Audit automatisation',

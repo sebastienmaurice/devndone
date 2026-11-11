@@ -2,7 +2,8 @@
 	Portfolio : toutes les réalisations (content/realisations.ts), chacune menant à son étude de cas.
 -->
 <script lang="ts">
-	import { Seo } from '$lib/components';
+	import { LinkArrow, Seo } from '$lib/components';
+	import { logicielIntro, logicielPage } from '$lib/content/logiciel';
 	import DoneWord from '$lib/components/brand/DoneWord.svelte';
 	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
@@ -27,7 +28,19 @@
 <section class="section section--tight" aria-label="Projets">
 	<div class="container">
 		<ProjectGrid headingLevel={2} featured />
+		<p class="logiciel-link">
+			{logicielIntro.eyebrow} : <LinkArrow href={logicielPage.path}>{logicielIntro.title}</LinkArrow
+			>
+		</p>
 	</div>
 </section>
 
 <ContactBlock />
+
+<style>
+	/* Lien vers le logiciel pour enseignistes, sous la grille des projets */
+	.logiciel-link {
+		margin: var(--space-6) 0 0;
+		font-weight: var(--weight-semibold);
+	}
+</style>

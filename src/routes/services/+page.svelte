@@ -9,11 +9,24 @@
 	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
 	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
 	import ExpertiseCards from '$lib/components/sections/ExpertiseCards.svelte';
+	import OfferShortcuts from '$lib/components/sections/OfferShortcuts.svelte';
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
 	import { servicesIntro } from '$lib/content/services';
+	import { logicielIntro, logicielPage } from '$lib/content/logiciel';
 	import { contactIntro, hero, links, maltRating, reviewsIntro } from '$lib/content/studio';
+
+	// Offres au forfait (accès direct, maillage interne) : slugs du catalogue content/tarifs.ts
+	const offerSlugs = [
+		'sprint-wordpress-woocommerce',
+		'audit-technique-wordpress',
+		'landing-page',
+		'site-vitrine-wordpress',
+		'refonte-site-wordpress',
+		'boutique-woocommerce',
+		'audit-automatisation'
+	];
 </script>
 
 <Seo
@@ -50,7 +63,18 @@
 					>Le renfort WordPress et WooCommerce</LinkArrow
 				>
 			</li>
+			<li>
+				{logicielIntro.eyebrow} : <LinkArrow href={logicielPage.path}
+					>{logicielIntro.title}</LinkArrow
+				>
+			</li>
 		</ul>
+	</div>
+</section>
+
+<section class="section section--tight" aria-labelledby="forfaits-title">
+	<div class="container">
+		<OfferShortcuts only={offerSlugs} />
 	</div>
 </section>
 
