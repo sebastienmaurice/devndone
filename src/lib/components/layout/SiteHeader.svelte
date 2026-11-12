@@ -1,7 +1,7 @@
 <!--
 	En-tête du site (maquette du 19/10/2026) : logo officiel à gauche, les pages du site au centre
 	séparées par des slashs orange, bouton « Discuter de votre projet » à droite. Fond Ivoire, collant.
-	Sous 1100 px : logo, bouton Menu et panneau plein écran. Sous 640 px, le bouton de contact garde
+	Sous 1280 px : logo, bouton Menu et panneau plein écran. Sous 640 px, le bouton de contact garde
 	un libellé court (« Contact ») pour rester visible sur téléphone.
 	Navigation : content/pages.ts (headerNav, mobileNav).
 -->
@@ -35,9 +35,9 @@
 		};
 	});
 
-	// Le panneau n'existe que sous 1100 px : on le ferme si la fenêtre s'élargit
+	// Le panneau n'existe que sous 1280 px : on le ferme si la fenêtre s'élargit
 	$effect(() => {
-		const wide = window.matchMedia('(min-width: 1100px)');
+		const wide = window.matchMedia('(min-width: 1280px)');
 		const onChange = () => wide.matches && close();
 		wide.addEventListener('change', onChange);
 		return () => wide.removeEventListener('change', onChange);
@@ -140,6 +140,7 @@
 		font-weight: var(--weight-semibold);
 		color: var(--text);
 		text-decoration: none;
+		white-space: nowrap;
 	}
 	.header__nav a::after {
 		content: '';
@@ -225,7 +226,7 @@
 			display: none;
 		}
 	}
-	@media (min-width: 1100px) {
+	@media (min-width: 1280px) {
 		.header__nav {
 			display: block;
 		}

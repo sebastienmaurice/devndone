@@ -36,6 +36,7 @@ export const headerNav: NavItem[] = [
 	{ label: 'Agences', href: agencesPage.path, match: agencesPage.path },
 	{ label: 'Réalisations', href: '/realisations/', match: '/realisations/' },
 	{ label: 'Tarifs', href: '/tarifs/', match: '/tarifs/' },
+	{ label: 'Ressources', href: ressourcesPage.path, match: ressourcesPage.path },
 	{ label: 'À propos', href: '/apropos/', match: '/apropos/' },
 	{ label: 'Contact', href: '/contact/', match: '/contact/' }
 ];
