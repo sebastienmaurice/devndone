@@ -16,7 +16,12 @@
 	import { articlePath, articles, ressourcesPage } from '$lib/content/ressources';
 	import { offerPath, offers } from '$lib/content/tarifs';
 
-	const feature = articles[0];
+	// Pour ajouter un guide : une entrée dans content/ressources.ts suffit. Le plus récent passe
+	// en grande carte, les autres apparaissent dans « Tous les guides », les sujets se cumulent.
+	const sorted = [...articles].sort((a, b) => b.published.localeCompare(a.published));
+	const feature = sorted[0];
+	const others = sorted.slice(1);
+	const allTags = [...new Set(sorted.flatMap((a) => a.tags))];
 	const sprint = offers.find((o) => o.slug === 'sprint-wordpress-woocommerce');
 
 	const dateFr = (iso: string) =>
@@ -80,7 +85,7 @@
 				<div class="tile tile--tags">
 					<h2 class="tile__small">Sujets abordés</h2>
 					<ul class="pills" role="list">
-						{#each feature.tags as tag (tag)}
+						{#each allTags as tag (tag)}
 							<li class="pill">{tag}</li>
 						{/each}
 					</ul>
@@ -113,6 +118,26 @@
 					<span class="tile__go">Me contacter <Icon name="arrow-right" /></span>
 				</a>
 			</div>
+		</div>
+	</section>
+{/if}
+
+{#if others.length > 0}
+	<section class="section section--tight" aria-labelledby="tous-les-guides">
+		<div class="container">
+			<h2 id="tous-les-guides" class="list-title">Tous les guides</h2>
+			<ul class="guide-list" role="list">
+				{#each others as a (a.slug)}
+					<li>
+						<a class="tile tile--item" href={articlePath(a.slug)}>
+							<p class="tile__meta">Guide · Publié le {dateFr(a.published)}</p>
+							<h3 class="tile__title">{a.title}</h3>
+							<p class="tile__text">{a.description}</p>
+							<span class="tile__go">Lire le guide <Icon name="arrow-right" /></span>
+						</a>
+					</li>
+				{/each}
+			</ul>
 		</div>
 	</section>
 {/if}
@@ -320,6 +345,32 @@
 	}
 	.tile--ask p {
 		color: var(--text-muted);
+	}
+
+	/* Liste des autres guides */
+	.list-title {
+		margin: 0 0 var(--space-5);
+	}
+	.guide-list {
+		display: grid;
+		gap: var(--col-gap);
+		grid-template-columns: minmax(0, 1fr);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	@media (min-width: 640px) {
+		.guide-list {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+	@media (min-width: 1000px) {
+		.guide-list {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+	.guide-list li {
+		display: grid;
 	}
 
 	/* Cartes principales : desktop, texte à côté du visuel */
