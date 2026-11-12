@@ -14,6 +14,10 @@
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import mascotLoupe from '$lib/assets/mascotte/mascotte-renard-dev-n-done-formulaire-message-envoye-loupe.webp?enhanced&w=720;360';
 	import mascotGuides from '$lib/assets/mascotte/mascotte-renard-dev-n-done-guides-wordpress-woocommerce.webp?enhanced&w=1200;720;360';
+	import imgAccueil from '$lib/assets/ressources/cine-delices-accueil-ambiance-salle-cinema.webp?enhanced&w=720;360';
+	import imgProfil from '$lib/assets/ressources/cine-delices-cinepass-profil-niveau-xp-cadre.webp?enhanced&w=1200;720;360';
+	import imgCollection from '$lib/assets/ressources/cine-delices-collection-cadres-profil-animes.webp?enhanced&w=1200;720;360';
+	import imgFonds from '$lib/assets/ressources/cine-delices-fonds-cadres-collection-themes-films.webp?enhanced&w=1200;720;360';
 	import { absoluteUrl, organizationId } from '$lib/config/site';
 	import { articlePath } from '$lib/content/ressources';
 	import { offerPath, offers } from '$lib/content/tarifs';
@@ -254,6 +258,70 @@
 						</div>
 					</aside>
 				{/if}
+			</div>
+		</section>
+	{/if}
+
+	<!-- Palette et images de la section -->
+	{#if s.palette?.length}
+		<section class="section section--tight" aria-label="Palette : {s.nav}">
+			<div class="container">
+				<ul class="swatches" role="list">
+					{#each s.palette as sw (sw.hex)}
+						<li class="swatch">
+							<svg
+								class="swatch__chip"
+								viewBox="0 0 10 4"
+								preserveAspectRatio="none"
+								aria-hidden="true"><rect width="10" height="4" fill={sw.hex} /></svg
+							>
+							<span class="swatch__name">{sw.name}</span>
+							<code class="swatch__hex">{sw.hex}</code>
+							<span class="swatch__role">{sw.role}</span>
+						</li>
+					{/each}
+				</ul>
+				{#if s.paletteCaption}<p class="fig__caption">{s.paletteCaption}</p>{/if}
+			</div>
+		</section>
+	{/if}
+	{#if s.figures?.length}
+		<section class="section section--tight" aria-label="Images : {s.nav}">
+			<div class="container figs">
+				{#each s.figures as f (f.id)}
+					<figure class="fig">
+						{#if f.id === 'accueil-ambiance'}
+							<enhanced:img
+								src={imgAccueil}
+								alt={f.alt}
+								sizes="(min-width: 1100px) 560px, 92vw"
+								loading="lazy"
+							/>
+						{:else if f.id === 'cinepass-profil'}
+							<enhanced:img
+								src={imgProfil}
+								alt={f.alt}
+								sizes="(min-width: 1100px) 1100px, 92vw"
+								loading="lazy"
+							/>
+						{:else if f.id === 'collection-cadres'}
+							<enhanced:img
+								src={imgCollection}
+								alt={f.alt}
+								sizes="(min-width: 1100px) 1100px, 92vw"
+								loading="lazy"
+							/>
+						{:else if f.id === 'fonds-cadres'}
+							<enhanced:img
+								src={imgFonds}
+								alt={f.alt}
+								sizes="(min-width: 1100px) 1100px, 92vw"
+								loading="lazy"
+							/>
+						{/if}
+						<figcaption class="fig__caption">{f.caption}</figcaption>
+					</figure>
+				{/each}
 			</div>
 		</section>
 	{/if}
@@ -621,6 +689,69 @@
 		gap: var(--space-3);
 		justify-items: start;
 		margin-top: var(--space-2);
+	}
+
+	/* Images légendées et palette */
+	.figs {
+		display: grid;
+		gap: var(--space-6);
+		grid-template-columns: minmax(0, 1fr);
+		align-items: start;
+	}
+	.fig {
+		margin: 0;
+		max-width: 64rem;
+		display: grid;
+		gap: var(--space-3);
+	}
+	.fig :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: var(--radius-card);
+		border: 1px solid var(--line);
+		box-shadow: var(--shadow-card);
+	}
+	.fig__caption {
+		margin: 0;
+		font-size: var(--text-body-sm);
+		color: var(--text-muted);
+		max-width: 52rem;
+	}
+	.swatches {
+		display: grid;
+		gap: var(--space-4);
+		grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+		margin: 0 0 var(--space-4);
+		padding: 0;
+		list-style: none;
+	}
+	.swatch {
+		display: grid;
+		gap: var(--space-1);
+		padding: var(--space-4);
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-card);
+	}
+	.swatch__chip {
+		display: block;
+		height: 3.5rem;
+		margin-bottom: var(--space-2);
+		border-radius: var(--radius-card);
+		border: 1px solid var(--line);
+	}
+	.swatch__name {
+		font-weight: var(--weight-bold);
+	}
+	.swatch__hex {
+		font-family: var(--font-mono, monospace);
+		font-size: var(--text-body-sm);
+	}
+	.swatch__role {
+		font-size: var(--text-body-sm);
+		color: var(--text-muted);
 	}
 
 	/* Sources */

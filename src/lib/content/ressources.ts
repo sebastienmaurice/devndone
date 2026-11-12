@@ -18,6 +18,26 @@
  */
 export type ArticleSectionKind = 'flow' | 'quote' | 'checklist' | 'steps' | 'case' | 'closing';
 
+/** Images disponibles dans les articles (fichiers dans src/lib/assets/ressources/, choisis par la page) */
+export type ArticleImageId =
+	'accueil-ambiance' | 'cinepass-profil' | 'collection-cadres' | 'fonds-cadres';
+
+export type ArticleFigure = {
+	id: ArticleImageId;
+	/** Texte alternatif : ce que montre l'image */
+	alt: string;
+	/** Légende visible */
+	caption: string;
+};
+
+export type ArticleSwatch = {
+	name: string;
+	/** Valeur publiée par le site, au format #rrggbb */
+	hex: string;
+	/** Rôle dans l'interface */
+	role: string;
+};
+
 export type ArticleSection = {
 	/** Ancre de la section (sommaire) */
 	id: string;
@@ -37,6 +57,12 @@ export type ArticleSection = {
 	list?: readonly string[];
 	/** Étapes numérotées (`steps`) */
 	steps?: readonly { title: string; text: string }[];
+	/** Pastilles de couleurs affichées sous la section */
+	palette?: readonly ArticleSwatch[];
+	/** Légende commune de la palette */
+	paletteCaption?: string;
+	/** Images légendées affichées sous la section */
+	figures?: readonly ArticleFigure[];
 };
 
 export type ArticleSource = {
@@ -134,6 +160,20 @@ export const articles: readonly Article[] = [
 						note: 'Débloqués par niveau, un thème de film chacun'
 					},
 					{ label: 'Des pages sur mesure', note: 'Un thème de couleurs par créateur' }
+				],
+				figures: [
+					{
+						id: 'accueil-ambiance',
+						alt: "Section de la page d'accueil de Ciné Délices : le titre « Cuisinez ce que vous regardez » en capitales blanches et or sur un fond bleu nuit, avec trois compteurs et deux boutons",
+						caption:
+							"Une section de l'accueil : titres en capitales, or sur bleu nuit, bouton doré. Le fond reprend l'univers de la salle de cinéma."
+					},
+					{
+						id: 'cinepass-profil',
+						alt: "Page CinéPass d'un membre : son avatar entouré d'un cadre animé sur le thème de la magie, son niveau 3, une barre de progression de 485 sur 600 points d'expérience et ses compteurs de recettes, d'avis et de cadres",
+						caption:
+							"Le CinéPass d'un membre : niveau, barre de progression et cadre de profil équipé."
+					}
 				]
 			},
 			{
@@ -144,6 +184,13 @@ export const articles: readonly Article[] = [
 				quote:
 					"Le texte courant doit offrir un contraste d'au moins 4,5 pour 1 avec son fond, pour respecter le niveau AA des règles d'accessibilité.",
 				quoteSource: "WCAG 2.1, critère 1.4.3, reformulé (page citée en bas d'article)",
+				palette: [
+					{ name: 'Bleu nuit', hex: '#142234', role: 'Fond des pages' },
+					{ name: 'Surface des cartes', hex: '#0f1e30', role: 'Cartes et encadrés' },
+					{ name: 'Or titre', hex: '#e3b148', role: 'Titres et accents' }
+				],
+				paletteCaption:
+					"Les trois valeurs publiées par le site. Le moodboard de départ (version 2) donnait l'or à #C4A052 : la valeur en ligne est celle de #e3b148.",
 				paragraphs: [
 					"Les variables CSS du site posent le fond bleu nuit #142234, des cartes en #0f1e30 et des titres en or #e3b148. Le code garde la trace d'un arbitrage : le fond a été éclairci de 3 % par rapport à la valeur d'origine, parce qu'il se lisait mieux sur des écrans non calibrés. L'or est décrit dans le code comme « ambré, moins saturé, luxe cinéma ».",
 					"Côté typographie, le site charge quatre polices : Playfair Display pour les titres éditoriaux, Bebas Neue pour les grands titres d'affiche, Cinzel pour les petits titres, les boutons et la navigation, Lato pour le texte courant.",
@@ -164,6 +211,20 @@ export const articles: readonly Article[] = [
 					"Un moteur d'animation d'environ 800 lignes de JavaScript : une classe par thème, et un chef d'orchestre commun.",
 					'Douze fonds de bannière associés aux cadres, choisis selon une priorité : bannière personnalisée approuvée, puis variante choisie, puis fond du cadre équipé, puis fond par défaut.',
 					"Une préférence « réduire les animations » respectée par le carrousel des publications, mais pas encore par la page CinéPass : c'est un chantier d'accessibilité à venir."
+				],
+				figures: [
+					{
+						id: 'collection-cadres',
+						alt: 'Collection de cadres de la page CinéPass : cartes Sans cadre, Ciné Délices, Sherlock Holmes, Matrix, Indiana Jones et Harry Potter, chacune avec son avatar encadré, son niveau de déblocage et des filtres par univers',
+						caption:
+							'La collection de cadres : chaque carte indique le niveau de déblocage, et des filtres permettent de trier par univers.'
+					},
+					{
+						id: 'fonds-cadres',
+						alt: 'Six fonds illustrés : bobine et pop-corn pour Ciné Délices, Big Ben et réverbère pour Sherlock Holmes, pluie de code vert pour Matrix, chapeau et temple pour Indiana Jones, château sous la lune pour Harry Potter, médaillon à œil et cercle violet pour Doctor Strange',
+						caption:
+							"Les fonds associés à six des cadres. Ces illustrations ont été générées avec des outils d'IA, puis recadrées et optimisées."
+					}
 				]
 			},
 			{
