@@ -64,6 +64,8 @@ export type Article = {
 	sources: readonly ArticleSource[];
 	/** Date de consultation des sources (affichée) */
 	sourcesChecked: string;
+	/** Sujets abordés (pastilles de la page Ressources), uniquement des termes présents dans l'article */
+	tags: readonly string[];
 };
 
 export const ressourcesPage = {
@@ -89,6 +91,7 @@ export const articles: readonly Article[] = [
 		published: '2026-11-11',
 		modified: '2026-11-11',
 		sourcesChecked: '11 novembre 2026',
+		tags: ['WordPress', 'Formulaire de contact', 'E-mails', 'SMTP', 'SPF', 'DKIM', 'DMARC'],
 		sections: [
 			{
 				id: 'chemin',
