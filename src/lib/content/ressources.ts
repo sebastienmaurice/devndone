@@ -20,7 +20,12 @@ export type ArticleSectionKind = 'flow' | 'quote' | 'checklist' | 'steps' | 'cas
 
 /** Images disponibles dans les articles (fichiers dans src/lib/assets/ressources/, choisis par la page) */
 export type ArticleImageId =
-	'accueil-ambiance' | 'cinepass-profil' | 'collection-cadres' | 'fonds-cadres';
+	| 'accueil-ambiance'
+	| 'cinepass-profil'
+	| 'collection-cadres'
+	| 'fonds-cadres'
+	| 'page-auteur'
+	| 'carte-ticket';
 
 export type ArticleFigure = {
 	id: ArticleImageId;
@@ -28,6 +33,8 @@ export type ArticleFigure = {
 	alt: string;
 	/** Légende visible */
 	caption: string;
+	/** Image en hauteur : affichée plus étroite */
+	narrow?: boolean;
 };
 
 export type ArticleSwatch = {
@@ -169,6 +176,13 @@ export const articles: readonly Article[] = [
 							"Une section de l'accueil : titres en capitales, or sur bleu nuit, bouton doré. Le fond reprend l'univers de la salle de cinéma."
 					},
 					{
+						id: 'carte-ticket',
+						narrow: true,
+						alt: "Carte « Avis de la communauté » en dégradé doré sur fond bleu nuit : titre en capitales, note moyenne à zéro avis, barres de répartition par nombre d'étoiles, séparateur en pointillés à encoches comme sur un ticket",
+						caption:
+							"La carte « Avis de la communauté » : dégradé doré et séparateur en pointillés à encoches, façon ticket de cinéma (le site n'a encore aucun avis, d'où les zéros)."
+					},
+					{
 						id: 'cinepass-profil',
 						alt: "Page CinéPass d'un membre : son avatar entouré d'un cadre animé sur le thème de la magie, son niveau 3, une barre de progression de 485 sur 600 points d'expérience et ses compteurs de recettes, d'avis et de cadres",
 						caption:
@@ -229,6 +243,14 @@ export const articles: readonly Article[] = [
 			},
 			{
 				id: 'createurs',
+				figures: [
+					{
+						id: 'page-auteur',
+						alt: "Page auteur d'un membre : portrait dans un cadre Sherlock Holmes en bois et cuivre, fond de bannière londonien avec lampe à huile et Big Ben, compteurs de recettes, d'avis et de cadres débloqués, puis une rangée de quatre recettes",
+						caption:
+							"La page auteur d'un membre, ici avec le cadre Sherlock Holmes et le fond de bannière qui lui est associé. Le thème de chaque page suit le cadre équipé."
+					}
+				],
 				nav: 'Un thème par créateur',
 				title: 'Une page sur mesure par créateur : une couleur, tout le reste calculé',
 				kind: 'steps',

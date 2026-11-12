@@ -18,6 +18,8 @@
 	import imgProfil from '$lib/assets/ressources/cine-delices-cinepass-profil-niveau-xp-cadre.webp?enhanced&w=1200;720;360';
 	import imgCollection from '$lib/assets/ressources/cine-delices-collection-cadres-profil-animes.webp?enhanced&w=1200;720;360';
 	import imgFonds from '$lib/assets/ressources/cine-delices-fonds-cadres-collection-themes-films.webp?enhanced&w=1200;720;360';
+	import imgAuteur from '$lib/assets/ressources/cine-delices-page-auteur-cadre-sherlock-holmes.webp?enhanced&w=1200;720;360';
+	import imgTicket from '$lib/assets/ressources/cine-delices-carte-avis-ticket-dore.webp?enhanced&w=720;360';
 	import { absoluteUrl, organizationId } from '$lib/config/site';
 	import { articlePath } from '$lib/content/ressources';
 	import { offerPath, offers } from '$lib/content/tarifs';
@@ -289,7 +291,7 @@
 		<section class="section section--tight" aria-label="Images : {s.nav}">
 			<div class="container figs">
 				{#each s.figures as f (f.id)}
-					<figure class="fig">
+					<figure class="fig" class:fig--narrow={f.narrow}>
 						{#if f.id === 'accueil-ambiance'}
 							<enhanced:img
 								src={imgAccueil}
@@ -316,6 +318,20 @@
 								src={imgFonds}
 								alt={f.alt}
 								sizes="(min-width: 1100px) 1100px, 92vw"
+								loading="lazy"
+							/>
+						{:else if f.id === 'page-auteur'}
+							<enhanced:img
+								src={imgAuteur}
+								alt={f.alt}
+								sizes="(min-width: 1100px) 1000px, 92vw"
+								loading="lazy"
+							/>
+						{:else if f.id === 'carte-ticket'}
+							<enhanced:img
+								src={imgTicket}
+								alt={f.alt}
+								sizes="(min-width: 640px) 360px, 80vw"
 								loading="lazy"
 							/>
 						{/if}
@@ -703,6 +719,9 @@
 		max-width: 64rem;
 		display: grid;
 		gap: var(--space-3);
+	}
+	.fig--narrow {
+		max-width: 24rem;
 	}
 	.fig :global(img) {
 		display: block;
