@@ -12,7 +12,8 @@
 	import SectionLabel from '$lib/components/brand/SectionLabel.svelte';
 	import ContactBlock from '$lib/components/sections/ContactBlock.svelte';
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
-	import mascot from '$lib/assets/mascotte/mascotte-renard-dev-n-done-formulaire-message-envoye-loupe.webp?enhanced&w=720;360';
+	import mascotLoupe from '$lib/assets/mascotte/mascotte-renard-dev-n-done-formulaire-message-envoye-loupe.webp?enhanced&w=720;360';
+	import mascotGuides from '$lib/assets/mascotte/mascotte-renard-dev-n-done-guides-wordpress-woocommerce.webp?enhanced&w=1200;720;360';
 	import { absoluteUrl, organizationId } from '$lib/config/site';
 	import { articlePath } from '$lib/content/ressources';
 	import { offerPath, offers } from '$lib/content/tarifs';
@@ -21,6 +22,12 @@
 
 	const a = $derived(data.article);
 	const sprint = offers.find((o) => o.slug === 'sprint-wordpress-woocommerce');
+
+	// Mascotte de l'en-tête selon l'article (champ visual) : enhanced:img veut un identifiant simple
+	const altLoupe =
+		"Dev, la mascotte de Dev'n Done, perplexe, une loupe à la main devant une fenêtre « Message envoyé » et une enveloppe qui n'arrive pas";
+	const altGuides =
+		"Dev, la mascotte de Dev'n Done, souriant devant son ordinateur portable, entouré des logos WordPress et WooCommerce, de code, d'un téléphone, de livres et d'un graphique";
 
 	const dateFr = (iso: string) =>
 		new Date(iso).toLocaleDateString('fr-FR', {
@@ -65,12 +72,21 @@
 >
 	{#snippet aside()}
 		<div class="portrait">
-			<enhanced:img
-				src={mascot}
-				alt="Dev, la mascotte de Dev'n Done, perplexe, une loupe à la main devant une fenêtre « Message envoyé » et une enveloppe qui n'arrive pas"
-				sizes="(min-width: 1100px) 480px, 92vw"
-				fetchpriority="high"
-			/>
+			{#if a.visual === 'guides'}
+				<enhanced:img
+					src={mascotGuides}
+					alt={altGuides}
+					sizes="(min-width: 1100px) 480px, 92vw"
+					fetchpriority="high"
+				/>
+			{:else}
+				<enhanced:img
+					src={mascotLoupe}
+					alt={altLoupe}
+					sizes="(min-width: 1100px) 480px, 92vw"
+					fetchpriority="high"
+				/>
+			{/if}
 		</div>
 	{/snippet}
 </PageIntro>
@@ -82,6 +98,7 @@
 			Par Sébastien Maurice · Publié le {dateFr(a.published)}
 			{#if a.modified !== a.published}· Mis à jour le {dateFr(a.modified)}{/if}
 		</p>
+		{#if a.note}<p class="toc__note">{a.note}</p>{/if}
 		<nav aria-label="Dans cet article">
 			<ul class="toc__list" role="list">
 				{#each a.sections as s (s.id)}
@@ -105,7 +122,7 @@
 						<p class="lead-text" class:lead-text--first={j === 0}>{p}</p>
 					{/each}
 				</div>
-				<ol class="flow" aria-label="Trajet d'un e-mail envoyé par WordPress">
+				<ol class="flow" aria-label={s.title}>
 					{#each s.flow ?? [] as step, k (k)}
 						<li class="flow__step" class:flow__step--end={k === (s.flow?.length ?? 0) - 1}>
 							<span class="flow__node" aria-hidden="true">
@@ -211,7 +228,19 @@
 						<p class="lead-text" class:lead-text--first={j === 0}>{p}</p>
 					{/each}
 				</div>
-				{#if sprint}
+				{#if a.cta === 'contact'}
+					<aside class="guide-offer surface-night" aria-labelledby="{s.id}-offer">
+						<h3 class="t-h3" id="{s.id}-offer">Un projet sur mesure ?</h3>
+						<p>
+							Décrivez-moi votre besoin : je vous dis ce qui est faisable, et à quel prix, avant
+							tout engagement.
+						</p>
+						<div class="guide-offer__actions">
+							<Button href="/contact/" icon="arrow-right">Discuter de votre projet</Button>
+							<LinkArrow href="/realisations/">Voir les réalisations</LinkArrow>
+						</div>
+					</aside>
+				{:else if sprint}
 					<aside class="guide-offer surface-night" aria-labelledby="{s.id}-offer">
 						<h3 class="t-h3" id="{s.id}-offer">Un problème sur votre site ?</h3>
 						<p>
@@ -282,6 +311,12 @@
 	.toc__meta {
 		margin: 0;
 		font-size: var(--text-body-sm);
+		color: var(--text-muted);
+	}
+	.toc__note {
+		margin: 0;
+		max-width: 62rem;
+		font-size: var(--text-caption, 0.8125rem);
 		color: var(--text-muted);
 	}
 	.toc__list {

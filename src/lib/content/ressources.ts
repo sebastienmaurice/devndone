@@ -66,13 +66,19 @@ export type Article = {
 	sourcesChecked: string;
 	/** Sujets abordés (pastilles de la page Ressources), uniquement des termes présents dans l'article */
 	tags: readonly string[];
+	/** Mascotte de l'en-tête et de la carte du hub (par défaut : la loupe) */
+	visual?: 'loupe' | 'guides';
+	/** Carte de la section finale : dépannage (par défaut) ou simple contact */
+	cta?: 'sprint' | 'contact';
+	/** Mention discrète sous la signature (contexte du projet, outils utilisés) */
+	note?: string;
 };
 
 export const ressourcesPage = {
 	path: '/ressources/',
 	seoTitle: 'Ressources : guides pratiques WordPress et WooCommerce',
 	description:
-		"Des explications courtes sur des problèmes WordPress et WooCommerce concrets, avec leurs sources : formulaire qui n'envoie plus, e-mails qui n'arrivent pas.",
+		"Des guides pratiques sur WordPress, WooCommerce et le développement web, avec leurs sources : formulaire qui n'envoie plus, retours d'expérience sur des projets réels.",
 	label: 'Ressources',
 	title: 'Guides pratiques WordPress et WooCommerce',
 	accent: 'Guides pratiques',
@@ -80,6 +86,160 @@ export const ressourcesPage = {
 } as const;
 
 export const articles: readonly Article[] = [
+	{
+		slug: 'identite-visuelle-cine-delices',
+		title: "Trop sombre ? Ce que les retours m'ont appris sur le design de Ciné Délices",
+		accent: 'Trop sombre ?',
+		seoTitle: "Design de Ciné Délices : l'identité visuelle d'un site de cinéma et de cuisine",
+		description:
+			"Palette, typographies, cadres animés, pages créateurs : comment j'ai conçu l'identité visuelle de Ciné Délices et ce que les retours m'ont appris.",
+		lede: "Un site de recettes inspirées du cinéma, un fond bleu nuit, de l'or, des cadres de profil animés. Voici comment l'identité visuelle de Ciné Délices a été construite, et ce que j'ai décidé de ne pas faire quand des visiteurs ont trouvé le site trop sombre.",
+		published: '2026-11-12',
+		modified: '2026-11-12',
+		sourcesChecked: '12 novembre 2026',
+		visual: 'guides',
+		cta: 'contact',
+		note: "Ciné Délices est un projet de formation (titre professionnel DWWM) mené en équipe de 3 et développé avec l'aide de Claude. Les illustrations des cadres et des fonds ont été générées avec des outils d'IA, puis détourées et optimisées. Mon rôle : le front-end et la direction artistique.",
+		tags: [
+			'Direction artistique',
+			'Palette de couleurs',
+			'Typographie',
+			'Canvas',
+			'color-mix',
+			'Accessibilité'
+		],
+		sections: [
+			{
+				id: 'identite',
+				nav: "D'un thème à une identité",
+				title: "Partir d'un thème, y ajouter de la gourmandise",
+				kind: 'flow',
+				paragraphs: [
+					"Ciné Délices relie des films et des séries à des recettes de cuisine, et chaque membre peut y publier. Sur ce projet, j'ai pris en charge le front-end et la direction artistique : l'idée était qu'une page du site soit aussi immersive qu'un générique de film.",
+					"L'identité s'est construite par couches successives, du thème jusqu'aux pages sur mesure, sans framework CSS : les feuilles de style sont écrites à la main. Ce choix est assumé, mais il a un coût, qu'on retrouve plus bas avec la question du mode clair."
+				],
+				flow: [
+					{ label: 'Un thème', note: 'Le cinéma, auquel on ajoute la cuisine' },
+					{ label: 'Une palette', note: 'Bleu nuit et or, avec le rouge néon du logo' },
+					{
+						label: 'Des polices',
+						note: "Une pour l'affiche, une pour le texte, deux pour les titres"
+					},
+					{
+						label: 'Une ambiance de salle',
+						note: 'Étoiles, halos de projecteur, motifs de pellicule, sections qui apparaissent au défilement'
+					},
+					{
+						label: 'Des cadres de profil animés',
+						note: 'Débloqués par niveau, un thème de film chacun'
+					},
+					{ label: 'Des pages sur mesure', note: 'Un thème de couleurs par créateur' }
+				]
+			},
+			{
+				id: 'lisible',
+				nav: 'Sombre mais lisible',
+				title: 'Un fond sombre, mais lisible',
+				kind: 'quote',
+				quote:
+					"Le texte courant doit offrir un contraste d'au moins 4,5 pour 1 avec son fond, pour respecter le niveau AA des règles d'accessibilité.",
+				quoteSource: "WCAG 2.1, critère 1.4.3, reformulé (page citée en bas d'article)",
+				paragraphs: [
+					"Les variables CSS du site posent le fond bleu nuit #142234, des cartes en #0f1e30 et des titres en or #e3b148. Le code garde la trace d'un arbitrage : le fond a été éclairci de 3 % par rapport à la valeur d'origine, parce qu'il se lisait mieux sur des écrans non calibrés. L'or est décrit dans le code comme « ambré, moins saturé, luxe cinéma ».",
+					"Côté typographie, le site charge quatre polices : Playfair Display pour les titres éditoriaux, Bebas Neue pour les grands titres d'affiche, Cinzel pour les petits titres, les boutons et la navigation, Lato pour le texte courant.",
+					"Un audit d'accessibilité automatique (axe-core) est branché dans les tests, et les couleurs des textes ont fait l'objet de comparaisons de variantes. Je n'ai en revanche pas mesuré de ratios de contraste précis, donc je n'en cite pas : c'est un contrôle que je ferais avec un outil dédié avant de m'engager sur un chiffre."
+				]
+			},
+			{
+				id: 'cadres',
+				nav: 'Les cadres animés',
+				title: 'Les cadres de profil animés',
+				kind: 'checklist',
+				paragraphs: [
+					"C'est la partie la plus visible du site : chaque membre peut équiper un cadre autour de son avatar, débloqué selon sa progression."
+				],
+				list: [
+					'Cinq cadres animés dessinés sur un élément canvas (Sherlock Holmes, Matrix, Indiana Jones, Harry Potter et le cadre Ciné Délices), chacun avec son propre système de particules : sort de baguette, pluie de code, poussière, étincelles.',
+					'Un sixième cadre, Doctor Strange, réalisé uniquement en CSS.',
+					"Un moteur d'animation d'environ 800 lignes de JavaScript : une classe par thème, et un chef d'orchestre commun.",
+					'Douze fonds de bannière associés aux cadres, choisis selon une priorité : bannière personnalisée approuvée, puis variante choisie, puis fond du cadre équipé, puis fond par défaut.',
+					"Une préférence « réduire les animations » respectée par le carrousel des publications, mais pas encore par la page CinéPass : c'est un chantier d'accessibilité à venir."
+				]
+			},
+			{
+				id: 'createurs',
+				nav: 'Un thème par créateur',
+				title: 'Une page sur mesure par créateur : une couleur, tout le reste calculé',
+				kind: 'steps',
+				steps: [
+					{
+						title: 'Une seule couleur principale',
+						text: 'Le créateur choisit une couleur. Les teintes, bordures et survols de sa page se calculent en CSS avec color-mix(), à partir de cette seule valeur. La fonction mélange des couleurs dans un espace colorimétrique donné ; elle est disponible dans les navigateurs depuis mai 2023.'
+					},
+					{
+						title: "Un héros et un cadre qui s'ajuste",
+						text: "La page reprend le décor et le slogan du créateur. Son cadre sur mesure trouve tout seul où placer l'avatar : le serveur analyse le canal transparent de l'image pour repérer le centre et le diamètre du trou."
+					},
+					{
+						title: 'Une bannière de publications',
+						text: 'En bas de page, une bannière présente ses douze publications les plus populaires sur deux rails qui défilent en sens inverse, avec des flèches, une pause au survol et le respect de la préférence « réduire les animations ».'
+					},
+					{
+						title: 'Des retours, un ajustement',
+						text: 'Le créateur peut choisir son fond parmi des visuels validés et modifier sa bio, son slogan et son lien depuis un bouton « Personnaliser mon profil » à ses couleurs. Les itérations (héros sombre ou rose, hauteur de la bannière, bouton, pastille « Créatrice Partenaire ») ont chacune répondu à un retour précis.'
+					}
+				]
+			},
+			{
+				id: 'trop-sombre',
+				nav: 'Trop sombre ?',
+				title: 'Des visiteurs ont trouvé le site trop sombre',
+				kind: 'case',
+				paragraphs: [
+					"Des retours d'utilisateurs ont fait ressortir deux choses : le site paraissait trop foncé, et l'or, volontairement peu saturé, semblait terne à côté d'un rose très saturé comme celui d'une créatrice partenaire. Ce sont des retours oraux, sans mesure : je n'ai aucun chiffre de satisfaction à vous donner.",
+					"J'ai décidé de ne pas refaire le site en mode clair. La raison est technique : la variable du bleu nuit n'est utilisée que dans une minorité des déclarations, la plupart des couleurs sombres étant écrites en dur dans des feuilles de style très volumineuses. Un mode clair aurait demandé de reprendre le site page par page, pour un gain incertain.",
+					"Les pistes légères retenues si le retour revient : éclaircir un cran les surfaces, intercaler des sections claires, et proposer un réglage « ambiance claire » par créateur. Savoir dire « ça n'en vaut pas le coup », arguments techniques à l'appui, fait aussi partie du travail."
+				]
+			},
+			{
+				id: 'conclusion',
+				nav: 'Ce que ça apprend',
+				title: 'Un design vivant se construit avec les retours',
+				kind: 'closing',
+				paragraphs: [
+					"Ce que je retiens de Ciné Délices : une identité forte se pose vite, mais elle ne vaut que si elle reste lisible et qu'on sait la faire évoluer. La vraie compétence, c'est de choisir quels retours intégrer et lesquels laisser de côté, en connaissant le coût de chaque changement.",
+					"Si votre projet demande autre chose qu'un thème standard, parlons-en : j'explique ce qui est faisable et à quel prix, avant de m'engager."
+				]
+			}
+		],
+		sources: [
+			{
+				label: 'Ciné Délices : feuille de style publique (base.css)',
+				url: 'https://cinedelices.com/css/base.css',
+				note: 'Les valeurs #142234, #0f1e30 et #e3b148 et leurs commentaires, tels que le site les publie.'
+			},
+			{
+				label: 'W3C, WCAG 2.1 : Contraste (minimum), critère 1.4.3',
+				url: 'https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html',
+				note: "Ratio d'au moins 4,5 pour 1 pour le texte courant au niveau AA, 3 pour 1 pour le grand texte."
+			},
+			{
+				label: 'MDN, color-mix()',
+				url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix',
+				note: 'Mélange de couleurs dans un espace colorimétrique donné ; disponible dans les navigateurs depuis mai 2023. Page en anglais.'
+			},
+			{
+				label: 'MDN, prefers-reduced-motion',
+				url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion',
+				note: "Détecte la préférence de l'utilisateur pour la réduction des mouvements non essentiels. Page en anglais."
+			},
+			{
+				label: 'MDN, API Canvas',
+				url: 'https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API',
+				note: "Dessin de graphismes et d'animations en JavaScript avec l'élément canvas. Page en anglais."
+			}
+		]
+	},
 	{
 		slug: 'formulaire-wordpress-qui-n-envoie-plus',
 		title: "Formulaire WordPress qui n'envoie plus : comprendre et corriger",

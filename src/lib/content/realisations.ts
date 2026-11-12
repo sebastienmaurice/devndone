@@ -137,9 +137,9 @@ export const projects: readonly Project[] = [
 			subtitle: 'Application web full stack, projet de formation (Titre professionnel DWWM)',
 			period: '12 semaines de développement',
 			summary:
-				"Chaque plat est rattaché au film qui l'a inspiré : affiche, contexte, puis la recette. Développé from scratch par une équipe de 5, sans framework UI côté front.",
+				"Chaque plat est rattaché au film qui l'a inspiré : affiche, contexte, puis la recette. Développé from scratch par une équipe de 3, sans framework UI côté front.",
 			context:
-				"Trois tensions à résoudre : un cahier des charges DWWM, une équipe de 5, et l'envie de produire un site qui ne ressemble pas à un exercice.",
+				"Trois tensions à résoudre : un cahier des charges DWWM, une équipe de 3, et l'envie de produire un site qui ne ressemble pas à un exercice.",
 			interventions: [
 				"Recettes de films : chaque plat rattaché au film qui l'a inspiré",
 				'Système de niveaux et de badges qui récompense chaque contribution',
