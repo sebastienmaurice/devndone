@@ -19,13 +19,7 @@
 export type ArticleSectionKind = 'flow' | 'quote' | 'checklist' | 'steps' | 'case' | 'closing';
 
 /** Images disponibles dans les articles (fichiers dans src/lib/assets/ressources/, choisis par la page) */
-export type ArticleImageId =
-	| 'accueil-ambiance'
-	| 'cinepass-profil'
-	| 'collection-cadres'
-	| 'fonds-cadres'
-	| 'page-auteur'
-	| 'carte-ticket';
+export type ArticleImageId = 'page-auteur';
 
 export type ArticleFigure = {
 	id: ArticleImageId;
@@ -33,8 +27,6 @@ export type ArticleFigure = {
 	alt: string;
 	/** Légende visible */
 	caption: string;
-	/** Image en hauteur : affichée plus étroite */
-	narrow?: boolean;
 };
 
 export type ArticleSwatch = {
@@ -170,23 +162,10 @@ export const articles: readonly Article[] = [
 				],
 				figures: [
 					{
-						id: 'accueil-ambiance',
-						alt: "Section de la page d'accueil de Ciné Délices : le titre « Cuisinez ce que vous regardez » en capitales blanches et or sur un fond bleu nuit, avec trois compteurs et deux boutons",
+						id: 'page-auteur',
+						alt: "Page auteur d'un membre de Ciné Délices : portrait dans un cadre Sherlock Holmes en bois et cuivre, fond de bannière londonien avec lampe à huile et Big Ben, compteurs de recettes, d'avis et de cadres débloqués, puis une rangée de quatre recettes",
 						caption:
-							"Une section de l'accueil : titres en capitales, or sur bleu nuit, bouton doré. Le fond reprend l'univers de la salle de cinéma."
-					},
-					{
-						id: 'carte-ticket',
-						narrow: true,
-						alt: "Carte « Avis de la communauté » en dégradé doré sur fond bleu nuit : titre en capitales, note moyenne à zéro avis, barres de répartition par nombre d'étoiles, séparateur en pointillés à encoches comme sur un ticket",
-						caption:
-							"La carte « Avis de la communauté » : dégradé doré et séparateur en pointillés à encoches, façon ticket de cinéma (le site n'a encore aucun avis, d'où les zéros)."
-					},
-					{
-						id: 'cinepass-profil',
-						alt: "Page CinéPass d'un membre : son avatar entouré d'un cadre animé sur le thème de la magie, son niveau 3, une barre de progression de 485 sur 600 points d'expérience et ses compteurs de recettes, d'avis et de cadres",
-						caption:
-							"Le CinéPass d'un membre : niveau, barre de progression et cadre de profil équipé."
+							"Une page auteur de Ciné Délices : fond bleu nuit, titres en capitales dorées, cadre Sherlock Holmes et fond de bannière associé. C'est l'identité décrite ci-dessous, à l'écran."
 					}
 				]
 			},
@@ -225,32 +204,10 @@ export const articles: readonly Article[] = [
 					"Un moteur d'animation d'environ 800 lignes de JavaScript : une classe par thème, et un chef d'orchestre commun.",
 					'Douze fonds de bannière associés aux cadres, choisis selon une priorité : bannière personnalisée approuvée, puis variante choisie, puis fond du cadre équipé, puis fond par défaut.',
 					"Une préférence « réduire les animations » respectée par le carrousel des publications, mais pas encore par la page CinéPass : c'est un chantier d'accessibilité à venir."
-				],
-				figures: [
-					{
-						id: 'collection-cadres',
-						alt: 'Collection de cadres de la page CinéPass : cartes Sans cadre, Ciné Délices, Sherlock Holmes, Matrix, Indiana Jones et Harry Potter, chacune avec son avatar encadré, son niveau de déblocage et des filtres par univers',
-						caption:
-							'La collection de cadres : chaque carte indique le niveau de déblocage, et des filtres permettent de trier par univers.'
-					},
-					{
-						id: 'fonds-cadres',
-						alt: 'Six fonds illustrés : bobine et pop-corn pour Ciné Délices, Big Ben et réverbère pour Sherlock Holmes, pluie de code vert pour Matrix, chapeau et temple pour Indiana Jones, château sous la lune pour Harry Potter, médaillon à œil et cercle violet pour Doctor Strange',
-						caption:
-							"Les fonds associés à six des cadres. Ces illustrations ont été générées avec des outils d'IA, puis recadrées et optimisées."
-					}
 				]
 			},
 			{
 				id: 'createurs',
-				figures: [
-					{
-						id: 'page-auteur',
-						alt: "Page auteur d'un membre : portrait dans un cadre Sherlock Holmes en bois et cuivre, fond de bannière londonien avec lampe à huile et Big Ben, compteurs de recettes, d'avis et de cadres débloqués, puis une rangée de quatre recettes",
-						caption:
-							"La page auteur d'un membre, ici avec le cadre Sherlock Holmes et le fond de bannière qui lui est associé. Le thème de chaque page suit le cadre équipé."
-					}
-				],
 				nav: 'Un thème par créateur',
 				title: 'Une page sur mesure par créateur : une couleur, tout le reste calculé',
 				kind: 'steps',

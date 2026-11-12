@@ -25,3 +25,7 @@ declare module '*?enhanced&w=1388;960;480' {
 	const picture: import('vite-imagetools').Picture;
 	export default picture;
 }
+declare module '*?enhanced&w=2000;1200;720' {
+	const picture: import('vite-imagetools').Picture;
+	export default picture;
+}
