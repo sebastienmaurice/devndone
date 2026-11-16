@@ -28,8 +28,6 @@
 	import { site, absoluteUrl, organizationId } from '$lib/config/site';
 	import { legal } from '$lib/content/legal';
 
-	const keywords = hero.keywords.split(' · ');
-
 	// Offres de l'accueil (accès direct, maillage interne) : slugs du catalogue content/tarifs.ts
 	const homeOffers = [
 		'sprint-wordpress-woocommerce',
@@ -118,7 +116,6 @@
 <section class="hero" aria-labelledby="hero-title">
 	<div class="container hero__grid">
 		<div class="hero__text">
-			<HandNote lines={heroSlogan} />
 			<h1 class="hero__title" id="hero-title">
 				<!-- Métier en surtitre, dans le H1 (16/11/2026) : lu par les moteurs, discret à l'écran -->
 				<span class="hero__kicker">{hero.kicker}</span>
@@ -127,11 +124,6 @@
 				<span class="hero__line">être <DoneWord sizes="(min-width: 1100px) 340px, 220px" /></span>
 			</h1>
 			<p class="hero__lede">{hero.lede}</p>
-			<p class="hero__keywords">
-				{#each keywords as word, i (word)}{#if i > 0}<span class="hero__slash" aria-hidden="true"
-							>/</span
-						>{/if}<span>{word}</span>{/each}
-			</p>
 			<div class="hero__ctas">
 				<Button href="/services/" icon="arrow-right" size="lg">{hero.ctaServices}</Button>
 				<Button href={links.calendly} variant="secondary" size="lg"
@@ -140,6 +132,8 @@
 			</div>
 		</div>
 		<div class="hero__visual">
+			<!-- Slogan manuscrit côté visuel (16/11/2026) : allège la colonne de texte -->
+			<HandNote lines={heroSlogan} />
 			<enhanced:img
 				src={heroImage}
 				alt="Dev, la mascotte renard de Dev'n Done, assis avec son ordinateur portable entre un écran de code JavaScript et une interface WordPress avec Elementor, entouré des icônes WordPress, Elementor, WooCommerce, Automatisation, Identité et Full Stack"
@@ -304,7 +298,7 @@
 		justify-items: start;
 	}
 	.hero__title {
-		margin: var(--space-4) 0 var(--space-2);
+		margin: 0;
 		font-family: var(--font-display);
 		font-weight: 400;
 		font-size: clamp(2.75rem, 2rem + 3.6vw, 5.25rem);
@@ -341,24 +335,10 @@
 		white-space: nowrap;
 	}
 	.hero__lede {
-		max-width: 34rem;
+		max-width: 38rem;
 		margin: 0;
 		font-size: var(--text-body-lg);
 		color: var(--text-muted);
-	}
-	.hero__keywords {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: var(--space-1) 0;
-		margin: 0;
-		font-size: var(--text-body-sm);
-		font-weight: var(--weight-semibold);
-	}
-	.hero__slash {
-		padding-inline: var(--space-3);
-		color: var(--accent-deco);
-		font-weight: var(--weight-bold);
 	}
 	.hero__ctas {
 		display: flex;
@@ -372,8 +352,16 @@
 	}
 	.hero__visual {
 		position: relative;
+		display: grid;
 		justify-self: center;
 		width: min(100%, 680px);
+	}
+	/* Slogan manuscrit au-dessus de l'illustration, légèrement chevauchant, côté texte */
+	.hero__visual > :global(.hand-note) {
+		position: relative;
+		z-index: 1;
+		justify-self: start;
+		margin: 0 0 calc(-1 * var(--space-4)) var(--space-4);
 	}
 	@media (min-width: 1100px) {
 		.hero__visual {
@@ -387,11 +375,9 @@
 		height: auto;
 	}
 
-	/* Entrée du hero (au chargement, CSS seul) : note manuscrite, titre ligne par ligne, mot DONE
-	   qui apparaît d'un coup, mots-clés et boutons, puis le visuel qui monte et flotte doucement */
-	.hero__text > :global(.hand-note) {
-		animation: hero-rise 640ms var(--ease-out) 80ms both;
-	}
+	/* Entrée du hero (au chargement, CSS seul) : surtitre, titre ligne par ligne, mot DONE
+	   qui apparaît d'un coup, accroche et boutons, puis le visuel (avec la note manuscrite) qui monte
+	   et flotte doucement */
 	.hero__kicker {
 		animation: hero-rise 640ms var(--ease-out) 140ms both;
 	}
@@ -411,8 +397,7 @@
 		display: inline-block;
 		animation: hero-pop 720ms cubic-bezier(0.34, 1.56, 0.64, 1) 900ms both;
 	}
-	.hero__lede,
-	.hero__keywords {
+	.hero__lede {
 		animation: hero-rise 640ms var(--ease-out) 760ms both;
 	}
 	.hero__ctas {
@@ -463,12 +448,10 @@
 		}
 	}
 	@media (prefers-reduced-motion: reduce) {
-		.hero__text > :global(.hand-note),
 		.hero__kicker,
 		.hero__line,
 		.hero__line :global(.done),
 		.hero__lede,
-		.hero__keywords,
 		.hero__ctas,
 		.hero__visual,
 		.hero__visual :global(img) {

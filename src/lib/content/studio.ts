@@ -140,7 +140,6 @@ export const hero = {
 	 *  refonte de sites, automatisation, WordPress et WooCommerce (pas seulement WordPress) */
 	kicker: 'Développeur web full stack',
 	lede: "Dev'n Done crée et fait évoluer des sites web et des outils sur mesure : développement full stack, automatisation des processus, WordPress et WooCommerce. Pour les entreprises comme en renfort des agences.",
-	keywords: 'Sites web · Automatisation · WordPress · WooCommerce',
 	ctaServices: 'Découvrir les services',
 	ctaCall: 'Réserver 15 min'
 } as const;
