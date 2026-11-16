@@ -52,6 +52,8 @@ export const universes: readonly Universe[] = [
 	},
 	{
 		id: 'design',
+		/** H1 = titre SEO validé (audit SEO du 16/11/2026), nom court en surtitre */
+		headingAccent: 'direction artistique',
 		title: 'Design',
 		text: 'Identité visuelle, direction artistique, images IA et mockups : une esthétique cohérente pour marquer les esprits.',
 		tags: ['Identité visuelle', 'Direction artistique', 'Images IA', 'Mockups'],
@@ -63,6 +65,8 @@ export const universes: readonly Universe[] = [
 	},
 	{
 		id: 'automatisation',
+		/** H1 = titre SEO validé (audit SEO du 16/11/2026), nom court en surtitre */
+		headingAccent: 'Make et Zapier',
 		title: 'Automatisation',
 		text: 'Et si cette tâche pouvait se faire toute seule ? Audit des processus, automatisation ciblée ou complète.',
 		tags: ['Audit', 'Automatisation ciblée', 'Make · Zapier'],
@@ -74,6 +78,8 @@ export const universes: readonly Universe[] = [
 	},
 	{
 		id: 'applications',
+		/** H1 = titre SEO validé (audit SEO du 16/11/2026), nom court en surtitre */
+		headingAccent: 'sur mesure',
 		title: 'Applications & logiciels',
 		text: 'Outils métier et applications web sur mesure, étudiés au cas par cas. Un logiciel pour enseignistes est en cours de développement.',
 		tags: ['Outils sur mesure', 'Applications web', 'Étude au cas par cas'],
@@ -85,6 +91,8 @@ export const universes: readonly Universe[] = [
 	},
 	{
 		id: 'full-stack',
+		/** H1 = titre SEO validé (audit SEO du 16/11/2026), nom court en surtitre */
+		headingAccent: 'interfaces, API, back-end',
 		title: 'Full Stack',
 		text: 'Interfaces, API et back-end, pour les besoins qui dépassent un site WordPress. Étudié au cas par cas.',
 		tags: ['Interfaces', 'API', 'Back-end'],

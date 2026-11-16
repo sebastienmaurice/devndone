@@ -75,7 +75,13 @@
 			image: absoluteUrl(site.ogImage),
 			description: site.description,
 			slogan: heroSlogan.join(' '),
-			knowsAbout: ['WordPress', 'WooCommerce', 'Intégration front-end'],
+			knowsAbout: [
+				'Développement full stack',
+				'Création et refonte de sites web',
+				'Automatisation des processus',
+				'WordPress',
+				'WooCommerce'
+			],
 			areaServed: 'FR',
 			// Coordonnées : celles des mentions légales (publication validée par Sébastien)
 			telephone: '+33 6 20 84 78 01',
@@ -114,6 +120,8 @@
 		<div class="hero__text">
 			<HandNote lines={heroSlogan} />
 			<h1 class="hero__title" id="hero-title">
+				<!-- Métier en surtitre, dans le H1 (16/11/2026) : lu par les moteurs, discret à l'écran -->
+				<span class="hero__kicker">{hero.kicker}</span>
 				<span class="hero__line">Des projets</span>
 				<span class="hero__line">pensés pour</span>
 				<span class="hero__line">être <DoneWord sizes="(min-width: 1100px) 340px, 220px" /></span>
@@ -305,6 +313,28 @@
 		color: var(--text);
 		text-wrap: balance;
 	}
+	/* Surtitre du H1 : le métier, en Plus Jakarta capitales, précédé d'un trait orange */
+	.hero__kicker {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+		margin-bottom: var(--space-4);
+		font-family: var(--font-ui);
+		font-size: clamp(0.8125rem, 0.75rem + 0.25vw, 0.9375rem);
+		font-weight: var(--weight-extrabold);
+		letter-spacing: var(--tracking-label);
+		line-height: 1.3;
+		text-transform: uppercase;
+		text-wrap: balance;
+	}
+	.hero__kicker::before {
+		content: '';
+		flex: none;
+		width: 2rem;
+		height: 3px;
+		border-radius: 2px;
+		background: var(--accent-deco);
+	}
 	/* Trois lignes fixes : « être » et DONE restent ensemble sur la dernière */
 	.hero__line {
 		display: block;
@@ -362,16 +392,19 @@
 	.hero__text > :global(.hand-note) {
 		animation: hero-rise 640ms var(--ease-out) 80ms both;
 	}
+	.hero__kicker {
+		animation: hero-rise 640ms var(--ease-out) 140ms both;
+	}
 	.hero__line {
 		animation: hero-line 760ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 	}
-	.hero__line:nth-child(1) {
+	.hero__line:nth-child(2) {
 		animation-delay: 200ms;
 	}
-	.hero__line:nth-child(2) {
+	.hero__line:nth-child(3) {
 		animation-delay: 330ms;
 	}
-	.hero__line:nth-child(3) {
+	.hero__line:nth-child(4) {
 		animation-delay: 460ms;
 	}
 	.hero__line :global(.done) {
@@ -431,6 +464,7 @@
 	}
 	@media (prefers-reduced-motion: reduce) {
 		.hero__text > :global(.hand-note),
+		.hero__kicker,
 		.hero__line,
 		.hero__line :global(.done),
 		.hero__lede,

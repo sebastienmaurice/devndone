@@ -1,14 +1,15 @@
 import { absoluteUrl } from '$lib/config/site';
 import { sitemapPages } from '$lib/content/pages';
 
-// Généré une fois au build : fichier statique build/sitemap.xml
+// Généré une fois au build : fichier statique build/sitemap.xml. <lastmod> seulement quand la date
+// de modification est réellement connue (articles) : une date approximative serait ignorée par Google
 export const prerender = true;
 
 export function GET() {
 	const urls = sitemapPages
 		.map(
 			(p) => `  <url>
-    <loc>${absoluteUrl(p.path)}</loc>${p.priority !== undefined ? `\n    <priority>${p.priority.toFixed(1)}</priority>` : ''}
+    <loc>${absoluteUrl(p.path)}</loc>${p.lastmod ? `\n    <lastmod>${p.lastmod}</lastmod>` : ''}${p.priority !== undefined ? `\n    <priority>${p.priority.toFixed(1)}</priority>` : ''}
   </url>`
 		)
 		.join('\n');

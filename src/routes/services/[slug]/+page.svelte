@@ -56,8 +56,8 @@
 <Seo title={u.seoTitle} path={u.path} description={u.description ?? u.text} />
 
 <PageIntro
-	label="Expertise {num}"
-	heading={u.heading ?? u.title}
+	label="Expertise {num} · {u.title}"
+	heading={u.heading ?? u.seoTitle}
 	accent={u.headingAccent}
 	lede={u.text}
 	crumbs={[

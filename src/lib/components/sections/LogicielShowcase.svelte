@@ -34,6 +34,10 @@
 
 	const images = [commerce, cotes, proposition, fiche];
 	const gallery = [realite, interfacePlan, mesures, planTechnique];
+	// Niveaux de titres : sans en-tête propre, le composant suit directement le H1 de la page ; ses
+	// titres remontent d'un niveau (H2 puis H3) pour une structure sans saut (audit SEO, 16/11/2026)
+	const h2 = $derived(showHeader ? 'h3' : 'h2');
+	const h3 = $derived(showHeader ? 'h4' : 'h3');
 	const pad = (n: number) => String(n + 1).padStart(2, '0');
 </script>
 
@@ -67,7 +71,7 @@
 			{#each logicielPillars as p, i (p.title)}
 				<li class="pillar">
 					<span class="pillar__num" aria-hidden="true">{pad(i)}</span>
-					<h3 class="pillar__title">{p.title}</h3>
+					<svelte:element this={h2} class="pillar__title">{p.title}</svelte:element>
 					<p>{p.text}</p>
 				</li>
 			{/each}
@@ -75,7 +79,9 @@
 
 		<!-- Exemple conceptuel en 4 étapes -->
 		<div class="stack stack--sm">
-			<h3 class="sub-title">Un exemple, de la façade nue au dossier prêt à produire</h3>
+			<svelte:element this={h2} class="sub-title"
+				>Un exemple, de la façade nue au dossier prêt à produire</svelte:element
+			>
 			<ol class="example" role="list">
 				{#each logicielSteps as step, i (step.title)}
 					<li class="example__step">
@@ -89,7 +95,7 @@
 							/>
 						</span>
 						<span class="example__num" aria-hidden="true">{pad(i)}</span>
-						<h4 class="example__title">{step.title}</h4>
+						<svelte:element this={h3} class="example__title">{step.title}</svelte:element>
 						<p class="example__text">{step.text}</p>
 					</li>
 				{/each}
@@ -98,7 +104,7 @@
 
 		<!-- Mises en situation -->
 		<div class="stack stack--sm">
-			<h3 class="sub-title">Sur le terrain, sur tablette</h3>
+			<svelte:element this={h2} class="sub-title">Sur le terrain, sur tablette</svelte:element>
 			<ul class="gallery" role="list">
 				{#each logicielGallery as g, i (g.caption)}
 					<li>
@@ -120,12 +126,14 @@
 
 		<!-- Parcours en 5 phases -->
 		<div class="stack stack--sm">
-			<h3 class="sub-title">Du premier contact à l'encaissement, un seul dossier</h3>
+			<svelte:element this={h2} class="sub-title"
+				>Du premier contact à l'encaissement, un seul dossier</svelte:element
+			>
 			<ol class="phases" role="list">
 				{#each logicielPhases as phase, i (phase.title)}
 					<li class="phase">
 						<p class="phase__label">Phase {i + 1}</p>
-						<h4 class="phase__title">{phase.title}</h4>
+						<svelte:element this={h3} class="phase__title">{phase.title}</svelte:element>
 						<ul class="phase__steps" role="list">
 							{#each phase.steps as st (st)}<li>{st}</li>{/each}
 						</ul>
@@ -142,11 +150,11 @@
 
 		<!-- Ce que cela apporte -->
 		<div class="stack stack--sm">
-			<h3 class="sub-title">Ce que cela apporte</h3>
+			<svelte:element this={h2} class="sub-title">Ce que cela apporte</svelte:element>
 			<ul class="benefits" role="list">
 				{#each logicielBenefits as b (b.title)}
 					<li class="benefit">
-						<h4 class="benefit__title">{b.title}</h4>
+						<svelte:element this={h3} class="benefit__title">{b.title}</svelte:element>
 						<ul role="list">
 							{#each b.items as it (it)}
 								<li><span class="benefit__check"><Icon name="check" size="sm" /></span>{it}</li>

@@ -38,9 +38,13 @@
 		jsonLd
 	}: Props = $props();
 
-	const fullTitle = $derived(
-		fullTitleProp ?? (title ? `${title} · ${site.wordmark}` : site.homeTitle)
-	);
+	// Suffixe « · Dev'n Done » ajouté seulement si le titre complet tient en 60 caractères (au-delà,
+	// Google tronque) : audit SEO du 16/11/2026
+	const withSuffix = (t: string) => {
+		const full = `${t} · ${site.wordmark}`;
+		return full.length <= 60 ? full : t;
+	};
+	const fullTitle = $derived(fullTitleProp ?? (title ? withSuffix(title) : site.homeTitle));
 	const shareTitle = $derived(ogTitle ?? fullTitle);
 	const shareDescription = $derived(ogDescription ?? description);
 	const canonical = $derived(absoluteUrl(path));

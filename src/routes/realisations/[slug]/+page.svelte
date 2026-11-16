@@ -17,6 +17,7 @@
 	import { links, reviews } from '$lib/content/studio';
 	import { offerPath, offers } from '$lib/content/tarifs';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
+	import { absoluteUrl, organizationId } from '$lib/config/site';
 
 	let { data } = $props();
 
@@ -35,6 +36,33 @@
 		import: 'default'
 	});
 	const picture = $derived(pictures[`/src/lib/assets/projets/${p.image}.jpg`]);
+
+	// Image de partage (Open Graph) : le visuel du projet recadré en 1200 × 630, en JPEG
+	const ogImages = import.meta.glob<string>('/src/lib/assets/projets/*.jpg', {
+		eager: true,
+		query: { w: '1200', h: '630', fit: 'cover', format: 'jpg' },
+		import: 'default'
+	});
+	const ogImage = $derived(ogImages[`/src/lib/assets/projets/${p.image}.jpg`]);
+
+	// Données structurées de l'étude de cas (audit SEO et GEO du 16/11/2026) : uniquement des
+	// informations déjà affichées sur la page
+	const workLd = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'CreativeWork',
+		name: p.name,
+		headline: p.details?.subtitle ?? p.seoTitle,
+		description: p.description ?? p.text,
+		url: absoluteUrl(`/realisations/${p.slug}/`),
+		image: ogImage ? absoluteUrl(ogImage) : undefined,
+		creator: { '@id': organizationId },
+		keywords: p.stack.split(' · ').join(', '),
+		about: p.details?.sector,
+		locationCreated: p.details?.location
+			? { '@type': 'Place', name: p.details.location }
+			: undefined,
+		inLanguage: 'fr-FR'
+	});
 
 	const host = $derived(new URL(p.url).hostname.replace(/^www\./, ''));
 	const index = $derived(projects.findIndex((x) => x.slug === p.slug));
@@ -58,7 +86,14 @@
 	);
 </script>
 
-<Seo title={p.seoTitle} path="/realisations/{p.slug}/" description={p.description ?? p.text} />
+<Seo
+	title={p.seoTitle}
+	path="/realisations/{p.slug}/"
+	description={p.description ?? p.text}
+	image={ogImage}
+	imageAlt="Aperçu du site {p.name}"
+	jsonLd={workLd}
+/>
 
 <PageIntro
 	label="Réalisation {num}"

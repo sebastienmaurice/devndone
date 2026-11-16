@@ -21,6 +21,8 @@ export type PageEntry = {
 	/** Incluse dans sitemap.xml */
 	sitemap: boolean;
 	priority?: number;
+	/** Date de dernière modification réelle (AAAA-MM-JJ), seulement quand elle est connue */
+	lastmod?: string;
 };
 
 export type NavItem = {
@@ -80,7 +82,8 @@ export const pages: PageEntry[] = [
 		path: articlePath(a.slug),
 		label: a.title,
 		sitemap: true,
-		priority: 0.6
+		priority: 0.6,
+		lastmod: a.modified
 	})),
 	{ path: '/tarifs/', label: 'Tarifs', footer: 'studio', sitemap: true, priority: 0.7 },
 	{ path: '/apropos/', label: 'À propos', footer: 'studio', sitemap: true, priority: 0.6 },

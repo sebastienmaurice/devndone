@@ -14,6 +14,7 @@
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import Accordion from '$lib/components/ui/Accordion.svelte';
+	import { faqPageLd } from '$lib/config/jsonld';
 	import PriceTag from '$lib/components/ui/PriceTag.svelte';
 	import { maintenanceVisual } from '$lib/assets/maintenance/formules';
 	import { hero, links } from '$lib/content/studio';
@@ -27,6 +28,7 @@
 	title={maintenancePage.seoTitle}
 	path={maintenancePage.path}
 	description={maintenancePage.description}
+	jsonLd={faqPageLd(faq)}
 />
 
 <PageIntro

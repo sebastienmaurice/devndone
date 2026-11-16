@@ -10,14 +10,14 @@ export const site = {
 	lang: 'fr',
 	locale: 'fr_FR',
 	tagline: ['Développer', 'Piloter', 'Livrer'],
-	// Titre, description et Open Graph de l'accueil : développement web, WordPress et WooCommerce en
-	// spécialité, voix de marque à la troisième personne (22/10/2026)
-	homeTitle: "Dev'n Done · Développement web, WordPress et WooCommerce",
+	// Titre, description et Open Graph de l'accueil : développeur web full stack, sites web,
+	// automatisation, WordPress et WooCommerce (positionnement précisé le 16/11/2026)
+	homeTitle: "Dev'n Done · Développeur web full stack et WordPress",
 	description:
-		"Dev'n Done crée, refond et optimise des sites web, de la maquette à l'intégration front-end, avec une spécialité WordPress et WooCommerce.",
+		'Développeur web full stack : création et refonte de sites, automatisation des processus, WordPress et WooCommerce, pour les entreprises et les agences.',
 	ogTitle: "Dev'n Done · Des projets pensés pour être Done.",
 	ogDescription:
-		'Développement web, design et solutions sur mesure, avec une spécialité WordPress et WooCommerce.',
+		'Développement full stack, sites web, automatisation des processus, WordPress et WooCommerce.',
 	themeColor: '#0A0D11',
 	ogImage: '/og/dev-n-done-studio-digital-wordpress.jpg',
 	ogImageAlt:

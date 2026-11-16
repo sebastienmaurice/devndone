@@ -135,9 +135,11 @@ export const homePaths = {
 } as const;
 
 export const hero = {
-	/** Le métier dès le premier écran, voix de marque (22/10/2026) */
-	lede: "Dev'n Done crée et fait évoluer des sites web : développement, intégration front-end, spécialité WordPress et WooCommerce. Pour les entreprises comme en renfort des agences.",
-	keywords: 'Front-end · WordPress · WooCommerce',
+	/** Positionnement précisé par Sébastien le 16/11/2026 : développeur full stack, création et
+	 *  refonte de sites, automatisation, WordPress et WooCommerce (pas seulement WordPress) */
+	kicker: 'Développeur web full stack',
+	lede: "Dev'n Done crée et fait évoluer des sites web et des outils sur mesure : développement full stack, automatisation des processus, WordPress et WooCommerce. Pour les entreprises comme en renfort des agences.",
+	keywords: 'Sites web · Automatisation · WordPress · WooCommerce',
 	ctaServices: 'Découvrir les services',
 	ctaCall: 'Réserver 15 min'
 } as const;

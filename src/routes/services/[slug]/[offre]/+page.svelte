@@ -14,6 +14,7 @@
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import Accordion from '$lib/components/ui/Accordion.svelte';
+	import { faqPageLd } from '$lib/config/jsonld';
 	import { offerVisuals } from '$lib/assets/tarifs/visuels';
 	import { hero, links, maltRating, reviewsIntro } from '$lib/content/studio';
 	import PriceTag from '$lib/components/ui/PriceTag.svelte';
@@ -99,7 +100,12 @@
 	});
 </script>
 
-<Seo title={o.seoTitle} path={offerPath(o)} description={o.description} jsonLd={serviceLd} />
+<Seo
+	title={o.seoTitle}
+	path={offerPath(o)}
+	description={o.description}
+	jsonLd={[serviceLd, faqPageLd(faq)]}
+/>
 
 <PageIntro
 	label={o.name}

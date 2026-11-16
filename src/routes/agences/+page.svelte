@@ -16,6 +16,7 @@
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
 	import Accordion from '$lib/components/ui/Accordion.svelte';
+	import { faqPageLd } from '$lib/config/jsonld';
 	import visual from '$lib/assets/mascotte/mascotte-renard-dev-n-done-developpeur-wordpress-code.jpg?enhanced&w=1200;720;360';
 	import { missionVisuals } from '$lib/assets/agences/missions';
 	import presentation from '$lib/assets/mascotte/mascotte-renard-projet-site-web-presentation-client.jpg?enhanced&w=720;360';
@@ -35,7 +36,12 @@
 	const faq = agencesFaq.map((f) => ({ question: f.q, answer: f.a }));
 </script>
 
-<Seo title={agencesPage.seoTitle} path={agencesPage.path} description={agencesPage.description} />
+<Seo
+	title={agencesPage.seoTitle}
+	path={agencesPage.path}
+	description={agencesPage.description}
+	jsonLd={faqPageLd(faq)}
+/>
 
 <PageIntro
 	label={agencesPage.label}
