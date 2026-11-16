@@ -18,6 +18,7 @@
 	import OfferShortcuts from '$lib/components/sections/OfferShortcuts.svelte';
 	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
+	import PriceTag from '$lib/components/ui/PriceTag.svelte';
 	import heroImage from '$lib/assets/mascotte/mascotte-renard-developpeur-wordpress-elementor.png?enhanced&w=1120;720;480&quality=40';
 	import { realisationsIntro } from '$lib/content/realisations';
 	import { heroSlogan, servicesIntro } from '$lib/content/services';
@@ -170,7 +171,16 @@
 						<div class="path__body">
 							<h3 class="path__title">{p.title}</h3>
 							<p>{p.text}</p>
-							<p class="path__price">{p.price}</p>
+							<!-- Repère de prix en « ticket » : montant à gauche, précision à droite après
+							     la perforation ; passe en Bleu nuit au survol de la carte -->
+							<div class="path__ticket">
+								<PriceTag
+									label={p.priceTag.label}
+									value={p.priceTag.value}
+									unit={'unit' in p.priceTag ? p.priceTag.unit : undefined}
+								/>
+								<p class="path__note">{p.priceTag.note}</p>
+							</div>
 							<p class="path__links">
 								{#each p.links as l (l.href)}
 									<a class="link-arrow" href={l.href}>{l.label} <Icon name="arrow-right" /></a>
@@ -491,6 +501,7 @@
 		display: grid;
 	}
 	.path {
+		position: relative;
 		display: grid;
 		gap: var(--space-4);
 		align-items: center;
@@ -499,9 +510,22 @@
 		border: 1px solid var(--line);
 		border-radius: var(--radius-card);
 		box-shadow: var(--shadow-card);
+		overflow: hidden;
 		transition:
-			box-shadow var(--duration-base) var(--ease-out),
-			border-color var(--duration-base) var(--ease-out);
+			transform var(--duration-reveal) var(--ease-out),
+			box-shadow var(--duration-reveal) var(--ease-out),
+			border-color var(--duration-reveal) var(--ease-out);
+	}
+	/* Filet orange qui se dessine en haut de la carte au survol */
+	.path::before {
+		content: '';
+		position: absolute;
+		inset: 0 0 auto;
+		height: 4px;
+		background: var(--action);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform var(--duration-scene) var(--ease-out);
 	}
 	/* Mascotte à gauche, contenu à droite ; empilés sur téléphone */
 	@media (min-width: 600px) {
@@ -526,6 +550,7 @@
 		width: 100%;
 		height: auto;
 		aspect-ratio: 1;
+		transition: transform var(--duration-scene) var(--ease-out);
 	}
 	.path__body {
 		display: grid;
@@ -540,11 +565,66 @@
 		margin: 0;
 		color: var(--text-muted);
 	}
-	/* Repère de prix : toujours visible (audit du 16/11/2026) */
-	.path .path__price {
-		font-weight: var(--weight-semibold);
-		color: var(--text);
+
+	/* Repère de prix en « ticket » (audit du 16/11/2026) : fond bleu océan très clair, encoches
+	   découpées sur les côtés, perforation en pointillés entre le montant et sa précision */
+	.path__ticket {
+		--notch: 0.6rem;
+		justify-self: start;
+		display: grid;
+		grid-template-columns: auto auto;
+		align-items: center;
+		gap: var(--space-4);
+		max-width: 100%;
+		margin-top: var(--space-1);
+		padding: var(--space-3) var(--space-5);
+		background: var(--tag-bg);
+		border-radius: var(--radius-md);
+		mask:
+			radial-gradient(circle var(--notch) at 0 50%, transparent 98%, black) left / 51% 100%
+				no-repeat,
+			radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, black) right / 51% 100%
+				no-repeat;
+		transform-origin: left center;
+		transition:
+			background-color var(--duration-reveal) var(--ease-out),
+			transform var(--duration-reveal) var(--ease-out);
 	}
+	/* Libellé du prix sur une ligne : la précision prend la place restante */
+	.path__ticket :global(.price__label) {
+		white-space: nowrap;
+	}
+	.path .path__note {
+		align-self: stretch;
+		display: flex;
+		align-items: center;
+		max-width: 10rem;
+		padding-left: var(--space-4);
+		border-left: 2px dashed color-mix(in srgb, var(--tag-text) 40%, transparent);
+		font-size: var(--text-body-sm);
+		font-weight: var(--weight-semibold);
+		line-height: var(--leading-tight);
+		color: var(--text);
+		transition:
+			color var(--duration-reveal) var(--ease-out),
+			border-color var(--duration-reveal) var(--ease-out);
+	}
+
+	/* Téléphone : la précision passe sous le montant, perforation horizontale */
+	@media (max-width: 479px) {
+		.path__ticket {
+			justify-self: stretch;
+			grid-template-columns: minmax(0, 1fr);
+			gap: var(--space-2);
+		}
+		.path .path__note {
+			max-width: none;
+			padding: var(--space-2) 0 0;
+			border-left: 0;
+			border-top: 2px dashed color-mix(in srgb, var(--tag-text) 40%, transparent);
+		}
+	}
+
 	.path .path__links {
 		display: flex;
 		flex-wrap: wrap;
@@ -555,12 +635,30 @@
 		transition: transform var(--duration-base) var(--ease-out);
 	}
 
-	/* Survol et focus clavier : simple mise en valeur (filet orange, ombre, flèches). Mascotte,
-	   texte, repère de prix et liens restent visibles au repos (audit du 16/11/2026). */
+	/* Survol et focus clavier : la carte se soulève, le filet orange se dessine, la mascotte
+	   s'approche et le ticket passe en Bleu nuit, montant en orange, légèrement détaché. Tout le
+	   contenu reste visible au repos. */
 	@media (hover: hover) {
 		.path:is(:hover, :focus-within) {
+			transform: translateY(-6px);
 			border-color: var(--action);
 			box-shadow: var(--shadow-card-hover);
+		}
+		.path:is(:hover, :focus-within)::before {
+			transform: scaleX(1);
+		}
+		.path:is(:hover, :focus-within) .path__media :global(img) {
+			transform: scale(1.06) rotate(-1.5deg);
+		}
+		.path:is(:hover, :focus-within) .path__ticket {
+			--price-color: var(--action);
+			--price-muted: color-mix(in srgb, var(--bg) 72%, var(--text));
+			background: var(--text);
+			transform: rotate(-2deg);
+		}
+		.path:is(:hover, :focus-within) .path__note {
+			color: var(--bg);
+			border-left-color: color-mix(in srgb, var(--bg) 40%, transparent);
 		}
 		.path:is(:hover, :focus-within) .path__links :global(.icon) {
 			transform: translateX(4px);
@@ -590,8 +688,11 @@
 	}
 	/* Mouvement réduit : pas de déplacement, seules l'opacité et les couleurs changent */
 	@media (prefers-reduced-motion: reduce) {
+		.path,
 		.path__stage,
 		.path__body,
+		.path__ticket,
+		.path__media :global(img),
 		.path .path__links :global(.icon) {
 			transform: none !important;
 		}
@@ -604,11 +705,6 @@
 	/* Fond Ivoire : les cartes blanches du process s'en détachent */
 	.home-process {
 		border-block: 1px solid var(--line);
-	}
-	/* Repère de prix des cartes d'orientation (tarifs validés, sans « HT ») */
-	.path .path__price {
-		font-weight: var(--weight-bold);
-		color: var(--text);
 	}
 	.paths-vat {
 		margin: var(--space-4) 0 0;
