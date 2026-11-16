@@ -2,18 +2,13 @@
 	Cartes d'offre (content/tarifs.ts). `only` : slugs à afficher (pages de services) ; `group` :
 	création ou interventions ponctuelles. Prix affichés sans « HT » : franchise en base de TVA.
 
-	Au repos (écrans à survol) : pastille, nom, description, mascotte en grand, liens. Pas de prix.
-	Au survol ou au focus clavier : la carte passe en Bleu nuit, filet orange ; la mascotte s'efface
-	(son fond blanc ne doit jamais apparaître sur le Bleu nuit) et laisse la place aux éléments
-	compris et au prix en grand, en orange ; « Découvrir l'offre » devient un bouton orange.
-	Les deux compositions occupent la même case (même hauteur) : aucun saut de mise en page.
-	Écrans tactiles (sans survol) : la carte reste claire et montre tout, mascotte, éléments compris
-	et prix.
+	Tout est visible au repos, sur tous les écrans (audit du 16/11/2026 : le prix ne doit jamais
+	dépendre du survol) : pastille, nom, description, mascotte, éléments compris, prix, liens.
+	Au survol ou au focus clavier : simple mise en valeur, filet orange, ombre plus marquée,
+	« Découvrir l'offre » devient un bouton orange.
 
 	Éléments compris : les trois premières lignes de « Ce qui est compris » (offer.includes) assez
 	courtes pour la carte (52 caractères au plus), reprises mot pour mot, sans troncature.
-	Couleurs du survol : variables sémantiques inversées (--text en fond, --bg en texte, --action
-	pour l'orange), sans code couleur en dur.
 
 	Grille (24/10/2026) : 1 colonne, 2 dès 640 px, 3 dès 1024 px, 4 dès 1280 px (en dessous, le bouton du survol et « En parler » ne tiennent plus sur une ligne). Colonnes de largeur
 	fixe : une rangée incomplète garde des cartes de même largeur que les autres.
@@ -117,12 +112,6 @@
 	}
 
 	.package {
-		/* Teintes du survol, tirées des variables sémantiques du contexte clair (inversées) */
-		--deal-muted: color-mix(in srgb, var(--bg) 74%, var(--text));
-		--deal-line: color-mix(in srgb, var(--bg) 16%, var(--text));
-		/* Délai des changements de couleur : nul au retour, le temps que la mascotte s'efface à
-		   l'entrée du survol (voir plus bas) */
-		--swap-delay: 0s;
 		display: grid;
 		/* Lignes partagées avec les cartes voisines (subgrid) : pastille, nom, description, zone
 		   visuelle et liens restent alignés d'une carte à l'autre */
@@ -137,9 +126,8 @@
 		box-shadow: var(--shadow-card);
 		scroll-margin-top: 110px;
 		transition:
-			background-color var(--duration-base) var(--ease-out) var(--swap-delay),
-			border-color var(--duration-base) var(--ease-out) var(--swap-delay),
-			box-shadow var(--duration-base) var(--ease-out) var(--swap-delay);
+			border-color var(--duration-base) var(--ease-out),
+			box-shadow var(--duration-base) var(--ease-out);
 	}
 	/* Délai en pastille : bleu océan très clair, texte Bleu nuit, icône bleu océan */
 	.package__delay {
@@ -154,14 +142,10 @@
 		font-size: var(--text-caption);
 		font-weight: var(--weight-bold);
 		color: var(--text);
-		transition:
-			background-color var(--duration-base) var(--ease-out) var(--swap-delay),
-			color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	.package__delay :global(.icon) {
 		flex: none;
 		color: var(--tag-text);
-		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	/* Nom en grand, réparti sur deux lignes équilibrées */
 	.package__name {
@@ -170,7 +154,6 @@
 		font-size: clamp(1.625rem, 1.45rem + 0.4vw, 1.875rem);
 		line-height: 1.05;
 		text-wrap: balance;
-		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	.package__name--lines {
 		max-width: none;
@@ -179,9 +162,8 @@
 		margin: 0;
 		font-size: var(--text-body-sm);
 		color: var(--text-muted);
-		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
-	/* Zone visuelle : mascotte au repos, éléments compris et prix au survol */
+	/* Zone visuelle : mascotte, puis éléments compris et prix */
 	.package__stage {
 		align-self: stretch;
 		display: grid;
@@ -190,7 +172,7 @@
 	}
 	.package__visual {
 		justify-self: center;
-		width: min(100%, 20rem);
+		width: min(100%, 17rem);
 		aspect-ratio: 919 / 754;
 	}
 	.package__visual :global(img) {
@@ -204,6 +186,14 @@
 		display: grid;
 		gap: var(--space-4);
 		align-content: start;
+	}
+	/* Avec mascotte : éléments compris et prix calés en bas de la zone (partagée par la rangée),
+	   pour que les prix soient à la même hauteur d'une carte à l'autre */
+	.package--visual .package__stage {
+		grid-template-rows: auto 1fr;
+	}
+	.package--visual .package__deal {
+		align-content: end;
 	}
 	.package__features {
 		display: grid;
@@ -227,7 +217,6 @@
 	.package__price {
 		padding-top: var(--space-3);
 		border-top: 1px solid var(--line);
-		transition: border-color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	.package__actions {
 		display: flex;
@@ -237,7 +226,6 @@
 		gap: var(--space-2);
 		padding-top: var(--space-4);
 		border-top: 1px solid var(--line);
-		transition: border-color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	/* Hauteur constante : le lien a déjà la hauteur du bouton qu'il devient au survol */
 	.package__cta {
@@ -245,9 +233,9 @@
 		padding-inline: 0;
 		border-radius: var(--radius-btn);
 		transition:
-			background-color var(--duration-base) var(--ease-out) var(--swap-delay),
-			color var(--duration-base) var(--ease-out) var(--swap-delay),
-			padding var(--duration-base) var(--ease-out) var(--swap-delay);
+			background-color var(--duration-base) var(--ease-out),
+			color var(--duration-base) var(--ease-out),
+			padding var(--duration-base) var(--ease-out);
 	}
 	.package__talk {
 		font-size: var(--text-body-sm);
@@ -255,83 +243,13 @@
 		color: var(--text-muted);
 		text-decoration: underline;
 		text-underline-offset: 3px;
-		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 
-	/* Écrans à survol : les deux compositions dans la même case, prix caché au repos */
+	/* Survol et focus clavier : mise en valeur seulement, aucun contenu masqué au repos */
 	@media (hover: hover) {
-		.package__stage > :global(*) {
-			grid-area: 1 / 1;
-		}
-		/* Enchaînement sans transparence : la mascotte (JPG à fond blanc, en multiply) n'est jamais
-		   visible sur un fond qui fonce. Entrée : elle s'efface d'abord, sur la carte encore blanche,
-		   puis fond, couleurs et prix changent (--swap-delay). Sortie : le prix s'efface, la carte
-		   redevient blanche, puis la mascotte revient. */
-		.package__visual {
-			align-self: center;
-			transition:
-				opacity var(--duration-micro) var(--ease-out) var(--duration-base),
-				transform var(--duration-base) var(--ease-out) var(--duration-base);
-		}
-		.package__deal {
-			opacity: 0;
-			transform: translateY(8px);
-			transition:
-				opacity var(--duration-micro) var(--ease-out),
-				transform var(--duration-micro) var(--ease-out);
-		}
 		.package:is(:hover, :focus-within) {
-			--swap-delay: var(--duration-micro);
-		}
-		.package:is(:hover, :focus-within) .package__visual {
-			transition:
-				opacity var(--duration-micro) var(--ease-out),
-				transform var(--duration-micro) var(--ease-out);
-		}
-		.package:is(:hover, :focus-within) .package__deal {
-			transition:
-				opacity var(--duration-base) var(--ease-out) var(--duration-micro),
-				transform var(--duration-base) var(--ease-out) var(--duration-micro);
-		}
-
-		/* Offre sans illustration : rien à remplacer, le prix reste affiché */
-		.package:not(.package--visual) .package__deal {
-			opacity: 1;
-			transform: none;
-		}
-		/* État actif : Bleu nuit (fond --text), filet orange, textes clairs */
-		.package:is(:hover, :focus-within) {
-			background: var(--text);
 			border-color: var(--action);
 			box-shadow: var(--shadow-card-hover);
-		}
-		.package:is(:hover, :focus-within) .package__delay {
-			background: var(--action);
-			color: var(--text);
-		}
-		.package:is(:hover, :focus-within) .package__delay :global(.icon) {
-			color: var(--text);
-		}
-		.package:is(:hover, :focus-within) .package__name {
-			color: var(--bg);
-		}
-		.package:is(:hover, :focus-within) :is(.package__text, .package__features) {
-			color: var(--deal-muted);
-		}
-		.package:is(:hover, :focus-within) :is(.package__price, .package__actions) {
-			border-color: var(--deal-line);
-		}
-		.package:is(:hover, :focus-within) .package__price {
-			--price-color: var(--action);
-			--price-muted: var(--deal-muted);
-		}
-		.package:is(:hover, :focus-within) .package__visual {
-			opacity: 0;
-			transform: scale(0.96);
-		}
-		.package:is(:hover, :focus-within) .package__deal {
-			opacity: 1;
-			transform: none;
 		}
 		.package:is(:hover, :focus-within) .package__cta {
 			padding-inline: var(--space-3);
@@ -340,21 +258,6 @@
 		}
 		.package:is(:hover, :focus-within) .package__cta :global(svg) {
 			transform: translateX(4px);
-		}
-		.package:is(:hover, :focus-within) .package__talk {
-			color: var(--bg);
-		}
-	}
-	/* Sans survol possible : mascotte puis éléments compris et prix, sur la carte claire */
-	@media (hover: none) {
-		.package__visual {
-			width: min(100%, 17rem);
-		}
-	}
-	@media (prefers-reduced-motion: reduce) {
-		.package__deal,
-		.package__visual {
-			transform: none !important;
 		}
 	}
 </style>

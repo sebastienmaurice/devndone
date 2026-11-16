@@ -407,8 +407,11 @@
 	}
 
 	/* Deux colonnes : texte et schéma, ou texte et carte */
+	/* minmax(0, 1fr) : la colonne ne s'élargit jamais au-delà de l'écran (débordement à 390 px
+	   relevé par l'audit du 16/11/2026) */
 	.split {
 		display: grid;
+		grid-template-columns: minmax(0, 1fr);
 		gap: var(--space-7);
 		align-items: center;
 	}
@@ -663,6 +666,12 @@
 		gap: var(--space-3);
 		justify-items: start;
 		margin-top: var(--space-2);
+	}
+	/* Libellé long (« Décrire votre besoin d'intervention ») : retour à la ligne permis */
+	.guide-offer__actions :global(.btn) {
+		max-width: 100%;
+		white-space: normal;
+		text-align: left;
 	}
 
 	/* Images légendées et palette */

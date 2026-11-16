@@ -7,7 +7,6 @@
 <script lang="ts">
 	import { Button, LinkArrow, Seo } from '$lib/components';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
-	import PriceTag from '$lib/components/ui/PriceTag.svelte';
 	import { vatNotice } from '$lib/content/tarifs';
 	import HandNote from '$lib/components/brand/HandNote.svelte';
 	import AccentTitle from '$lib/components/brand/AccentTitle.svelte';
@@ -154,7 +153,7 @@
 		<ul class="paths" role="list">
 			{#each homePaths.paths as p (p.id)}
 				<!-- Le li porte l'apparition au défilement (revealPage), la carte porte le survol.
-				     Zone visuelle : la mascotte au repos, le prix en grand au survol (même case) -->
+				     Repère de prix et liens toujours visibles (audit du 16/11/2026) -->
 				<li class="paths__item">
 					<div class="path">
 						<div class="path__stage">
@@ -166,15 +165,6 @@
 									sizes="(min-width: 1100px) 220px, (min-width: 768px) 240px, 200px"
 									loading="lazy"
 								/>
-							</div>
-							<div class="path__deal">
-								<PriceTag
-									label={p.priceTag.label}
-									value={p.priceTag.value}
-									unit={'unit' in p.priceTag ? p.priceTag.unit : undefined}
-									size="hero"
-								/>
-								<p class="path__note">{p.priceTag.note}</p>
 							</div>
 						</div>
 						<div class="path__body">
@@ -501,11 +491,6 @@
 		display: grid;
 	}
 	.path {
-		/* Teintes du survol, tirées des variables sémantiques du contexte clair (inversées) */
-		--deal-muted: color-mix(in srgb, var(--bg) 74%, var(--text));
-		/* Délai des changements de couleur : nul au retour, le temps que la mascotte s'efface à
-		   l'entrée du survol */
-		--swap-delay: 0s;
 		display: grid;
 		gap: var(--space-4);
 		align-items: center;
@@ -515,9 +500,8 @@
 		border-radius: var(--radius-card);
 		box-shadow: var(--shadow-card);
 		transition:
-			background-color var(--duration-base) var(--ease-out) var(--swap-delay),
-			box-shadow var(--duration-base) var(--ease-out) var(--swap-delay),
-			border-color var(--duration-base) var(--ease-out) var(--swap-delay);
+			box-shadow var(--duration-base) var(--ease-out),
+			border-color var(--duration-base) var(--ease-out);
 	}
 	/* Mascotte à gauche, contenu à droite ; empilés sur téléphone */
 	@media (min-width: 600px) {
@@ -526,7 +510,6 @@
 			gap: var(--space-5);
 		}
 	}
-	/* Zone visuelle : la mascotte au repos ; au survol, le prix en grand à sa place */
 	.path__stage {
 		display: grid;
 		width: 100%;
@@ -544,11 +527,6 @@
 		height: auto;
 		aspect-ratio: 1;
 	}
-	.path__deal {
-		display: grid;
-		gap: var(--space-2);
-		align-content: center;
-	}
 	.path__body {
 		display: grid;
 		gap: var(--space-3);
@@ -557,12 +535,15 @@
 	.path__title {
 		margin: 0;
 		font-size: var(--text-h3);
-		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
 	}
 	.path p {
 		margin: 0;
 		color: var(--text-muted);
-		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
+	}
+	/* Repère de prix : toujours visible (audit du 16/11/2026) */
+	.path .path__price {
+		font-weight: var(--weight-semibold);
+		color: var(--text);
 	}
 	.path .path__links {
 		display: flex;
@@ -570,76 +551,19 @@
 		gap: var(--space-2) var(--space-5);
 		margin-top: var(--space-2);
 	}
-	.path .path__links a {
-		transition: color var(--duration-base) var(--ease-out) var(--swap-delay);
-	}
 	.path .path__links :global(.icon) {
 		transition: transform var(--duration-base) var(--ease-out);
 	}
 
-	/* Écrans à survol : au repos, mascotte, titre et texte seulement ; le prix (à la place de la
-	   mascotte) et les liens n'apparaissent qu'au survol ou au focus clavier, sur une carte Bleu
-	   nuit. Les liens gardent leur place au repos (aucun saut de hauteur) et restent atteignables
-	   au clavier : le focus révèle la carte.
-	   Enchaînement sans transparence : la mascotte s'efface d'abord, sur la carte encore blanche,
-	   puis fond et couleurs changent ; au retour, la carte redevient blanche avant que la mascotte
-	   revienne. */
+	/* Survol et focus clavier : simple mise en valeur (filet orange, ombre, flèches). Mascotte,
+	   texte, repère de prix et liens restent visibles au repos (audit du 16/11/2026). */
 	@media (hover: hover) {
-		.path .path__price {
-			display: none;
-		}
-		.path__stage > * {
-			grid-area: 1 / 1;
-		}
-		.path__media {
-			transition: opacity var(--duration-micro) var(--ease-out) var(--duration-base);
-		}
-		.path__deal,
-		.path .path__links {
-			opacity: 0;
-			transform: translateY(8px);
-			transition:
-				opacity var(--duration-micro) var(--ease-out),
-				transform var(--duration-micro) var(--ease-out);
-		}
 		.path:is(:hover, :focus-within) {
-			--swap-delay: var(--duration-micro);
-			background: var(--text);
 			border-color: var(--action);
 			box-shadow: var(--shadow-card-hover);
 		}
-		.path:is(:hover, :focus-within) .path__media {
-			opacity: 0;
-			transition: opacity var(--duration-micro) var(--ease-out);
-		}
-		.path:is(:hover, :focus-within) :is(.path__deal, .path__links) {
-			opacity: 1;
-			transform: none;
-			transition:
-				opacity var(--duration-base) var(--ease-out) var(--duration-micro),
-				transform var(--duration-base) var(--ease-out) var(--duration-micro);
-		}
-		.path:is(:hover, :focus-within) .path__deal {
-			--price-color: var(--action);
-			--price-muted: var(--deal-muted);
-		}
-		.path:is(:hover, :focus-within) .path__title {
-			color: var(--bg);
-		}
-		.path:is(:hover, :focus-within) p {
-			color: var(--deal-muted);
-		}
-		.path:is(:hover, :focus-within) .path__links a {
-			color: var(--action);
-		}
 		.path:is(:hover, :focus-within) .path__links :global(.icon) {
 			transform: translateX(4px);
-		}
-	}
-	/* Sans survol possible : la carte reste claire, mascotte, repère de prix et liens visibles */
-	@media (hover: none) {
-		.path__deal {
-			display: none;
 		}
 	}
 
@@ -668,8 +592,6 @@
 	@media (prefers-reduced-motion: reduce) {
 		.path__stage,
 		.path__body,
-		.path__deal,
-		.path .path__links,
 		.path .path__links :global(.icon) {
 			transform: none !important;
 		}

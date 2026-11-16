@@ -666,11 +666,13 @@ export const maintenanceStatus = {
 		'Formules en préparation : elles ne sont pas encore proposées à la commande. Vous pouvez déjà en discuter pour votre site.'
 } as const;
 
+/** Titre et description signalent « en préparation » : aucun résultat de recherche ne laisse croire
+ *  que la maintenance est déjà en vente (audit du 16/11/2026) */
 export const maintenancePage = {
 	path: '/services/web/maintenance-wordpress/',
-	seoTitle: 'Maintenance WordPress : de 99 € à 229 € par mois',
+	seoTitle: 'Maintenance WordPress en préparation : 99 € à 229 € par mois',
 	description:
-		'Maintenance WordPress facultative : mises à jour contrôlées, sauvegardes, petites interventions techniques incluses. Trois formules de 99 € à 229 € par mois.',
+		'Formules de maintenance WordPress en préparation, pas encore proposées à la commande : mises à jour, sauvegardes, petites interventions. De 99 € à 229 € par mois.',
 	title: 'Un site WordPress à jour et suivi chaque mois',
 	accent: 'à jour et suivi',
 	lede: 'Une maintenance facultative, sans formule imposée à la création. Les formules sont en préparation : elles ne sont pas encore proposées à la commande.'

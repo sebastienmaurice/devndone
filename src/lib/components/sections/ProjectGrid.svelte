@@ -1,5 +1,5 @@
 <!--
-	Cartes de réalisations : visuel du projet avec pastille numérotée, secteur et lieu, nom, texte
+	Cartes de réalisations : visuel du projet avec pastille numérotée (portfolio complet seulement), secteur et lieu, nom, texte
 	court, technologies en pastilles bleu océan, lien « Voir le projet ». Chaque carte mène à
 	l'étude de cas (/realisations/<slug>/). Trois colonnes en grand écran.
 	`featured` : la première carte occupe toute la largeur, visuel à gauche (page Réalisations) ;
@@ -31,7 +31,10 @@
 
 	const list = $derived(only ? projects.filter((p) => only.includes(p.slug)) : projects);
 	const shown = $derived(limit ? list.slice(0, limit) : list);
-	// Numéro d'ordre dans le portfolio complet (stable d'une page à l'autre)
+	// Numéro d'ordre dans le portfolio complet (stable d'une page à l'autre, repris sur l'étude de cas).
+	// Affiché seulement quand tout le portfolio est listé : une sélection (accueil, offres, autres
+	// réalisations) donnerait une suite à trous, 01, 02, 04... (audit du 16/11/2026)
+	const numbered = $derived(!only && !limit);
 	const numOf = (slug: string) =>
 		String(projects.findIndex((p) => p.slug === slug) + 1).padStart(2, '0');
 </script>
@@ -57,7 +60,9 @@
 					{/if}
 				</span>
 				<span class="project__body">
-					<span class="project__num" aria-hidden="true">{numOf(p.slug)}</span>
+					{#if numbered}
+						<span class="project__num" aria-hidden="true">{numOf(p.slug)}</span>
+					{/if}
 					{#if meta.length}
 						<span class="project__meta">{meta.join(' · ')}</span>
 					{/if}
