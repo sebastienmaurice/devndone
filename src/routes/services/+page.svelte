@@ -36,9 +36,9 @@
 />
 
 <PageIntro
-	label={servicesIntro.eyebrow}
-	heading={servicesIntro.title}
-	accent={servicesIntro.accent}
+	label={servicesIntro.title}
+	heading={servicesIntro.pageTitle}
+	accent={servicesIntro.pageAccent}
 	lede={servicesIntro.lede}
 	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Services' }]}
 >

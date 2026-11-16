@@ -60,8 +60,8 @@
 
 <PageIntro
 	label="Tarifs"
-	heading={offersIntro.title}
-	accent={offersIntro.accent}
+	heading={offersIntro.pageTitle}
+	accent={offersIntro.pageAccent}
 	lede="{offersIntro.lede} {vatNotice}"
 	crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Tarifs' }]}
 >

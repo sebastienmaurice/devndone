@@ -410,7 +410,7 @@
 					<a href={links.malt} target="_blank" rel="noopener"
 						><span class="contact-links__icon"><Icon name="arrow-up-right" /></span><span
 							class="contact-links__text"
-							><span class="contact-links__label">Profil freelance et avis</span>Malt<span
+							><span class="contact-links__label">Profil et avis clients</span>Malt<span
 								class="sr-only"
 							>
 								(nouvel onglet)</span

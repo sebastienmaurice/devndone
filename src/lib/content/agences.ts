@@ -20,10 +20,10 @@ export const agencesPage = {
 	path: '/agences/',
 	seoTitle: 'Sous-traitance WordPress et WooCommerce pour agences web',
 	description:
-		'Développeur WordPress et WooCommerce indépendant en renfort pour les agences web : intégration, évolutions, corrections et front-end, marque blanche possible.',
+		'Studio indépendant en renfort WordPress, WooCommerce et front-end pour les agences web : intégration, évolutions, corrections, marque blanche possible.',
 	label: 'Agences web',
-	title: 'Un développeur WordPress en renfort pour votre agence',
-	accent: 'en renfort',
+	title: 'Un renfort WordPress et front-end pour votre agence',
+	accent: 'Un renfort',
 	lede: "Un pic de charge, une boutique WooCommerce à terminer, un site client qui plante : vous confiez à Dev'n Done une partie précise du projet, sur un périmètre écrit avant de commencer.",
 	cta: "Discuter d'un besoin de renfort",
 	/**
@@ -88,7 +88,7 @@ export const agencesFrame = [
 	{
 		label: 'Interlocuteur',
 		value:
-			"Vous échangez avec la personne qui fait le travail. Dev'n Done n'a pas d'équipe : la charge acceptée se décide mission par mission."
+			"Dev'n Done est un studio à taille humaine : vous échangez avec la personne qui fait le travail, et la charge acceptée se décide mission par mission."
 	},
 	{
 		label: 'Fin de mission',
@@ -187,6 +187,6 @@ export const agencesFaq = [
 	},
 	{
 		q: 'Avez-vous une équipe ?',
-		a: "Non. Dev'n Done est une activité indépendante : Sébastien Maurice réalise lui-même le travail que vous confiez."
+		a: "Non. Dev'n Done est un studio indépendant à taille humaine : Sébastien Maurice réalise lui-même le travail que vous confiez."
 	}
 ] as const;

@@ -131,7 +131,14 @@
 		<div class="container">
 			<div class="quote">
 				<h2 class="t-h3" id="devis-title">Un projet sur mesure</h2>
-				<p>{offersIntro.customNote}</p>
+				<p>{u.customNote ?? offersIntro.customNote}</p>
+				{#if u.customLinks?.length}
+					<ul class="quote__links" role="list">
+						{#each u.customLinks as l (l.href)}
+							<li><LinkArrow href={l.href}>{l.label}</LinkArrow></li>
+						{/each}
+					</ul>
+				{/if}
 				<Button href={links.calendly} icon="arrow-up-right">{hero.ctaCall}</Button>
 			</div>
 		</div>
@@ -283,6 +290,15 @@
 	.quote p {
 		margin: 0;
 		color: var(--text-muted);
+	}
+	/* Liens de l'encart vers des contenus existants (article, réalisation) */
+	.quote__links {
+		display: grid;
+		gap: var(--space-2);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-weight: var(--weight-semibold);
 	}
 	.others {
 		display: flex;

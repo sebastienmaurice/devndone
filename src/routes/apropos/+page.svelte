@@ -23,7 +23,7 @@
 		'@type': 'Person',
 		'@id': `${absoluteUrl('/apropos/')}#sebastien-maurice`,
 		name: 'Sébastien Maurice',
-		jobTitle: 'Développeur web indépendant',
+		jobTitle: "Fondateur de Dev'n Done",
 		url: absoluteUrl('/apropos/'),
 		worksFor: { '@id': organizationId },
 		knowsAbout: ['WordPress', 'WooCommerce', 'Intégration front-end'],

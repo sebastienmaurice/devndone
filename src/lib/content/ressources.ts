@@ -101,13 +101,13 @@ export type Article = {
 
 export const ressourcesPage = {
 	path: '/ressources/',
-	seoTitle: 'Ressources : guides pratiques WordPress et WooCommerce',
+	seoTitle: "Ressources : guides pratiques et retours d'expérience",
 	description:
-		"Des guides pratiques sur WordPress, WooCommerce et le développement web, avec leurs sources : formulaire qui n'envoie plus, retours d'expérience sur des projets réels.",
+		"Des guides pratiques et des retours d'expérience sur des projets réels : WordPress, WooCommerce, design et développement web, avec leurs sources.",
 	label: 'Ressources',
-	title: 'Guides pratiques WordPress et WooCommerce',
+	title: "Guides pratiques et retours d'expérience",
 	accent: 'Guides pratiques',
-	lede: 'Des explications courtes sur des problèmes concrets, avec les sources citées en bas de chaque page.'
+	lede: 'Des explications courtes sur des problèmes concrets et des retours sur des projets réels, avec les sources citées.'
 } as const;
 
 export const articles: readonly Article[] = [

@@ -280,7 +280,7 @@ export const projects: readonly Project[] = [
 				'Site vitrine WordPress',
 				'Création de site WordPress Elementor',
 				'SEO WordPress',
-				'Développeur WordPress'
+				'Développement WordPress'
 			],
 			summary:
 				'PME industrielle de Caudry, avec plus de 100 clients B2B et une activité de personnalisation textile à échelle nationale. Gestion complète de la présence web sur 4 ans.',
@@ -314,7 +314,7 @@ export const projects: readonly Project[] = [
 				'Refonte WordPress',
 				'WooCommerce',
 				'Elementor',
-				'Développeur WordPress',
+				'Développement WordPress',
 				'Optimisation UX/UI',
 				'Intégration WordPress'
 			],

@@ -569,9 +569,13 @@ export const offerPath = (o: Pick<Offer, 'universe' | 'slug'>) =>
 	`/services/${o.universe}/${o.slug}/` as const;
 
 export const offersIntro = {
-	title: 'Des forfaits clairs pour votre site WordPress',
+	title: 'Des forfaits clairs pour votre site web',
 	accent: 'forfaits clairs',
-	lede: 'Chaque prestation a un prix, un périmètre et une limite de travail définis avant de commencer. Les prix affichés sont ceux que vous payez.',
+	lede: 'Sites WordPress et WooCommerce au forfait, automatisation et développement sur mesure sur devis. Chaque prestation a un prix, un périmètre et une limite de travail définis avant de commencer. Les prix affichés sont ceux que vous payez.',
+	/** H1 de la page Tarifs (validé le 16/11/2026) : la page couvre aussi audits, interventions et
+	 *  maintenance */
+	pageTitle: 'Tarifs web, WordPress et accompagnement',
+	pageAccent: 'Tarifs web',
 	creationTitle: 'Créer ou refondre votre site',
 	ponctuelTitle: 'Interventions et audits',
 	/** Encart « Un projet sur mesure » des pages de service */

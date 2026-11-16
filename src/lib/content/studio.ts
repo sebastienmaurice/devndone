@@ -96,7 +96,7 @@ export const contactIntro = {
 	question: 'Un projet en tête ?',
 	/** Variante du titre de la page Contact pour les agences (/contact/?type=agence) */
 	agencyQuestion: 'Un besoin de renfort ?',
-	lede: '15 minutes pour faire le point sur votre projet et définir la bonne approche, sans engagement.',
+	lede: '15 minutes avec Sébastien pour faire le point sur votre projet et définir la bonne approche, sans engagement.',
 	cta: 'Discuter de votre projet'
 } as const;
 
@@ -122,13 +122,13 @@ export const homePaths = {
 		},
 		{
 			id: 'entreprises',
-			title: 'Vous avez un projet de site',
-			text: 'Landing page, site vitrine, refonte ou boutique WooCommerce : des forfaits dont le périmètre est écrit au devis.',
+			title: 'Vous avez un projet web',
+			text: "Site vitrine, refonte, boutique en ligne, automatisation ou outil sur mesure : un forfait quand c'est possible, un devis étudié sinon, toujours avec un périmètre écrit.",
 			/** La landing page (1 750 €) est le forfait de création le moins cher du catalogue ;
 			 *  Sprint : 350 € par jour (content/tarifs.ts) */
 			priceTag: { label: 'Forfaits à partir de', value: '1 750', note: 'Sprint à 350 € par jour' },
 			links: [
-				{ label: 'Les prestations WordPress', href: '/services/web/' },
+				{ label: 'Les services', href: '/services/' },
 				{ label: 'Les tarifs', href: '/tarifs/' }
 			]
 		}
@@ -136,10 +136,10 @@ export const homePaths = {
 } as const;
 
 export const hero = {
-	/** Positionnement précisé par Sébastien le 16/11/2026 : développeur full stack, création et
-	 *  refonte de sites, automatisation, WordPress et WooCommerce (pas seulement WordPress) */
-	kicker: 'Développeur web full stack',
-	lede: "Dev'n Done crée et fait évoluer des sites web et des outils sur mesure : développement full stack, automatisation des processus, WordPress et WooCommerce. Pour les entreprises comme en renfort des agences.",
+	/** Positionnement validé par Sébastien le 16/11/2026 : studio web et solutions digitales,
+	 *  signature officielle « Studio Web & Solutions Digitales » (surtitre du H1) */
+	kicker: 'Studio Web & Solutions Digitales',
+	lede: "Studio indépendant, Dev'n Done conçoit et développe vos solutions numériques, du site web à l'application sur mesure. Un seul interlocuteur, du premier échange à la mise en ligne.",
 	ctaServices: 'Découvrir les services',
 	ctaCall: 'Réserver 15 min'
 } as const;

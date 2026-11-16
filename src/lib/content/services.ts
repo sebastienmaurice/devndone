@@ -25,6 +25,10 @@ export type Universe = {
 	description?: string;
 	/** Mise en avant en bandeau orange sous les cartes (pas une carte) : développement sur mesure */
 	complementary?: boolean;
+	/** Texte de l'encart « Un projet sur mesure » (sinon le texte commun de content/tarifs.ts) */
+	customNote?: string;
+	/** Liens de l'encart vers des contenus existants (article, réalisation) */
+	customLinks?: readonly { label: string; href: string }[];
 };
 
 /** Positionnement précisé le 16/11/2026 : expertises plurielles, WordPress et WooCommerce en font partie
@@ -32,8 +36,11 @@ export type Universe = {
  *  Voix de marque : Dev'n Done à la troisième personne. */
 export const servicesIntro = {
 	eyebrow: 'Expertises',
-	title: 'Cinq expertises autour du web',
-	accent: 'autour du web',
+	title: 'Cinq expertises, un seul studio',
+	accent: 'un seul studio',
+	/** H1 de la page Services : descriptif pour les moteurs (16/11/2026), le slogan passe en surtitre */
+	pageTitle: 'Développement web, WordPress et solutions sur mesure',
+	pageAccent: 'solutions sur mesure',
 	lede: 'Développement full stack et applications sur mesure, WordPress et WooCommerce, automatisation des processus, identité visuelle : chaque projet mobilise les expertises dont il a besoin.'
 } as const;
 
@@ -44,7 +51,7 @@ export const universes: readonly Universe[] = [
 		/** H1 validé par Sébastien le 24/10/2026 (audit SEO) */
 		heading: 'Création et refonte de sites WordPress et WooCommerce',
 		headingAccent: 'WordPress et WooCommerce',
-		text: 'Sites vitrine, boutiques en ligne, refontes et optimisation SEO, avec une maintenance mensuelle facultative pour garder votre site à jour.',
+		text: 'Sites vitrine, boutiques en ligne et refontes sous WordPress et WooCommerce, avec optimisation SEO.',
 		tags: ['Création', 'Refonte', 'WooCommerce', 'SEO', 'Maintenance'],
 		seoTitle: 'Création et refonte de sites WordPress, maintenance',
 		path: '/services/web/',
@@ -56,10 +63,23 @@ export const universes: readonly Universe[] = [
 		/** H1 = titre SEO validé (audit SEO du 16/11/2026), nom court en surtitre */
 		headingAccent: 'direction artistique',
 		title: 'Design',
-		text: 'Identité visuelle, direction artistique, images IA et mockups : une esthétique cohérente pour marquer les esprits.',
+		text: "Identité visuelle, direction artistique, images IA et mockups : une image cohérente, du logo à l'écran.",
+		/** Encart « Un projet sur mesure » propre à l'expertise, avec liens vers des contenus existants */
+		customNote:
+			'Identité visuelle, direction artistique ou visuels pour un site : chaque projet est chiffré après un premier échange.',
+		customLinks: [
+			{
+				label: "L'identité visuelle de Ciné Délices",
+				href: '/ressources/identite-visuelle-cine-delices/'
+			},
+			{
+				label: 'Palimpseste Urbain, direction artistique',
+				href: '/realisations/palimpseste-urbain/'
+			}
+		],
 		tags: ['Identité visuelle', 'Direction artistique', 'Images IA', 'Mockups'],
 		description:
-			'Identité visuelle, direction artistique, images IA et mockups : une esthétique cohérente pour marquer les esprits.',
+			"Identité visuelle, direction artistique, images IA et mockups : une image cohérente, du logo à l'écran.",
 		seoTitle: 'Identité visuelle et direction artistique',
 		path: '/services/design/',
 		icon: 'pen'
@@ -69,10 +89,12 @@ export const universes: readonly Universe[] = [
 		/** H1 = titre SEO validé (audit SEO du 16/11/2026), nom court en surtitre */
 		headingAccent: 'Make et Zapier',
 		title: 'Automatisation',
-		text: 'Et si cette tâche pouvait se faire toute seule ? Audit des processus, automatisation ciblée ou complète.',
+		text: 'Et si cette tâche pouvait se faire toute seule ? Audit des processus, automatisations et intégrations entre vos outils.',
+		customNote:
+			"Une automatisation ou une intégration entre vos outils, au-delà de l'audit : chiffrée après un premier échange.",
 		tags: ['Audit', 'Automatisation ciblée', 'Make · Zapier'],
 		description:
-			'Et si cette tâche pouvait se faire toute seule ? Audit des processus, automatisation ciblée ou complète avec Make ou Zapier.',
+			'Et si cette tâche pouvait se faire toute seule ? Audit des processus, automatisations et intégrations entre vos outils avec Make ou Zapier.',
 		seoTitle: 'Automatisation des processus avec Make et Zapier',
 		path: '/services/automatisation/',
 		icon: 'settings'
@@ -95,7 +117,15 @@ export const universes: readonly Universe[] = [
 		/** H1 = titre SEO validé (audit SEO du 16/11/2026), nom court en surtitre */
 		headingAccent: 'interfaces, API, back-end',
 		title: 'Full Stack',
-		text: 'Interfaces, API et back-end : des applications web conçues sur mesure.',
+		text: 'Interfaces, API et back-end en JavaScript, Node.js et PostgreSQL : des applications web conçues de bout en bout.',
+		customNote:
+			'Une application web, une API ou un back-end : chaque projet est étudié et chiffré après un premier échange.',
+		customLinks: [
+			{
+				label: "L'identité visuelle de Ciné Délices",
+				href: '/ressources/identite-visuelle-cine-delices/'
+			}
+		],
 		tags: ['Interfaces', 'API', 'Back-end'],
 		description:
 			'Interfaces, API et back-end en JavaScript, Node.js, Express et PostgreSQL : des applications web conçues sur mesure, étudiées au cas par cas.',
@@ -113,9 +143,17 @@ export const processIntro = {
 } as const;
 
 export const processSteps = [
-	{ title: 'Comprendre', text: 'Un échange sur vos besoins et vos objectifs.', icon: 'message' },
+	{
+		title: 'Comprendre',
+		text: "Vous échangez directement avec Sébastien, de la première idée jusqu'à la livraison.",
+		icon: 'message'
+	},
 	{ title: 'Concevoir', text: 'Une solution sur mesure, proposée et chiffrée.', icon: 'lightbulb' },
-	{ title: 'Développer', text: 'Le design prend vie, le code fait le reste.', icon: 'code' },
+	{
+		title: 'Développer',
+		text: 'Design, code et intégrations, avec votre validation à chaque étape importante.',
+		icon: 'code'
+	},
 	{ title: 'Livrer', text: 'Tests, ajustements, puis mise en ligne.', icon: 'rocket' }
 ] as const;
 
