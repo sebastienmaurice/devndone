@@ -3,7 +3,7 @@
  * Aucune valeur ici n'est secrète : tout finit dans le HTML public.
  */
 export const site = {
-	name: "DEV'n DONE",
+	name: "Dev'n Done",
 	wordmark: "Dev'n Done",
 	/** URL canonique de production (sans www, sans slash final) */
 	url: 'https://devndone.com',
@@ -21,7 +21,7 @@ export const site = {
 	themeColor: '#0A0D11',
 	ogImage: '/og/dev-n-done-studio-digital-wordpress.jpg',
 	ogImageAlt:
-		"Dev, la mascotte DEV'n DONE, derrière le lettrage Dev'n Done, avec la signature Développer / Piloter / Livrer"
+		"Dev, la mascotte Dev'n Done, derrière le lettrage Dev'n Done, avec la signature Développer / Piloter / Livrer"
 } as const;
 
 /** Identifiant de l'entreprise dans les données structurées (JSON-LD) : relie l'entreprise, le

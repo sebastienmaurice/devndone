@@ -170,7 +170,7 @@
 			<header class="stack stack--sm">
 				<SectionLabel label="Réalisations" />
 				<h2 class="t-h2" id="related-title">
-					Projets <span class="accent-word">{u.title.toLowerCase()}</span> déjà livrés
+					Projets <span class="accent-word">{u.title.toLowerCase()}</span> réalisés
 				</h2>
 			</header>
 			<ProjectGrid only={related} />

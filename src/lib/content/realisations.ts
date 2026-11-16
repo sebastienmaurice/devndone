@@ -101,7 +101,7 @@ export const projects: readonly Project[] = [
 			"Migration de Wix vers WordPress et WooCommerce d'un site industriel B2B : fusion de deux activités, catalogue produits et système de devis en ligne.",
 		details: {
 			subtitle: 'Refonte WordPress WooCommerce B2B : catalogue & système de devis',
-			sector: 'Commerce de détail',
+			sector: 'Pièces détachées industrielles',
 			period: 'septembre 2023 à novembre 2023',
 			location: 'Bruay-la-Buissière, France',
 			skills: [
@@ -235,7 +235,7 @@ export const projects: readonly Project[] = [
 		details: {
 			subtitle:
 				'Refonte du site WordPress avec Elementor, boutique WooCommerce et demande de devis',
-			sector: 'Presse & médias',
+			sector: 'Signalétique & enseignes',
 			period: 'février 2020 à novembre 2022',
 			location: 'Dechy, France',
 			skills: [
@@ -272,7 +272,7 @@ export const projects: readonly Project[] = [
 		image: 'alternativ-uniforme-site-ecommerce-b2b',
 		details: {
 			subtitle: 'Développement WordPress & E-commerce B2B',
-			sector: 'Commerce de détail',
+			sector: 'Personnalisation textile',
 			period: 'février 2016 à janvier 2020',
 			location: 'Caudry, France',
 			skills: [

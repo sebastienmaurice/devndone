@@ -34,7 +34,7 @@ export const legal = {
 	},
 	/** Textes du site en ligne, repris tels quels */
 	privacy:
-		"Ce site ne dépose pas de cookie et ne collecte aucune donnée personnelle par lui-même. La prise de rendez-vous passe par le service Calendly, soumis à sa propre politique de confidentialité. Si vous m'écrivez par email, vos informations ne servent qu'à répondre à votre demande.",
+		"Ce site ne dépose pas de cookie et ne collecte aucune donnée personnelle par lui-même. La prise de rendez-vous passe par le service Calendly, soumis à sa propre politique de confidentialité. Si vous écrivez à Dev'n Done par email, vos informations ne servent qu'à répondre à votre demande.",
 	intellectualProperty:
 		"Les contenus de ce site (textes, visuels, mise en page) sont la propriété de Dev'n Done, sauf mention contraire. Les sites et marques cités appartiennent à leurs propriétaires respectifs.",
 	updatedAt: '2026-10-14'

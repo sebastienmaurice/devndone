@@ -1,10 +1,10 @@
 <!--
-	Pied de page partagé, sur le fond Ivoire de la page : logo, slogan manuscrit et signature,
-	colonnes Expertises, Studio et Contact (liens déjà publiés), puis la mention du
+	Pied de page partagé, sur le fond Ivoire de la page : logo et slogan manuscrit (signature
+	« Développer / Piloter / Livrer » retirée le 16/11/2026 : un seul slogan),
+	colonnes Expertises, Dev'n Done et Contact (liens déjà publiés), puis la mention du
 	site en ligne, les pages légales et le retour en haut de page. Colonnes : content/pages.ts.
 -->
 <script lang="ts">
-	import { site } from '$lib/config/site';
 	import { legal } from '$lib/content/legal';
 	import { footerPages } from '$lib/content/pages';
 	import { heroSlogan } from '$lib/content/services';
@@ -22,7 +22,7 @@
 	];
 	const columns = [
 		{ id: 'footer-expertises', title: 'Expertises', items: footerPages('expertises') },
-		{ id: 'footer-studio', title: 'Studio', items: footerPages('studio') }
+		{ id: 'footer-studio', title: "Dev'n Done", items: footerPages('studio') }
 	];
 </script>
 
@@ -34,12 +34,6 @@
 					><Logo variant="horizontal" tone="night" height={40} alt="" /></a
 				>
 				<p class="footer__slogan">{heroSlogan.join(' ')}</p>
-				<p class="footer__tagline">
-					{#each site.tagline as word, i (word)}{#if i > 0}<span
-								class="footer__slash"
-								aria-hidden="true">/</span
-							>{/if}{word}{/each}
-				</p>
 			</div>
 
 			{#each columns as col (col.id)}
@@ -132,18 +126,6 @@
 		display: grid;
 		align-content: start;
 		gap: var(--space-4);
-	}
-	.footer__tagline {
-		margin: 0;
-		font-size: var(--text-label);
-		font-weight: var(--weight-extrabold);
-		letter-spacing: var(--tracking-label);
-		text-transform: uppercase;
-		color: var(--text-muted);
-	}
-	.footer__slash {
-		padding-inline: var(--space-2);
-		color: var(--accent-deco);
 	}
 	/* Titres de colonne : surtitre orange, comme le reste du site */
 	.site-footer .site-footer__title {

@@ -56,7 +56,7 @@ export const universes: readonly Universe[] = [
 		text: 'Identité visuelle, direction artistique, images IA et mockups : une esthétique cohérente pour marquer les esprits.',
 		tags: ['Identité visuelle', 'Direction artistique', 'Images IA', 'Mockups'],
 		description:
-			'Identité visuelle, direction artistique, images IA et mockups : une esthétique cohérente pour marquer les esprits. Studio digital indépendant à Caudry.',
+			'Identité visuelle, direction artistique, images IA et mockups : une esthétique cohérente pour marquer les esprits.',
 		seoTitle: 'Identité visuelle et direction artistique',
 		path: '/services/design/',
 		icon: 'pen'
@@ -67,7 +67,7 @@ export const universes: readonly Universe[] = [
 		text: 'Et si cette tâche pouvait se faire toute seule ? Audit des processus, automatisation ciblée ou complète.',
 		tags: ['Audit', 'Automatisation ciblée', 'Make · Zapier'],
 		description:
-			'Et si cette tâche pouvait se faire toute seule ? Audit des processus, automatisation ciblée ou complète avec Make ou Zapier. Studio indépendant à Caudry.',
+			'Et si cette tâche pouvait se faire toute seule ? Audit des processus, automatisation ciblée ou complète avec Make ou Zapier.',
 		seoTitle: 'Automatisation des processus avec Make et Zapier',
 		path: '/services/automatisation/',
 		icon: 'settings'

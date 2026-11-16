@@ -124,7 +124,7 @@
 				<!-- Contact -->
 				<a class="tile tile--ask" href="/contact/">
 					<h2 class="tile__small">Une question, un sujet à traiter ?</h2>
-					<p>Écrivez-moi : je réponds directement.</p>
+					<p>Écrivez à Dev'n Done : Sébastien Maurice vous répond directement.</p>
 					<span class="tile__go">Me contacter <Icon name="arrow-right" /></span>
 				</a>
 			</div>
