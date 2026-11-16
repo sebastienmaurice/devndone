@@ -34,7 +34,7 @@
 <Seo
 	title="À propos de Dev'n Done et de Sébastien Maurice"
 	path="/apropos/"
-	description="Dev'n Done, l'activité de Sébastien Maurice, développeur web indépendant : sites pour les entreprises, spécialité WordPress, renfort pour les agences web."
+	description="Dev'n Done, studio indépendant de Sébastien Maurice : développement full stack, WordPress et WooCommerce, automatisation, identité visuelle."
 	jsonLd={personLd}
 />
 

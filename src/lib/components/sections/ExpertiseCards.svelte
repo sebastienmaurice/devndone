@@ -4,7 +4,7 @@
 	(toute la carte est le lien). 4 colonnes en grand écran, 2 en tablette, 1 sur petit mobile.
 	Données : content/services.ts. Mascottes : $lib/assets/mascotte/expertises.ts (illustrations 3:2,
 	fond blanc posé sur la carte blanche), reprises dans l'en-tête de chaque page de service.
-	Sous les cartes : l'expertise complémentaire (Full Stack) en bandeau orange pleine largeur,
+	Sous les cartes : le développement sur mesure (Full Stack) en bandeau orange pleine largeur,
 	mascotte détourée qui déborde du haut du bandeau, bouton vers sa page.
 -->
 <script lang="ts">
@@ -53,7 +53,7 @@
 {#each extras as u, j (u.id)}
 	<div class="extra surface-orange">
 		<div class="extra__text">
-			<p class="extra__label">{pad(cards.length + j)} · Expertise complémentaire</p>
+			<p class="extra__label">{pad(cards.length + j)} · Développement sur mesure</p>
 			<svelte:element this={`h${headingLevel}`} class="extra__title">{u.title}</svelte:element>
 			<p class="extra__lede">{u.text}</p>
 			<Button href={u.path} icon="arrow-right"
@@ -197,7 +197,7 @@
 			transform: none;
 		}
 	}
-	/* Bandeau orange de l'expertise complémentaire (un seul bandeau Orange par page) */
+	/* Bandeau orange du développement sur mesure (un seul bandeau Orange par page) */
 	.extra {
 		position: relative;
 		display: grid;

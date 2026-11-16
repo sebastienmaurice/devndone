@@ -32,7 +32,7 @@
 <Seo
 	title="Services : développement web, WordPress et WooCommerce"
 	path="/services/"
-	description="Création, refonte et optimisation de sites, intégration front-end, spécialité WordPress et WooCommerce. En complément : design, automatisation, applications."
+	description="Développement full stack et applications sur mesure, création et refonte de sites, WordPress et WooCommerce, automatisation des processus, identité visuelle."
 />
 
 <PageIntro

@@ -1,5 +1,5 @@
 /**
- * Les univers (quatre cartes + une expertise complémentaire en bandeau) et le process.
+ * Les univers (quatre cartes + le développement sur mesure en bandeau) et le process.
  * Source : page provisoire (dépôt devndone, index.html, sections #services et #process).
  * « Applications & logiciels » et le bandeau « Full Stack » : maquette de Sébastien du 20/10/2026.
  * Textes repris tels quels : ne rien ajouter sans validation.
@@ -23,17 +23,18 @@ export type Universe = {
 	seoTitle: string;
 	/** Description pour les moteurs de recherche (sinon `text`) */
 	description?: string;
-	/** Expertise complémentaire : bandeau orange sous les cartes, pas une carte */
+	/** Mise en avant en bandeau orange sous les cartes (pas une carte) : développement sur mesure */
 	complementary?: boolean;
 };
 
-/** Positionnement du 22/10/2026 : le web au centre, WordPress et WooCommerce en spécialité,
- *  le sur-mesure étudié au cas par cas. Voix de marque : Dev'n Done à la troisième personne. */
+/** Positionnement précisé le 16/11/2026 : expertises plurielles, WordPress et WooCommerce en font partie
+ *  sans définir à eux seuls l'activité (remplace le positionnement du 22/10/2026).
+ *  Voix de marque : Dev'n Done à la troisième personne. */
 export const servicesIntro = {
 	eyebrow: 'Expertises',
 	title: 'Cinq expertises autour du web',
 	accent: 'autour du web',
-	lede: "Le web d'abord, avec WordPress et WooCommerce pour spécialité. Le design et l'automatisation complètent les projets qui en ont besoin ; le développement sur mesure, jusqu'aux applications web, s'étudie au cas par cas."
+	lede: 'Développement full stack et applications sur mesure, WordPress et WooCommerce, automatisation des processus, identité visuelle : chaque projet mobilise les expertises dont il a besoin.'
 } as const;
 
 export const universes: readonly Universe[] = [
@@ -94,10 +95,10 @@ export const universes: readonly Universe[] = [
 		/** H1 = titre SEO validé (audit SEO du 16/11/2026), nom court en surtitre */
 		headingAccent: 'interfaces, API, back-end',
 		title: 'Full Stack',
-		text: 'Interfaces, API et back-end, pour les besoins qui dépassent un site WordPress. Étudié au cas par cas.',
+		text: 'Interfaces, API et back-end : des applications web conçues sur mesure.',
 		tags: ['Interfaces', 'API', 'Back-end'],
 		description:
-			'Interfaces, API et back-end en JavaScript, Node.js, Express et PostgreSQL, pour les besoins qui dépassent un site WordPress. Étudié au cas par cas.',
+			'Interfaces, API et back-end en JavaScript, Node.js, Express et PostgreSQL : des applications web conçues sur mesure, étudiées au cas par cas.',
 		seoTitle: 'Développement full stack : interfaces, API, back-end',
 		path: '/services/full-stack/',
 		icon: 'code',

@@ -55,7 +55,7 @@ export const realisationsIntro = {
 export const projects: readonly Project[] = [
 	{
 		slug: 'palimpseste-urbain',
-		seoTitle: "Palimpseste Urbain : refonte WordPress d'une agence d'architecture",
+		seoTitle: 'Palimpseste Urbain : refonte WordPress, architecture',
 		name: 'Palimpseste Urbain',
 		stack: 'WordPress · Elementor Pro · SEO',
 		text: "Agence d'architecture et d'urbanisme. Refonte WordPress, direction artistique, SEO.",
@@ -224,7 +224,7 @@ export const projects: readonly Project[] = [
 	},
 	{
 		slug: 'pano-signservice',
-		seoTitle: "PANO Sign'Service : refonte WordPress d'une agence de signalétique",
+		seoTitle: "PANO Sign'Service : refonte WordPress, signalétique",
 		name: "PANO Sign'Service",
 		stack: 'WordPress · Elementor · E-commerce',
 		text: 'Refonte WordPress Elementor. Vitrine et e-commerce de signalétique.',
@@ -264,7 +264,7 @@ export const projects: readonly Project[] = [
 	},
 	{
 		slug: 'alternativ-uniforme',
-		seoTitle: "Alternativ' Uniforme : e-commerce B2B WordPress et PrestaShop",
+		seoTitle: "Alternativ' Uniforme : e-commerce B2B WordPress, PrestaShop",
 		name: "Alternativ' Uniforme",
 		stack: 'WordPress · PrestaShop · E-commerce B2B',
 		text: 'PME industrielle de Caudry, personnalisation textile. Sites WordPress et PrestaShop, e-commerce B2B et devis en ligne, sur 4 ans.',
@@ -297,7 +297,7 @@ export const projects: readonly Project[] = [
 	},
 	{
 		slug: 'harmony-valse',
-		seoTitle: "Harmony Valse : refonte WordPress d'une école de valse à Paris",
+		seoTitle: "Harmony Valse : refonte WordPress d'une école de valse",
 		name: 'Harmony Valse',
 		stack: 'WordPress · Elementor · WooCommerce',
 		text: 'Cours de valse à Paris. Refonte WordPress Elementor & WooCommerce : réservation et boutique en ligne.',

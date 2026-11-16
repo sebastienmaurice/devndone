@@ -8,7 +8,7 @@
 /** Page dédiée au logiciel */
 export const logicielPage = {
 	path: '/services/applications/logiciel-gestion-affaires-enseignistes/',
-	seoTitle: "Logiciel de gestion d'affaires pour enseignistes (en développement)",
+	seoTitle: 'Logiciel de gestion pour enseignistes (en développement)',
 	description:
 		'Un logiciel pour enseignistes qui relie relevé de site, chiffrage, proposition visuelle, devis, décision du client et fiche atelier dans un seul dossier par affaire.'
 } as const;

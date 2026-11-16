@@ -27,10 +27,11 @@ export const aboutIntro = {
 	eyebrow: 'À propos',
 	title: 'Un seul interlocuteur, du brief à la mise en ligne.',
 	accent: 'Un seul interlocuteur',
-	/** Texte validé le 24/10/2026 (audit SEO : identité de développeur web indépendant).
+	/** Texte validé le 24/10/2026, positionnement précisé le 16/11/2026 : studio indépendant aux
+	 *  expertises plurielles (full stack, WordPress et WooCommerce, automatisation, identité visuelle).
 	 *  Voix de marque (22/10/2026) : troisième personne, sans « je » ni « nous ». « Plus de 20 ans
 	 *  d'expérience professionnelle » confirmé par Sébastien (expérience globale, pas seulement WordPress). */
-	text: "Dev'n Done est l'activité de Sébastien Maurice, développeur web indépendant, avec plus de 20 ans d'expérience professionnelle, du design à l'intégration. Sa spécialité : WordPress et WooCommerce, pour les entreprises comme en renfort des agences web. Sa méthode reste simple : un cadrage précis avant de commencer, un devis clair, un délai annoncé, puis une validation à chaque étape importante. Vous échangez directement avec la personne qui réalise le projet, sans intermédiaire."
+	text: "Dev'n Done est un studio indépendant de développement web et de solutions numériques, fondé par Sébastien Maurice, avec plus de 20 ans d'expérience professionnelle, du design à l'intégration. Il intervient sur plusieurs domaines : développement full stack et applications sur mesure, WordPress et WooCommerce, automatisation des processus et intégrations, identité visuelle et direction artistique. Pour les entreprises comme en renfort des agences web. Sa méthode reste simple : un cadrage précis avant de commencer, un devis clair, un délai annoncé, puis une validation à chaque étape importante. Vous échangez directement avec la personne qui réalise le projet, sans intermédiaire."
 } as const;
 
 /** Section « La mascotte » de la page À propos : texte fourni par Sébastien le 20/10/2026 */

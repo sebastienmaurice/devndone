@@ -115,7 +115,7 @@ export const articles: readonly Article[] = [
 		slug: 'identite-visuelle-cine-delices',
 		title: "Trop sombre ? Ce que les retours m'ont appris sur le design de Ciné Délices",
 		accent: 'Trop sombre ?',
-		seoTitle: "Design de Ciné Délices : l'identité visuelle d'un site de cinéma et de cuisine",
+		seoTitle: "Ciné Délices : l'identité visuelle d'un site de cinéma",
 		description:
 			"Palette, typographies, cadres animés, pages créateurs : comment j'ai conçu l'identité visuelle de Ciné Délices et ce que les retours m'ont appris.",
 		lede: "Un site de recettes inspirées du cinéma, un fond bleu nuit, de l'or, des cadres de profil animés. Voici comment l'identité visuelle de Ciné Délices a été construite, et ce que j'ai décidé de ne pas faire quand des visiteurs ont trouvé le site trop sombre.",
@@ -284,7 +284,7 @@ export const articles: readonly Article[] = [
 		slug: 'formulaire-wordpress-qui-n-envoie-plus',
 		title: "Formulaire WordPress qui n'envoie plus : comprendre et corriger",
 		accent: "n'envoie plus",
-		seoTitle: "Formulaire WordPress qui n'envoie plus : causes et corrections",
+		seoTitle: "Formulaire WordPress qui n'envoie plus : que faire ?",
 		description:
 			'Le formulaire de votre site WordPress dit « message envoyé » mais vous ne recevez rien ? Les causes possibles, ce que vous pouvez vérifier et la correction durable.',
 		lede: "Le formulaire affiche « message envoyé », mais rien n'arrive dans votre boîte de réception. Voici pourquoi cela se produit, ce que vous pouvez vérifier vous-même et comment corriger durablement.",
