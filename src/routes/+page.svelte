@@ -238,9 +238,18 @@
 				>Un autre projet en tête ?</Button
 			>
 		</header>
-		<!-- Projets WordPress et WooCommerce menés pour des clients (Ciné Délices, projet de
-		     formation, et Alternativ' Uniforme restent sur /realisations/) -->
+		<!-- Projets WordPress et WooCommerce menés pour des clients (Alternativ' Uniforme reste sur
+		     /realisations/ ; Ciné Délices est signalé à part, sous la grille) -->
 		<ProjectGrid only={homeProjects} />
+		<!-- Mise en avant du full stack, à part des projets clients et signalée comme projet de
+		     formation (validé le 16/11/2026) -->
+		<p class="home-projects__training">
+			Projet de formation (titre professionnel DWWM) :
+			<a class="link-arrow" href="/realisations/cine-delices/"
+				><strong>Ciné Délices</strong>, une application full stack de recettes inspirées du cinéma
+				<Icon name="arrow-right" /></a
+			>
+		</p>
 		<p class="home-projects__all">
 			<a class="link-arrow" href="/realisations/"
 				>Toutes les réalisations <Icon name="arrow-right" /></a
@@ -742,8 +751,17 @@
 		margin: 0;
 		color: var(--text-muted);
 	}
-	.home-projects__all {
+	.home-projects__training {
 		margin: var(--space-6) 0 0;
+		padding-top: var(--space-5);
+		border-top: 1px dashed var(--line-strong);
+		color: var(--text-muted);
+	}
+	.home-projects__training .link-arrow {
+		display: inline;
+	}
+	.home-projects__all {
+		margin: var(--space-5) 0 0;
 		text-align: right;
 	}
 </style>
