@@ -10,7 +10,7 @@
 export const legal = {
 	publisher: {
 		name: 'Sébastien Maurice',
-		tradeName: "DEV'n DONE",
+		tradeName: "Dev'n Done",
 		status: 'Entrepreneur individuel (micro-entreprise)',
 		siret: '517 849 733 00020',
 		registration: 'Immatriculé au Registre national des entreprises (RNE)',
