@@ -40,19 +40,17 @@ function watch(node: HTMLElement, delay = 0): IntersectionObserver | undefined {
 
 /**
  * Blocs révélés automatiquement dans les sections d'une page (hors première section, qui a sa
- * propre animation d'entrée) : titres, surtitres, textes, cartes de liste (en cascade), visuels,
- * formulaires, encarts. Un bloc contenu dans un autre bloc révélé n'est pas traité deux fois.
+ * propre animation d'entrée). Depuis le 16/11/2026, on anime des blocs entiers et non chaque
+ * paragraphe : en-têtes de section (surtitre, titre et chapô ensemble), cartes de liste (en
+ * cascade), visuels, formulaires, encarts de contact. Un titre ou un texte isolé reste immobile.
+ * Un bloc contenu dans un autre bloc révélé n'est pas traité deux fois.
  */
 const BLOCKS = [
-	'.section-label',
-	'h2',
 	'header',
-	'p',
 	'ul[role="list"] > li',
 	'ol > li',
 	'figure',
 	'form',
-	'aside',
 	'.contact',
 	'[class*="__visual"]'
 ].join(', ');

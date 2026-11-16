@@ -384,39 +384,40 @@
 		height: auto;
 	}
 
-	/* Entrée du hero (au chargement, CSS seul) : surtitre, titre ligne par ligne, mot DONE
-	   qui apparaît d'un coup, accroche et boutons, puis le visuel (avec la note manuscrite) qui monte
-	   et flotte doucement */
+	/* Entrée du hero (au chargement, CSS seul), resserrée le 16/11/2026 : tout est en place en moins
+	   de 900 ms. Surtitre, titre ligne par ligne, mot DONE qui apparaît d'un coup, accroche et
+	   boutons. L'illustration (élément LCP probable) est visible dès le premier rendu : elle glisse
+	   seulement, sans fondu, puis flotte doucement */
 	.hero__kicker {
-		animation: hero-rise 640ms var(--ease-out) 140ms both;
+		animation: hero-rise 480ms var(--ease-out) both;
 	}
 	.hero__line {
-		animation: hero-line 760ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+		animation: hero-line 560ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 	}
 	.hero__line:nth-child(2) {
-		animation-delay: 200ms;
+		animation-delay: 60ms;
 	}
 	.hero__line:nth-child(3) {
-		animation-delay: 330ms;
+		animation-delay: 130ms;
 	}
 	.hero__line:nth-child(4) {
-		animation-delay: 460ms;
+		animation-delay: 200ms;
 	}
 	.hero__line :global(.done) {
 		display: inline-block;
-		animation: hero-pop 720ms cubic-bezier(0.34, 1.56, 0.64, 1) 900ms both;
+		animation: hero-pop 560ms cubic-bezier(0.34, 1.56, 0.64, 1) 340ms both;
 	}
 	.hero__lede {
-		animation: hero-rise 640ms var(--ease-out) 760ms both;
+		animation: hero-rise 480ms var(--ease-out) 300ms both;
 	}
 	.hero__ctas {
-		animation: hero-rise 640ms var(--ease-out) 880ms both;
+		animation: hero-rise 480ms var(--ease-out) 380ms both;
 	}
 	.hero__visual {
-		animation: hero-visual 1000ms var(--ease-out) 300ms both;
+		animation: hero-visual 800ms var(--ease-out) both;
 	}
 	.hero__visual :global(img) {
-		animation: hero-float 6s ease-in-out 1.6s infinite;
+		animation: hero-float 6s ease-in-out 1s infinite;
 	}
 	@keyframes hero-rise {
 		from {
@@ -443,8 +444,7 @@
 	}
 	@keyframes hero-visual {
 		from {
-			opacity: 0;
-			transform: translateY(48px) scale(0.94);
+			transform: translateY(32px) scale(0.96);
 		}
 	}
 	@keyframes hero-float {

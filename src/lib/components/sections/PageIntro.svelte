@@ -44,26 +44,28 @@
 		padding-block: clamp(var(--space-6), 5vw, var(--space-9))
 			clamp(var(--space-6), 4vw, var(--space-8));
 	}
-	/* Entrée au chargement (CSS seul) : textes en cascade, visuel qui monte */
+	/* Entrée au chargement et à chaque changement de page (CSS seul) : textes en cascade, visuel qui
+	   monte. Seule transition entre les pages depuis le 16/11/2026 (le balayage de page est retiré),
+	   resserrée : tout est en place en moins de 700 ms */
 	.page-intro__text > :global(*) {
-		animation: intro-rise 620ms var(--ease-out) both;
+		animation: intro-rise 480ms var(--ease-out) both;
 	}
 	.page-intro__text > :global(:nth-child(2)) {
-		animation-delay: 80ms;
+		animation-delay: 50ms;
 	}
 	.page-intro__text > :global(:nth-child(3)) {
-		animation-delay: 160ms;
+		animation-delay: 100ms;
 	}
 	.page-intro__text > :global(:nth-child(4)) {
-		animation-delay: 260ms;
+		animation-delay: 150ms;
 	}
 	.page-intro__text > :global(:nth-child(n + 5)) {
-		animation-delay: 360ms;
+		animation-delay: 200ms;
 	}
 	/* Visuel : on anime l'image elle-même, pas son conteneur. Un conteneur animé (transform,
 	   opacité) isole l'image, et son fond blanc ne se fond plus dans l'Ivoire (mix-blend-mode) */
 	.page-intro__aside :global(:is(img, ul)) {
-		animation: intro-visual 900ms var(--ease-out) 200ms both;
+		animation: intro-visual 700ms var(--ease-out) both;
 	}
 	@keyframes intro-rise {
 		from {
@@ -71,10 +73,10 @@
 			transform: translateY(24px);
 		}
 	}
+	/* Sans fondu : le visuel (souvent l'élément LCP de la page) est visible dès le premier rendu */
 	@keyframes intro-visual {
 		from {
-			opacity: 0;
-			transform: translateY(40px) scale(0.95);
+			transform: translateY(32px) scale(0.96);
 		}
 	}
 	@media (prefers-reduced-motion: reduce) {
