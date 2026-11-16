@@ -23,6 +23,9 @@
 
 	const a = $derived(data.article);
 	const sprint = offers.find((o) => o.slug === 'sprint-wordpress-woocommerce');
+	// Numéro affiché d'une section : rang parmi les sections numérotées (le retour d'expérience ne
+	// porte pas de numéro), pour que deux sections de même type ne partagent pas le même numéro
+	const num = (i: number) => a.sections.slice(0, i + 1).filter((x) => x.kind !== 'case').length;
 
 	// Mascotte de l'en-tête selon l'article (champ visual) : enhanced:img veut un identifiant simple
 	const altLoupe =
@@ -111,13 +114,13 @@
 	</div>
 </section>
 
-{#each a.sections as s (s.id)}
+{#each a.sections as s, i (s.id)}
 	{#if s.kind === 'flow'}
 		<!-- Texte à gauche, schéma du trajet de l'e-mail à droite -->
 		<section class="section section--tight anchor" id={s.id} aria-labelledby="{s.id}-title">
 			<div class="container split">
 				<div class="split__text stack stack--sm">
-					<SectionLabel label="1 · {s.nav}" />
+					<SectionLabel label="{num(i)} · {s.nav}" />
 					<h2 class="t-h2" id="{s.id}-title">{s.title}</h2>
 					{#each s.paragraphs ?? [] as p, j (j)}
 						<p class="lead-text" class:lead-text--first={j === 0}>{p}</p>
@@ -127,8 +130,10 @@
 					{#each s.flow ?? [] as step, k (k)}
 						<li class="flow__step" class:flow__step--end={k === (s.flow?.length ?? 0) - 1}>
 							<span class="flow__node" aria-hidden="true">
-								{#if k === (s.flow?.length ?? 0) - 1}<Icon name="mail" size="sm" />{:else}{k +
-										1}{/if}
+								{#if k === (s.flow?.length ?? 0) - 1}<Icon
+										name={s.flowEnd ?? 'mail'}
+										size="sm"
+									/>{:else}{k + 1}{/if}
 							</span>
 							<span class="flow__body">
 								<span class="flow__label">{step.label}</span>
@@ -145,7 +150,7 @@
 			<div class="container">
 				<div class="night surface-night">
 					<div class="night__quote">
-						<SectionLabel label="2 · {s.nav}" />
+						<SectionLabel label="{num(i)} · {s.nav}" />
 						<h2 class="t-h3 night__title" id="{s.id}-title">{s.title}</h2>
 						<blockquote class="pull">
 							<p>{s.quote}</p>
@@ -165,7 +170,7 @@
 		<section class="section section--tight band anchor" id={s.id} aria-labelledby="{s.id}-title">
 			<div class="container stack stack--lg">
 				<header class="stack stack--sm head">
-					<SectionLabel label="3 · {s.nav}" />
+					<SectionLabel label="{num(i)} · {s.nav}" />
 					<h2 class="t-h2" id="{s.id}-title">{s.title}</h2>
 					{#each s.paragraphs ?? [] as p, j (j)}
 						<p class="lead-text">{p}</p>
@@ -188,8 +193,11 @@
 		<section class="section section--tight anchor" id={s.id} aria-labelledby="{s.id}-title">
 			<div class="container stack stack--lg">
 				<header class="stack stack--sm head">
-					<SectionLabel label="4 · {s.nav}" />
+					<SectionLabel label="{num(i)} · {s.nav}" />
 					<h2 class="t-h2" id="{s.id}-title">{s.title}</h2>
+					{#each s.paragraphs ?? [] as p, j (j)}
+						<p class="lead-text">{p}</p>
+					{/each}
 				</header>
 				<ol class="guide-steps" role="list">
 					{#each s.steps ?? [] as step, k (k)}
@@ -200,6 +208,16 @@
 						</li>
 					{/each}
 				</ol>
+				{#if s.code}
+					<!-- Bloc de code (IBM Plex Mono, charte), légende sous le code -->
+					<figure class="guide-code surface-night">
+						<pre><code>{s.code.content}</code></pre>
+						<figcaption class="guide-code__caption">{s.code.caption}</figcaption>
+					</figure>
+				{/if}
+				{#each s.after ?? [] as p, j (j)}
+					<p class="lead-text guide-after">{p}</p>
+				{/each}
 			</div>
 		</section>
 	{:else if s.kind === 'case'}
@@ -214,6 +232,7 @@
 						{#each s.paragraphs ?? [] as p, j (j)}
 							<p>{p}</p>
 						{/each}
+						{#if s.link}<p><LinkArrow href={s.link.href}>{s.link.label}</LinkArrow></p>{/if}
 					</div>
 				</div>
 			</div>
@@ -223,7 +242,7 @@
 		<section class="section section--tight band anchor" id={s.id} aria-labelledby="{s.id}-title">
 			<div class="container split split--closing">
 				<div class="split__text stack stack--sm">
-					<SectionLabel label="5 · {s.nav}" />
+					<SectionLabel label="{num(i)} · {s.nav}" />
 					<h2 class="t-h2" id="{s.id}-title">{s.title}</h2>
 					{#each s.paragraphs ?? [] as p, j (j)}
 						<p class="lead-text" class:lead-text--first={j === 0}>{p}</p>
@@ -605,6 +624,33 @@
 	.guide-step p {
 		margin: 0;
 		color: var(--text-muted);
+	}
+
+	/* Bloc de code : fond Bleu nuit, IBM Plex Mono, défilement horizontal si une ligne déborde */
+	.guide-code {
+		margin: 0;
+		padding: var(--space-5);
+		background: var(--bg);
+		color: var(--text);
+		border-radius: var(--radius-card);
+	}
+	.guide-code pre {
+		margin: 0;
+		overflow-x: auto;
+		font-family: var(--font-mono);
+		font-size: var(--text-tech);
+		line-height: 1.7;
+	}
+	.guide-code__caption {
+		margin-top: var(--space-3);
+		padding-top: var(--space-3);
+		border-top: 1px solid var(--line);
+		font-size: var(--text-body-sm);
+		color: var(--text-muted);
+	}
+	.guide-after {
+		max-width: var(--measure);
+		margin: 0;
 	}
 
 	/* Retour d'expérience */

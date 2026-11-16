@@ -9,11 +9,13 @@
 
 /**
  * Mise en page d'une section d'article (la page choisit le gabarit selon `kind`) :
- * - `flow` : texte et schéma en étapes (liste `flow`) ;
+ * - `flow` : texte et schéma en étapes (liste `flow`, icône de fin `flowEnd`) ;
  * - `quote` : bandeau sombre avec une phrase mise en avant (`quote`) et le texte ;
  * - `checklist` : liste de contrôles en cartes (`list`) ;
- * - `steps` : étapes numérotées en cartes (`steps`) ;
- * - `case` : retour d'expérience en carte (cas vécu, anonymisé, faits fournis par Sébastien) ;
+ * - `steps` : étapes numérotées en cartes (`steps`), chapô facultatif, bloc de code (`code`) et texte
+ *   après les étapes (`after`) ;
+ * - `case` : retour d'expérience en carte (cas vécu, anonymisé, faits fournis par Sébastien), lien
+ *   facultatif vers l'étude de cas (`link`) ;
  * - `closing` : texte et carte d'appel vers l'offre de dépannage.
  */
 export type ArticleSectionKind = 'flow' | 'quote' | 'checklist' | 'steps' | 'case' | 'closing';
@@ -48,6 +50,8 @@ export type ArticleSection = {
 	paragraphs?: readonly string[];
 	/** Schéma `flow` : étapes dans l'ordre, avec une précision facultative */
 	flow?: readonly { label: string; note?: string }[];
+	/** Icône de la dernière étape du schéma : enveloppe (par défaut) ou alerte */
+	flowEnd?: 'mail' | 'alert';
 	/** Phrase mise en avant (`quote`), reformulation d'une source citée */
 	quote?: string;
 	/** Source de la phrase mise en avant */
@@ -56,6 +60,12 @@ export type ArticleSection = {
 	list?: readonly string[];
 	/** Étapes numérotées (`steps`) */
 	steps?: readonly { title: string; text: string }[];
+	/** Bloc de code affiché après les étapes, avec sa légende */
+	code?: { caption: string; content: string };
+	/** Paragraphes affichés après les étapes et le code */
+	after?: readonly string[];
+	/** Lien du retour d'expérience (`case`) vers l'étude de cas */
+	link?: { label: string; href: string };
 	/** Pastilles de couleurs affichées sous la section */
 	palette?: readonly ArticleSwatch[];
 	/** Légende commune de la palette */
@@ -111,6 +121,198 @@ export const ressourcesPage = {
 } as const;
 
 export const articles: readonly Article[] = [
+	{
+		slug: 'erreur-500-wordpress-elementor',
+		title: 'Erreur 500 sur WordPress et Elementor : les causes fréquentes',
+		accent: 'Erreur 500',
+		seoTitle: 'Erreur 500 WordPress et Elementor : causes et solutions',
+		description:
+			'Votre site WordPress affiche une erreur 500, souvent avec Elementor ? Ce que signifie cette erreur, ses causes fréquentes et comment la diagnostiquer pas à pas.',
+		lede: "Vous ouvrez votre site ou l'éditeur Elementor, et au lieu de votre page s'affiche « 500 Internal Server Error », parfois une page blanche. Le message ne dit rien de la cause : c'est voulu, et c'est justement ce qui rend cette erreur déroutante. Voici ce qu'elle signifie, ses causes les plus fréquentes et la manière de remonter jusqu'à la vraie panne sans casser autre chose.",
+		published: '2026-11-16',
+		modified: '2026-11-16',
+		sourcesChecked: '16 novembre 2026',
+		tags: ['WordPress', 'Elementor', 'Erreur 500', 'PHP', 'Mémoire', 'Débogage'],
+		visual: 'guides',
+		sections: [
+			{
+				id: 'signification',
+				nav: 'Ce que dit une erreur 500',
+				title: 'Ce que dit (et ne dit pas) une erreur 500',
+				kind: 'flow',
+				flowEnd: 'alert',
+				paragraphs: [
+					"Le code 500 indique, selon la documentation de référence MDN, que le serveur « a rencontré une condition inattendue qui l'a empêché de satisfaire la requête ». C'est une erreur générique : elle signale qu'une panne s'est produite côté serveur, pas laquelle.",
+					"Deux messages proches ont une autre origine. « Il y a eu une erreur critique sur ce site » est la page affichée par WordPress lui-même quand une erreur PHP fatale survient : depuis WordPress 5.2, l'administrateur reçoit alors un e-mail contenant un lien vers le mode de récupération, qui met en pause l'extension ou le thème fautif pour lui seul, le temps de corriger. La page blanche sans aucun message relève souvent des mêmes causes, avec un affichage des erreurs désactivé."
+				],
+				flow: [
+					{ label: 'Le visiteur demande une page', note: "Le site, ou l'éditeur Elementor" },
+					{ label: 'Le serveur web reçoit la demande', note: 'Apache, Nginx, LiteSpeed…' },
+					{ label: 'PHP exécute WordPress', note: 'Le cœur, le thème et les extensions' },
+					{
+						label: "Une erreur interrompt l'exécution",
+						note: 'Mémoire, conflit, fichier invalide…'
+					},
+					{ label: 'Le serveur renvoie le code 500', note: 'Sans dire pourquoi' }
+				]
+			},
+			{
+				id: 'causes',
+				nav: 'Les causes fréquentes',
+				title: 'Les causes les plus fréquentes',
+				kind: 'quote',
+				quote:
+					'Face à une « Internal Server Error », le premier suspect est un fichier .htaccess corrompu.',
+				quoteSource: "D'après la documentation WordPress, Common WordPress errors",
+				paragraphs: [
+					'Un fichier .htaccess corrompu. Ce fichier règle la réécriture des adresses sur les serveurs Apache : une ligne invalide suffit à bloquer tout le site.',
+					"La mémoire allouée à PHP est épuisée. WordPress tente par défaut d'utiliser 40 Mo (64 Mo en multisite). Elementor demande beaucoup plus : sa documentation indique un minimum de 256 Mo et recommande 512 Mo quand d'autres extensions sont installées. C'est une cause classique d'erreur 500 à l'ouverture de l'éditeur.",
+					"Une extension en conflit, souvent juste après une mise à jour ou l'ajout d'un module. Elementor recommande de désactiver toutes les extensions sauf Elementor et Elementor Pro, puis de les réactiver une à une.",
+					"Le thème, pour les mêmes raisons qu'une extension.",
+					"Une version de PHP incompatible avec une extension ou le thème. WordPress recommande aujourd'hui PHP 8.3 ou plus ; il fonctionne encore avec PHP 7.4, mais ces versions ne reçoivent plus de correctifs de sécurité.",
+					'Des fichiers du cœur de WordPress endommagés, par exemple après une mise à jour interrompue.'
+				]
+			},
+			{
+				id: 'avant',
+				nav: 'Avant de toucher à quoi que ce soit',
+				title: 'Avant de toucher à quoi que ce soit',
+				kind: 'checklist',
+				list: [
+					'Faites une sauvegarde des fichiers et de la base de données, ou vérifiez que celle de votre hébergeur est récente.',
+					"Notez ce qui a changé juste avant : mise à jour de WordPress, d'Elementor ou d'une extension, nouvelle extension, changement de version PHP chez l'hébergeur.",
+					"Situez l'erreur : sur tout le site, seulement dans l'administration, ou seulement à l'ouverture de l'éditeur Elementor ? Une erreur limitée à l'éditeur oriente vers la mémoire ou une extension.",
+					"Cherchez l'e-mail du mode de récupération dans la boîte de l'adresse d'administration. S'il existe, il nomme souvent l'extension ou le thème en cause."
+				]
+			},
+			{
+				id: 'journaux',
+				nav: "Les journaux d'erreurs",
+				title: "Trouver la vraie cause : les journaux d'erreurs",
+				kind: 'steps',
+				paragraphs: [
+					"Elementor le dit sans détour : face à une erreur 500, il faut consulter les journaux d'erreurs PHP du serveur pour en connaître la cause. Tout le reste n'est que supposition."
+				],
+				steps: [
+					{
+						title: "Les journaux de l'hébergeur",
+						text: "La plupart des panneaux d'hébergement donnent accès aux journaux d'erreurs PHP ou Apache. Sinon, le support de l'hébergeur peut les transmettre."
+					},
+					{
+						title: 'Le journal de WordPress',
+						text: "Dans le fichier wp-config.php, juste avant la ligne « That's all, stop editing! », la documentation WordPress propose le réglage ci-dessous. Les erreurs sont alors écrites dans wp-content/debug.log, sans être affichées aux visiteurs."
+					},
+					{
+						title: 'Lire, puis retirer le réglage',
+						text: "Reproduisez l'erreur, lisez les dernières lignes du fichier, puis retirez ces réglages : WordPress déconseille d'utiliser ces outils sur un site en ligne, ils sont prévus pour les copies de développement et de test."
+					}
+				],
+				code: {
+					caption:
+						"Réglage à placer dans wp-config.php, avant la ligne « That's all, stop editing! »",
+					content:
+						"define( 'WP_DEBUG', true );\ndefine( 'WP_DEBUG_LOG', true );\ndefine( 'WP_DEBUG_DISPLAY', false );\n@ini_set( 'display_errors', 0 );"
+				},
+				after: [
+					'Une ligne du type « Allowed memory size … exhausted » désigne la mémoire. Un chemin vers wp-content/plugins/… désigne une extension.'
+				]
+			},
+			{
+				id: 'corriger',
+				nav: 'Corriger pas à pas',
+				title: "Corriger, une piste après l'autre",
+				kind: 'steps',
+				paragraphs: ["Dans l'ordre proposé par la documentation WordPress."],
+				steps: [
+					{
+						title: 'Régénérer le .htaccess',
+						text: 'Renommez le fichier (par exemple .htaccess_old), puis enregistrez de nouveau les réglages dans Réglages › Permaliens : WordPress le recrée.'
+					},
+					{
+						title: 'Augmenter la mémoire PHP',
+						text: "Avec la constante WP_MEMORY_LIMIT dans wp-config.php, par exemple define( 'WP_MEMORY_LIMIT', '256M' );. Certains hébergeurs n'autorisent pas cette augmentation : il faut alors la leur demander."
+					},
+					{
+						title: 'Désactiver les extensions',
+						text: "Depuis l'administration si elle répond, sinon par FTP en renommant leur dossier. Réactivez-les une par une pour trouver la fautive."
+					},
+					{
+						title: 'Passer à un thème par défaut',
+						text: "Temporairement, un thème par défaut de WordPress (ou Hello Elementor) permet d'écarter le thème."
+					},
+					{
+						title: 'Vérifier la version de PHP',
+						text: "Dans le panneau de l'hébergeur, au regard des exigences de WordPress, d'Elementor et de vos extensions."
+					},
+					{
+						title: 'Remplacer wp-admin et wp-includes',
+						text: "En dernier recours, par ceux d'une installation neuve de la même version. Ne touchez jamais au dossier wp-content, qui contient vos contenus."
+					}
+				],
+				after: [
+					'Une piste à la fois : en modifiant plusieurs choses ensemble, on ne sait plus laquelle a réglé le problème, ni si une autre en a créé un nouveau.'
+				]
+			},
+			{
+				id: 'cas',
+				nav: 'Un cas rencontré',
+				title: 'Rencontré pendant une refonte',
+				kind: 'case',
+				paragraphs: [
+					"Sur le site d'une école de valse à Paris, des erreurs serveur bloquantes empêchaient de travailler avec Elementor, en plus de problèmes d'affichage sur mobile. Le diagnostic a porté sur Elementor, PHP et la gestion de la mémoire. La reprise a aussi compris un nettoyage et un allègement des extensions, avant la refonte du site. Le site est aujourd'hui stabilisé.",
+					"Ce cas montre surtout une chose : une erreur 500 a rarement une seule piste évidente, et c'est la lecture des journaux qui permet de trancher."
+				],
+				link: { label: "Voir l'étude de cas Harmony Valse", href: '/realisations/harmony-valse/' }
+			},
+			{
+				id: 'diagnostic',
+				nav: 'Sans regarder votre site',
+				title: 'Ce que je ne peux pas vous dire sans regarder votre site',
+				kind: 'closing',
+				paragraphs: [
+					"La même erreur 500 peut venir d'une ligne du .htaccess, d'une limite de mémoire fixée par l'hébergeur ou d'une extension mise à jour la veille. Sans les journaux d'erreurs et l'accès au site, toute réponse serait une supposition.",
+					"Si vous préférez me confier le diagnostic, c'est l'objet de l'intervention de dépannage : lecture des journaux, identification de la cause, correction sur le périmètre convenu, puis compte rendu de ce qui a été fait."
+				]
+			}
+		],
+		sources: [
+			{
+				label: 'MDN Web Docs, 500 Internal Server Error',
+				url: 'https://developer.mozilla.org/fr/docs/Web/HTTP/Reference/Status/500',
+				note: 'Définition du code 500, erreur générique côté serveur.'
+			},
+			{
+				label: 'WordPress.org, Advanced Administration Handbook : Common WordPress errors',
+				url: 'https://developer.wordpress.org/advanced-administration/wordpress/common-errors/',
+				note: 'Internal Server Error (.htaccess, extensions, thème, mémoire PHP, fichiers wp-admin et wp-includes) et causes du message « erreur critique ». Page en anglais.'
+			},
+			{
+				label: 'WordPress.org, Advanced Administration Handbook : Debugging in WordPress',
+				url: 'https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/',
+				note: "WP_DEBUG, WP_DEBUG_LOG, WP_DEBUG_DISPLAY, fichier debug.log et mise en garde sur l'usage en ligne. Page en anglais."
+			},
+			{
+				label: 'WordPress.org, Advanced Administration Handbook : Editing wp-config.php',
+				url: 'https://developer.wordpress.org/advanced-administration/wordpress/wp-config/',
+				note: 'Constante WP_MEMORY_LIMIT et mémoire allouée par défaut (40 Mo, 64 Mo en multisite). Page en anglais.'
+			},
+			{
+				label: 'WordPress.org, Requirements',
+				url: 'https://wordpress.org/about/requirements/',
+				note: 'Versions de PHP recommandées et versions anciennes encore prises en charge. Page en anglais.'
+			},
+			{
+				label: 'Make WordPress Core, Fatal Error Recovery Mode in 5.2',
+				url: 'https://make.wordpress.org/core/2019/04/16/fatal-error-recovery-mode-in-5-2/',
+				note: "E-mail à l'administrateur et mode de récupération en cas d'erreur fatale (16 avril 2019). Page en anglais."
+			},
+			{
+				label: 'Elementor, 500 error',
+				url: 'https://elementor.com/help/500-error/',
+				note: 'Causes (mémoire, extensions tierces, erreurs fatales), mémoire minimale et recommandée, lecture des journaux PHP, désactivation des extensions. Page en anglais.'
+			}
+		]
+	},
 	{
 		slug: 'identite-visuelle-cine-delices',
 		title: "Trop sombre ? Ce que les retours m'ont appris sur le design de Ciné Délices",

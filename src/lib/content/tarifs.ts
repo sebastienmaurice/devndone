@@ -89,7 +89,8 @@ export type OfferRelated =
 	| 'sprint-wordpress-woocommerce'
 	| 'audit-technique-wordpress'
 	| 'audit-automatisation'
-	| 'formulaire-wordpress-qui-n-envoie-plus';
+	| 'formulaire-wordpress-qui-n-envoie-plus'
+	| 'erreur-500-wordpress-elementor';
 
 /** Réponses communes aux pages d'offre (informations validées) */
 const faqDomain = {
@@ -381,7 +382,12 @@ export const offers: readonly Offer[] = [
 	{
 		slug: 'sprint-wordpress-woocommerce',
 		cta: "Décrire votre besoin d'intervention",
-		related: ['agences', 'realisations', 'formulaire-wordpress-qui-n-envoie-plus'],
+		related: [
+			'agences',
+			'realisations',
+			'formulaire-wordpress-qui-n-envoie-plus',
+			'erreur-500-wordpress-elementor'
+		],
 		/** Témoignage d'un client accompagné sur un site existant (avis Google) */
 		reviews: ['pierre-pointeau'],
 		universe: 'web',
