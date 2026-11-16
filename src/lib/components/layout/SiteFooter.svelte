@@ -11,13 +11,13 @@
 	import { contactIntro, links } from '$lib/content/studio';
 	import Icon from '../brand/Icon.svelte';
 	import Logo from '../brand/Logo.svelte';
+	import SocialLinks from '../brand/SocialLinks.svelte';
 
 	const year = new Date().getFullYear();
 
 	const contactLinks = [
 		{ label: contactIntro.cta, href: '/contact/', external: false },
 		{ label: 'Réserver 15 min', href: links.calendly, external: true },
-		{ label: 'LinkedIn', href: links.linkedin, external: true },
 		{ label: 'Malt', href: links.malt, external: true }
 	];
 	const columns = [
@@ -34,6 +34,10 @@
 					><Logo variant="horizontal" tone="night" height={40} alt="" /></a
 				>
 				<p class="footer__slogan">{heroSlogan.join(' ')}</p>
+				<!-- Réseaux sociaux (16/11/2026) : liens sortants seulement -->
+				<nav class="footer__social" aria-label="Réseaux sociaux de Dev'n Done">
+					<SocialLinks />
+				</nav>
 			</div>
 
 			{#each columns as col (col.id)}
@@ -126,6 +130,9 @@
 		display: grid;
 		align-content: start;
 		gap: var(--space-4);
+	}
+	.footer__social {
+		margin-top: var(--space-2);
 	}
 	/* Titres de colonne : surtitre orange, comme le reste du site */
 	.site-footer .site-footer__title {

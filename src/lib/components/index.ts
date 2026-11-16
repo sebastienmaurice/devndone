@@ -15,6 +15,7 @@ export { default as Icon, type IconName } from './brand/Icon.svelte';
 export { default as Eyebrow } from './brand/Eyebrow.svelte';
 export { default as Tagline } from './brand/Tagline.svelte';
 export { default as Stroke } from './brand/Stroke.svelte';
+export { default as SocialLinks } from './brand/SocialLinks.svelte';
 export { default as Rule } from './brand/Rule.svelte';
 export { default as SlashBand } from './brand/SlashBand.svelte';
 export { default as Annotation } from './brand/Annotation.svelte';

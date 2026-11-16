@@ -8,8 +8,28 @@
 export const links = {
 	calendly: 'https://calendly.com/sebastienmaurice/prise-de-contact',
 	malt: 'https://www.malt.fr/profile/semauri',
-	linkedin: 'https://www.linkedin.com/in/sebastien-maurice/'
+	linkedin: 'https://www.linkedin.com/in/sebastien-maurice/',
+	/** Réseaux de Dev'n Done, transmis par Sébastien le 16/11/2026 */
+	facebook: 'https://www.facebook.com/profile.php?id=61596153557412',
+	instagram: 'https://www.instagram.com/devndone.fr/',
+	tiktok: 'https://www.tiktok.com/@devndone.com'
 } as const;
+
+/** Réseaux sociaux affichés (pied de page, page Contact) : trois comptes Dev'n Done et le LinkedIn de
+ *  Sébastien, relié à Dev'n Done. Liens sortants seulement, aucun widget tiers. */
+export type Social = {
+	id: 'facebook' | 'instagram' | 'tiktok' | 'linkedin';
+	label: string;
+	/** Compte, pour le nom accessible du lien */
+	account: string;
+	href: string;
+};
+export const socials: readonly Social[] = [
+	{ id: 'facebook', label: 'Facebook', account: "page Dev'n Done", href: links.facebook },
+	{ id: 'instagram', label: 'Instagram', account: '@devndone.fr', href: links.instagram },
+	{ id: 'tiktok', label: 'TikTok', account: '@devndone.com', href: links.tiktok },
+	{ id: 'linkedin', label: 'LinkedIn', account: 'Sébastien Maurice', href: links.linkedin }
+];
 
 /**
  * Formulaire de contact : envoi direct via Web3Forms (https://web3forms.com), choisi le 20/10/2026.

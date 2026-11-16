@@ -93,10 +93,12 @@
 			founder: {
 				'@type': 'Person',
 				'@id': `${absoluteUrl('/apropos/')}#sebastien-maurice`,
-				name: 'Sébastien Maurice'
+				name: 'Sébastien Maurice',
+				sameAs: [links.linkedin, links.malt]
 			},
 			email: legal.publisher.email,
-			sameAs: [links.malt, links.linkedin]
+			// Comptes de Dev'n Done (16/11/2026) ; LinkedIn et Malt sont les profils de Sébastien (fondateur)
+			sameAs: [links.facebook, links.instagram, links.tiktok]
 		},
 		{
 			'@context': 'https://schema.org',

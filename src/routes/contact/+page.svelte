@@ -12,7 +12,7 @@
 -->
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Button, Check, Field, Honeypot, Notice, Seo } from '$lib/components';
+	import { Button, Check, Field, Honeypot, Notice, Seo, SocialLinks } from '$lib/components';
 	import DoneWord from '$lib/components/brand/DoneWord.svelte';
 	import Icon from '$lib/components/brand/Icon.svelte';
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
@@ -397,16 +397,6 @@
 			</div>
 			<ul class="contact-links" role="list">
 				<li>
-					<a href={links.linkedin} target="_blank" rel="noopener"
-						><span class="contact-links__icon"><Icon name="arrow-up-right" /></span><span
-							class="contact-links__text"
-							><span class="contact-links__label">Réseau</span>LinkedIn<span class="sr-only">
-								(nouvel onglet)</span
-							></span
-						></a
-					>
-				</li>
-				<li>
 					<a href={links.malt} target="_blank" rel="noopener"
 						><span class="contact-links__icon"><Icon name="arrow-up-right" /></span><span
 							class="contact-links__text"
@@ -419,6 +409,11 @@
 					>
 				</li>
 			</ul>
+			<!-- Réseaux sociaux (16/11/2026) : Facebook, Instagram, TikTok, LinkedIn de Sébastien -->
+			<nav class="contact-social" aria-labelledby="contact-social-title">
+				<p class="contact-social__title" id="contact-social-title">Suivre Dev'n Done</p>
+				<SocialLinks labels />
+			</nav>
 		</aside>
 	</div>
 </section>
@@ -523,6 +518,19 @@
 	}
 	.contact-card > :global(.icon) {
 		color: var(--action-alt);
+	}
+	.contact-social {
+		display: grid;
+		gap: var(--space-3);
+		margin-top: var(--space-5);
+	}
+	.contact-social__title {
+		margin: 0;
+		font-size: var(--text-label);
+		font-weight: var(--weight-extrabold);
+		letter-spacing: var(--tracking-label);
+		text-transform: uppercase;
+		color: var(--accent-text);
 	}
 	.contact-links {
 		display: grid;
