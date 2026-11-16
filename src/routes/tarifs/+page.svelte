@@ -192,7 +192,7 @@
 			</h2>
 			<p class="note">{reviewsIntro.lede}</p>
 		</header>
-		<ReviewList />
+		<ReviewList only={['gsti']} />
 		<div class="cluster">
 			<LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow>
 			<a class="link-arrow" href="/realisations/"

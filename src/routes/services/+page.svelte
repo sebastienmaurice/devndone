@@ -1,6 +1,6 @@
 <!--
 	Vue d'ensemble des expertises : les cinq expertises, l'accès aux tarifs et au renfort agences,
-	le process, les avis Malt (cités à l'identique), l'appel au contact.
+	un témoignage client (cité à l'identique), l'appel au contact.
 -->
 <script lang="ts">
 	import { Button, LinkArrow, Seo } from '$lib/components';
@@ -11,11 +11,10 @@
 	import ExpertiseCards from '$lib/components/sections/ExpertiseCards.svelte';
 	import OfferShortcuts from '$lib/components/sections/OfferShortcuts.svelte';
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
-	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
 	import { servicesIntro } from '$lib/content/services';
 	import { logicielIntro, logicielPage } from '$lib/content/logiciel';
-	import { contactIntro, hero, links, maltRating, reviewsIntro } from '$lib/content/studio';
+	import { contactIntro, hero, links, ratingNote, reviewsIntro } from '$lib/content/studio';
 
 	// Offres au forfait (accès direct, maillage interne) : slugs du catalogue content/tarifs.ts
 	const offerSlugs = [
@@ -78,12 +77,6 @@
 	</div>
 </section>
 
-<section class="section section--tight band" aria-labelledby="process-title">
-	<div class="container">
-		<ProcessRow />
-	</div>
-</section>
-
 <section class="section section--tight" aria-labelledby="avis-title">
 	<div class="container stack stack--lg">
 		<header class="stack stack--sm">
@@ -92,11 +85,10 @@
 				<AccentTitle text={reviewsIntro.title} accent={reviewsIntro.accent} />
 			</h2>
 			<p class="note">
-				Note de {maltRating.score} sur {maltRating.count} avis publiés sur le profil Malt de Sébastien
-				Maurice.
+				{ratingNote}
 			</p>
 		</header>
-		<ReviewList />
+		<ReviewList only={['eloustick']} />
 		<p><LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow></p>
 	</div>
 </section>
@@ -116,9 +108,5 @@
 	.note {
 		margin: 0;
 		color: var(--text-muted);
-	}
-	.band {
-		background: var(--surface);
-		border-block: 1px solid var(--line);
 	}
 </style>

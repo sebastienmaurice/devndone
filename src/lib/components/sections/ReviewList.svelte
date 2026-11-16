@@ -3,14 +3,15 @@
 	`only` pour choisir des avis précis (identifiants `id` des avis), `mission` pour indiquer sous la
 	signature la mission concernée (étude de cas liée à l'avis), quand elle est documentée.
 
-	Cartes d'avis (16/11/2026) : grand guillemet orange en Lilita One, pastille « Avis Malt », citation,
+	Cartes d'avis (16/11/2026) : grand guillemet orange en Lilita One, pastille de la source (avis Malt,
+	recommandation Malt ou avis Google), citation,
 	puis signature avec initiales en médaillon. La signature n'est pas réécrite : elle est seulement
 	coupée à la première virgule (nom en gras, fonction et entreprise en dessous). Dans une liste d'au
 	moins trois avis, la carte du milieu passe en Bleu nuit pour rythmer la rangée.
 -->
 <script lang="ts">
 	import { projects } from '$lib/content/realisations';
-	import { reviews, type Review } from '$lib/content/studio';
+	import { reviews, reviewSources, type Review } from '$lib/content/studio';
 
 	let {
 		limit,
@@ -42,7 +43,7 @@
 		<li class="card review-card" class:surface-night={shown.length >= 3 && i === 1}>
 			<figure class="review">
 				<span class="review__mark" aria-hidden="true">«</span>
-				<span class="review__source">Avis Malt</span>
+				<span class="review__source">{reviewSources[r.source]}</span>
 				<blockquote><p>« {r.quote} »</p></blockquote>
 				<figcaption>
 					<span class="review__avatar" aria-hidden="true">{initialsOf(r)}</span>
@@ -117,6 +118,8 @@
 		line-height: var(--leading-body-lg);
 		color: var(--text);
 		text-wrap: pretty;
+		/* Retours à la ligne de l'original conservés (citation exacte) */
+		white-space: pre-line;
 	}
 	figcaption {
 		display: flex;

@@ -100,13 +100,11 @@ const faqOverrun = {
 	q: 'Et si mon projet dépasse le forfait ?',
 	a: "Le travail supplémentaire fait l'objet d'un devis complémentaire, accepté par écrit avant toute exécution. Rien n'est facturé sans votre accord."
 };
+/** Le paiement n'est plus repris en FAQ quand il figure déjà dans l'encadré « Paiement » de la page
+ *  d'offre (16/11/2026) ; seule la FAQ du sprint le garde, pour la facturation des agences */
 const faqVat = {
 	q: 'Les prix sont-ils HT ou TTC ?',
 	a: "Les prix affichés sont ceux que vous payez : Dev'n Done applique la franchise en base de TVA (TVA non applicable, art. 293 B du CGI)."
-};
-const faqPaymentStaged = {
-	q: 'Comment se passe le paiement ?',
-	a: paymentTerms.staged + ' Les échéances sont précisées dans le devis.'
 };
 
 export const offers: readonly Offer[] = [
@@ -162,12 +160,13 @@ export const offers: readonly Offer[] = [
 			'Les accès nécessaires (WordPress, nom de domaine, hébergement)'
 		],
 		extras: ['Rédaction des textes', 'Sections supplémentaires', 'Maintenance mensuelle'],
-		faq: [faqDomain, faqOverrun, faqPaymentStaged, faqVat]
+		faq: [faqDomain, faqOverrun, faqVat]
 	},
 	{
 		slug: 'site-vitrine-wordpress',
 		cta: 'Demander un devis pour un site vitrine',
 		related: ['realisations'],
+		reviews: ['petit-chateau-vercourt'],
 		universe: 'web',
 		group: 'creation',
 		name: 'Site vitrine WordPress',
@@ -233,7 +232,6 @@ export const offers: readonly Offer[] = [
 			},
 			faqDomain,
 			faqOverrun,
-			faqPaymentStaged,
 			faqVat
 		],
 		projects: ['petit-chateau-vercourt']
@@ -241,7 +239,7 @@ export const offers: readonly Offer[] = [
 	{
 		slug: 'refonte-site-wordpress',
 		cta: 'Demander un devis pour une refonte WordPress',
-		reviews: ['palimpseste-urbain', 'gsti'],
+		reviews: ['harmony-valse'],
 		related: ['maintenance', 'realisations'],
 		universe: 'web',
 		group: 'creation',
@@ -304,7 +302,6 @@ export const offers: readonly Offer[] = [
 			},
 			faqDomain,
 			faqOverrun,
-			faqPaymentStaged,
 			faqVat
 		],
 		projects: ['palimpseste-urbain', 'gsti', 'pano-signservice', 'harmony-valse']
@@ -313,6 +310,7 @@ export const offers: readonly Offer[] = [
 		slug: 'boutique-woocommerce',
 		cta: 'Échanger sur votre projet WooCommerce',
 		related: ['realisations'],
+		reviews: ['gsti'],
 		universe: 'web',
 		group: 'creation',
 		name: 'Boutique WooCommerce',
@@ -376,7 +374,6 @@ export const offers: readonly Offer[] = [
 			},
 			faqDomain,
 			faqOverrun,
-			faqPaymentStaged,
 			faqVat
 		],
 		projects: ['harmony-valse', 'pano-signservice']
@@ -385,6 +382,8 @@ export const offers: readonly Offer[] = [
 		slug: 'sprint-wordpress-woocommerce',
 		cta: "Décrire votre besoin d'intervention",
 		related: ['agences', 'realisations', 'formulaire-wordpress-qui-n-envoie-plus'],
+		/** Témoignage d'un client accompagné sur un site existant (avis Google) */
+		reviews: ['pierre-pointeau'],
 		universe: 'web',
 		group: 'ponctuel',
 		name: 'Sprint WordPress / WooCommerce',
@@ -494,7 +493,6 @@ export const offers: readonly Offer[] = [
 				q: 'Les problèmes trouvés sont-ils corrigés ?',
 				a: "Non. L'audit établit un diagnostic et des priorités. Les corrections peuvent ensuite être chiffrées, par exemple sous forme de sprint."
 			},
-			{ q: 'Comment se passe le paiement ?', a: paymentTerms.upfront },
 			faqVat
 		]
 	},
@@ -545,7 +543,6 @@ export const offers: readonly Offer[] = [
 				q: 'Les automatisations sont-elles mises en place ?',
 				a: "Non. L'audit livre des recommandations priorisées. Toute mise en œuvre fait l'objet d'un devis séparé."
 			},
-			{ q: 'Comment se passe le paiement ?', a: paymentTerms.upfront },
 			faqVat
 		]
 	}

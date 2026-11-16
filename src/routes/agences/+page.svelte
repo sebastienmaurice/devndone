@@ -192,7 +192,7 @@
 	</div>
 </section>
 
-<!-- Avis Malt (clients directs) -->
+<!-- Témoignage d'un client direct (recommandation Malt) -->
 <section class="section section--tight band" aria-labelledby="avis-title">
 	<div class="container stack stack--lg">
 		<header class="stack stack--sm">
@@ -202,7 +202,7 @@
 			</h2>
 			<p class="muted">{reviewsIntro.lede}</p>
 		</header>
-		<ReviewList />
+		<ReviewList only={['hache']} />
 		<p><LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow></p>
 	</div>
 </section>

@@ -175,6 +175,12 @@
 		width: min(100%, 17rem);
 		aspect-ratio: 919 / 754;
 	}
+	/* Téléphone (16/11/2026) : mascotte réduite pour alléger la pile de cartes */
+	@media (max-width: 639px) {
+		.package__visual {
+			width: min(100%, 11rem);
+		}
+	}
 	.package__visual :global(img) {
 		display: block;
 		width: 100%;

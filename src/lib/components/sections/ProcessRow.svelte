@@ -130,6 +130,28 @@
 		padding: 0;
 		list-style: none;
 	}
+	/* Téléphone (16/11/2026) : les 4 étapes en 2 colonnes, cartes et illustrations plus compactes,
+	   mascotte réduite ; rien ne change à partir de 640 px */
+	@media (max-width: 639px) {
+		.process__steps {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: var(--space-3);
+		}
+		.process-card {
+			padding: var(--space-3) var(--space-3) var(--space-4);
+		}
+		.process-card__icon {
+			width: min(100%, 6.5rem);
+		}
+		.process-card__num {
+			width: 2.25rem;
+			height: 2.25rem;
+			font-size: 1.0625rem;
+		}
+		.process__mascot {
+			width: min(100%, 15rem);
+		}
+	}
 	@media (min-width: 1100px) {
 		.process__steps {
 			grid-template-columns: repeat(4, minmax(0, 1fr));

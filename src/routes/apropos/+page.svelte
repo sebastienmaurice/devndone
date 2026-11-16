@@ -101,7 +101,8 @@
 			</h2>
 			<p class="note">{reviewsIntro.lede}</p>
 		</header>
-		<ReviewList />
+		<!-- Trois témoignages différents de ceux de l'accueil -->
+		<ReviewList only={['palimpseste-urbain', 'eloustick', 'petit-chateau-vercourt']} />
 		<p><LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow></p>
 	</div>
 </section>

@@ -1,6 +1,7 @@
 <!--
 	Page d'une expertise. Contenu réel uniquement : description et domaines (content/services.ts),
-	offres rattachées et maintenance (content/tarifs.ts), process, réalisations liées.
+	offres rattachées et maintenance (content/tarifs.ts), réalisations liées (la méthode n'est
+	plus répétée ici : accueil et À propos seulement, 16/11/2026).
 	Rien n'est inventé : sans forfait, la page renvoie au premier échange (texte du site en ligne).
 	En-tête : la mascotte de l'expertise à droite (même illustration que sa carte sur l'accueil),
 	prestations en pastilles cochées sous le texte, au-dessus des boutons.
@@ -14,7 +15,6 @@
 	import MaintenancePlans from '$lib/components/sections/MaintenancePlans.svelte';
 	import PackageGrid from '$lib/components/sections/PackageGrid.svelte';
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
-	import ProcessRow from '$lib/components/sections/ProcessRow.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import { expertiseHeaderVisuals, expertiseMascots } from '$lib/assets/mascotte/expertises';
 	import { projects } from '$lib/content/realisations';
@@ -164,12 +164,6 @@
 		</div>
 	</section>
 {/if}
-
-<section class="section section--tight" aria-labelledby="process-title">
-	<div class="container">
-		<ProcessRow />
-	</div>
-</section>
 
 {#if related.length}
 	<section class="section section--tight band" aria-labelledby="related-title">

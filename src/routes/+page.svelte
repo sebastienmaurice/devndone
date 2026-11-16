@@ -22,7 +22,7 @@
 	import heroImage from '$lib/assets/mascotte/mascotte-renard-developpeur-wordpress-elementor.png?enhanced&w=1120;720;480&quality=40';
 	import { realisationsIntro } from '$lib/content/realisations';
 	import { heroSlogan, servicesIntro } from '$lib/content/services';
-	import { hero, homePaths, links, maltRating, reviewsIntro } from '$lib/content/studio';
+	import { hero, homePaths, links, ratingNote, reviewsIntro } from '$lib/content/studio';
 	import pathAgences from '$lib/assets/mascotte/mascotte-renard-agence-web-partenariat-poignee-de-main.jpg?enhanced&w=640;320';
 	import pathEntreprises from '$lib/assets/mascotte/mascotte-renard-projet-site-web-presentation-client.jpg?enhanced&w=640;320';
 	import { site, absoluteUrl, organizationId } from '$lib/config/site';
@@ -258,7 +258,7 @@
 	</div>
 </section>
 
-<!-- Avis Malt réels, cités à l'identique -->
+<!-- Avis et recommandations réels (Malt, Google), cités à l'identique -->
 <section class="section section--tight home-reviews" aria-labelledby="avis-title">
 	<div class="container stack stack--lg">
 		<header class="stack stack--sm">
@@ -267,11 +267,11 @@
 				<AccentTitle text={reviewsIntro.title} accent={reviewsIntro.accent} />
 			</h2>
 			<p class="home-reviews__note">
-				Note de {maltRating.score} sur {maltRating.count} avis publiés sur le profil Malt de Sébastien
-				Maurice.
+				{ratingNote}
 			</p>
 		</header>
-		<ReviewList />
+		<!-- Trois témoignages variés : design et UX, délais, conscience professionnelle -->
+		<ReviewList only={['harmony-valse', 'gsti', 'pierre-pointeau']} />
 		<!-- Lien vers À propos (maillage interne, validé le 24/10/2026) -->
 		<p class="home-reviews__links">
 			<LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow>

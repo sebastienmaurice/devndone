@@ -16,7 +16,7 @@
 	import Accordion from '$lib/components/ui/Accordion.svelte';
 	import { faqPageLd } from '$lib/config/jsonld';
 	import { offerVisuals } from '$lib/assets/tarifs/visuels';
-	import { hero, links, maltRating, reviewsIntro } from '$lib/content/studio';
+	import { hero, links, ratingNote, reviewsIntro } from '$lib/content/studio';
 	import PriceTag from '$lib/components/ui/PriceTag.svelte';
 	import {
 		maintenancePage,
@@ -211,10 +211,9 @@
 		<div class="box">
 			<h2 class="box__title"><Icon name="calendar" /> Paiement</h2>
 			<p>{paymentTerms[o.payment]} Conditions précisées au devis.</p>
-			<p class="small">{vatNotice}</p>
 		</div>
 		<div class="box">
-			<h2 class="box__title"><Icon name="plus" /> Sur devis</h2>
+			<h2 class="box__title"><Icon name="plus" /> En option, sur devis</h2>
 			<ul class="tags" role="list">
 				{#each o.extras as extra (extra)}<li>{extra}</li>{/each}
 			</ul>
@@ -246,7 +245,7 @@
 {/if}
 
 {#if o.reviews?.length}
-	<!-- Avis Malt cités à l'identique, laissés sur une mission de même nature (mission indiquée) -->
+	<!-- Témoignages cités à l'identique, laissés sur une mission de même nature (mission indiquée) -->
 	<section class="section section--tight" aria-labelledby="avis-title">
 		<div class="container stack stack--lg">
 			<header class="stack stack--sm">
@@ -255,8 +254,7 @@
 			</header>
 			<ReviewList only={o.reviews} mission />
 			<p class="malt">
-				Note de {maltRating.score} sur {maltRating.count} avis publiés sur le profil Malt de Sébastien
-				Maurice ·
+				{ratingNote} ·
 				<LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow>
 			</p>
 			<div class="cta-row">
@@ -270,8 +268,7 @@
 	<section class="section section--tight" aria-label="Avis clients">
 		<div class="container">
 			<p class="malt">
-				Note de {maltRating.score} sur {maltRating.count} avis publiés sur le profil Malt de Sébastien
-				Maurice ·
+				{ratingNote} ·
 				<LinkArrow href={links.malt}>{reviewsIntro.more}</LinkArrow>
 			</p>
 		</div>
@@ -370,9 +367,6 @@
 	.box p {
 		margin: 0;
 		color: var(--text-muted);
-	}
-	.box .small {
-		font-size: var(--text-body-sm);
 	}
 	.box__title {
 		display: flex;

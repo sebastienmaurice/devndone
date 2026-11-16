@@ -14,7 +14,7 @@
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import ProjectGrid from '$lib/components/sections/ProjectGrid.svelte';
 	import { projects } from '$lib/content/realisations';
-	import { links, reviews } from '$lib/content/studio';
+	import { links, reviewSources, reviews } from '$lib/content/studio';
 	import { offerPath, offers } from '$lib/content/tarifs';
 	import ReviewList from '$lib/components/sections/ReviewList.svelte';
 	import { absoluteUrl, organizationId } from '$lib/config/site';
@@ -22,7 +22,7 @@
 	let { data } = $props();
 
 	const p = $derived(data.project);
-	// Avis Malt du même client, s'il existe (correspondance déclarée dans content/studio.ts)
+	// Témoignage du même client, s'il existe (correspondance déclarée dans content/studio.ts)
 	const review = $derived(reviews.find((r) => r.project === p.slug));
 	// Offres illustrées par ce projet : uniquement les correspondances déclarées dans le catalogue
 	// (content/tarifs.ts, champ `projects` de chaque offre), sans rattachement ajouté ici
@@ -209,12 +209,13 @@
 			{/if}
 
 			{#if review}
-				<!-- Avis Malt laissé par ce client, cité à l'identique -->
+				<!-- Témoignage laissé par ce client, cité à l'identique -->
 				<div class="stack stack--sm client-review">
 					<SectionLabel label="L'avis du client" />
 					<ReviewList only={[review.id]} />
 					<p class="client-review__source">
-						Avis publié sur Malt · <a class="link" href={links.malt}>voir le profil</a>
+						{reviewSources[review.source]} ·
+						<a class="link" href={links.malt}>voir le profil Malt</a>
 					</p>
 				</div>
 			{/if}

@@ -46,47 +46,115 @@ export const aboutMascot = {
 	cta: 'Découvrir les prestations'
 } as const;
 
-/** `id` : repère interne pour choisir un avis selon la page ; `project` : étude de cas du même
- *  client (correspondance vérifiable par le nom de l'entreprise dans la signature) */
+/**
+ * Témoignages publiés sur Malt (avis notés et recommandations) et sur Google, relevés par Sébastien
+ * le 16/11/2026 (captures de son profil Malt et de la fiche Google Dev'n Done).
+ * Règle : citations mot pour mot. Un texte long est cité en extrait exact, la coupure étant marquée
+ * « […] ». Seules les apostrophes sont harmonisées avec le site. Ne jamais reformuler ni corriger.
+ * `id` : repère interne pour choisir un témoignage selon la page ; `project` : étude de cas du même
+ * client ; `source` : avis noté Malt, recommandation Malt ou avis Google (pastille de la carte).
+ * Non utilisée : la recommandation d'un « Ancien utilisateur » (CEO), sans nom ni entreprise.
+ */
 export type Review = {
-	id: 'palimpseste-urbain' | 'gsti' | 'hache';
+	id:
+		| 'harmony-valse'
+		| 'petit-chateau-vercourt'
+		| 'gsti'
+		| 'palimpseste-urbain'
+		| 'hache'
+		| 'pierre-pointeau'
+		| 'eloustick';
 	quote: string;
+	/** Signature : « Nom, fonction ou entreprise » (coupée à la première virgule à l'affichage) */
 	author: string;
+	source: 'malt-avis' | 'malt-recommandation' | 'google';
 	project?: string;
+};
+
+/** Libellé de la pastille de chaque source */
+export const reviewSources: Record<Review['source'], string> = {
+	'malt-avis': 'Avis Malt',
+	'malt-recommandation': 'Recommandation Malt',
+	google: 'Avis Google'
 };
 
 export const reviewsIntro = {
 	eyebrow: 'Avis clients',
 	title: "Ce qu'en disent les clients",
 	accent: 'les clients',
-	lede: 'Avis publiés sur le profil Malt de Sébastien Maurice.',
+	lede: 'Avis et recommandations publiés sur Malt et sur Google.',
 	more: 'Voir tous les avis sur Malt'
 } as const;
 
 /**
- * Note publique du profil Malt, relevée sur https://www.malt.fr/profile/semauri le 22/10/2026 :
- * 5 sur 5, 3 avis. À mettre à jour si elle change (nouveaux avis).
+ * Notes publiques : profil Malt (https://www.malt.fr/profile/semauri), 5,0 sur 3 évaluations, et
+ * fiche Google Dev'n Done, 5/5 sur 1 avis (relevé du 16/11/2026). À mettre à jour à chaque nouvel avis.
  */
-export const maltRating = { score: '5/5', count: 3, checked: '22/10/2026' } as const;
+export const maltRating = { score: '5/5', count: 3, checked: '16/11/2026' } as const;
+export const googleRating = { score: '5/5', count: 1, checked: '16/11/2026' } as const;
+/** Phrase de note affichée sous les titres « Ce qu'en disent les clients » */
+export const ratingNote = `Note de ${maltRating.score} sur ${maltRating.count} avis Malt et de ${googleRating.score} sur Google.`;
 
 export const reviews: readonly Review[] = [
 	{
-		id: 'palimpseste-urbain',
-		project: 'palimpseste-urbain',
+		// Avis Malt du 08/09/2026, mission « Designer UX/UI, refonte de site internet »
+		id: 'harmony-valse',
+		project: 'harmony-valse',
+		source: 'malt-avis',
 		quote:
-			'Un travail extraordinaire. Il a parfaitement intégré les enjeux de notre communication, force de proposition sur les textes et les graphiques.',
-		author: 'Ryad Asselah, Directeur, Palimpseste Urbain'
+			"Très satisfait du travail de Sébastien sur l'évolution de mon site internet. Il possède de très bonnes compétences en design et UX/UI, avec une vraie créativité et un excellent sens du détail. […] Je le recommande avec plaisir et n'hésiterai pas à retravailler avec lui sur de futurs projets.",
+		author: 'Yves-Marie, Harmony Valse'
 	},
 	{
+		// Avis Malt du 18/07/2024
+		id: 'petit-chateau-vercourt',
+		project: 'petit-chateau-vercourt',
+		source: 'malt-avis',
+		quote:
+			"On était très heureux de travailler avec Sébastien, il était rapide et efficace, cela se remarque qu'il a beaucoup d'expérience dans ce domaine. Grand merci !",
+		author: 'Alexia, Petit Château Vercourt'
+	},
+	{
+		// Avis Malt du 23/11/2023 (retours à la ligne de l'original conservés)
 		id: 'gsti',
 		project: 'gsti',
-		quote: 'Efficace, professionnelle, respecte les délais demandés. Je le recommande à 100 %.',
+		source: 'malt-avis',
+		quote:
+			"Sébastien a été à la hauteur de ce que l'on recherchait ! une personne efficace, professionnelle, qui respecte le délais demandé\nContact facile\nje le recommande à 100%",
 		author: 'Virginie, SARL GSTI (pièces détachées industrielles)'
 	},
 	{
+		// Recommandation Malt du 31/05/2024
+		id: 'palimpseste-urbain',
+		project: 'palimpseste-urbain',
+		source: 'malt-recommandation',
+		quote:
+			"Pour la refonte de notre site pour une agence d'architectes-urbanistes, Sébastien a fait un travail extraordinaire. […] Il s'est également adapté à nos exigences et à notre planning. […] je peux dire que c'est un professionnel hors pair.",
+		author: 'Ryad Asselah, Directeur, Palimpseste Urbain'
+	},
+	{
+		// Recommandation Malt du 17/04/2024 (retours à la ligne de l'original conservés)
 		id: 'hache',
-		quote: "Rapide, précis, efficace... je te recontacte dès que j'ai un nouveau besoin.",
+		source: 'malt-recommandation',
+		quote:
+			"Grand merci Sébastien pour ton excellent travail\nrapide, précis, efficace...\nJe te recontacte dès que j'ai un nouveau besoin.",
 		author: 'Eric Havard, Gérant, Hache'
+	},
+	{
+		// Avis Google, novembre 2026 (aussi auteur d'une recommandation Malt du 09/11/2026)
+		id: 'pierre-pointeau',
+		source: 'google',
+		quote:
+			"Excellent développeur. Et le mieux, c'est sa conscience professionnelle : proactif, réactif, et ne lâche rien jusqu'à ce que tout soit parfait. Franchement, je recommande.",
+		author: 'Pierre Pointeau, Photographe'
+	},
+	{
+		// Recommandation Malt du 18/09/2023, signée « Gérant d'entreprise chez eLoustick »
+		id: 'eloustick',
+		source: 'malt-recommandation',
+		quote:
+			"Sébastien a su identifier mes besoins spécifiques en un seul rdv. Quelques échanges mails plus tard pour l'aspect technique, la refonte de mon site correspond pleinement à la vision numérique que je m'en faisais. Professionnel, réactif, fort de proposition, créatif et efficace …",
+		author: "eLoustick, Gérant d'entreprise"
 	}
 ];
 
