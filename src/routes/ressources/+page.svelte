@@ -13,6 +13,7 @@
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import heroMascot from '$lib/assets/mascotte/mascotte-renard-dev-n-done-guides-wordpress-woocommerce.webp?enhanced&w=1200;720;360';
 	import cardMascot from '$lib/assets/mascotte/mascotte-renard-dev-n-done-formulaire-message-envoye-loupe.webp?enhanced&w=720;360';
+	import cardMascotBuilder from '$lib/assets/mascotte/mascotte-renard-creation-site-web-wordpress.jpg?enhanced&w=720;360';
 	import cardMascotGuides from '$lib/assets/mascotte/mascotte-renard-dev-n-done-guides-wordpress-woocommerce.webp?enhanced&w=720;360';
 	import { articlePath, articles, ressourcesPage } from '$lib/content/ressources';
 	import { offerPath, offers } from '$lib/content/tarifs';
@@ -66,7 +67,14 @@
 				<!-- Dernier guide : grande carte -->
 				<a class="tile tile--feature" href={articlePath(feature.slug)}>
 					<div class="tile__visual">
-						{#if feature.visual === 'guides'}
+						{#if feature.visual === 'constructeur'}
+							<enhanced:img
+								src={cardMascotBuilder}
+								alt=""
+								sizes="(min-width: 1000px) 340px, (min-width: 640px) 45vw, 90vw"
+								loading="lazy"
+							/>
+						{:else if feature.visual === 'guides'}
 							<enhanced:img
 								src={cardMascotGuides}
 								alt=""

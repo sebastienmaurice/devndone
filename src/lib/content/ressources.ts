@@ -20,8 +20,11 @@
  */
 export type ArticleSectionKind = 'flow' | 'quote' | 'checklist' | 'steps' | 'case' | 'closing';
 
-/** Images disponibles dans les articles (fichiers dans src/lib/assets/ressources/, choisis par la page) */
-export type ArticleImageId = 'page-auteur';
+/**
+ * Images disponibles dans les articles (choisies par la page) : capture de Ciné Délices
+ * (src/lib/assets/ressources/) et visuels des réalisations (src/lib/assets/projets/).
+ */
+export type ArticleImageId = 'page-auteur' | 'palimpseste-urbain' | 'harmony-valse';
 
 export type ArticleFigure = {
 	id: ArticleImageId;
@@ -102,7 +105,7 @@ export type Article = {
 	/** Sujets abordés (pastilles de la page Ressources), uniquement des termes présents dans l'article */
 	tags: readonly string[];
 	/** Mascotte de l'en-tête et de la carte du hub (par défaut : la loupe) */
-	visual?: 'loupe' | 'guides';
+	visual?: 'loupe' | 'guides' | 'constructeur';
 	/** Carte de la section finale : dépannage (par défaut) ou simple contact */
 	cta?: 'sprint' | 'contact';
 	/** Mention discrète sous la signature (contexte du projet, outils utilisés) */
@@ -121,6 +124,149 @@ export const ressourcesPage = {
 } as const;
 
 export const articles: readonly Article[] = [
+	{
+		slug: 'divi-elementor-gutenberg',
+		title: 'Divi, Elementor ou Gutenberg : quel constructeur pour votre site WordPress ?',
+		accent: 'Divi, Elementor ou Gutenberg',
+		seoTitle: 'Divi, Elementor ou Gutenberg : lequel choisir pour WordPress ?',
+		description:
+			"Divi, Elementor ou l'éditeur de blocs Gutenberg : ce que chacun coûte, ce qu'il implique pour la suite et comment choisir selon votre projet WordPress.",
+		lede: "Vous lancez un site WordPress, ou vous reprenez un site existant, et la même question revient : faut-il un constructeur de pages comme Divi ou Elementor, ou l'éditeur intégré à WordPress suffit-il ? Les trois permettent de construire de belles pages. Ce qui les sépare se voit plus tard : le coût dans la durée, la dépendance à un outil, et la personne qui modifiera le site au quotidien.",
+		published: '2026-11-24',
+		modified: '2026-11-24',
+		sourcesChecked: '24 novembre 2026',
+		tags: ['WordPress', 'Elementor', 'Divi', 'Gutenberg', 'Éditeur de blocs'],
+		visual: 'constructeur',
+		cta: 'contact',
+		sections: [
+			{
+				id: 'logiques',
+				nav: 'Trois outils, trois logiques',
+				title: 'Trois outils, trois logiques',
+				kind: 'checklist',
+				list: [
+					"Gutenberg est l'éditeur de blocs de WordPress lui-même. Depuis WordPress 5.0, sorti en décembre 2018, c'est l'éditeur par défaut. Il ne demande aucune extension.",
+					"Elementor est une extension. La version de base est gratuite sur WordPress.org, où elle affiche plus de 10 millions d'installations actives. Les fonctions avancées passent par une offre payante.",
+					"Divi est un thème doublé d'un constructeur, vendu par Elegant Themes. Il n'existe pas de version gratuite."
+				],
+				figures: [
+					{
+						id: 'palimpseste-urbain',
+						alt: "Présentation du site de Palimpseste Urbain, agence d'architecture et d'urbanisme, sur ordinateur et mobile",
+						caption:
+							'Palimpseste Urbain : refonte WordPress réalisée avec Elementor Pro (étude de cas sur ce site).'
+					}
+				]
+			},
+			{
+				id: 'cout',
+				nav: 'Ce que chacun coûte',
+				title: 'Ce que chacun coûte',
+				kind: 'checklist',
+				paragraphs: [
+					'Prix relevés le 24 novembre 2026 sur les sites des éditeurs, en dollars, susceptibles de changer.'
+				],
+				list: [
+					'Gutenberg : rien. Il est inclus dans WordPress.',
+					"Elementor : version de base gratuite. Les offres payantes commencent à 60 $ par an pour 1 site. Le nombre de sites dépend de la formule : 1, 3, 25, ou illimité pour l'offre agence.",
+					'Divi : 89 $ par an, ou 249 $ en paiement unique, pour un nombre de sites illimité.'
+				]
+			},
+			{
+				id: 'apres',
+				nav: 'Après la mise en ligne',
+				title: 'Ce qui se joue après la mise en ligne',
+				kind: 'quote',
+				quote:
+					'Dans Divi 4, les mises en page étaient enregistrées sous forme de codes courts, comme [et_pb_section].',
+				quoteSource: "D'après Elegant Themes, guide de migration de Divi 4 vers Divi 5",
+				paragraphs: [
+					"Le choix d'un constructeur engage le site pour longtemps : le contenu est enregistré dans son propre format. Divi l'illustre bien.",
+					"Divi 5, publié en version stable le 26 février 2026, est une reconstruction complète, avec un nouveau format d'enregistrement. Pour passer de l'un à l'autre, Elegant Themes fournit un outil de migration qui convertit le contenu pris en charge et garde le reste en mode de compatibilité. Divi 4 reste pris en charge au moins 12 mois après la sortie de Divi 5.",
+					"Le contenu écrit avec Gutenberg reste dans le format natif de WordPress. Avec un thème compatible (un « thème de blocs »), l'éditeur de site permet aussi de construire l'en-tête, le pied de page et les modèles de pages avec les mêmes blocs."
+				]
+			},
+			{
+				id: 'choisir',
+				nav: 'Comment choisir',
+				title: 'Comment choisir',
+				kind: 'steps',
+				steps: [
+					{
+						title: 'Qui modifiera le site ?',
+						text: "Si c'est vous, chaque semaine, l'outil doit être celui avec lequel vous êtes à l'aise, et non celui que préfère votre prestataire."
+					},
+					{
+						title: 'Le site existe-t-il déjà ?',
+						text: "Changer de constructeur revient souvent à reprendre les mises en page une à une. Garder l'outil en place est souvent le choix le plus raisonnable."
+					},
+					{
+						title: 'Quel budget dans la durée ?',
+						text: 'Une licence annuelle se paie chaque année, y compris pour les mises à jour.'
+					},
+					{
+						title: 'Avez-vous besoin de fonctions avancées ?',
+						text: 'Formulaires, fenêtres surgissantes, boutique : vérifiez ce qui est inclus dans la version gratuite et ce qui demande une offre payante.'
+					}
+				],
+				figures: [
+					{
+						id: 'harmony-valse',
+						alt: "Présentation du site d'Harmony Valse, école de valse à Paris, sur ordinateur et mobile",
+						caption:
+							'Harmony Valse : refonte WordPress avec Elementor et WooCommerce (étude de cas sur ce site).'
+					}
+				]
+			},
+			{
+				id: 'conclusion',
+				nav: 'Le bon outil',
+				title: 'Le bon outil pour votre site',
+				kind: 'closing',
+				paragraphs: [
+					"Il n'y a pas de meilleur outil dans l'absolu. Il y a le bon outil pour votre site, vos usages et la personne qui le fera vivre.",
+					"Si vous hésitez, ou si vous reprenez un site construit avec l'un de ces outils, parlons-en avant de choisir."
+				]
+			}
+		],
+		sources: [
+			{
+				label: 'WordPress.org, WordPress Block Editor',
+				url: 'https://wordpress.org/documentation/article/wordpress-block-editor/',
+				note: "L'éditeur de blocs est l'éditeur par défaut depuis WordPress 5.0 (décembre 2018). Page en anglais."
+			},
+			{
+				label: 'WordPress.org, Site Editor',
+				url: 'https://wordpress.org/documentation/article/site-editor/',
+				note: "L'éditeur de site nécessite un thème de blocs et permet de concevoir l'en-tête, le pied de page et tout le site avec des blocs. Page en anglais."
+			},
+			{
+				label: 'WordPress.org, extension Elementor',
+				url: 'https://wordpress.org/plugins/elementor/',
+				note: "Extension gratuite avec offres payantes, plus de 10 millions d'installations actives. Page en anglais."
+			},
+			{
+				label: 'Elementor, Pricing',
+				url: 'https://elementor.com/pricing/',
+				note: 'Offres à partir de 60 $ par an et nombre de sites par formule. Page en anglais.'
+			},
+			{
+				label: 'Elegant Themes, Pricing',
+				url: 'https://www.elegantthemes.com/pricing/',
+				note: 'Divi à 89 $ par an ou 249 $ en paiement unique, sur un nombre de sites illimité. Page en anglais.'
+			},
+			{
+				label: 'Elegant Themes, How to safely migrate from Divi 4 to Divi 5',
+				url: 'https://help.elegantthemes.com/en/articles/12767407-how-to-safely-migrate-from-divi-4-to-divi-5',
+				note: 'Sortie de Divi 5 le 26 février 2026, codes courts de Divi 4, outil de migration, prise en charge de Divi 4 pendant au moins 12 mois. Page en anglais.'
+			},
+			{
+				label: 'Elegant Themes, Divi 5 Update Status',
+				url: 'https://help.elegantthemes.com/en/articles/9973580-divi-5-update-status',
+				note: 'Dernière version publiée au moment de la rédaction : Divi 5.19, le 6 novembre 2026. Page en anglais.'
+			}
+		]
+	},
 	{
 		slug: 'erreur-500-wordpress-elementor',
 		title: 'Erreur 500 sur WordPress et Elementor : les causes fréquentes',

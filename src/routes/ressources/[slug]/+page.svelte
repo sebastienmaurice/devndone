@@ -14,7 +14,10 @@
 	import PageIntro from '$lib/components/sections/PageIntro.svelte';
 	import mascotLoupe from '$lib/assets/mascotte/mascotte-renard-dev-n-done-formulaire-message-envoye-loupe.webp?enhanced&w=720;360';
 	import mascotGuides from '$lib/assets/mascotte/mascotte-renard-dev-n-done-guides-wordpress-woocommerce.webp?enhanced&w=1200;720;360';
+	import mascotBuilder from '$lib/assets/mascotte/mascotte-renard-creation-site-web-wordpress.jpg?enhanced&w=1200;720;360';
 	import imgAuteur from '$lib/assets/ressources/cine-delices-page-auteur-cadre-sherlock-holmes.webp?enhanced&w=2000;1200;720';
+	import imgPalimpseste from '$lib/assets/projets/palimpseste-urbain-refonte-wordpress.jpg?enhanced&w=2000;1200;720';
+	import imgHarmony from '$lib/assets/projets/harmony-valse-site-wordpress-ecole-de-danse.jpg?enhanced&w=2000;1200;720';
 	import { absoluteUrl, organizationId } from '$lib/config/site';
 	import { articlePath } from '$lib/content/ressources';
 	import { offerPath, offers } from '$lib/content/tarifs';
@@ -32,6 +35,8 @@
 		"Dev, la mascotte de Dev'n Done, perplexe, une loupe à la main devant une fenêtre « Message envoyé » et une enveloppe qui n'arrive pas";
 	const altGuides =
 		"Dev, la mascotte de Dev'n Done, souriant devant son ordinateur portable, entouré des logos WordPress et WooCommerce, de code, d'un téléphone, de livres et d'un graphique";
+	const altBuilder =
+		'Dev, la mascotte, à son bureau, montre sur grand écran une page en cours de construction dans un éditeur visuel';
 
 	const dateFr = (iso: string) =>
 		new Date(iso).toLocaleDateString('fr-FR', {
@@ -76,7 +81,14 @@
 >
 	{#snippet aside()}
 		<div class="portrait">
-			{#if a.visual === 'guides'}
+			{#if a.visual === 'constructeur'}
+				<enhanced:img
+					src={mascotBuilder}
+					alt={altBuilder}
+					sizes="(min-width: 1100px) 480px, 92vw"
+					fetchpriority="high"
+				/>
+			{:else if a.visual === 'guides'}
 				<enhanced:img
 					src={mascotGuides}
 					alt={altGuides}
@@ -306,12 +318,29 @@
 			<div class="container figs">
 				{#each s.figures as f (f.id)}
 					<figure class="fig">
-						<enhanced:img
-							src={imgAuteur}
-							alt={f.alt}
-							sizes="(min-width: 1100px) 1100px, 92vw"
-							loading="lazy"
-						/>
+						<!-- enhanced:img veut un identifiant simple comme src : une branche par image -->
+						{#if f.id === 'palimpseste-urbain'}
+							<enhanced:img
+								src={imgPalimpseste}
+								alt={f.alt}
+								sizes="(min-width: 1100px) 1024px, 92vw"
+								loading="lazy"
+							/>
+						{:else if f.id === 'harmony-valse'}
+							<enhanced:img
+								src={imgHarmony}
+								alt={f.alt}
+								sizes="(min-width: 1100px) 1024px, 92vw"
+								loading="lazy"
+							/>
+						{:else}
+							<enhanced:img
+								src={imgAuteur}
+								alt={f.alt}
+								sizes="(min-width: 1100px) 1100px, 92vw"
+								loading="lazy"
+							/>
+						{/if}
 						<figcaption class="fig__caption">{f.caption}</figcaption>
 					</figure>
 				{/each}
