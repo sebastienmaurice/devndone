@@ -67,6 +67,34 @@ export const aboutMascot = {
 } as const;
 
 /**
+ * Parcours de Sébastien (page À propos), faits validés par lui les 16 et 24/11/2026.
+ * Règle : l'expérience professionnelle (plus de 20 ans, du design à l'intégration) est distincte de
+ * la formation Full Stack récente. Jamais « 20 ans de programmation ». Aucune date de formation ni
+ * de création, aucun autre outil ou certification sans confirmation.
+ */
+export const aboutPath = {
+	eyebrow: 'Parcours',
+	title: "Du design à l'intégration, puis le développement Full Stack",
+	accent: 'développement Full Stack',
+	text: "Sébastien Maurice cumule plus de 20 ans d'expérience professionnelle, du design à l'intégration. Il a ensuite suivi la formation Full Stack d'O'clock, en développement web et web mobile, et obtenu le titre professionnel de niveau 5.",
+	steps: [
+		{
+			icon: 'briefcase',
+			title: 'Expérience professionnelle',
+			text: "Plus de 20 ans, du design à l'intégration."
+		},
+		{
+			icon: 'code',
+			title: 'Formation Full Stack',
+			text: "O'clock, développement web et web mobile. Titre professionnel de niveau 5."
+		},
+		{ icon: 'trophy', title: 'Certification', text: 'TOSA WordPress, 2023.' }
+	],
+	toolsLabel: 'Technologies utilisées',
+	tools: ['JavaScript', 'Node.js', 'PostgreSQL', 'WordPress', 'WooCommerce']
+} as const;
+
+/**
  * Témoignages publiés sur Malt (avis notés et recommandations) et sur Google, relevés par Sébastien
  * le 16/11/2026 (captures de son profil Malt et de la fiche Google Dev'n Done).
  * Règle : citations mot pour mot. Un texte long est cité en extrait exact, la coupure étant marquée
