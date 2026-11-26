@@ -14,8 +14,8 @@
  * - `checklist` : liste de contrôles en cartes (`list`) ;
  * - `steps` : étapes numérotées en cartes (`steps`), chapô facultatif, bloc de code (`code`) et texte
  *   après les étapes (`after`) ;
- * - `case` : retour d'expérience en carte (cas vécu, anonymisé, faits fournis par Sébastien), lien
- *   facultatif vers l'étude de cas (`link`) ;
+ * - `case` : retour d'expérience en carte (cas vécu, faits fournis par Sébastien, client nommé seulement avec son accord), lien
+ *   facultatif vers l'étude de cas ou le site du client (`link`) ;
  * - `closing` : texte et carte d'appel vers l'offre de dépannage.
  */
 export type ArticleSectionKind = 'flow' | 'quote' | 'checklist' | 'steps' | 'case' | 'closing';
@@ -133,7 +133,7 @@ export const articles: readonly Article[] = [
 			"Divi, Elementor ou l'éditeur de blocs Gutenberg : ce que chacun coûte, ce qu'il implique pour la suite et comment choisir selon votre projet WordPress.",
 		lede: "Vous lancez un site WordPress, ou vous reprenez un site existant, et la même question revient : faut-il un constructeur de pages comme Divi ou Elementor, ou l'éditeur intégré à WordPress suffit-il ? Les trois permettent de construire de belles pages. Ce qui les sépare se voit plus tard : le coût dans la durée, la dépendance à un outil, et la personne qui modifiera le site au quotidien.",
 		published: '2026-11-24',
-		modified: '2026-11-24',
+		modified: '2026-11-26',
 		sourcesChecked: '24 novembre 2026',
 		tags: ['WordPress', 'Elementor', 'Divi', 'Gutenberg', 'Éditeur de blocs'],
 		visual: 'constructeur',
@@ -185,6 +185,18 @@ export const articles: readonly Article[] = [
 					"Divi 5, publié en version stable le 26 février 2026, est une reconstruction complète, avec un nouveau format d'enregistrement. Pour passer de l'un à l'autre, Elegant Themes fournit un outil de migration qui convertit le contenu pris en charge et garde le reste en mode de compatibilité. Divi 4 reste pris en charge au moins 12 mois après la sortie de Divi 5.",
 					"Le contenu écrit avec Gutenberg reste dans le format natif de WordPress. Avec un thème compatible (un « thème de blocs »), l'éditeur de site permet aussi de construire l'en-tête, le pied de page et les modèles de pages avec les mêmes blocs."
 				]
+			},
+			{
+				id: 'projet-divi',
+				nav: 'Un projet Divi',
+				title: 'Rencontré sur un projet Divi',
+				kind: 'case',
+				paragraphs: [
+					"J'ai créé avec Divi le site d'O NATUREL, consacré à la naturopathie. Le choix de l'outil venait de la cliente : elle connaissait un peu mieux Divi qu'Elementor.",
+					"Sur ce projet, et dans la version de Divi utilisée, deux limites sont apparues par rapport à Elementor : l'adaptation de l'affichage aux mobiles demandait plus de travail, et Divi offrait moins d'options d'agencement et moins d'extensions complémentaires.",
+					'Ce choix illustre la première question de la partie suivante : qui fera vivre le site au quotidien ?'
+				],
+				link: { label: 'Voir le site O NATUREL', href: 'https://onaturel.eu/' }
 			},
 			{
 				id: 'choisir',
